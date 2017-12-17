@@ -1,8 +1,8 @@
 package com.apps.noura.masajd;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         final TextView loginlink = (TextView) findViewById(R.id.tvloginlink);
+        final TextView Mosque = (TextView) findViewById(R.id.Mosqu);
 
         //Login link open Login Activity
         loginlink.setOnClickListener(new View.OnClickListener() {
@@ -24,6 +25,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent LoginIntent = new Intent(MainActivity.this,LoginActivity.class);
                 MainActivity.this.startActivity(LoginIntent);
+            }
+        });
+
+
+
+
+        //Login link open Login Activity
+        Mosque.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mm = new Intent(MainActivity.this,MosqueActivity.class);
+                MainActivity.this.startActivity(mm);
             }
         });
 
