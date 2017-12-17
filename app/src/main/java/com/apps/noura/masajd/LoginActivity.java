@@ -104,7 +104,21 @@ public class LoginActivity extends AppCompatActivity {
                             User user = gson.fromJson(usernameR, User.class);
                             String usernameR2 = "Name:" + user.getUsername();
                             System.out.println(usernameR2);
-                            Toast.makeText(LoginActivity.this,"Welcome"+ usernameR2 , Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(LoginActivity.this,"Welcome"+ usernameR2 , Toast.LENGTH_SHORT).show();
+
+                            //get user info:
+                            int userID= user.getUserAutoID();
+                            int userCategory= user.getUserCategory();
+                            String username= user.getUsername();
+
+                            //move to home page after success login
+                            Intent homeIntent = new Intent(LoginActivity.this, UserAreaActivity.class);
+                            LoginActivity.this.startActivity(homeIntent);
+                            // pass data to the activity userAutoID and username
+                            
+                            //session using Account manager
+
+
                         }
                         else{
                             String ErrorMsg = InfoResponse.getString("Messsage");
@@ -156,24 +170,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
             }
-/*
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(LoginActivity.this,"Login Fail", Toast.LENGTH_SHORT).show();
-            }
-*/
 
-           /* @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(LoginActivity.this,"Error", Toast.LENGTH_SHORT).show();
-            }*/
-
-/*
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(LoginActivity.this,"Login Fail", Toast.LENGTH_SHORT).show();
-            });
-            */
 
         });
     }
@@ -182,49 +179,5 @@ public class LoginActivity extends AppCompatActivity {
 }
 
 
-/*
-     bLogin.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            final String username = etUsername.getText().toString();
-            final String password = etPassword.getText().toString();
 
-            // Response received from the server
-           /Response.Listener<String> responseListener = new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-
-                        JSONObject jsonResponse = new JSONObject(response);
-                      // boolean success = jsonResponse.getBoolean("success");
-
-                      //  if (success) {
-                            String username = jsonResponse.getString("username");
-                            //int age = jsonResponse.getInt("age");
-
-                            Intent intent = new Intent(LoginActivity.this, UserAreaActivity.class);
-                            //intent.putExtra("name", name);
-                           // intent.putExtra("age", age);
-                            intent.putExtra("name", username);
-                            LoginActivity.this.startActivity(intent);
-                       // } else {
-                           // AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                         //   builder.setMessage("Login Failed")
-                                //    .setNegativeButton("Retry", null)
-                                //    .create()
-                                //    .show();
-                       // }
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            };
-
-            LoginRequest loginRequest = new LoginRequest(username, password, responseListener);
-            RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-            queue.add(loginRequest);
-        }
-    });
-    */
 
