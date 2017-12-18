@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">Masajd</string>
+
+    <string name="nameerr">ادخل اسم صحيح </string>
+      <string name="usernamerr">ادخل اسم مستخدم صحيح</string>
+    <string name="usernamerr2">اسم المستخدم موجود مسبقاً</string>
+     <string name="emailerr">Enter Correct Email</string>
+     <string name="phoneerr">Enter Correct Mobile no</string>
+    <string name="passerr">كلمة المرور يجب أن تكون 6 خانات وتحوي أحرف كبيرة وصغيرة و رموز </string>
+    <string name="cnfpasserr">كلمة المرور غير متطابقة</string>
+
     <string name="search">أدخل كلمة البحث</string>
     <string name="Text_name_Tag">إسم المسجد :</string>
     <string name="Text_name">لا يوجد</string>

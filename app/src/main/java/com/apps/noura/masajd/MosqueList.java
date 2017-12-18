@@ -1,5 +1,6 @@
 package com.apps.noura.masajd;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,14 +9,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
-public class MosqueList extends Fragment  {
+public class MosqueList extends Fragment {
     // the fragment initialization
 
     private static final String TAG = "MosqueLIST";
 
     //-----------------------------------------------------------------
-
 
     public MosqueList() {
         // Required empty public constructor
@@ -30,6 +31,8 @@ public class MosqueList extends Fragment  {
         View view;
 
         view = inflater.inflate(R.layout.fragment_mosque_list, container, false);
+
+
 
         //Create Recycle View:
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.MosqueRecyclerView);
@@ -54,5 +57,6 @@ public class MosqueList extends Fragment  {
     }//end On create
 
 
-}
 
+
+}

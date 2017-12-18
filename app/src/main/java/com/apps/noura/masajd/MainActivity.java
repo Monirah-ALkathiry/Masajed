@@ -20,6 +20,19 @@ public class MainActivity extends AppCompatActivity {
         final TextView loginlink = (TextView) findViewById(R.id.tvloginlink);
         final TextView websitelink = (TextView) findViewById(R.id.tvwebsitelink);
 
+        final TextView Mosque = (TextView) findViewById(R.id.Mosqu);
+
+
+
+//Mosque link open Mosque Activity
+        Mosque.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent Mosque = new Intent(MainActivity.this,MosqueActivity.class);
+                MainActivity.this.startActivity(Mosque);
+            }
+        });
+
         //Login link open Login Activity
         loginlink.setOnClickListener(new View.OnClickListener() {
             @Override
