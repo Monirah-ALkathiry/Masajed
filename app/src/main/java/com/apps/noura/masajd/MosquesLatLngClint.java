@@ -12,7 +12,7 @@ import retrofit2.http.Query;
 
 public interface MosquesLatLngClint {
 
-    @GET("/mosques/index.jsp?")
+    @GET("mosques/index.jsp?")
     Call<List<MosquesLatLng>>
     getMosqueLatLng(@Query("lat") String latitude , @Query("lon") String longitude);
 

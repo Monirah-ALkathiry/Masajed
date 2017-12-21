@@ -9,12 +9,13 @@ import android.os.Bundle;
  */
 
 public class UsereLocationListener implements LocationListener {
-    public static Location location; // User Location
+    public static Location location; // To Follow User Location
 
     //Constructor
     UsereLocationListener(){
 
-        location = new Location("Zero");
+        //Initialization
+        location = new Location("Zero"); //
         location.setLatitude(0);//Initialize Latitude
         location.setLongitude(0);//Initialize Longitude
     }

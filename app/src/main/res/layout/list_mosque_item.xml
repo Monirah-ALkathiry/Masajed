@@ -3,25 +3,44 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@drawable/border_style"
+    android:layout_margin=".5dp"
+    android:id="@+id/linearLayout"
+    >
+
+    <android.support.v7.widget.CardView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/cardView"
+        >
+
 
     <TextView
         android:id="@+id/MosqueInfo"
-        android:layout_width="169dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_weight="1"
-        android:gravity="right"
-        android:text="@string/MosqueInfo" />
-
-    <TextView
-        android:id="@+id/MosqueName"
-        android:layout_width="8dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/Text_name_Tag" />
+        android:text="@string/MosqueInfo" />
+        <TextView
+            android:id="@+id/District"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="@string/MosqueDistrict" />
+
+        <TextView
+            android:id="@+id/MosqueName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="@string/Text_name_Tag" />
 
     <ImageView
         android:id="@+id/MosqueImage"
@@ -32,6 +51,7 @@
         android:layout_weight="1"
         android:scaleType="fitCenter" />
 
+    </android.support.v7.widget.CardView>
     </LinearLayout>
    <!--
        <android.support.v7.widget.CardView
