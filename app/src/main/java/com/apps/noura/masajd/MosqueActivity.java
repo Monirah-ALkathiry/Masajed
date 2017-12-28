@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import java.io.File;
 import java.util.List;
 
 import retrofit2.Call;
@@ -22,6 +23,7 @@ public class MosqueActivity extends AppCompatActivity  {
 
     private static final String TAG = "MosqueActivity";
     private ViewPager mviewPager;
+
 
     //----------------------
 

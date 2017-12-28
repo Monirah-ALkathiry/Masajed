@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_margin="2dp"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+
+        <TextView
+            android:id="@+id/MosqueType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Null" />
+
+
+        <TextView
+            android:id="@+id/Mosque_Type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="@string/MosqueType" />
+
+
+        <TextView
+            android:id="@+id/MosqueRegion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Null" />
+
+        <TextView
+            android:id="@+id/Mosque_Region"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/MosqueRegion" />
+
+
+        <TextView
+            android:id="@+id/CityVillage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Null" />
+
+        <TextView
+            android:id="@+id/City_Village"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/CityVillage" />
+
+
+        <TextView
+            android:id="@+id/District"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Null" />
+
+        <TextView
+            android:id="@+id/District_Tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/District" />
+
+
+        <TextView
+            android:id="@+id/StreetName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Null" />
+
+        <TextView
+            android:id="@+id/Street_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/StreetName" />
+
+
+        <TextView
+            android:id="@+id/ImamName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Null" />
+
+
+        <TextView
+            android:id="@+id/Imam_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ImamName" />
+
+
+        <TextView
+            android:id="@+id/KhateebName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Null" />
+
+
+        <TextView
+            android:id="@+id/Khateeb_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/KhateebName" />
+
+
+        <TextView
+            android:id="@+id/MoathenName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Null" />
+
+        <TextView
+            android:id="@+id/Moathen_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/MoathenName" />
+
+
+        <TextView
+            android:id="@+id/ObserverName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Null" />
+
+        <TextView
+            android:id="@+id/Observer_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ObserverName" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

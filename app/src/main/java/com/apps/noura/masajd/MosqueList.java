@@ -60,7 +60,7 @@ public class MosqueList extends Fragment {
         recyclerView.setHasFixedSize(true);
         //-------------------------------------------------------
 
-        //Make A Connection :
+        //Make A Connection With API :
         mosquesLatLngClint = ApiRetrofitClint.getApiRetrofitClint().create(MosquesLatLngClint.class);
         //Call Function form Inter Face And Send Parameter to it
         Call<List<MosquesLatLng>> call = mosquesLatLngClint.getMosqueLatLng("24.7179970","46.64460257");
@@ -70,8 +70,10 @@ public class MosqueList extends Fragment {
             public void onResponse(Call<List<MosquesLatLng>> call, Response<List<MosquesLatLng>> response) {
 
                 mosquesLatLngs = response.body();
+
                 //Send Data To Fragment List---
                adapter = new MosqueListAdapter(getContext(),mosquesLatLngs);
+
                 recyclerView.setAdapter(adapter);
                 //-------
 

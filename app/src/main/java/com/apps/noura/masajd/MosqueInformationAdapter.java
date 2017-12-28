@@ -1,5 +1,7 @@
 package com.apps.noura.masajd;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,12 +19,14 @@ public class MosqueInformationAdapter extends FragmentPagerAdapter{
     //Keep Track for Fragment and Fragment Title:
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
+    private Context context;
 
     //Fun : Add Fragment To Fragment List:
-    public void AddFragment (Fragment fragment, String title){
+    public void AddFragment (Fragment fragment, String title ,Context context){
 
         mFragmentList.add(fragment);
         mFragmentTitleList.add(title);
+        this.context = context;
 
     }//end AddFragment Fun
 
