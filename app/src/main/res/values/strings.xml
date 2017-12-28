@@ -9,11 +9,24 @@
     <string name="passerr">كلمة المرور يجب أن تكون 6 خانات وتحوي أحرف كبيرة وصغيرة و رموز </string>
     <string name="cnfpasserr">كلمة المرور غير متطابقة</string>
 
+    <!-- Monirah -->
     <string name="search">أدخل كلمة البحث</string>
     <string name="Text_name_Tag">إسم المسجد :</string>
     <string name="Text_name">لا يوجد</string>
     <string name="Back">الرجوع</string>
     <string name="MosqueInfo">معلومات المسجد</string>
+    <string name="MosqueDistrict">الحي</string>
+    <string name="MosqueImage">صورة المسجد</string>
+    <string name="MosqueType">فئه المسجد</string>
+    <string name="District">الحي</string>
+    <string name="Null">غير متوفر</string>
+    <string name="MosqueRegion">المنطقة</string>
+    <string name="CityVillage">المدينة</string>
+    <string name="ImamName">إسم الإمام </string>
+    <string name="MoathenName">إسم المؤذن</string>
+    <string name="KhateebName"> إسم الخطيب</string>
+    <string name="ObserverName"> إسم المراقب </string>
+    <string name="StreetName">إسم الشارع</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

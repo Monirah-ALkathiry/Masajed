@@ -4,8 +4,8 @@ package com.apps.noura.masajd;
  * Created by Monirah on 11/12/17.
  */
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+        import com.google.gson.annotations.Expose;
+        import com.google.gson.annotations.SerializedName;
 
 public class MosquesLatLng {
 
@@ -42,9 +42,63 @@ public class MosquesLatLng {
     @SerializedName("Constructing_Date")
     @Expose
     private String constructingDate;
+    @SerializedName("Imam_Name")
+    @Expose
+    private String imamName;
+    @SerializedName("Imam_Employee_No")
+    @Expose
+    private String imamEmployeeNo;
+    @SerializedName("Imam_ID_No")
+    @Expose
+    private String imamIDNo;
+    @SerializedName("Imam_Qualification")
+    @Expose
+    private String imamQualification;
+    @SerializedName("Imam_Graduation_Institute")
+    @Expose
+    private String imamGraduationInstitute;
+    @SerializedName("Imam_Graduation_Year")
+    @Expose
+    private String imamGraduationYear;
+    @SerializedName("Imam_Graduation_Place")
+    @Expose
+    private String imamGraduationPlace;
+    @SerializedName("Imam_Mobile_No")
+    @Expose
+    private String imamMobileNo;
+    @SerializedName("Khateeb_Name")
+    @Expose
+    private String khateebName;
+    @SerializedName("Moathen_Name")
+    @Expose
+    private String moathenName;
+    @SerializedName("Moathen_Employee_No")
+    @Expose
+    private String moathenEmployeeNo;
+    @SerializedName("Moathen_ID_No")
+    @Expose
+    private String moathenIDNo;
+    @SerializedName("Moathen_Qualification")
+    @Expose
+    private String moathenQualification;
+    @SerializedName("Moathen_Graduation_Institute")
+    @Expose
+    private String moathenGraduationInstitute;
+    @SerializedName("Moathen_Graduation_Year")
+    @Expose
+    private String moathenGraduationYear;
+    @SerializedName("Moathen_Graduation_Place")
+    @Expose
+    private String moathenGraduationPlace;
+    @SerializedName("Moathen_Mobile_No")
+    @Expose
+    private String moathenMobileNo;
     @SerializedName("Observer_Name")
     @Expose
     private String observerName;
+    @SerializedName("Observer_Mobile_No")
+    @Expose
+    private String observerMobileNo;
     @SerializedName("Construction_Type")
     @Expose
     private String constructionType;
@@ -57,67 +111,15 @@ public class MosquesLatLng {
     @SerializedName("Zone_")
     @Expose
     private String zone;
+    @SerializedName("Notes")
+    @Expose
+    private String notes;
     @SerializedName("Latitude")
     @Expose
     private String latitude;
     @SerializedName("Longitude")
     @Expose
     private String longitude;
-
-    /**
-     * No args constructor for use in serialization
-     *
-     * @param icons
-     * @param cityVillage
-     * @param s
-     * @param latitude
-     * @param longitude
-     */
-    public MosquesLatLng(int icons, String cityVillage, String s, String latitude, String longitude) {
-    }
-
-    /**
-     *
-     * @param region
-     * @param mosqueName
-     * @param parking
-     * @param constructionType
-     * @param streetName
-     * @param code
-     * @param easting
-     * @param asphaltRoad
-     * @param constructingDate
-     * @param cityVillage
-     * @param observerName
-     * @param longitude
-     * @param mosqueCatogery
-     * @param latitude
-     * @param district
-     * @param northing
-     * @param zone
-     * @param mosqueStatus
-     */
-    public MosquesLatLng(String mosqueName, String code, String region, String cityVillage, String district, String streetName, String mosqueCatogery, String mosqueStatus, String parking, String asphaltRoad, String constructingDate, String observerName, String constructionType, String easting, String northing, String zone, String latitude, String longitude) {
-        super();
-        this.mosqueName = mosqueName;
-        this.code = code;
-        this.region = region;
-        this.cityVillage = cityVillage;
-        this.district = district;
-        this.streetName = streetName;
-        this.mosqueCatogery = mosqueCatogery;
-        this.mosqueStatus = mosqueStatus;
-        this.parking = parking;
-        this.asphaltRoad = asphaltRoad;
-        this.constructingDate = constructingDate;
-        this.observerName = observerName;
-        this.constructionType = constructionType;
-        this.easting = easting;
-        this.northing = northing;
-        this.zone = zone;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
 
     public String getMosqueName() {
         return mosqueName;
@@ -207,12 +209,156 @@ public class MosquesLatLng {
         this.constructingDate = constructingDate;
     }
 
+    public String getImamName() {
+        return imamName;
+    }
+
+    public void setImamName(String imamName) {
+        this.imamName = imamName;
+    }
+
+    public String getImamEmployeeNo() {
+        return imamEmployeeNo;
+    }
+
+    public void setImamEmployeeNo(String imamEmployeeNo) {
+        this.imamEmployeeNo = imamEmployeeNo;
+    }
+
+    public String getImamIDNo() {
+        return imamIDNo;
+    }
+
+    public void setImamIDNo(String imamIDNo) {
+        this.imamIDNo = imamIDNo;
+    }
+
+    public String getImamQualification() {
+        return imamQualification;
+    }
+
+    public void setImamQualification(String imamQualification) {
+        this.imamQualification = imamQualification;
+    }
+
+    public String getImamGraduationInstitute() {
+        return imamGraduationInstitute;
+    }
+
+    public void setImamGraduationInstitute(String imamGraduationInstitute) {
+        this.imamGraduationInstitute = imamGraduationInstitute;
+    }
+
+    public String getImamGraduationYear() {
+        return imamGraduationYear;
+    }
+
+    public void setImamGraduationYear(String imamGraduationYear) {
+        this.imamGraduationYear = imamGraduationYear;
+    }
+
+    public String getImamGraduationPlace() {
+        return imamGraduationPlace;
+    }
+
+    public void setImamGraduationPlace(String imamGraduationPlace) {
+        this.imamGraduationPlace = imamGraduationPlace;
+    }
+
+    public String getImamMobileNo() {
+        return imamMobileNo;
+    }
+
+    public void setImamMobileNo(String imamMobileNo) {
+        this.imamMobileNo = imamMobileNo;
+    }
+
+    public String getKhateebName() {
+        return khateebName;
+    }
+
+    public void setKhateebName(String khateebName) {
+        this.khateebName = khateebName;
+    }
+
+    public String getMoathenName() {
+        return moathenName;
+    }
+
+    public void setMoathenName(String moathenName) {
+        this.moathenName = moathenName;
+    }
+
+    public String getMoathenEmployeeNo() {
+        return moathenEmployeeNo;
+    }
+
+    public void setMoathenEmployeeNo(String moathenEmployeeNo) {
+        this.moathenEmployeeNo = moathenEmployeeNo;
+    }
+
+    public String getMoathenIDNo() {
+        return moathenIDNo;
+    }
+
+    public void setMoathenIDNo(String moathenIDNo) {
+        this.moathenIDNo = moathenIDNo;
+    }
+
+    public String getMoathenQualification() {
+        return moathenQualification;
+    }
+
+    public void setMoathenQualification(String moathenQualification) {
+        this.moathenQualification = moathenQualification;
+    }
+
+    public String getMoathenGraduationInstitute() {
+        return moathenGraduationInstitute;
+    }
+
+    public void setMoathenGraduationInstitute(String moathenGraduationInstitute) {
+        this.moathenGraduationInstitute = moathenGraduationInstitute;
+    }
+
+    public String getMoathenGraduationYear() {
+        return moathenGraduationYear;
+    }
+
+    public void setMoathenGraduationYear(String moathenGraduationYear) {
+        this.moathenGraduationYear = moathenGraduationYear;
+    }
+
+    public String getMoathenGraduationPlace() {
+        return moathenGraduationPlace;
+    }
+
+    public void setMoathenGraduationPlace(String moathenGraduationPlace) {
+        this.moathenGraduationPlace = moathenGraduationPlace;
+    }
+
+    public String getMoathenMobileNo() {
+        return moathenMobileNo;
+    }
+
+    public void setMoathenMobileNo(String moathenMobileNo) {
+        this.moathenMobileNo = moathenMobileNo;
+    }
+
     public String getObserverName() {
         return observerName;
     }
 
     public void setObserverName(String observerName) {
         this.observerName = observerName;
+    }
+
+    public String getObserverMobileNo() {
+        return observerMobileNo;
+    }
+
+    public void setObserverMobileNo(String observerMobileNo) {
+        this.observerMobileNo = observerMobileNo;
     }
 
     public String getConstructionType() {
@@ -247,6 +393,14 @@ public class MosquesLatLng {
         this.zone = zone;
     }
 
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
     public String getLatitude() {
         return latitude;
     }
@@ -277,11 +431,30 @@ public class MosquesLatLng {
                 ", parking='" + parking + '\'' +
                 ", asphaltRoad='" + asphaltRoad + '\'' +
                 ", constructingDate='" + constructingDate + '\'' +
+                ", imamName='" + imamName + '\'' +
+                ", imamEmployeeNo='" + imamEmployeeNo + '\'' +
+                ", imamIDNo='" + imamIDNo + '\'' +
+                ", imamQualification='" + imamQualification + '\'' +
+                ", imamGraduationInstitute='" + imamGraduationInstitute + '\'' +
+                ", imamGraduationYear='" + imamGraduationYear + '\'' +
+                ", imamGraduationPlace='" + imamGraduationPlace + '\'' +
+                ", imamMobileNo='" + imamMobileNo + '\'' +
+                ", khateebName='" + khateebName + '\'' +
+                ", moathenName='" + moathenName + '\'' +
+                ", moathenEmployeeNo='" + moathenEmployeeNo + '\'' +
+                ", moathenIDNo='" + moathenIDNo + '\'' +
+                ", moathenQualification='" + moathenQualification + '\'' +
+                ", moathenGraduationInstitute='" + moathenGraduationInstitute + '\'' +
+                ", moathenGraduationYear='" + moathenGraduationYear + '\'' +
+                ", moathenGraduationPlace='" + moathenGraduationPlace + '\'' +
+                ", moathenMobileNo='" + moathenMobileNo + '\'' +
                 ", observerName='" + observerName + '\'' +
+                ", observerMobileNo='" + observerMobileNo + '\'' +
                 ", constructionType='" + constructionType + '\'' +
                 ", easting='" + easting + '\'' +
                 ", northing='" + northing + '\'' +
                 ", zone='" + zone + '\'' +
+                ", notes='" + notes + '\'' +
                 ", latitude='" + latitude + '\'' +
                 ", longitude='" + longitude + '\'' +
                 '}';

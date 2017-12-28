@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -32,9 +33,9 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback {
 
     //Initialize Map variables :
             MapView mapView;
-            private GoogleMap MgoogleMap;
+          protected GoogleMap MgoogleMap;
             View mView;
-            SupportMapFragment mapFragment;
+           // SupportMapFragment mapFragment;
     //----------------------------------
 
     //private OnFragmentInteractionListener mListener;
@@ -48,70 +49,11 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-       /* //Retrofit Data
 
-        //1)- Declare Retrofit Builder
-        Retrofit builder = new Retrofit.Builder()
-                .baseUrl("http://mosquesapi.azurewebsites.net")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-//2)_ Create Object Form Mosque_Lat_lng interface
-        final MosquesLatLngClint mosquesLatLngClint = builder.create(MosquesLatLngClint.class);
-//3)- Call Function form Inter Face And Send Parameter to it
-        Call<List<MosquesLatLng>> call = mosquesLatLngClint.getMosqueLatLng("24.7179970","46.64460257");
-
-//4)- Create Response:
-        call.enqueue(new Callback<List<MosquesLatLng>>() {
-            @Override
-            public void onResponse(Call<List<MosquesLatLng>> call, Response<List<MosquesLatLng>> response) {
-
-                mosquesLatLngs = response.body();
-
-                //Test Result and Print Data
-                System.out.println("Responce toString"+ response.toString());
-                System.out.println("Responce body"+ response.body());
-                System.out.println("Responce headers"+ response.headers());
-                System.out.println("Responce errorBody"+ response.errorBody());
-                System.out.print("URL" + response.isSuccessful());
-                //Storing the data in our list
-
-                System.out.println("Size Is onResponce :----" +mosquesLatLngs.size());
-                //-----------------------------------------------------------------------
-
-                showlist();//For test
-                //LoadMasijedLocations();
-            }
-
-            @Override
-            public void onFailure(Call<List<MosquesLatLng>> call, Throwable t) {
-                System.out.println("Error bad  ):-----------------------");
-            }
-        });
-*/
 
     }//end on create
 
-    /*
-    //Insert Data to array
-private void showlist(){
 
-    String[][] item = new String[mosquesLatLngs.size()][2];
-
-
-    for(int i =0; i<mosquesLatLngs.size() ; i++){
-        for(  int j=0 ; j <2 ; j++) {
-
-            if(j == 0) {
-                System.out.println( item[i][j] = mosquesLatLngs.get(i).getLatitude() + " Lat" );
-            }else {
-                System.out.println(item[i][j] = mosquesLatLngs.get(i).getLongitude() + " log");
-            }
-        }//end Inner for
-
-    }//end for
-
-
-}*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -121,23 +63,7 @@ private void showlist(){
     // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_mosque_map, container, false);
 
-        //Implementing Map On Fragment
-            mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapView) ;
 
-            if(mapFragment == null){
-
-                FragmentManager fragmentManager =getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                mapFragment = SupportMapFragment.newInstance();
-
-                //replace Fragment By Map
-                fragmentTransaction.replace(R.id.mapView,mapFragment)
-                .commit();
-            }
-
-            mapFragment.getMapAsync(this);
-        //----------Implementing Map On Fragment--------------
-       // checkPermition();
         return mView;
 
     }
@@ -146,11 +72,10 @@ private void showlist(){
     @Override
     public void onViewCreated(View view,  Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-       // SupportMapFragment supportMapFragment = (SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.mapView);
-        //supportMapFragment.getMapAsync(this);
+
+
 
         //Set Map View By Id
-
         mapView = (MapView) mView.findViewById(R.id.mapView);
         //check if Not Null
         if(mapView != null){
@@ -192,8 +117,73 @@ private void showlist(){
         //Move Camera
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
 
-
+        Toast.makeText(getContext(),"Test_Toast_Massage",Toast.LENGTH_SHORT).show();
     }
+
+}
+
+
+      /* //Retrofit Data
+
+        //1)- Declare Retrofit Builder
+        Retrofit builder = new Retrofit.Builder()
+                .baseUrl("http://mosquesapi.azurewebsites.net")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+//2)_ Create Object Form Mosque_Lat_lng interface
+        final MosquesLatLngClint mosquesLatLngClint = builder.create(MosquesLatLngClint.class);
+//3)- Call Function form Inter Face And Send Parameter to it
+        Call<List<MosquesLatLng>> call = mosquesLatLngClint.getMosqueLatLng("24.7179970","46.64460257");
+
+//4)- Create Response:
+        call.enqueue(new Callback<List<MosquesLatLng>>() {
+            @Override
+            public void onResponse(Call<List<MosquesLatLng>> call, Response<List<MosquesLatLng>> response) {
+
+                mosquesLatLngs = response.body();
+
+                //Test Result and Print Data
+                System.out.println("Responce toString"+ response.toString());
+                System.out.println("Responce body"+ response.body());
+                System.out.println("Responce headers"+ response.headers());
+                System.out.println("Responce errorBody"+ response.errorBody());
+                System.out.print("URL" + response.isSuccessful());
+                //Storing the data in our list
+
+                System.out.println("Size Is onResponce :----" +mosquesLatLngs.size());
+                //-----------------------------------------------------------------------
+
+                showlist();//For test
+                //LoadMasijedLocations();
+            }
+
+            @Override
+            public void onFailure(Call<List<MosquesLatLng>> call, Throwable t) {
+                System.out.println("Error bad  ):-----------------------");
+            }
+        });
+*/
+         /*
+    //Insert Data to array
+private void showlist(){
+
+    String[][] item = new String[mosquesLatLngs.size()][2];
+
+
+    for(int i =0; i<mosquesLatLngs.size() ; i++){
+        for(  int j=0 ; j <2 ; j++) {
+
+            if(j == 0) {
+                System.out.println( item[i][j] = mosquesLatLngs.get(i).getLatitude() + " Lat" );
+            }else {
+                System.out.println(item[i][j] = mosquesLatLngs.get(i).getLongitude() + " log");
+            }
+        }//end Inner for
+
+    }//end for
+
+
+}*/
 
 
 /*
@@ -328,6 +318,3 @@ final int REQUEST_CODE_ASK_PERMITION =10;
     }
 
 */
-
-
-}
