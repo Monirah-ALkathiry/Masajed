@@ -1,6 +1,7 @@
 package com.apps.noura.masajd;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -60,9 +61,14 @@ public class LoginActivity extends AppCompatActivity {
         registerLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // link to register from the website
+                final String registerurl= "http://stg.moia.gov.sa/Pages/NewUser.aspx";
+                Intent LinkIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(registerurl));
+                startActivity(LinkIntent);
 
-                Intent registerIntent = new Intent(LoginActivity.this, RigisterActivity.class);
-                LoginActivity.this.startActivity(registerIntent);
+               // link to register activity
+               // Intent registerIntent = new Intent(LoginActivity.this, RigisterActivity.class);
+             //   LoginActivity.this.startActivity(registerIntent);
             }
         });
 
