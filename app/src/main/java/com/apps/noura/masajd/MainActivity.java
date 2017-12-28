@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
 
         final TextView loginlink = (TextView) findViewById(R.id.tvloginlink);
         final TextView websitelink = (TextView) findViewById(R.id.tvwebsitelink);
-
         final TextView Mosque = (TextView) findViewById(R.id.Mosqu);
 
 

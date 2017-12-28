@@ -36,14 +36,23 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
-
+     /*  Old login Version
     //create Retrofit instance
     private static Retrofit.Builder builder = new Retrofit.Builder()
         .baseUrl("http://mosquesapi.azurewebsites.net/")
         .addConverterFactory(GsonConverterFactory.create());
     public static Retrofit retrofit = builder.build();
 
-    UserClient userClient =retrofit.create(UserClient.class);
+    UserClient userClient =retrofit.create(UserClient.class); */
+
+     // New Login using moia API
+    //create Retrofit instance
+    private static Retrofit.Builder builder = new Retrofit.Builder()
+            .baseUrl("http://stg.moia.gov.sa/PortalAPIs/")
+            .addConverterFactory(GsonConverterFactory.create());
+    public static Retrofit retrofit = builder.build();
+
+    LoginRequest loginClient =retrofit.create(LoginRequest.class);
 
 
 
@@ -86,21 +95,46 @@ public class LoginActivity extends AppCompatActivity {
 
 //private static String usernameR;
     private void login(String etUsername, String etPassword){
-        final int option = 1;
+        final String grant_type = "password";
         System.out.println(etUsername);
        // Login login = new Login(option,etUsername,etPassword);
 
         // Calling interface
-        Call<JsonObject> call =userClient.login(option,etUsername,etPassword);
+       // Call<JsonObject> call =userClient.login(option,etUsername,etPassword);
+        Call<JsonObject> call =loginClient.login(grant_type,etUsername,etPassword);
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if (response.isSuccessful()) {
+                //System.out.println(response.body().toString());
+
+                  try {
+                        System.out.println(response.body().toString());
+
+                       JSONObject InfoResponse = new JSONObject(String.valueOf(response.body()));
+                        String usernameR = InfoResponse.getString("FullName");
+                        System.out.println("Welcome"+usernameR);
+                      Toast.makeText(LoginActivity.this,"Welcome"+ usernameR , Toast.LENGTH_SHORT).show();
+                      //2
+                      String jsonData = response.body().toString();
+                      JSONObject Jobject= new JSONObject(jsonData);
+                      String usernameR2  =  "Name:" + Jobject.get("UserName");
+                      System.out.println(usernameR2);
+
+                      String username = Jobject.getString("UserName");
+                      System.out.println(username);
+
+
+
+                      //JSONObject Jobject = new JSONObject(response.body().string());
+                   } catch (JSONException e) {
+                       e.printStackTrace();
+                    }
+/*
+                    try {
+                    if (response.isSuccessful()) {
 
                         System.out.println(response.body().toString());
                         //String jsonString = response.body().toString();
-
-                    try {
                         JSONObject InfoResponse = new JSONObject(String.valueOf(response.body()));
                         boolean check  = InfoResponse.getBoolean("Error");
                         if (!check) {
@@ -136,7 +170,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    }
+                    } */
 
                        // Gson gson = new Gson();
                       //  User user = gson.fromJson(usernameR, User.class);
@@ -165,12 +199,10 @@ public class LoginActivity extends AppCompatActivity {
                         // str= response.body().getUsername();
                         // System.out.println(str);
 
-                } else {
-                   Toast.makeText(LoginActivity.this, "Login Fail", Toast.LENGTH_SHORT).show();
-
-
                 }
-            }
+
+
+
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {

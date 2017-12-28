@@ -17,7 +17,7 @@ public class User {
     private Object userIDNumber;
     @SerializedName("fullName")
     @Expose
-    private Object fullName;
+    private String fullName;
     @SerializedName("username")
     @Expose
     private String username;
@@ -62,11 +62,11 @@ public class User {
         this.userIDNumber = userIDNumber;
     }
 
-    public Object getFullName() {
+    public String getFullName() {
         return fullName;
     }
 
-    public void setFullName(Object fullName) {
+    public void setFullName(String fullName) {
         this.fullName = fullName;
     }
 
