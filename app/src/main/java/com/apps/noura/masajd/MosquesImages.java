@@ -9,5 +9,9 @@ public interface MosquesImages {
     Call<List<MosquesLatLng>>
     getMosqueImage(@Path("Code") String Code );
     */
+
+
+
+
 }
 

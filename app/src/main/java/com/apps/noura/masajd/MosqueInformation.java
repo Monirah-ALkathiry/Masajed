@@ -86,17 +86,18 @@ public class MosqueInformation extends Fragment implements OnMapReadyCallback {
         //TODO : Lay_Out :
         //ToDO Check NUll Values:
         //TODO : Check The Error
-        if(MOSQUE_TYPE == "1"){
+        int MTyop= Integer.parseInt(MOSQUE_TYPE);
+        if(MTyop == 1){
             Masijed_Type.setText("مسجد");
-        }else if(MOSQUE_TYPE == "2"){
+        }else if(MTyop == 2){
             Masijed_Type.setText("مصلى");
 
         }
-        else if(MOSQUE_TYPE == "3"){
+        else if(MTyop == 3){
             Masijed_Type.setText("جامع");
 
         }
-        else if(MOSQUE_TYPE == "4"){
+        else if(MTyop == 4){
             Masijed_Type.setText("مصلى عيد");
 
         }else{
@@ -109,11 +110,13 @@ public class MosqueInformation extends Fragment implements OnMapReadyCallback {
         String REGION =intent.getStringExtra("MOSQUE_REGION");
         //TEST
         System.out.println(REGION + " +++++++++++++++++++++++++++");
-        if(REGION == "1"){
+        int RegionType= Integer.parseInt(REGION);
+
+        if(RegionType == 1){
             MOSQUE_REGION.setText("الرياض");
 
         }
-        else if (REGION != "1"){
+        else if (RegionType != 1){
             MOSQUE_REGION.setText("لا يوجد");
         }
 
@@ -145,6 +148,7 @@ public class MosqueInformation extends Fragment implements OnMapReadyCallback {
 
         return view;
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
