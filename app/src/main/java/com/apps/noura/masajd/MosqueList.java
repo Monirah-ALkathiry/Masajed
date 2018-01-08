@@ -63,8 +63,9 @@ public class MosqueList extends Fragment {
         //Make A Connection With API :
         mosquesLatLngClint = ApiRetrofitClint.getApiRetrofitClint().create(MosquesLatLngClint.class);
         //Call Function form Inter Face And Send Parameter to it
+        //24.7179970   46.64460257
         Call<List<MosquesLatLng>> call = mosquesLatLngClint.getMosqueLatLng("24.7179970","46.64460257");
-      //  Create Response:
+     //  Create Response:
         call.enqueue(new Callback<List<MosquesLatLng>>() {
             @Override
             public void onResponse(Call<List<MosquesLatLng>> call, Response<List<MosquesLatLng>> response) {

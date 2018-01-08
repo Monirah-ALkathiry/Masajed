@@ -4,9 +4,6 @@ package com.apps.noura.masajd;
 import android.content.Context;
 import android.content.Intent;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.location.LocationListener;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,14 +19,11 @@ import com.squareup.picasso.Picasso;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
+
 import java.util.List;
 
 import android.app.ProgressDialog;
@@ -87,80 +81,6 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         holder.mTextView.setText(mosquesLatLngs.get(position).getMosqueName());
         holder.InfoTextView.setText(mosquesLatLngs.get(position).getCityVillage());
         holder.MosqueDistrict.setText(mosquesLatLngs.get(position).getDistrict());
-//------------------------------------------------------------------------------------------------------
-
-       // String NewURL = extractImageUrl("http://gis.moia.gov.sa/Mosques/Content/images/mosques/"+holder.MosqueCode+"/");
-        //System.out.println("NewURL : "  + NewURL +"\n\n\n");
-        //TODO : Get Mosque Image
-
-       /* new Thread(new Runnable() {
-            Bitmap bitmap;
-
-            Document doc = null;
-            @Override
-            public void run() {
-
-                final StringBuilder builder = new StringBuilder();
-
-                try {
-
-                     doc = Jsoup.connect("http://gis.moia.gov.sa/Mosques/Content/images/mosques/"+holder.MosqueCode).get();
-
-                } catch (IOException e) {
-                    builder.append("Error :( :(")
-                            .append(e.getMessage())
-                            .append("\n");
-                    //e.printStackTrace();
-                }
-
-                Elements links = doc.getElementsByTag("a");
-
-                String title = doc.title();
-                Elements img= doc.select("a");
-
-
-                builder.append(title).append("\n");
-
-                // Log.d("Code" ,"Link : " +links.get(2).attr("href"));
-
-                System.out.println("Convert to String "+ builder );
-                builder.append("\n").append("Link: ")
-                        .append(links.attr("href"))
-                        .append("\n")
-                        .append("Text: ")
-                        .append("\n")
-                        .append(links.text());
-                System.out.println("LINKS "+ links );
-                System.out.println(links.get(1).attr("href") + " FIRST IMG");//Get Link IMage Name
-
-
-                holder.url=links.get(1).attr("href");
-                System.out.println(holder.url + " TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTRRRRRRRRRRRRRRRRRR \n\n\n\n\n\n");
-                System.out.println("NEW \n\n "+  builder.append("\n").append("Link: ")
-                        .append(links.attr("href"))
-                        .append("\n")
-                        .append("Text: ")//Get Image Name
-                        .append("\n")
-                        .append(links.text()));
-
-                StringBuilder i = builder.append(links.text());
-                System.out.println("NEW \n\n  ffff : "+  i+" New I ");
-
-                System.out.println(builder +"\n BILDER 77777777770000000000000000000000000000000000000000000000");
-                System.out.println("  Test After Thred  eeeeeeeeeeeeeeee");
-                Picasso.with(context)
-                        .load("http://gis.moia.gov.sa/"+holder.url)
-                        .placeholder(R.drawable.mosqueicon)
-                        .into(tets);
-            }
-
-
-        }).start();
-        */
-
-//------------------------------------------------------------------------------------
-
-
 
         //Onclick : Open New Activity
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
@@ -278,7 +198,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
             if(doc != null){
                 Log.d("IMG :  ", "Download Image" +a);
-                System.out.print(a + " New Link ");
+                System.out.println(a + " New Link " +CodNumber+ "  CODE NUMBER\n" +imgurl);
 
                Picasso.with(context)
                         .load(imgurl)
@@ -303,6 +223,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         private ImageView imageView;
         private TextView MosqueDistrict;
         private LinearLayout linearLayout;
+
         //private CardView cardView;
 
 
@@ -343,4 +264,78 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
     }//end Inner Class
 }// Mian Class
+
+//------------------------------------------------------------------------------------------------------
+
+// String NewURL = extractImageUrl("http://gis.moia.gov.sa/Mosques/Content/images/mosques/"+holder.MosqueCode+"/");
+//System.out.println("NewURL : "  + NewURL +"\n\n\n");
+//TODO : Get Mosque Image
+
+       /* new Thread(new Runnable() {
+            Bitmap bitmap;
+
+            Document doc = null;
+            @Override
+            public void run() {
+
+                final StringBuilder builder = new StringBuilder();
+
+                try {
+
+                     doc = Jsoup.connect("http://gis.moia.gov.sa/Mosques/Content/images/mosques/"+holder.MosqueCode).get();
+
+                } catch (IOException e) {
+                    builder.append("Error :( :(")
+                            .append(e.getMessage())
+                            .append("\n");
+                    //e.printStackTrace();
+                }
+
+                Elements links = doc.getElementsByTag("a");
+
+                String title = doc.title();
+                Elements img= doc.select("a");
+
+
+                builder.append(title).append("\n");
+
+                // Log.d("Code" ,"Link : " +links.get(2).attr("href"));
+
+                System.out.println("Convert to String "+ builder );
+                builder.append("\n").append("Link: ")
+                        .append(links.attr("href"))
+                        .append("\n")
+                        .append("Text: ")
+                        .append("\n")
+                        .append(links.text());
+                System.out.println("LINKS "+ links );
+                System.out.println(links.get(1).attr("href") + " FIRST IMG");//Get Link IMage Name
+
+
+                holder.url=links.get(1).attr("href");
+                System.out.println(holder.url + " TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTRRRRRRRRRRRRRRRRRR \n\n\n\n\n\n");
+                System.out.println("NEW \n\n "+  builder.append("\n").append("Link: ")
+                        .append(links.attr("href"))
+                        .append("\n")
+                        .append("Text: ")//Get Image Name
+                        .append("\n")
+                        .append(links.text()));
+
+                StringBuilder i = builder.append(links.text());
+                System.out.println("NEW \n\n  ffff : "+  i+" New I ");
+
+                System.out.println(builder +"\n BILDER 77777777770000000000000000000000000000000000000000000000");
+                System.out.println("  Test After Thred  eeeeeeeeeeeeeeee");
+                Picasso.with(context)
+                        .load("http://gis.moia.gov.sa/"+holder.url)
+                        .placeholder(R.drawable.mosqueicon)
+                        .into(tets);
+            }
+
+
+        }).start();
+        */
+
+//------------------------------------------------------------------------------------
+
 
