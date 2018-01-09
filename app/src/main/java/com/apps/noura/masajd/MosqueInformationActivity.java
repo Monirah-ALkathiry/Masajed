@@ -33,6 +33,8 @@ public class MosqueInformationActivity extends AppCompatActivity  {
         private static final String TAG = "MosqueInformationActivity";
         private MosqueInformationAdapter mMosqueInformationAdapter;
         private ViewPager mViewPager;
+        //private ViewPager mapViewPager;
+
     //Adapter------------------------
     private TextView MasijedName ;
     //Get Data From Mosque_List ---
@@ -64,6 +66,10 @@ public class MosqueInformationActivity extends AppCompatActivity  {
         mViewPager = (ViewPager) findViewById(R.id.container);
         setUpViewPager(mViewPager);
 
+            //Map View :
+       // mapViewPager = (ViewPager) findViewById(R.id.container2);
+      //  setUpViewPager(mapViewPager);
+
         //TabLayout
        TabLayout tabLayout =(TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
@@ -83,14 +89,13 @@ public class MosqueInformationActivity extends AppCompatActivity  {
 
     private void setUpViewPager(ViewPager viewPager ){
 
+        //TODO : Arrange The Links:
+        //ToDo: Add onclick BackGround
          MosqueInformationAdapter adapter = new MosqueInformationAdapter(getSupportFragmentManager());
-
+        adapter.AddFragment(new MosqueInformation(), "عام " , this);
         adapter.AddFragment(new MosqueNote(),  "ملاحظات" , this);
         adapter.AddFragment(new MosqueImage(),  "الصور" ,this);
-        adapter.AddFragment(new MosqueInformation(), "عام " , this);
-
         viewPager.setAdapter(adapter);
-
 
     }
 

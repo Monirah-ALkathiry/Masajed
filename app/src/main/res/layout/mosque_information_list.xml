@@ -1,89 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_margin="2dp"
-        android:orientation="vertical"
-        android:padding="15dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="1.5dp"
+    android:id="@+id/linearLayoutInfo"
+    android:orientation="vertical"
+    android:background="@color/lightGry"
+    >
 
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <TextView
             android:id="@+id/MosqueType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Null" />
+            android:layout_gravity="left"
+            android:text="@string/Null"
+            android:textColor="@color/colorAccent"
+            />
 
 
         <TextView
             android:id="@+id/Mosque_Type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:text="@string/MosqueType" />
 
 
+</RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <TextView
             android:id="@+id/MosqueRegion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Null" />
+            android:text="@string/Null"
+            android:textColor="@color/colorAccent"/>
 
         <TextView
             android:id="@+id/Mosque_Region"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/MosqueRegion" />
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/CityVillage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Null" />
+            android:text="@string/Null"
+            android:textColor="@color/colorAccent"/>
 
         <TextView
             android:id="@+id/City_Village"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/CityVillage" />
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/District"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Null" />
+            android:text="@string/Null"
+            android:textColor="@color/colorAccent"/>
 
         <TextView
             android:id="@+id/District_Tag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/District" />
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/StreetName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Null" />
+            android:text="@string/Null"
+            android:textColor="@color/colorAccent"/>
 
         <TextView
             android:id="@+id/Street_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/StreetName" />
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/ImamName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Null" />
+            android:text="@string/Null"
+            android:textColor="@color/colorAccent"/>
 
 
         <TextView
@@ -92,12 +120,16 @@
             android:layout_height="wrap_content"
             android:text="@string/ImamName" />
 
-
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <TextView
             android:id="@+id/KhateebName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Null" />
+            android:text="@string/Null"
+            android:textColor="@color/colorAccent"/>
 
 
         <TextView
@@ -106,25 +138,35 @@
             android:layout_height="wrap_content"
             android:text="@string/KhateebName" />
 
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <TextView
             android:id="@+id/MoathenName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Null" />
+            android:text="@string/Null"
+            android:textColor="@color/colorAccent"/>
 
         <TextView
             android:id="@+id/Moathen_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/MoathenName" />
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/ObserverName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Null" />
+            android:text="@string/Null"
+            android:textColor="@color/colorAccent"/>
 
         <TextView
             android:id="@+id/Observer_Name"
@@ -132,6 +174,7 @@
             android:layout_height="wrap_content"
             android:text="@string/ObserverName" />
 
-    </LinearLayout>
+</RelativeLayout>
 
-</android.support.constraint.ConstraintLayout>
+
+</LinearLayout>
