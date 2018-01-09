@@ -1,10 +1,12 @@
 package com.apps.noura.masajd;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 
 import android.os.AsyncTask;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,10 +25,11 @@ import org.jsoup.select.Elements;
 
 
 import java.io.IOException;
-
 import java.util.List;
 
 import android.app.ProgressDialog;
+
+import static com.apps.noura.masajd.R.color.grey;
 
 /**
  * Created by Monirah on 14/12/17.
@@ -84,8 +87,11 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
         //Onclick : Open New Activity
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+           //USED in color
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View view) {
+                //view.setBackgroundColor(grey);
                 Toast.makeText(context, "Click", Toast.LENGTH_SHORT).show();
                 //Create Object From Activity:
 
@@ -224,7 +230,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         private TextView MosqueDistrict;
         private LinearLayout linearLayout;
 
-        //private CardView cardView;
+        private CardView cardView;
 
 
         private String MosqueCode;//Form API To IMAGE VIEW
@@ -244,7 +250,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
             imageView = (ImageView) view.findViewById(R.id.MosqueImage);
             MosqueDistrict =(TextView) view.findViewById(R.id.District);
             linearLayout = (LinearLayout) view.findViewById(R.id.linearLayout);
-            //cardView = (CardView) view.findViewById(R.id.cardView);
+            cardView = (CardView) view.findViewById(R.id.cardView);
 
         }
         public void FillList(int position) {
