@@ -20,7 +20,17 @@ public class MainActivity extends AppCompatActivity {
         final TextView loginlink = (TextView) findViewById(R.id.tvloginlink);
         final TextView websitelink = (TextView) findViewById(R.id.tvwebsitelink);
         final TextView Mosque = (TextView) findViewById(R.id.Mosqu);
+        final TextView dawa = (TextView) findViewById(R.id.tvdawalink);
 
+
+        //DawaActivity link open Mnasht Dawa Activity
+        dawa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent dawaIntent = new Intent(MainActivity.this,DawaActivity.class);
+                MainActivity.this.startActivity(dawaIntent);
+            }
+        });
 
 
 //Mosque link open Mosque Activity
@@ -31,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(Mosque);
             }
         });
+
 
         //Login link open Login Activity
         loginlink.setOnClickListener(new View.OnClickListener() {

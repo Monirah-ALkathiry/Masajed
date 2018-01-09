@@ -23,6 +23,7 @@ public interface UserClient {
     @Field("username")String username,
     @Field("password")String password
              );
+
     @GET("getuserinfo")
     Call<ResponseBody> getinfo(@Header("Authorization") String authToken);
 
