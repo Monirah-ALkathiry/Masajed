@@ -71,23 +71,30 @@ class DawaListAdapter extends RecyclerView.Adapter<DawaListAdapter.DawaViewList>
 
 
                 Intent intent = new Intent(context,DawaInformationActivity.class);
-
-                intent.putExtra("DAWA_ID",DawaLatLng.get(position).getId());
-                intent.putExtra("DAWA_Name",DawaLatLng.get(position).getDawaAddress());
-                intent.putExtra("DAWA_LAT",DawaLatLng.get(position).getLocYCoord());
-                intent.putExtra("DAWA_LON",DawaLatLng.get(position).getLocXCoord());
-
                 // Dawa Activity Information:
+                intent.putExtra("DAWA_ID",DawaLatLng.get(position).getId());
+                intent.putExtra("DawaAddress",DawaLatLng.get(position).getDawaAddress());
+                intent.putExtra("DawaOffice",DawaLatLng.get(position).getDawaOffice());
+                intent.putExtra("DawaActivityDateH",DawaLatLng.get(position).getDawaActivityDateH());
+                intent.putExtra("DawaActivityTime",DawaLatLng.get(position).getDawaActivityTime());
+                intent.putExtra("DawaActivityRepDays",DawaLatLng.get(position).getDawaActivityRepDays());
+                intent.putExtra("LocX_Coord",DawaLatLng.get(position).getLocYCoord());
+                intent.putExtra("LocY_Coord",DawaLatLng.get(position).getLocXCoord());
+
+
                 intent.putExtra("MOSQUE_NAME",DawaLatLng.get(position).getMosqueName());
                 intent.putExtra("MOSQUE_REGION",DawaLatLng.get(position).getRegion());
                 intent.putExtra("CITY_VILLAGE",DawaLatLng.get(position).getCityVillage());
                 intent.putExtra("DISTRICT",DawaLatLng.get(position).getDistrict());
                 intent.putExtra("STREET_NAME",DawaLatLng.get(position).getStreetName());
-                intent.putExtra("First_NAME",DawaLatLng.get(position).getFirstName());
-                intent.putExtra("Father_Name", DawaLatLng.get(position).getFatherName());
-                intent.putExtra("Family_NAME", DawaLatLng.get(position).getFamilyName());
-                intent.putExtra("Language", DawaLatLng.get(position).getDawaActivLanguage());
-                intent.putExtra("Women_Availability", DawaLatLng.get(position).getWomenPlaceAvailability());
+
+                intent.putExtra("FirstName",DawaLatLng.get(position).getFirstName());
+                intent.putExtra("FatherName", DawaLatLng.get(position).getFatherName());
+                intent.putExtra("GrandFatherName", DawaLatLng.get(position).getGrandFatherName());
+
+                intent.putExtra("FamilyName", DawaLatLng.get(position).getFamilyName());
+                intent.putExtra("DawaActivLanguage", DawaLatLng.get(position).getDawaActivLanguage());
+                intent.putExtra("WomenPlaceAvailability", DawaLatLng.get(position).getWomenPlaceAvailability());
 
                 context.startActivity(intent);
                 //Test
