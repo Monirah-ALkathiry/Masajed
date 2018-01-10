@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="1.5dp"
+    android:id="@+id/linearLayoutInfo"
+    android:orientation="vertical"
+    android:background="@color/lightGry"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/DawaOffice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="غير متوفر"
+            android:textColor="@color/colorPrimary"
+            />
+        <TextView
+            android:id="@+id/Dawa_Office"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:text="تابع لي : " />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/DawaActivityDateH"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="غير متوفر"
+            android:textColor="@color/colorPrimary"
+            />
+        <TextView
+            android:id="@+id/DawaActivity_DateH"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:text="تقام في تاريخ : " />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/DawaActivityTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="غير متوفر"
+            android:textColor="@color/colorPrimary"
+            />
+
+        <TextView
+            android:id="@+id/City_Village"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:text="وقت إقامة النشاط" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/DawaActivityRepDays"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="غير متوفر"
+            android:textColor="@color/colorPrimary"
+            />
+
+        <TextView
+            android:id="@+id/DawaActivity_RepDays"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:text="أيام إعادة النشاط" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="غير متوفر"
+            android:textColor="@color/colorPrimary"
+            />
+
+        <TextView
+            android:id="@+id/Daiah_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:text="الداعية" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/DawaActivLanguage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="غير متوفر"
+            android:textColor="@color/colorPrimary"
+            />
+
+
+        <TextView
+            android:id="@+id/DawaActiv_Language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:text="تلقى باللغة" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/WomenPlaceAvailability"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="غير متوفر"
+            android:textColor="@color/colorPrimary"/>
+
+
+        <TextView
+            android:id="@+id/WomenPlace_Availability"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:text="قاعة للنساء" />
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>
