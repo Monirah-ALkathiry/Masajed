@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
@@ -35,7 +34,6 @@ public class MosqueImage extends Fragment {
 
 
     ArrayList<String> ImageUrls = new ArrayList<String>();
-    String myUrl;
     Intent intent;
 
     @Override
@@ -45,8 +43,6 @@ public class MosqueImage extends Fragment {
         View view;
 
         view = inflater.inflate(R.layout.fragment_mosque_image, container, false);
-
-        // ListView listView = (ListView) view.findViewById(R.id.Listimag);
 
         intent= getActivity().getIntent();
         mosqCode = intent.getStringExtra("MOSQUE_CODE");
@@ -60,18 +56,12 @@ public class MosqueImage extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-
-        // holder.MosqueCode = (mosquesLatLngs.get(position).getCode());
         loodImage ParseH = new loodImage();
 
         ParseH.mos(mosqCode );
         ParseH.execute();
 
-
-
-        Toast.makeText(getActivity(),"View Image Fragment",Toast.LENGTH_SHORT).show();
-
-
+       // Toast.makeText(getActivity(),"View Image Fragment",Toast.LENGTH_SHORT).show();
 
         return view;
     }
@@ -151,7 +141,7 @@ public class MosqueImage extends Fragment {
                 }
 
             }//end if
-            adapter = new MosqueImagAdapter(intent, getContext(),ImageUrls);
+            adapter = new MosqueImagAdapter( getContext(),ImageUrls);
             recyclerView.setAdapter(adapter);
         }
     }//end Class
