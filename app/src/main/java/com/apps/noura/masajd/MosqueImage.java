@@ -1,33 +1,42 @@
 package com.apps.noura.masajd;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.squareup.picasso.Picasso;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.w3c.dom.Document;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.List;
+import java.util.ArrayList;
+
 
 
 ///Fragment
 public class MosqueImage extends Fragment {
 
-    private  ImageView img ;
     private String mosqCode;
-    private List<MosquesLatLng> mosquesLatLngs;
+    private Context context = getContext();
+
+    //Recycle View (Mosque List)
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private MosqueImagAdapter adapter;
+
+
+    ArrayList<String> ImageUrls = new ArrayList<String>();
+    String myUrl;
+    Intent intent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,61 +46,123 @@ public class MosqueImage extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_mosque_image, container, false);
 
-        img = (ImageView) view.findViewById(R.id.img);
+        // ListView listView = (ListView) view.findViewById(R.id.Listimag);
 
-        /*Intent intent = getActivity().getIntent();
-        mosqCode= intent.getStringExtra("MOSQUE_CODE");
-        System.out.print(mosqCode + " THE CPDE KKKKKKKKKK:::: ::: PPPPPPP");
+        intent= getActivity().getIntent();
+        mosqCode = intent.getStringExtra("MOSQUE_CODE");
+
+        System.out.print(mosqCode + " Mosque Code");
+
+
+        //Recycler View
+        recyclerView = (RecyclerView) view.findViewById(R.id.RecyclerViewImag);
+        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+
+
+        // holder.MosqueCode = (mosquesLatLngs.get(position).getCode());
+        loodImage ParseH = new loodImage();
+
+        ParseH.mos(mosqCode );
+        ParseH.execute();
+
+
+
         Toast.makeText(getActivity(),"View Image Fragment",Toast.LENGTH_SHORT).show();
-        */
-        /*
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                final StringBuilder builder = new StringBuilder();
-
-                try {
-                    org.jsoup.nodes.Document doc = Jsoup.connect("http://gis.moia.gov.sa/Mosques/Content/images/mosques/" + mosqCode + "/").get();
-
-                    String title = doc.title();
-                    Elements links = doc.getElementsByTag("a");
 
 
-                    builder.append(title).append("\n");
 
-
-                    for (Element link : links) {
-                        builder.append("\n").append("Link: ")
-                                .append(link.attr("href"))
-                                .append("\n")
-                                .append("Text: ")
-                                .append("\n")
-                                .append(link.text());
-
-                        System.out.println(links + " :):):):):):):)");
-                        System.out.println(link.attr("href") + " :):):):):):):)  ++++++");
-
-
-                    }
-
-                } catch (IOException e) {
-                    builder.append("Error :( :(")
-                            .append(e.getMessage())
-                            .append("\n");
-                    //e.printStackTrace();
-                }
-                System.out.println(builder +"\n BILDER 0000000000000000000000000000000000000000000000");
-            }
-        }).start();
-
-
-        System.out.println("Test After Thred");
-        Picasso.with(getContext())
-                .load("http://gis.moia.gov.sa/Mosques/Content/images/mosques/1232/IMG_2066.JPG")
-                .into(img);
-*/
         return view;
     }
 
 
+    //--------------------------------------------------------
+    class loodImage extends AsyncTask<String,Void,String> {
+
+        org.jsoup.nodes.Document doc = null;
+        String CodNumber;
+        Elements links;
+        String myUrl;
+        //ImageView imageView;
+        // TextView textView;
+        //, ImageView img, TextView textView
+        //Constructor
+        private void  mos( String MosquCode ){
+            this.CodNumber = MosquCode;
+            System.out.println(CodNumber + " CodNumber Is");
+            //this.imageView = img;
+            //   this.textView = textView;
+
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            final StringBuilder builder = new StringBuilder();
+            System.out.println(" :)0 ");
+
+            try {
+
+                System.out.println(" :)1 ");
+                doc = Jsoup.connect("http://gis.moia.gov.sa/Mosques/Content/images/mosques/"+CodNumber).get();
+                Log.d("EXAMPLE ", doc.toString());
+                String title = doc.title();
+                links = doc.getElementsByTag("a");
+                builder.append(title).append(" title was\n");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return "Execute";
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            if(doc != null  ){
+
+
+                for (Element E : links) {
+                    myUrl = E.attr("href");
+                    System.out.println(" Link is : " + myUrl);
+
+                    if(E.attr("href").endsWith(".JPG")){
+                        ImageUrls.add(E.attr("href"));
+                        Log.d("IMG :  ", "Download Image"+ E.attr("href").endsWith(".JPG"));
+
+
+                    }//end if
+
+                }//end for
+
+                for (String imag: ImageUrls  ){
+                    System.out.println(" size is  ffffffffffffffffffffff : " + ImageUrls.size());
+
+                    System.out.println("Url Is" + imag);
+
+                      /*
+                      Picasso.with(context)
+                                .load("http://gis.moia.gov.sa/"+imag)
+                                .placeholder(R.drawable.mosqueicon)
+                                .into(imageView);
+                                */
+                }
+
+            }//end if
+            adapter = new MosqueImagAdapter(intent, getContext(),ImageUrls);
+            recyclerView.setAdapter(adapter);
+        }
+    }//end Class
+
+
+    //--------------------------------------------------------
+
 }
+
+
+
+
+
+

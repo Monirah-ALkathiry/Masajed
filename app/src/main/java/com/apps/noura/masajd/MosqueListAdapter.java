@@ -144,7 +144,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
       //  Bitmap bitmap;
 
 
-        private   void  mos( String MosquCode , ImageView img){
+        private void  mos( String MosquCode , ImageView img){
             this.CodNumber = MosquCode;
             System.out.println(CodNumber + " yyyyyyyyyyyyyyyyyyyyyy@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2");
             this.imageView = img;
@@ -238,9 +238,9 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
         //Image :
 
-        private String i="2066";
+       // private String i="2066";
       // private String url;
-        private String url;
+     //   private String url;
 //="http://gis.moia.gov.sa/Mosques/Content/images/mosques/1234";
 
         public MosqueViewList(View view) {
