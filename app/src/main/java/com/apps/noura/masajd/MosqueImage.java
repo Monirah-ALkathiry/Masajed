@@ -128,7 +128,7 @@ public class MosqueImage extends Fragment {
                 }//end for
 
                 for (String imag: ImageUrls  ){
-                    System.out.println(" size is  ffffffffffffffffffffff : " + ImageUrls.size());
+                    System.out.println(" size is  ()Mosque Image : " + ImageUrls.size());
 
                     System.out.println("Url Is" + imag);
 
