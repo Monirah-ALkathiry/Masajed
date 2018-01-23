@@ -16,13 +16,13 @@
 
         <TextView
             android:id="@+id/NameTag"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:ems="10"
             android:padding="2pt"
             android:text="المنشط الدعوي"
-            android:textAlignment="viewEnd"
+            android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:typeface="sans"
             tools:layout_margin="2dp" />

@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
         final Button bLogin = (Button) findViewById(R.id.bLogin);
         final TextView registerLink = (TextView) findViewById(R.id.tvRigisterHere);
+        final TextView forgetPassLink = (TextView) findViewById(R.id.forgetPass);
 
         //Register link open RegisterActivity
         registerLink.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +90,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
+        //Forget password
+        forgetPassLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent forgetPassIntent = new Intent(LoginActivity.this, forgetPassActivity.class);
+                 LoginActivity.this.startActivity(forgetPassIntent);
+            }
+        });
 
     }
 

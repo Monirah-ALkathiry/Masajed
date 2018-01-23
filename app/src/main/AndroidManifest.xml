@@ -36,6 +36,7 @@
         <activity android:name=".MosqueActivity" />
         <activity android:name=".DawaActivity" />
         <activity android:name=".DawaInformationActivity" />
+        <activity android:name=".forgetPassActivity" />
 
         <!-- Map Android Key -->
         <!--  android:name="com.google.android.maps.v2.API_KEY" -->
