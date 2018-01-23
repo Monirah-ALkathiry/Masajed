@@ -2,10 +2,10 @@
     <string name="app_name">Masajd</string>
 
     <string name="nameerr">ادخل اسم صحيح </string>
-      <string name="usernamerr">ادخل اسم مستخدم صحيح</string>
+    <string name="usernamerr">ادخل اسم مستخدم صحيح</string>
     <string name="usernamerr2">اسم المستخدم موجود مسبقاً</string>
-     <string name="emailerr">Enter Correct Email</string>
-     <string name="phoneerr">Enter Correct Mobile no</string>
+    <string name="emailerr">Enter Correct Email</string>
+    <string name="phoneerr">Enter Correct Mobile no</string>
     <string name="passerr">كلمة المرور يجب أن تكون 6 خانات وتحوي أحرف كبيرة وصغيرة و رموز </string>
     <string name="cnfpasserr">كلمة المرور غير متطابقة</string>
 
@@ -38,11 +38,10 @@
     <string name="section_format">Hello World from section: %1$d</string>
 
 
-
     <!-- Dawa Activity -->
     <string name="DawaImage">صورة المنشط</string>
     <string name="DawaInfo">معلومات المنشط</string>
-
+    <string name="title_activity_jjjjjjjjjjkkkkkkkkkl">jjjjjjjjjjkkkkkkkkkl</string>
 
 
 </resources>

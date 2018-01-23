@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+
 /**
  * Created by Monirah on 02/01/18.
  */
@@ -28,7 +29,8 @@ public class MosqueInformationRecyclerView  extends RecyclerView.Adapter<MosqueI
     }
     @Override
     public MosqueViewInformationList onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mosque_information_list, parent, false);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.mosque_information_list, parent, false);
 
         //Mosque Code :
 
