@@ -50,10 +50,11 @@
          android:name="com.google.android.maps.v2.API_KEY"
          com.google.android.geo.API_KEY
         -->
+        <!--android:value="AIzaSyBl7YrjbRz22iYRckOPqqoxfbLAYRzymR8"-->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBl7YrjbRz22iYRckOPqqoxfbLAYRzymR8" />
-        <!-- Map -->
+          android:value="AIzaSyArYgxP0Mmgtwfhb_gAwDw8S0ZRaoBOxS4" />
+    <!-- Map -->
         <activity
             android:name=".MosqueInformationActivity"
             android:label="@string/title_activity_mosque_information"
