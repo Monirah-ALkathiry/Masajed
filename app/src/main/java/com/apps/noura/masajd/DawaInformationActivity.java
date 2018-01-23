@@ -57,7 +57,7 @@ public class DawaInformationActivity extends AppCompatActivity {
     private void setUpViewPager(ViewPager viewPager ){
 
         DawaInformationAdapter adapter = new DawaInformationAdapter(getSupportFragmentManager());
-
+        adapter.AddFragment(new DawaInformation(), "عام " , this);
         viewPager.setAdapter(adapter);
 
 
