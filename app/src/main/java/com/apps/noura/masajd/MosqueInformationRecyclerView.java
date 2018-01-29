@@ -64,7 +64,7 @@ public class MosqueInformationRecyclerView  extends RecyclerView.Adapter<MosqueI
 
         String REGION =intent.getStringExtra("MOSQUE_REGION");
         //TEST
-        System.out.println(REGION + " +++++++++++++++++++++++++++");
+        System.out.println(REGION + " REGION");
         int RegionType= Integer.parseInt(REGION);
 
         if(RegionType == 1){

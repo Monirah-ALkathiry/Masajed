@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
+<!--
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -21,7 +21,7 @@
             app:srcCompat="@drawable/filter_outline" />
 
         <SearchView
-            android:id="@+id/Search"
+            android:id="@+id/Search22"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -29,6 +29,7 @@
 
         </SearchView>
     </GridLayout>
+    -->
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"

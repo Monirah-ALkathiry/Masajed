@@ -146,9 +146,9 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
         private void  mos( String MosquCode , ImageView img){
             this.CodNumber = MosquCode;
-            System.out.println(CodNumber + " yyyyyyyyyyyyyyyyyyyyyy@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2");
+            System.out.println(CodNumber + " Mosque Code Number");
             this.imageView = img;
-            System.out.println(imageView + " holder.imageView ##########################");
+            System.out.println(imageView + " holder.imageView ");
 
                 }
 
@@ -158,7 +158,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
             super.onPreExecute();
             mProgressDialog = new ProgressDialog(context);
             //mProgressDialog.setTitle("Android Basic JSoup Tutorial");
-            mProgressDialog.setMessage("Loading");
+            mProgressDialog.setMessage("جاري التنزيل");
             mProgressDialog.setIndeterminate(false);
             mProgressDialog.show();
         }
@@ -218,6 +218,9 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
             }
             //super.onPostExecute(s);
         }
+
+
+
     }
 
 //------------------------------------------------------------------------------------------------------

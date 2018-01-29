@@ -14,8 +14,12 @@ public interface MosquesLatLngClint {
 
     @GET("mosques/index.jsp?")
     Call<List<MosquesLatLng>>
-    getMosqueLatLng(@Query("lat") String latitude , @Query("lon") String longitude);
+    getMosqueLatLng(@Query("lat") String latitude , @Query("lon") String longitude, @Query("limit") int limit);
 
+  /* @GET("mosques/index.jsp?")
+    Call<List<MosquesLatLng>>
+        getMosque_Name(@Query("lat") String latitude , @Query("lon") String longitude, @Query("limit") int limit );
+//where=Mosque_Name%20
 
-
+*/
 }
