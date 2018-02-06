@@ -22,4 +22,11 @@ public interface MosquesLatLngClint {
 //where=Mosque_Name%20
 
 */
+
+  //MobileApi/index.jsp
+    ///MobileApi/index.jsp?
+    // @Query("Mosque_Name")
+    @GET("mosques/index.jsp?")
+    Call<List<MosquesLatLng>>
+    Search_by_Name(@Query("lat") String latitude , @Query("lon") String longitude, @Query("limit") int limit ,@Query("where") String Mosque_Name);
 }

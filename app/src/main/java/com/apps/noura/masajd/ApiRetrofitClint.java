@@ -8,6 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class ApiRetrofitClint {
+    //http://gis.moia.gov.sa
     public static final String BASE_URL="http://mosquesapi.azurewebsites.net/";
     public static Retrofit retrofit = null;
 

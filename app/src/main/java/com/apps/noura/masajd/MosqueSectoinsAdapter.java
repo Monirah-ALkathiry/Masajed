@@ -20,11 +20,13 @@ public class MosqueSectoinsAdapter  extends FragmentPagerAdapter{
     private final List<String> mFragmentTitleList = new ArrayList<>();
 
 
+
     //Fun : Add Fragment To Fragment List:
-    public void AddFragment (Fragment fragment, String title){
+    public void AddFragment (Fragment fragment, String title ){
 
         mFragmentList.add(fragment);
         mFragmentTitleList.add(title);
+
 
     }//end AddFragment Fun
 
