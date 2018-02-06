@@ -11,22 +11,19 @@ import retrofit2.http.Query;
  */
 
 public interface MosquesLatLngClint {
-
-    @GET("mosques/index.jsp?")
+//MobileApi/index.jsp?
+    //Old :mosques/index.jsp?
+    @GET("MobileApi/index.jsp?")
     Call<List<MosquesLatLng>>
     getMosqueLatLng(@Query("lat") String latitude , @Query("lon") String longitude, @Query("limit") int limit);
 
-  /* @GET("mosques/index.jsp?")
-    Call<List<MosquesLatLng>>
-        getMosque_Name(@Query("lat") String latitude , @Query("lon") String longitude, @Query("limit") int limit );
-//where=Mosque_Name%20
-
-*/
-
+/*
   //MobileApi/index.jsp
     ///MobileApi/index.jsp?
     // @Query("Mosque_Name")
     @GET("mosques/index.jsp?")
     Call<List<MosquesLatLng>>
     Search_by_Name(@Query("lat") String latitude , @Query("lon") String longitude, @Query("limit") int limit ,@Query("where") String Mosque_Name);
+
+*/
 }

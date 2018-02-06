@@ -9,7 +9,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiRetrofitClint {
     //http://gis.moia.gov.sa
-    public static final String BASE_URL="http://mosquesapi.azurewebsites.net/";
+    //old : http://mosquesapi.azurewebsites.net/
+
+    public static final String BASE_URL="http://gis.moia.gov.sa/";
     public static Retrofit retrofit = null;
 
     public static Retrofit getApiRetrofitClint(){

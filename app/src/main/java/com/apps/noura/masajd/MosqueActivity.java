@@ -58,11 +58,7 @@ public class MosqueActivity extends AppCompatActivity implements LocationListene
     private static final String TAG = "MosqueActivity";
     private ViewPager mviewPager;
 
-    //Retrofit InterFace:
-    private MosquesLatLngClint mosquesLatLngClint;
-    //To get Mosque Information
-    private List<MosquesLatLng> mosquesLatLngs;
-    //private OnFragmentInteractionListener mListener;
+
     ///--------------MAP------------------------------
     Intent intentThatCalled;
     public double latitude;
@@ -71,8 +67,12 @@ public class MosqueActivity extends AppCompatActivity implements LocationListene
     public Criteria criteria;
     public String bestProvider;
 
-
-    //------------------------------------------------------
+//--------------------------------------
+//Retrofit InterFace:
+private MosquesLatLngClint mosquesLatLngClint;
+    //To get Mosque Information
+    private List<MosquesLatLng> mosquesLatLngs;
+//------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,13 +133,56 @@ public class MosqueActivity extends AppCompatActivity implements LocationListene
             public boolean onQueryTextSubmit(String query) {
                 //on-click submit
                 Toast.makeText(context,query,Toast.LENGTH_LONG).show();
+                String Search_by_Name = query;
 
+
+               /*
+                String lat= Double.toString(latitude);
+                 String  lon= Double.toString(longitude);
+                System.out.print("  \n"+ lat +"Lat And Long " + lon + "\n");
 
                 //Add Retrofit :
 
+                //Make A Connection With API :
+                mosquesLatLngClint = ApiRetrofitClint.getApiRetrofitClint().create(MosquesLatLngClint.class);
+                //Call Function form Inter Face And Send Parameter to it
 
 
+                Call<List<MosquesLatLng>> call = mosquesLatLngClint.Search_by_Name(lat,lon,25,Search_by_Name);
+                //  Create Response:
+                call.enqueue(new Callback<List<MosquesLatLng>>() {
+                    @Override
+                    public void onResponse(Call<List<MosquesLatLng>> call, Response<List<MosquesLatLng>> response) {
 
+                        mosquesLatLngs = response.body();
+                        System.out.println(mosquesLatLngs.size() + " SIZE IS");
+                        //Send Data To Fragment List---
+                        //  adapter = new MosqueListAdapter(getContext(),mosquesLatLngs);
+
+                        ///recyclerView.setAdapter(adapter);
+                        //-------
+
+                        //Test Result and Print Data
+                      //  System.out.println("Responce toString"+ response.toString());
+                       // System.out.println("Responce body"+ response.body());
+                       System.out.println("Responce headers"+ response.headers());
+                       // System.out.println("Responce errorBody"+ response.errorBody());
+                       System.out.print("URL" + response.isSuccessful());
+                        //Storing the data in our list
+
+                        System.out.println("Size Is onResponce :----" +mosquesLatLngs.size());
+                        //-----------------------------------------------------------------------
+                        System.out.println("NUMBER :----" +mosquesLatLngs.get(1).getMoathenEmployeeNo());
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<MosquesLatLng>> call, Throwable t) {
+                        System.out.println("Error bad  ):--------Search");
+                    }
+                });
+
+                */
                 return false;
             }
 

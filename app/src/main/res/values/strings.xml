@@ -27,6 +27,8 @@
     <string name="KhateebName"> إسم الخطيب</string>
     <string name="ObserverName"> إسم المراقب </string>
     <string name="StreetName">إسم الشارع</string>
+    <string name="MosqueDistance">المسافة</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Image fragment</string>

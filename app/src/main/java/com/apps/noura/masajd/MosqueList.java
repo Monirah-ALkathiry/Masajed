@@ -109,7 +109,7 @@ public class MosqueList extends Fragment {
                 mosquesLatLngs = response.body();
 
                 //Send Data To Fragment List---
-                adapter = new MosqueListAdapter(getContext(),mosquesLatLngs);
+                adapter = new MosqueListAdapter(getContext(),mosquesLatLngs , lat , log);
 
                 recyclerView.setAdapter(adapter);
                 //-------

@@ -5,6 +5,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 
+import android.graphics.Color;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -39,16 +41,22 @@ import static com.apps.noura.masajd.R.color.grey;
 public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.MosqueViewList> {
 
     private List<MosquesLatLng> mosquesLatLngs;
+    private double lat;
+    private double log;
 
+    double latd;
+    double logd;
 
     private Context context;
 
     //constructor
-    public MosqueListAdapter(Context context, List<MosquesLatLng> latLngs) {
+    public MosqueListAdapter(Context context, List<MosquesLatLng> latLngs, double lat , double log) {
 
         this.context = context;
         this.mosquesLatLngs = latLngs;
 
+        this.lat =lat;
+        this.log=log;
 
     }
 
@@ -85,17 +93,53 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         holder.InfoTextView.setText(mosquesLatLngs.get(position).getCityVillage());
         holder.MosqueDistrict.setText(mosquesLatLngs.get(position).getDistrict());
 
+        //-----------------------------Calc Distance --------------------------------
+//Location Distance :
+        Location locationA = new Location("point A");
+        Location locationB = new Location("point B");
+        //Used To calc Distance:
+        locationA.setLatitude(lat);
+        locationA.setLongitude(log);
+
+        String latAPI= mosquesLatLngs.get(position).getLatitude();
+
+        String logAPI= mosquesLatLngs.get(position).getLongitude();
+      //  System.out.println(" Distance is :) :) :0  ******* " + logAPI  + "\n d by meeter :" +latAPI + "\n In Kilo **********: " );
+
+        latd=Double.parseDouble(latAPI);
+         logd= Double.parseDouble(logAPI);
+
+        locationB.setLatitude(latd);
+        locationB.setLongitude(logd);
+        float distance = locationA.distanceTo(locationB);
+        double dm =distance * Math.PI / 180.0;
+        double dk = dm / 10.0;
+
+        //rad * 180.0 / Math.PI
+        System.out.println(" Distance is :) :) :0  ******* " + distance  + "\n d by meeter :" +dm + "\n In Kilo **********: " +dk );
+
+
+        //Convert To String:
+        dk = Math.floor(dk * 100) / 100;
+        String Dstance= Double.toString(dk);
+        holder.Distance.setText(Dstance + "كيلو");
+
+//--------------------------------------------------------------------------------------------------
+
+
         //Onclick : Open New Activity
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
            //USED in color
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View view) {
+                holder.cardView.setCardBackgroundColor(Color.parseColor("#D3D3D3"));
                 //view.setBackgroundColor(grey);
                 Toast.makeText(context, "Click", Toast.LENGTH_SHORT).show();
                 //Create Object From Activity:
 
                 Intent intent = new Intent(context, MosqueInformationActivity.class);
+
 
                 intent.putExtra("MOSQUE_CODE", mosquesLatLngs.get(position).getCode());
                 //USED IN MAP
@@ -232,7 +276,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         private ImageView imageView;
         private TextView MosqueDistrict;
         private LinearLayout linearLayout;
-
+        private TextView Distance;
         private CardView cardView;
 
 
@@ -253,6 +297,9 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
             imageView = (ImageView) view.findViewById(R.id.MosqueImage);
             MosqueDistrict =(TextView) view.findViewById(R.id.District);
             linearLayout = (LinearLayout) view.findViewById(R.id.linearLayout);
+            Distance = (TextView) view.findViewById(R.id.Distance);
+
+
             cardView = (CardView) view.findViewById(R.id.cardView);
 
         }

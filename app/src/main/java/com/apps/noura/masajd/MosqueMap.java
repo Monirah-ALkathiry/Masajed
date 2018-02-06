@@ -2,6 +2,7 @@ package com.apps.noura.masajd;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -52,6 +53,9 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback {
     String latitude;
     String longitude;
 
+    //Location Distance :
+    Location locationA = new Location("point A");
+    Location locationB = new Location("point B");
 
 
     //Retrofit InterFace:
@@ -97,9 +101,9 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback {
         latitude= Double.toString(lat);
         longitude= Double.toString(log);
 
-        System.out.print(lat +" Lat kkkk " + log + "\n");
+        //System.out.print(lat +" Lat  " + log + "\n");
 
-        System.out.print(latitude +" Lat STRING  " + longitude + "\n");
+        //System.out.print(latitude +" Lat  " + longitude + "\n");
 
         return mView;
 
@@ -159,6 +163,12 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback {
     }
 //TODO : Make Single RetroFit Connection
     public void AddOtherLocation(){
+
+
+
+
+
+
         //Make A Connection With API :
         mosquesLatLngClint = ApiRetrofitClint.getApiRetrofitClint().create(MosquesLatLngClint.class);
         //Call Function form Inter Face And Send Parameter to it
@@ -188,6 +198,10 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback {
 
                 System.out.println("Size Is onResponce :----" +mosquesLatLngs.size());
                 //-----------------------------------------------------------------------
+                //Used To calc Distance:
+                locationA.setLatitude(lat);
+                locationA.setLongitude(log);
+
 
                 //Add All mosqu
                 for(int i=0 ; i< mosquesLatLngs.size(); i++){
@@ -202,7 +216,20 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback {
                     System.out.println(latLngAPI + "  Id " + i);
                     String MosquName  = mosquesLatLngs.get(i).getMosqueName();
 
+//-----------------------------Calc Distance --------------------------------
+                    locationB.setLatitude(latd);
+                    locationB.setLongitude(logd);
+                    float distance = locationA.distanceTo(locationB);
+                    double dm =distance * Math.PI / 180.0;
+                    double dk = dm / 10.0;
 
+                    //rad * 180.0 / Math.PI
+                    System.out.println(" Distance is :) :) :0  " + distance  + "\n d by meeter :" +dm + "\n In Kilo : " +dk );
+
+
+
+
+//--------------------------------------------------------------------------------------------------
                     MgoogleMap.addMarker(new MarkerOptions()
                             .position(latLngAPI)
                             .title(MosquName)////title on the marker
@@ -231,6 +258,8 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback {
         });
 
     }
+
+    //---------------
 
 }
 
