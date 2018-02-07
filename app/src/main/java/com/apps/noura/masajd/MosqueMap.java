@@ -128,6 +128,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback {
 
         //Set Map View By Id
         mapView = (MapView) mView.findViewById(R.id.mapView);
+
         //check if Not Null
         if(mapView != null){
             mapView.onCreate(null);
@@ -166,7 +167,8 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback {
                 .tilt(45)
                 .build();
         //Move Camera
-        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
+       // googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
+        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
 
         Toast.makeText(getContext(),"Test_Toast_Massage",Toast.LENGTH_SHORT).show();
         AddOtherLocation();
