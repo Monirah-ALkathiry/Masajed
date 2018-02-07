@@ -53,6 +53,10 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback {
     String latitude;
     String longitude;
 
+    //Used If Map Marker Clicked Open this Activity
+    private MosqueListAdapter adapter;
+
+
     //Location Distance :
     Location locationA = new Location("point A");
     Location locationB = new Location("point B");
@@ -168,6 +172,11 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback {
                 .build();
         //Move Camera
        // googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
+        googleMap.getUiSettings().setRotateGesturesEnabled(false);
+        googleMap.getUiSettings().setScrollGesturesEnabled(false);
+        googleMap.getUiSettings().setTiltGesturesEnabled(false);
+
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
 
         Toast.makeText(getContext(),"Test_Toast_Massage",Toast.LENGTH_SHORT).show();
