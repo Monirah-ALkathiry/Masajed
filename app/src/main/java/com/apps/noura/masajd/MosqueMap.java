@@ -66,6 +66,14 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback {
 
     //private OnFragmentInteractionListener mListener;
     //public MosqueMap(){}
+
+    @SuppressLint("ValidFragment")
+    public MosqueMap(List<MosquesLatLng> mosquesLatLngs,double lat, double log){
+
+        this.mosquesLatLngs = mosquesLatLngs;
+    }
+
+
     @SuppressLint("ValidFragment")
     public  MosqueMap(double lat, double log){
 
@@ -98,10 +106,12 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback {
         System.out.print("  \n"+ lat +" Lat From Fragment " + log + "\n");
 
 
+
         latitude= Double.toString(lat);
         longitude= Double.toString(log);
 
-        //System.out.print(lat +" Lat  " + log + "\n");
+
+
 
         //System.out.print(latitude +" Lat  " + longitude + "\n");
 
@@ -164,9 +174,53 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback {
 //TODO : Make Single RetroFit Connection
     public void AddOtherLocation(){
 
+/*
+
+        for (int i = 0 ; i< mosquesLatLngs.size() ; i++){
+
+            String latAPI=mosquesLatLngs.get(i).getLatitude();
+            String logAPI= mosquesLatLngs.get(i).getLongitude();
+
+            System.out.print("  \n"+ latAPI +" Lat From Fragment  oopppplllplplplpdl" + logAPI + "\n");
+
+
+            double latd=Double.parseDouble(latAPI);
+            double logd= Double.parseDouble(logAPI);
+            LatLng latLngAPI = new LatLng(latd,logd);
+
+            System.out.println(latLngAPI + "  Id " + i);
+            String MosquName  = mosquesLatLngs.get(i).getMosqueName();
+            System.out.print("  \n"+ MosquName +" Lat From Fragment  oopppplllplplplpdl\n");
+
+//-----------------------------Calc Distance --------------------------------
+            locationB.setLatitude(latd);
+            locationB.setLongitude(logd);
+            float distance = locationA.distanceTo(locationB);
+            double dm =distance * Math.PI / 180.0;
+            double dk = dm / 10.0;
+
+            //rad * 180.0 / Math.PI
+            System.out.println(" Distance is :) :) :0  " + distance  + "\n d by meeter :" +dm + "\n In Kilo : " +dk );
 
 
 
+
+//--------------------------------------------------------------------------------------------------
+            MgoogleMap.addMarker(new MarkerOptions()
+                    .position(latLngAPI)
+                    .title(MosquName)////title on the marker
+                    .snippet("موقعي")//Description
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.icons)) );
+
+            // MarkerOptions markerOptions2 = new MarkerOptions();
+            // markerOptions2.position(latLngAPI);
+            // markerOptions2.title(MosquName);
+            // markerOptions2.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+            //mCurrLocationMarker = mMap.addMarker(markerOptions2);
+            System.out.println(MosquName + " Name");
+
+        }
+*/
 
 
         //Make A Connection With API :
@@ -236,10 +290,10 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback {
                             .snippet("موقعي")//Description
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.icons)) );
 
-                   // MarkerOptions markerOptions2 = new MarkerOptions();
-                   // markerOptions2.position(latLngAPI);
-                   // markerOptions2.title(MosquName);
-                   // markerOptions2.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+                    // MarkerOptions markerOptions2 = new MarkerOptions();
+                    // markerOptions2.position(latLngAPI);
+                    // markerOptions2.title(MosquName);
+                    // markerOptions2.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
                     //mCurrLocationMarker = mMap.addMarker(markerOptions2);
                     System.out.println(MosquName + " Name");
                 }
@@ -256,6 +310,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback {
                 System.out.println("Error bad  ):-----------------------");
             }
         });
+
 
     }
 

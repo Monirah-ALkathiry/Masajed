@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,37 +23,27 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
+
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.apps.noura.masajd.UsereLocationListener.location;
+//import static com.apps.noura.masajd.UsereLocationListener.location;
 
 
-public class MosqueActivity extends AppCompatActivity implements LocationListener{
+public class MosqueActivity extends AppCompatActivity implements LocationListener {
 
 
     private static final String TAG = "MosqueActivity";
@@ -67,11 +58,19 @@ public class MosqueActivity extends AppCompatActivity implements LocationListene
     public Criteria criteria;
     public String bestProvider;
 
-//--------------------------------------
+
+    LocationRequest mLocationRequest;
+    Location location;
+    GoogleApiClient mGoogleApiClient;
+
+    //--------------------------------------
 //Retrofit InterFace:
 private MosquesLatLngClint mosquesLatLngClint;
     //To get Mosque Information
     private List<MosquesLatLng> mosquesLatLngs;
+
+    //
+    protected Intent mapIntent ;
 //------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +99,9 @@ private MosquesLatLngClint mosquesLatLngClint;
         TabLayout tabLayout =(TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mviewPager);
 
+//-------------------------------------------------------
 
+//-----------------------------------------------------
 
 
          }
@@ -109,7 +110,7 @@ private MosquesLatLngClint mosquesLatLngClint;
     protected void onStart() {
         super.onStart();
         //end check if Not Null
-        setupViewPager(mviewPager);
+      setupViewPager(mviewPager);
     }
 
 //Search-------
@@ -233,31 +234,31 @@ private MosquesLatLngClint mosquesLatLngClint;
                 // for ActivityCompat#requestPermissions for more details.
                 return;
             }
-            Location location = locationManager.getLastKnownLocation(bestProvider);
+            location = locationManager.getLastKnownLocation(bestProvider);
             if (location != null) {
                 Log.e("TAG", "GPS is on");
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
                 Toast.makeText(this, "latitude:" + latitude + " longitude:" + longitude, Toast.LENGTH_SHORT).show();
+                //ConnectWithAPI(latitude,longitude);
             }
             else{
                 //This is what you need:
+                //(android.location.LocationListener)
+              //  Toast.makeText(this, "latitude:" + latitude + " longitude:" + longitude, Toast.LENGTH_SHORT).show();
+
                 locationManager.requestLocationUpdates(bestProvider, 1000, 0, (android.location.LocationListener) this);
             }
+
         }
         else
         {
-            //prompt user to enable location....
+            //prompt user to enable location
             //.................
+            Toast.makeText(this, "الرجاء منكم تفعيل احداثي الموقع GPS", Toast.LENGTH_SHORT).show();
+
         }
 
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-       // locationManager.removeUpdates(MosqueActivity);
 
     }
 
@@ -275,15 +276,85 @@ private MosquesLatLngClint mosquesLatLngClint;
 
 
     }
-    //---------------------------------------------------------
+
+    public  void ConnectWithAPI(double lat, double lon){
+
+        double LocationLat= lat;
+        double Locationlon = lon;
+        String latitude;
+        String longitude;
+
+        latitude= Double.toString(LocationLat);
+        longitude= Double.toString(Locationlon);
+
+
+
+
+        //Make A Connection With API :
+        mosquesLatLngClint = ApiRetrofitClint.getApiRetrofitClint().create(MosquesLatLngClint.class);
+        //Call Function form Inter Face And Send Parameter to it
+
+
+        Call<List<MosquesLatLng>> call = mosquesLatLngClint.getMosqueLatLng(latitude,longitude,25);
+        //  Create Response:
+        call.enqueue(new Callback<List<MosquesLatLng>>() {
+            @Override
+            public void onResponse(Call<List<MosquesLatLng>> call, Response<List<MosquesLatLng>> response) {
+
+                mosquesLatLngs = response.body();
+                System.out.println(mosquesLatLngs.size() + " SIZE IS");
+                //Send Data To Fragment List---
+                //  adapter = new MosqueListAdapter(getContext(),mosquesLatLngs);
+
+                ///recyclerView.setAdapter(adapter);
+                //-------
+
+                //Test Result and Print Data
+                System.out.println("Responce toString"+ response.toString());
+                System.out.println("Responce body"+ response.body());
+                System.out.println("Responce headers"+ response.headers());
+                System.out.println("Responce errorBody"+ response.errorBody());
+                System.out.print("URL" + response.isSuccessful());
+                //Storing the data in our list
+
+                System.out.println("Size Is onResponce :----" +mosquesLatLngs.size());
+
+                setupViewPager(mviewPager);
+
+           /*(() Intent intent = new Intent(getContext(),MosqueActivity.class);
+                intent.putExtra("MsqResult", String.valueOf(mosquesLatLngs));
+            startActivity(intent);
+            */
+            }
+
+            @Override
+            public void onFailure(Call<List<MosquesLatLng>> call, Throwable t) {
+                System.out.println("Error bad  ):-----------------------");
+            }
+        });
+
+
+
+
+    }
+
 
 //----------------------------------------------------------
+@Override
+protected void onPause() {
+    super.onPause();
+    // locationManager.removeUpdates(MosqueActivity);
 
+}
     //Create Function : Section Page Adapter , then Add Fragment To it
 
-    private void setupViewPager(ViewPager viewPager){
+    private void setupViewPager(ViewPager viewPager ){
+
 
         MosqueSectoinsAdapter adapter = new MosqueSectoinsAdapter(getSupportFragmentManager());
+
+        //List<MosquesLatLng> mosquesLatLngsT = mosquesLatLngs;
+      // System.out.print("LIST IS Empty Check " + mosquesLatLngsT.isEmpty());
 
         adapter.AddFragment(new MosqueMap(latitude,longitude), "خريطه" );
         adapter.AddFragment(new MosqueList(latitude,longitude), "قائمة" );
