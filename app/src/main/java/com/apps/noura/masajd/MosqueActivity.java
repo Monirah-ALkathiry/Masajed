@@ -28,6 +28,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
@@ -43,7 +44,9 @@ import retrofit2.Response;
 //import static com.apps.noura.masajd.UsereLocationListener.location;
 
 
-public class MosqueActivity extends AppCompatActivity implements LocationListener {
+public class MosqueActivity extends AppCompatActivity implements LocationListener ,
+GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener{
 
 
     private static final String TAG = "MosqueActivity";
@@ -136,54 +139,6 @@ private MosquesLatLngClint mosquesLatLngClint;
                 Toast.makeText(context,query,Toast.LENGTH_LONG).show();
                 String Search_by_Name = query;
 
-
-               /*
-                String lat= Double.toString(latitude);
-                 String  lon= Double.toString(longitude);
-                System.out.print("  \n"+ lat +"Lat And Long " + lon + "\n");
-
-                //Add Retrofit :
-
-                //Make A Connection With API :
-                mosquesLatLngClint = ApiRetrofitClint.getApiRetrofitClint().create(MosquesLatLngClint.class);
-                //Call Function form Inter Face And Send Parameter to it
-
-
-                Call<List<MosquesLatLng>> call = mosquesLatLngClint.Search_by_Name(lat,lon,25,Search_by_Name);
-                //  Create Response:
-                call.enqueue(new Callback<List<MosquesLatLng>>() {
-                    @Override
-                    public void onResponse(Call<List<MosquesLatLng>> call, Response<List<MosquesLatLng>> response) {
-
-                        mosquesLatLngs = response.body();
-                        System.out.println(mosquesLatLngs.size() + " SIZE IS");
-                        //Send Data To Fragment List---
-                        //  adapter = new MosqueListAdapter(getContext(),mosquesLatLngs);
-
-                        ///recyclerView.setAdapter(adapter);
-                        //-------
-
-                        //Test Result and Print Data
-                      //  System.out.println("Responce toString"+ response.toString());
-                       // System.out.println("Responce body"+ response.body());
-                       System.out.println("Responce headers"+ response.headers());
-                       // System.out.println("Responce errorBody"+ response.errorBody());
-                       System.out.print("URL" + response.isSuccessful());
-                        //Storing the data in our list
-
-                        System.out.println("Size Is onResponce :----" +mosquesLatLngs.size());
-                        //-----------------------------------------------------------------------
-                        System.out.println("NUMBER :----" +mosquesLatLngs.get(1).getMoathenEmployeeNo());
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<MosquesLatLng>> call, Throwable t) {
-                        System.out.println("Error bad  ):--------Search");
-                    }
-                });
-
-                */
                 return false;
             }
 
@@ -217,50 +172,99 @@ private MosquesLatLngClint mosquesLatLngClint;
         return true;
     }
 
+
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+
     protected void getLocation() {
-        if (isLocationEnabled(this)) {
-            locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-            criteria = new Criteria();
-            bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true)).toString();
 
-            //You can still do this if you like, you might get lucky:
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
-            location = locationManager.getLastKnownLocation(bestProvider);
-            if (location != null) {
-                Log.e("TAG", "GPS is on");
-                latitude = location.getLatitude();
-                longitude = location.getLongitude();
-                Toast.makeText(this, "latitude:" + latitude + " longitude:" + longitude, Toast.LENGTH_SHORT).show();
-                //ConnectWithAPI(latitude,longitude);
-            }
-            else{
-                //This is what you need:
-                //(android.location.LocationListener)
-              //  Toast.makeText(this, "latitude:" + latitude + " longitude:" + longitude, Toast.LENGTH_SHORT).show();
+      /* if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
 
-                locationManager.requestLocationUpdates(bestProvider, 1000, 0, (android.location.LocationListener) this);
-            }
+            // Asking user if explanation is needed
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
 
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+                //Prompt the user once explanation has been shown
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+
+
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+            }
+          //  return false;
+        } else {
+           // return true;
         }
-        else
-        {
-            //prompt user to enable location
-            //.................
-            Toast.makeText(this, "الرجاء منكم تفعيل احداثي الموقع GPS", Toast.LENGTH_SHORT).show();
+        */
 
+
+try {
+
+    if (isLocationEnabled(this)) {
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        criteria = new Criteria();
+        bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true)).toString();
+
+        //You can still do this if you like, you might get lucky:
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_LOCATION);
+
+            return;
+        }
+        location = locationManager.getLastKnownLocation(bestProvider);
+        if (location != null) {
+            Log.e("TAG", "GPS is on");
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+
+
+            Toast.makeText(this, "latitude:" + latitude + " longitude:" + longitude, Toast.LENGTH_SHORT).show();
+
+
+        } else {
+            //This is what you need:
+            //(android.location.LocationListener)
+            //  Toast.makeText(this, "latitude:" + latitude + " longitude:" + longitude, Toast.LENGTH_SHORT).show();
+
+            locationManager.requestLocationUpdates(bestProvider, 1000, 0, (android.location.LocationListener) this);
         }
 
+    } else {
+        //prompt user to enable location
+        //.................
+        Toast.makeText(this, "الرجاء منكم تفعيل احداثي الموقع GPS", Toast.LENGTH_SHORT).show();
+
+
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                MY_PERMISSIONS_REQUEST_LOCATION);
 
     }
+} //end Try
+
+catch (Exception e) {
+        e.printStackTrace();
+    }
+
+
+    }//end Function GetLocation
 
     @Override
     public void onLocationChanged(Location location) {
@@ -277,7 +281,7 @@ private MosquesLatLngClint mosquesLatLngClint;
 
     }
 
-    public  void ConnectWithAPI(double lat, double lon){
+   /* public  void ConnectWithAPI(double lat, double lon){
 
         double LocationLat= lat;
         double Locationlon = lon;
@@ -321,10 +325,7 @@ private MosquesLatLngClint mosquesLatLngClint;
 
                 setupViewPager(mviewPager);
 
-           /*(() Intent intent = new Intent(getContext(),MosqueActivity.class);
-                intent.putExtra("MsqResult", String.valueOf(mosquesLatLngs));
-            startActivity(intent);
-            */
+
             }
 
             @Override
@@ -337,13 +338,12 @@ private MosquesLatLngClint mosquesLatLngClint;
 
 
     }
-
+*/
 
 //----------------------------------------------------------
 @Override
 protected void onPause() {
     super.onPause();
-    // locationManager.removeUpdates(MosqueActivity);
 
 }
     //Create Function : Section Page Adapter , then Add Fragment To it
@@ -364,5 +364,18 @@ protected void onPause() {
     }//end Function ViewPager
 
 
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
 
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 }//end Class
