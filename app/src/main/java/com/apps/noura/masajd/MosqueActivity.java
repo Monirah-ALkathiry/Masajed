@@ -1,50 +1,36 @@
 package com.apps.noura.masajd;
 
-import android.Manifest;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
+
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import android.widget.SearchView;
 import android.widget.Toast;
 
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
 
 
-import java.util.ArrayList;
+
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-//import static com.apps.noura.masajd.UsereLocationListener.location;
 
 
-public class MosqueActivity extends AppCompatActivity implements LocationListener ,
+
+public class MosqueActivity extends AppCompatActivity implements
 GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener{
 
@@ -57,14 +43,8 @@ GoogleApiClient.ConnectionCallbacks,
     Intent intentThatCalled;
     public double latitude;
     public double longitude;
-    public LocationManager locationManager;
-    public Criteria criteria;
-    public String bestProvider;
 
 
-    LocationRequest mLocationRequest;
-    Location location;
-    GoogleApiClient mGoogleApiClient;
 
     //--------------------------------------
 //Retrofit InterFace:
@@ -72,8 +52,7 @@ private MosquesLatLngClint mosquesLatLngClint;
     //To get Mosque Information
     private List<MosquesLatLng> mosquesLatLngs;
 
-    //
-    protected Intent mapIntent ;
+
 //------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,31 +62,25 @@ private MosquesLatLngClint mosquesLatLngClint;
         //Log to start
         Log.d(TAG,"Start");
 
-
         //Set Up the view Pager with Section Adapter:
         mviewPager = (ViewPager) findViewById(R.id.container);
 
         //MAP
         intentThatCalled = getIntent();
 
-        System.out.print(intentThatCalled + " \n INTENT");
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getLocation();
+        latitude = intentThatCalled.getDoubleExtra("LAT",0.0);
+        longitude = intentThatCalled.getDoubleExtra("LONG",0.0);
 
-        }
-;
+        Toast.makeText(getApplicationContext(), "lat From Intent - \n Lat: "
+                + latitude + "\n Long: " + longitude, Toast.LENGTH_LONG).show();
 
-        //TabLayout
+          //TabLayout
 
         TabLayout tabLayout =(TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mviewPager);
 
-//-------------------------------------------------------
-
+    }
 //-----------------------------------------------------
-
-
-         }
 
     @Override
     protected void onStart() {
@@ -118,12 +91,10 @@ private MosquesLatLngClint mosquesLatLngClint;
 
 //Search-------
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_mosque_information,menu);
-
 
         //SEARCH --------------------------------
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -172,174 +143,6 @@ private MosquesLatLngClint mosquesLatLngClint;
         return true;
     }
 
-
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-
-    protected void getLocation() {
-
-      /* if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Asking user if explanation is needed
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
-                //Prompt the user once explanation has been shown
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION);
-
-
-            } else {
-                // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION);
-            }
-          //  return false;
-        } else {
-           // return true;
-        }
-        */
-
-
-try {
-
-    if (isLocationEnabled(this)) {
-        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        criteria = new Criteria();
-        bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true)).toString();
-
-        //You can still do this if you like, you might get lucky:
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_LOCATION);
-
-            return;
-        }
-        location = locationManager.getLastKnownLocation(bestProvider);
-        if (location != null) {
-            Log.e("TAG", "GPS is on");
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
-
-
-            Toast.makeText(this, "latitude:" + latitude + " longitude:" + longitude, Toast.LENGTH_SHORT).show();
-
-
-        } else {
-            //This is what you need:
-            //(android.location.LocationListener)
-            //  Toast.makeText(this, "latitude:" + latitude + " longitude:" + longitude, Toast.LENGTH_SHORT).show();
-
-            locationManager.requestLocationUpdates(bestProvider, 1000, 0, (android.location.LocationListener) this);
-        }
-
-    } else {
-        //prompt user to enable location
-        //.................
-        Toast.makeText(this, "الرجاء منكم تفعيل احداثي الموقع GPS", Toast.LENGTH_SHORT).show();
-
-
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                MY_PERMISSIONS_REQUEST_LOCATION);
-
-    }
-} //end Try
-
-catch (Exception e) {
-        e.printStackTrace();
-    }
-
-
-    }//end Function GetLocation
-
-    @Override
-    public void onLocationChanged(Location location) {
-        //Hey, a non null location! Sweet!
-
-        //remove location callback:
-        locationManager.removeUpdates((android.location.LocationListener) this);
-
-        //open the map:
-        latitude = location.getLatitude();
-        longitude = location.getLongitude();
-        Toast.makeText(this, "latitude:" + latitude + " longitude:" + longitude, Toast.LENGTH_SHORT).show();
-
-
-    }
-
-   /* public  void ConnectWithAPI(double lat, double lon){
-
-        double LocationLat= lat;
-        double Locationlon = lon;
-        String latitude;
-        String longitude;
-
-        latitude= Double.toString(LocationLat);
-        longitude= Double.toString(Locationlon);
-
-
-
-
-        //Make A Connection With API :
-        mosquesLatLngClint = ApiRetrofitClint.getApiRetrofitClint().create(MosquesLatLngClint.class);
-        //Call Function form Inter Face And Send Parameter to it
-
-
-        Call<List<MosquesLatLng>> call = mosquesLatLngClint.getMosqueLatLng(latitude,longitude,25);
-        //  Create Response:
-        call.enqueue(new Callback<List<MosquesLatLng>>() {
-            @Override
-            public void onResponse(Call<List<MosquesLatLng>> call, Response<List<MosquesLatLng>> response) {
-
-                mosquesLatLngs = response.body();
-                System.out.println(mosquesLatLngs.size() + " SIZE IS");
-                //Send Data To Fragment List---
-                //  adapter = new MosqueListAdapter(getContext(),mosquesLatLngs);
-
-                ///recyclerView.setAdapter(adapter);
-                //-------
-
-                //Test Result and Print Data
-                System.out.println("Responce toString"+ response.toString());
-                System.out.println("Responce body"+ response.body());
-                System.out.println("Responce headers"+ response.headers());
-                System.out.println("Responce errorBody"+ response.errorBody());
-                System.out.print("URL" + response.isSuccessful());
-                //Storing the data in our list
-
-                System.out.println("Size Is onResponce :----" +mosquesLatLngs.size());
-
-                setupViewPager(mviewPager);
-
-
-            }
-
-            @Override
-            public void onFailure(Call<List<MosquesLatLng>> call, Throwable t) {
-                System.out.println("Error bad  ):-----------------------");
-            }
-        });
-
-
-
-
-    }
-*/
-
 //----------------------------------------------------------
 @Override
 protected void onPause() {
@@ -353,11 +156,8 @@ protected void onPause() {
 
         MosqueSectoinsAdapter adapter = new MosqueSectoinsAdapter(getSupportFragmentManager());
 
-        //List<MosquesLatLng> mosquesLatLngsT = mosquesLatLngs;
-      // System.out.print("LIST IS Empty Check " + mosquesLatLngsT.isEmpty());
-
-        adapter.AddFragment(new MosqueMap(latitude,longitude), "خريطه" );
-        adapter.AddFragment(new MosqueList(latitude,longitude), "قائمة" );
+       adapter.AddFragment(new MosqueMap(latitude,longitude), "خريطه" );
+       adapter.AddFragment(new MosqueList(latitude,longitude), "قائمة" );
 
         viewPager.setAdapter(adapter);
 

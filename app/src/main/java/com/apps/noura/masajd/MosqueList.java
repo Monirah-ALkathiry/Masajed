@@ -1,5 +1,6 @@
 package com.apps.noura.masajd;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Context;
