@@ -92,6 +92,8 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
         this.lat = lat;
         this.log = log;
     }
+
+
     public MosqueMap() {
         // Required empty public constructor
     }
@@ -117,15 +119,8 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
 
         System.out.print("  \n"+ lat +" Lat From Fragment " + log + "\n");
 
-
-
         latitude= Double.toString(lat);
         longitude= Double.toString(log);
-
-
-
-
-        //System.out.print(latitude +" Lat  " + longitude + "\n");
 
         return mView;
 
@@ -135,7 +130,6 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
     @Override
     public void onViewCreated(View view,  Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
 
 
         //Set Map View By Id
@@ -182,28 +176,22 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
         //Move Camera
        // googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
         //Google Map Zoom in zoom out
-        MgoogleMap.getUiSettings().setZoomControlsEnabled(true);
+
+       // MgoogleMap.getUiSettings().setZoomControlsEnabled(true);
         MgoogleMap.getUiSettings().setRotateGesturesEnabled(false);
         MgoogleMap.getUiSettings().setScrollGesturesEnabled(false);
         MgoogleMap.getUiSettings().setTiltGesturesEnabled(false);
+
+
+
       //  MgoogleMap.setOnMarkerClickListener(this);
 
         //Google Map Onclick:
         MgoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
-
-
-
        // Toast.makeText(getContext(),"Test_Toast_Massage",Toast.LENGTH_SHORT).show();
         AddOtherLocation();
     }
 
-
- //---------
-
-
-
-    //---------------
-//---------
 public void AddOtherLocation(){
 
 

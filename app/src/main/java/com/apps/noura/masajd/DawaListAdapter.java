@@ -2,6 +2,7 @@ package com.apps.noura.masajd;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,13 +25,21 @@ class DawaListAdapter extends RecyclerView.Adapter<DawaListAdapter.DawaViewList>
     private List<DawaLatLng> DawaLatLng;
     private Context context;
 
+    private double lat;
+    private double log;
+
+    double latd;
+    double logd;
 
 
     //constructor
-    public DawaListAdapter(Context context,List<DawaLatLng> LatLng) {
+    public DawaListAdapter(Context context,List<DawaLatLng> LatLng, double lat , double log) {
 
         this.context =context;
         this.DawaLatLng = LatLng;
+
+        this.lat =lat;
+        this.log=log;
 
 
     }
@@ -63,6 +72,43 @@ class DawaListAdapter extends RecyclerView.Adapter<DawaListAdapter.DawaViewList>
                 .load("http://gis.moia.gov.sa/Mosques/Content/images/mosques/"+holder.DawaID+"/IMG_"+holder.i+".JPG")
                 .placeholder(R.drawable.markericonsmall)
                 .into(holder.imageView);
+
+
+
+        //-----------------------------Calc Distance --------------------------------
+//Location Distance :
+        Location locationA = new Location("point A");
+        Location locationB = new Location("point B");
+        //Used To calc Distance:
+        locationA.setLatitude(lat);
+        locationA.setLongitude(log);
+
+        String latAPI= DawaLatLng.get(position).getLocYCoord();
+        String logAPI= DawaLatLng.get(position).getLocXCoord();
+
+
+        //  System.out.println(" Distance is :) :) :0  ******* " + logAPI  + "\n d by meeter :" +latAPI + "\n In Kilo **********: " );
+
+        latd=Double.parseDouble(latAPI);
+        logd= Double.parseDouble(logAPI);
+
+        locationB.setLatitude(latd);
+        locationB.setLongitude(logd);
+        float distance = locationA.distanceTo(locationB);
+        double dm =distance * Math.PI / 180.0;
+        double dk = dm / 10.0;
+
+        //rad * 180.0 / Math.PI
+        System.out.println(" Distance is :) :) :0  ******* " + distance  + "\n d by meeter :" +dm + "\n In Kilo **********: " +dk );
+
+
+        //Convert To String:
+        dk = Math.floor(dk * 100) / 100;
+        String Dstance= Double.toString(dk);
+        holder.Distance.setText(Dstance + "كيلو");
+
+//--------------------------------------------------------------------------------------------------
+
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +173,7 @@ class DawaListAdapter extends RecyclerView.Adapter<DawaListAdapter.DawaViewList>
         private TextView DawaDistrict;
         private LinearLayout linearLayout;
         private String DawaID;
+        private TextView Distance;
 
 
         //Image :
@@ -141,7 +188,7 @@ class DawaListAdapter extends RecyclerView.Adapter<DawaListAdapter.DawaViewList>
             imageView = (ImageView) view.findViewById(R.id.DawaImage);
             DawaDistrict =(TextView) view.findViewById(R.id.DawaDistrict);
             linearLayout = (LinearLayout) view.findViewById(R.id.linearLayout);
-
+            Distance = (TextView) view.findViewById(R.id.Distance);
 
         }
 

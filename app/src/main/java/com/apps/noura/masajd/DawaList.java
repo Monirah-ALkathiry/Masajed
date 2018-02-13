@@ -1,5 +1,7 @@
 package com.apps.noura.masajd;
 
+import android.annotation.SuppressLint;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -34,17 +36,19 @@ public class DawaList extends Fragment {
 
     private static final String TAG = "DawaLIST";
     //------------------------------------------------------
+    //------------------------------------------------------
     // Retrofit
     //create Retrofit instance
-//http://mosquesapi.azurewebsites.net/mosques/DawaActivity.jsp?lat=24.0006&lon=46.000&limit=5
-    private static Retrofit.Builder builder = new Retrofit.Builder()
+    //http://mosquesapi.azurewebsites.net/mosques/DawaActivity.jsp?lat=24.0006&lon=46.000&limit=5
+
+   /*
+   private static Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl("http://mosquesapi.azurewebsites.net/")
             .addConverterFactory(GsonConverterFactory.create());
     public static Retrofit retrofit = builder.build();
 
     DawaClient dawaClient =retrofit.create(DawaClient.class);
-   // DawaClient2 dawaClient2 =retrofit.create(DawaClient2.class);
-
+    */
     //-----------------------------------------------------------------
 
     //Recycle View (Mosque List)
@@ -53,9 +57,25 @@ public class DawaList extends Fragment {
     private DawaListAdapter adapter;
 
 
+
     private DawaClient DawaClient;
     //To get dawa activity Information
-   private List<DawaLatLng> dawaLatLngs;
+    private List<DawaLatLng> dawaLatLngs;
+
+    private View view;
+
+    private  double lat;
+    private  double log;
+
+    String latitude;
+    String longitude;
+
+    @SuppressLint("ValidFragment")
+    public  DawaList(double lat, double log){
+
+        this.lat = lat;
+        this.log = log;
+    }
 
 
     public DawaList() {
@@ -70,6 +90,14 @@ public class DawaList extends Fragment {
         View view;
         view = inflater.inflate(R.layout.fragment_dawa_list, container, false);
 
+        latitude= Double.toString(lat);
+        longitude= Double.toString(log);
+
+        System.out.print(lat +" Lat from dawa List " + log + "\n");
+
+        System.out.print(latitude +" Lat from dawa List  " + longitude + "\n");
+
+
         //Recycler View
         recyclerView = (RecyclerView) view.findViewById(R.id.DawaRecyclerView);
         layoutManager = new LinearLayoutManager(getContext());
@@ -77,57 +105,11 @@ public class DawaList extends Fragment {
         recyclerView.setHasFixedSize(true);
         //-------------------------------------------------------
 
-/*
-        // try jason object
-        Call<JsonObject> call2 = dawaClient2.getDawaInfo("24.0006","46.000");
-
-        call2.enqueue(new Callback<JsonObject>(){
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                System.out.println("111111111111111111111");
-
-                System.out.println(response.body().toString());
-                Log.d("Ttt","SSSSSSSSSSSSSSSSSSSSWWWWWWWWWWWWWWW");
-                try {
-
-                    System.out.println("555555555555555555555555");
-                    Log.d("Ttt","Teeeeeee");
-
-                    JSONObject InfoResponse = new JSONObject(String.valueOf(response.body()));
-
-                    String Dawaname = InfoResponse.getString("DawaAddress");
-                    System.out.println("Dawa Activity Name " + Dawaname);
-                    //  Toast.makeText(DawaActivity.this, "Welcome" + Dawaname, Toast.LENGTH_SHORT).show();
-                    //2
-                    String jsonData = response.body().toString();
-                    JSONObject Jobject = new JSONObject(jsonData);
-                    String Dawaname2 = "Name:" + Jobject.get("Id");
-                    System.out.println(Dawaname2);
-
-                    String DawaAdress = Jobject.getString("DawaAddress");
-                    System.out.println(DawaAdress);
-                }
-                catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                System.out.println("Failure");
-                Log.d("Ttt","FFFFFFFFFFFFFFFF");
-            }
-
-
-        });
-
-*/
-
         //Connect to API :
         //DawaClient = ApiRetrofitClint.getApiRetrofitClint().create(DawaClient.class);
-
-        Call<List<DawaLatLng>> call = dawaClient.getDawaLatLng("24.000.6","46.000");
+        //Make A Connection With API :
+        DawaClient= ApiRetrofitClint.getApiRetrofitClint().create(DawaClient.class);
+        Call<List<DawaLatLng>> call = DawaClient.getDawaLatLng(latitude,longitude);
 
         call.enqueue(new Callback<List<DawaLatLng>>(){
 
@@ -137,16 +119,12 @@ public class DawaList extends Fragment {
                 dawaLatLngs = response.body();
 
                 //Send Data To Fragment List---
-               adapter = new DawaListAdapter(getContext(),dawaLatLngs);
+                adapter = new DawaListAdapter(getContext(),dawaLatLngs , lat , log);
 
                 recyclerView.setAdapter(adapter);
 
 
-              //dawaLatLngs.get(1).getCityVillage();
-              // System.out.println( dawaLatLngs.get(1).getCityVillage() + " DDDDDDDDDDDDDDDDDDDDDDD");
-                //-------
-               // System.out.println("Hi");
-                //----
+
                 if (response.isSuccessful())
                 {
                     System.out.print("Success ");
@@ -158,14 +136,14 @@ public class DawaList extends Fragment {
 
                 //Test Result and Print Data
                 System.out.println("Responce Value "+response.body().toString());
-              // System.out.println("Responce toString "+ response.body().String());
-               System.out.println("Responce body toString ---- "+ response.body());
+                // System.out.println("Responce toString "+ response.body().String());
+                System.out.println("Responce body toString ---- "+ response.body());
                 //System.out.println("Responce headers"+ response.headers());
                 // System.out.println("Responce errorBody"+ response.errorBody());
-               // System.out.print("Success ? --- " + response.isSuccessful());
+                // System.out.print("Success ? --- " + response.isSuccessful());
                 //Storing the data in our list
 
-               // System.out.println("Size Is onResponce :----" +dawaLatLngs.size());
+                // System.out.println("Size Is onResponce :----" +dawaLatLngs.size());
                 //-----------------------------------------------------------------------
 
             }
@@ -173,7 +151,7 @@ public class DawaList extends Fragment {
             @Override
             public void onFailure(Call<List<DawaLatLng>> call, Throwable t) {
                 System.out.println("Failure");
-               // Log.d("Ttt","Teeeeeee");
+                // Log.d("Ttt","Teeeeeee");
             }
 
         });
@@ -190,6 +168,7 @@ public class DawaList extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
+
 
 
 

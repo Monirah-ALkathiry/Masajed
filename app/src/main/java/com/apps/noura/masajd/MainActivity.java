@@ -52,6 +52,35 @@ public class MainActivity extends AppCompatActivity {
         dawa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+            /*   double latitude;
+                double longitude;
+                // create class object
+                gps = new GPSTracker(MainActivity.this);
+
+                // check if GPS enabled
+                if(gps.canGetLocation()){
+
+                    latitude = gps.getLatitude();
+                    longitude = gps.getLongitude();
+
+                    // \n is for new line
+                    Toast.makeText(getApplicationContext(), " FROM FIRST Your Location is - \nLat: "
+                            + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+
+                    Intent dawaIntent = new Intent(MainActivity.this,DawaActivity.class);
+                    dawaIntent.putExtra("LAT",latitude);
+                    dawaIntent.putExtra("LONG",longitude);
+                    MainActivity.this.startActivity(dawaIntent);
+
+                }else{
+                    // can't get location
+                    // GPS or Network is not enabled
+                    // Ask user to enable GPS/network in settings
+                    gps.showSettingsAlert();
+                }
+*/
+
                 Intent dawaIntent = new Intent(MainActivity.this,DawaActivity.class);
                 MainActivity.this.startActivity(dawaIntent);
             }
@@ -64,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                double latitude;
+               /* double latitude;
                 double longitude;
                 // create class object
                 gps = new GPSTracker(MainActivity.this);
@@ -88,10 +117,10 @@ public class MainActivity extends AppCompatActivity {
                     // GPS or Network is not enabled
                     // Ask user to enable GPS/network in settings
                     gps.showSettingsAlert();
-                }
+                }*/
 
-               // Intent Mosque = new Intent(MainActivity.this,MosqueActivity.class);
-                //MainActivity.this.startActivity(Mosque);
+                Intent Mosque = new Intent(MainActivity.this,MosqueActivity.class);
+                MainActivity.this.startActivity(Mosque);
             }
         });
 //----------------------------------------------------------------------------------------------------------

@@ -15,7 +15,7 @@ import retrofit2.http.Query;
 
 public interface DawaClient {
 //mosques/DawaActivity.jsp?
-    @GET("mosques/DawaActivity.jsp?")
+    @GET("MobileApi/DawaActivity.jsp?")
    // Call<JsonObject> getDawaInfo (@Query("lat") String latitude, @Query("lon") String longitude );
    Call<List<DawaLatLng>>
     getDawaLatLng(@Query("lat") String locYCoord , @Query("lon") String locXCoord);
