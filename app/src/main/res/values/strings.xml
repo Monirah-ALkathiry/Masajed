@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Masajd</string>
+    <string name="app_name">مساجد</string>
 
     <string name="nameerr">ادخل اسم صحيح </string>
     <string name="usernamerr">ادخل اسم مستخدم صحيح</string>

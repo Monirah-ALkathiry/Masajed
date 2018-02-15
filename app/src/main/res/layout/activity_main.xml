@@ -44,7 +44,7 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:padding="10dp"
-                    android:src="@drawable/microphone" />
+                    android:src="@drawable/dawa" />
 
                 <TextView
                     android:id="@+id/tvdawalink"
@@ -75,7 +75,7 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:padding="10dp"
-                    android:src="@drawable/mosqueicon" />
+                    android:src="@drawable/mosque_" />
 
                 <TextView
                     android:id="@+id/Mosqu"

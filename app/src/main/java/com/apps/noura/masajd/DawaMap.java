@@ -144,9 +144,9 @@ public class DawaMap extends Fragment implements OnMapReadyCallback, GoogleMap.I
         MgoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
 
         MgoogleMap.getUiSettings().setZoomControlsEnabled(true);
-        MgoogleMap.getUiSettings().setRotateGesturesEnabled(false);
-        MgoogleMap.getUiSettings().setScrollGesturesEnabled(false);
-        MgoogleMap.getUiSettings().setTiltGesturesEnabled(false);
+        MgoogleMap.getUiSettings().setRotateGesturesEnabled(true);
+        MgoogleMap.getUiSettings().setScrollGesturesEnabled(true);
+        MgoogleMap.getUiSettings().setTiltGesturesEnabled(true);
 
         Toast.makeText(getContext(),"Test_Toast_Massage",Toast.LENGTH_SHORT).show();
         AddOtherLocation();

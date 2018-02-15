@@ -14,7 +14,7 @@
         android:layout_weight="50"
         android:adjustViewBounds="false"
         android:cropToPadding="false"
-        android:src="@drawable/icons" />
+        android:src="@drawable/mosque_" />
 
     <LinearLayout
         android:layout_width="match_parent"

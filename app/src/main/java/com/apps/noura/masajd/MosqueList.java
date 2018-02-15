@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,7 +31,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MosqueList extends Fragment {
+public class MosqueList extends Fragment{
     // the fragment initialization
 
     private static final String TAG = "MosqueLIST";
@@ -94,8 +95,24 @@ public class MosqueList extends Fragment {
         //-------------------------------------------------------
 
 
+        ConnectWithAPI(latitude,longitude);
 
 
+
+
+
+        return  view;
+    }
+    double New_lat;
+    double New_log;
+    public void ConnectWithAPI(String latitude , String longitude){
+
+       // String lat2 = latitude;
+       // String long2 = longitude;
+        //----------------------------------
+
+         New_lat= Double.parseDouble(latitude);
+         New_log=Double.parseDouble(latitude);
 
         //Make A Connection With API :
         mosquesLatLngClint = ApiRetrofitClint.getApiRetrofitClint().create(MosquesLatLngClint.class);
@@ -109,8 +126,11 @@ public class MosqueList extends Fragment {
 
                 mosquesLatLngs = response.body();
 
+                System.out.print("lat fffff: "+ New_lat);
+                System.out.print("long ffffff : "+ New_log);
+
                 //Send Data To Fragment List---
-                adapter = new MosqueListAdapter(getContext(),mosquesLatLngs , lat , log);
+                adapter = new MosqueListAdapter(getContext(),mosquesLatLngs , New_lat , New_log);
 
                 recyclerView.setAdapter(adapter);
                 //-------
@@ -135,12 +155,7 @@ public class MosqueList extends Fragment {
         });
 
 
-
-
-
-        return  view;
     }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -148,9 +163,20 @@ public class MosqueList extends Fragment {
         setHasOptionsMenu(true);
 
 
-
     }//end On create
-//-------------------------------------
+
+//-------TODO : Search ------------------
+
+    public void searchQuery(String lat , String lon) {
+       // String strtext = getArguments().getString("MOSQUE_LAT");
+       // System.out.print("LAt From BUNDEL : " + strtext);
+        Log.e("lat : ", lat);
+        Log.e("long : ", lon);
+
+       //ConnectWithAPI(lat,lon);
+
+    }
+
 
 }
 
