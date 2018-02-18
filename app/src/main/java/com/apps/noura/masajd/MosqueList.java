@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -31,6 +32,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.support.v7.widget.RecyclerView.*;
+
 public class MosqueList extends Fragment{
     // the fragment initialization
 
@@ -40,7 +43,7 @@ public class MosqueList extends Fragment{
 
     //Recycle View (Mosque List)
     private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
+    private LayoutManager layoutManager;
     private MosqueListAdapter adapter;
 
     //Retrofit InterFace:
@@ -49,6 +52,7 @@ public class MosqueList extends Fragment{
     private List<MosquesLatLng> mosquesLatLngs;
 
     private View view;
+
 
     private  double lat;
     private  double log;
@@ -87,12 +91,13 @@ public class MosqueList extends Fragment{
         System.out.print(latitude +" Lat STRING  " + longitude + "\n");
 
 
-      //Recycler View
+//Recycler View
+
+
         recyclerView = (RecyclerView) view.findViewById(R.id.MosqueRecyclerView);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        //-------------------------------------------------------
 
 
         ConnectWithAPI(latitude,longitude);
@@ -103,22 +108,26 @@ public class MosqueList extends Fragment{
 
         return  view;
     }
+
+
     double New_lat;
     double New_log;
+    String lat2;
+    String long2;
     public void ConnectWithAPI(String latitude , String longitude){
 
-       // String lat2 = latitude;
-       // String long2 = longitude;
+         lat2 = latitude;
+        long2 = longitude;
         //----------------------------------
+        System.out.println("----:" + lat2 + ")P)----------------" + long2);
 
-         New_lat= Double.parseDouble(latitude);
-         New_log=Double.parseDouble(latitude);
+
 
         //Make A Connection With API :
         mosquesLatLngClint = ApiRetrofitClint.getApiRetrofitClint().create(MosquesLatLngClint.class);
         //Call Function form Inter Face And Send Parameter to it
 //24.710684, 46.630387
-        Call<List<MosquesLatLng>> call = mosquesLatLngClint.getMosqueLatLng(latitude,longitude,25);
+        Call<List<MosquesLatLng>> call = mosquesLatLngClint.getMosqueLatLng(lat2,long2,25);
         //  Create Response:
         call.enqueue(new Callback<List<MosquesLatLng>>() {
             @Override
@@ -126,31 +135,38 @@ public class MosqueList extends Fragment{
 
                 mosquesLatLngs = response.body();
 
-                System.out.print("lat fffff: "+ New_lat);
-                System.out.print("long ffffff : "+ New_log);
+                New_lat= Double.parseDouble(lat2);
+                New_log=Double.parseDouble(long2);
+
+                System.out.print("lat : "+ New_lat);
+                System.out.print("long: "+ New_log + " \n CONTEXT IS : " +getContext() +"\n");
 
                 //Send Data To Fragment List---
-                adapter = new MosqueListAdapter(getContext(),mosquesLatLngs , New_lat , New_log);
+                if(getContext()  != null) {
+                    adapter = new MosqueListAdapter(getContext(), mosquesLatLngs, New_lat, New_log);
 
-                recyclerView.setAdapter(adapter);
+                    recyclerView.setAdapter(adapter);
+                }else{
+                    System.out.println("Context null\n" );
+                }
                 //-------
 
                 //Test Result and Print Data
-                System.out.println("Responce toString"+ response.toString());
-                System.out.println("Responce body"+ response.body());
-                System.out.println("Responce headers"+ response.headers());
-                System.out.println("Responce errorBody"+ response.errorBody());
-                System.out.print("URL" + response.isSuccessful());
+                System.out.println("Responce toString: " + response.toString());
+                System.out.println("Responce body : "+ response.body());
+                System.out.println("Responce headers : "+ response.headers());
+                System.out.println("Responce errorBody : "+ response.errorBody());
+                System.out.print("URL : " + response.isSuccessful());
                 //Storing the data in our list
 
-                System.out.println("Size Is onResponce :----" +mosquesLatLngs.size());
+                System.out.println("Size Is on Responce :----" +mosquesLatLngs.size());
                 //-----------------------------------------------------------------------
 
             }
 
             @Override
             public void onFailure(Call<List<MosquesLatLng>> call, Throwable t) {
-                System.out.println("Error bad  ):-----------------------");
+                System.out.println("Error bad  ):-----------------------\n");
             }
         });
 
@@ -165,13 +181,16 @@ public class MosqueList extends Fragment{
 
     }//end On create
 
-//-------TODO : Search ------------------
 
-    public void searchQuery(String lat , String lon) {
+//--------- TODO : Search ----------------
+
+
+
+    public void searchQuery(String lat , String lon ) {
        // String strtext = getArguments().getString("MOSQUE_LAT");
        // System.out.print("LAt From BUNDEL : " + strtext);
-        Log.e("lat : ", lat);
-        Log.e("long : ", lon);
+        Log.e(" After Search lat : ", lat);
+        Log.e(" After Search long : ", lon);
 
        //ConnectWithAPI(lat,lon);
 

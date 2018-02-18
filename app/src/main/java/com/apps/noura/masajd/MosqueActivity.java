@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.view.SearchEvent;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -180,84 +181,94 @@ GoogleApiClient.ConnectionCallbacks,
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                //on-click submit
-                // Toast.makeText(context,query,Toast.LENGTH_LONG).show();
-                try {
-                    String Search_String = query;
-                    Search(Search_String);
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return false;
+    public boolean onQueryTextSubmit(String query) {
+        //on-click submit
+        // Toast.makeText(context,query,Toast.LENGTH_LONG).show();
+        try {
+            String Search_String = query;
+            Search(Search_String);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    // Search Method
+    private void Search(String Search_String) {
+
+         final String MosqueName = Search_String;
+        System.out.println(MosqueName);  //Test Print
+        //Convert latitude and longitude to String
+        final String lat= Double.toString(latitude);
+        final String lon= Double.toString(longitude);
+
+        //New Test:
+        Map<String, Object> map = new HashMap<>();
+        map.put("where","Mosque_Name = N"+"\'"+MosqueName+"\'");
+
+        System.out.println(map + " MAP \n");
+
+        //Call SearchRequest interface
+        Call<List<MosquesLatLng>> call = searchClient.getMosqueList(lat,lon,map,5);
+        //  Create Response:
+        call.enqueue(new Callback<List<MosquesLatLng>>() {
+            @Override
+            public void onResponse(Call<List<MosquesLatLng>> call, Response<List<MosquesLatLng>> response) {
+                mosquesLatLngs= response.body();
+                //Test Result and Print Data
+                System.out.println("Search Responce :");
+                System.out.println("Responce toString"+ response.toString());
+                System.out.println("Responce body"+ response.body());
+                System.out.println("Responce Headers"+ response.headers());
+                System.out.print("URL" + response.isSuccessful());
+
+                Log.e("  URL KK : ", call.request().url().toString());
+
+
+
+                String latitude= mosquesLatLngs.get(1).getLatitude();
+                String longitude =mosquesLatLngs.get(1).getLongitude();
+
+                double lat=  Double.parseDouble(latitude);
+                double lon =Double.parseDouble( longitude);
+
+
+
+               /* Bundle bundle = new Bundle();
+                bundle.putString("LAT", latitude);
+                bundle.putString("LONG", longitude);
+
+                    // set MyFragment Arguments
+                MosqueList myObj = new MosqueList();
+                myObj.setArguments(bundle);
+
+                */
+                     // set Fragmentclass Arguments
+                    //MosqueList fragobj = new MosqueList();
+                    //fragobj.ConnectWithAPI(latitude,longitude);
+
+
+
             }
-            // Search Method
-            private void Search(String Search_String) {
 
-                 final String MosqueName = Search_String;
-                System.out.println(MosqueName);  //Test Print
-                //Convert latitude and longitude to String
-                final String lat= Double.toString(latitude);
-                final String lon= Double.toString(longitude);
+            @Override
+            public void onFailure(Call<List<MosquesLatLng>> call, Throwable t) {
+                System.out.print(":( :( \n" );
 
-                //New Test:
-                Map<String, Object> map = new HashMap<>();
-                map.put("where","Mosque_Name = N"+"\'"+MosqueName+"\'");
-
-                System.out.println(map + " MAP \n");
-
-                //Call SearchRequest interface
-                Call<List<MosquesLatLng>> call = searchClient.getMosqueList(lat,lon,map,5);
-                //  Create Response:
-                call.enqueue(new Callback<List<MosquesLatLng>>() {
-                    @Override
-                    public void onResponse(Call<List<MosquesLatLng>> call, Response<List<MosquesLatLng>> response) {
-                        mosquesLatLngs= response.body();
-                        //Test Result and Print Data
-                        System.out.println("Search Responce :");
-                        System.out.println("Responce toString"+ response.toString());
-                        System.out.println("Responce body"+ response.body());
-                        System.out.println("Responce Headers"+ response.headers());
-                        System.out.print("URL" + response.isSuccessful());
-
-                        Log.e("  URL KK : ", call.request().url().toString());
-
-
-
-                        String latitude= mosquesLatLngs.get(1).getLatitude();
-                        String longitude =mosquesLatLngs.get(1).getLongitude();
-
-                        double lat=  Double.parseDouble(latitude);
-                        double lon =Double.parseDouble( longitude);
-
-
-
-//
-                        // set Fragmentclass Arguments
-                        MosqueList fragobj = new MosqueList();
-                        fragobj.searchQuery(latitude,longitude);
-
-
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<MosquesLatLng>> call, Throwable t) {
-                        System.out.print(":( :( \n" );
-
-                    }
-                });
-
-            }       @Override
-            public boolean onQueryTextChange(String newText) {//on change
-                return false;
             }
         });
-        //-------------------------------------------------------
 
-        //super.onCreateOptionsMenu(menu)  default return
-        return true;
+}   //
+
+@Override
+    public boolean onQueryTextChange(String newText) {//on change
+        return false;
     }
+});
+//-------------------------------------------------------
+
+//super.onCreateOptionsMenu(menu)  default return
+return true;
+}
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -271,15 +282,6 @@ GoogleApiClient.ConnectionCallbacks,
 
 //--------------------END Search------------------------------------------
 
-
-
-//--------------------END Search------------------------------------------
-
-/*@Override
-protected void onPause() {
-    super.onPause();
-
-}*/
     //Create Function : Section Page Adapter , then Add Fragment To it
 
     private void setupViewPager(ViewPager viewPager ){

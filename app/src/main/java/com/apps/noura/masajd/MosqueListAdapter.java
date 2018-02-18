@@ -60,6 +60,8 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
     }
 
+
+
     @Override
     public MosqueViewList onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -174,6 +176,9 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
         return mosquesLatLngs.size();
     }
+
+
+
 
 //-----------------------------------------------------------------------------------------------------
 
