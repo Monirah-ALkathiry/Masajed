@@ -8,6 +8,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <ImageButton
+        android:id="@+id/SearchFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="open"
+        app:srcCompat="@drawable/filter_outline" />
+    </GridLayout>
+
 <!--
     <GridLayout
         android:layout_width="match_parent"
@@ -29,7 +43,7 @@
 
         </SearchView>
     </GridLayout>
-    -->
+-->
     <TextView
         android:id="@+id/textview1"
         android:layout_width="wrap_content"
@@ -59,6 +73,11 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
-
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/MosqueRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey"
+        />
 </LinearLayout>
 

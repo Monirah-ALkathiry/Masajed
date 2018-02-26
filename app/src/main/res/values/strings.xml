@@ -11,6 +11,7 @@
 
     <!-- Monirah -->
     <string name="search">أدخل كلمة البحث</string>
+    <string name="mosqueName">إسم المسجد</string>
     <string name="Text_name_Tag">إسم المسجد :</string>
     <string name="Text_name">لايوجد </string>
     <string name="Back">الرجوع</string>
@@ -30,8 +31,11 @@
     <string name="MosqueDistance">المسافة</string>
 
 
+
+
+
     <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Image fragment</string>
+    <string name="hello_blank_fragment">Image fragment</string>
     <string name="title_activity_mosque_information">مسجد</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
@@ -43,7 +47,8 @@
     <string name="DawaImage">صورة المنشط</string>
     <string name="DawaInfo">معلومات المنشط</string>
     <string name="title_activity_maps">Map</string>
-
+    <string name="title_activity_advance_search">AdvanceSearch</string>
+    <string name="action_settings">Settings</string>
 
 
 </resources>

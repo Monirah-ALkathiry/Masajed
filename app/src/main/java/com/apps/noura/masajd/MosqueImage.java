@@ -95,7 +95,10 @@ public class MosqueImage extends Fragment {
             try {
 
                 System.out.println(" :)1 ");
-                doc = Jsoup.connect("http://gis.moia.gov.sa/Mosques/Content/images/mosques/"+CodNumber).get();
+                doc = Jsoup.connect("http://gis.moia.gov.sa/Mosques/Content/images/mosques/"+CodNumber)
+                        .userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")
+                        .referrer("http://www.google.com")
+                        .get();
                 Log.d("EXAMPLE ", doc.toString());
                 String title = doc.title();
                 links = doc.getElementsByTag("a");

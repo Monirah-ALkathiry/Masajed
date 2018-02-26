@@ -62,6 +62,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
 
 
+
     @Override
     public MosqueViewList onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -81,11 +82,6 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
 
         holder.MosqueCode = (mosquesLatLngs.get(position).getCode());
-        ParseHTML  ParseH = new ParseHTML();
-
-        ParseH.mos(holder.MosqueCode , holder.imageView);
-        ParseH.execute();
-        System.out.println(ParseH.a + " LINK ");
 
         System.out.println(holder.imageView + " holder.imageView ");
 
@@ -94,7 +90,6 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         holder.mTextView.setText(mosquesLatLngs.get(position).getMosqueName());
         holder.InfoTextView.setText(mosquesLatLngs.get(position).getCityVillage());
         holder.MosqueDistrict.setText(mosquesLatLngs.get(position).getDistrict());
-
         //-----------------------------Calc Distance --------------------------------
 //Location Distance :
         Location locationA = new Location("point A");
@@ -165,9 +160,12 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
             }
         });
 
+        ParseHTML  ParseH = new ParseHTML();
 
+        ParseH.mos(holder.MosqueCode,holder.imageView);
+         ParseH.execute();
 
-
+        System.out.println(ParseH.a + " LINK ");
     }
 
 
@@ -198,7 +196,6 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
             System.out.println(CodNumber + " Mosque Code Number");
             this.imageView = img;
             System.out.println(imageView + " holder.imageView ");
-
                 }
 
 
@@ -218,14 +215,16 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
             final StringBuilder builder = new StringBuilder();
 
-            try {
-                doc = Jsoup.connect("http://gis.moia.gov.sa/Mosques/Content/images/mosques/"+CodNumber+"/").get();
+            try {//+CodNumber+
+                doc = Jsoup.connect("http://gis.moia.gov.sa/Mosques/Content/images/mosques/EST_DMB146/")
+                        .userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")
+                        .referrer("http://www.google.com")
+                        .get();
                 Log.d("EXAMPLE " , doc.toString());
                 Elements links = doc.getElementsByTag("a");
 
                 Log.d("Elements ",links.toString());
                 Log.d("Elements 222 ",links.get(1).attr("href"));
-
 
                 a = links.get(1).attr("href");
                 System.out.print(a + " New Link");

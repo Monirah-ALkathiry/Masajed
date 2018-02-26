@@ -52,7 +52,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
 
     //Initialize Map variables :
     MapView mapView;
-    protected GoogleMap MgoogleMap;
+     GoogleMap MgoogleMap;
     View mView;
     // SupportMapFragment mapFragment;
     //----------------------------------
@@ -60,8 +60,8 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
     private  double lat;
     private  double log;
 
-    String latitude;
-    String longitude;
+    private String latitude;
+    private String longitude;
 
     private Marker MosqueMarker;
     //Used If Map Marker Clicked Open this Activity
@@ -121,7 +121,6 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
             latitude = Double.toString(lat);
             longitude = Double.toString(log);
 
-
            // Intent intent = getActivity().getIntent();
 
           //  latitude = intent.getStringExtra("MOSQUE_LAT");
@@ -129,15 +128,9 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
 
             System.out.println("lat intent : "+latitude + "Long: "+ longitude + "\n");
 
-
-
-
         return mView;
 
     }
-
-
-
 
 
 
@@ -185,7 +178,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
         CameraPosition CameraMosque = CameraPosition.builder().target(latLng)
                 .zoom(14)
                 .bearing(0)
-                .tilt(45)
+                .tilt(40)
                 .build();
         //Move Camera
        // googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
@@ -203,10 +196,14 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
         //Google Map Onclick:
         MgoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
        // Toast.makeText(getContext(),"Test_Toast_Massage",Toast.LENGTH_SHORT).show();
-        AddOtherLocation();
+        AddOtherLocation(latitude,longitude);
     }
 
-public void AddOtherLocation(){
+public void AddOtherLocation(String latitude2,String longitude2){
+
+
+    String New_latitude = latitude2;
+     String New_longitude = longitude2;
 
 
         //Make A Connection With API :
@@ -214,7 +211,7 @@ public void AddOtherLocation(){
         //Call Function form Inter Face And Send Parameter to it
 
 
-        Call<List<MosquesLatLng>> call = mosquesLatLngClint.getMosqueLatLng(latitude,longitude,25);
+        Call<List<MosquesLatLng>> call = mosquesLatLngClint.getMosqueLatLng(New_latitude,New_longitude,25);
         //  Create Response:
         call.enqueue(new Callback<List<MosquesLatLng>>() {
             @Override
@@ -251,14 +248,17 @@ public void AddOtherLocation(){
 
     }
 
-    private TextView MosqueName ;
-   private String MosquName;
-   private List<MosquesLatLng> mosquesLatLngs2;
 
-    protected  void addMoreMarker ( List<MosquesLatLng> mosques){
+     private TextView MosqueName ;
+     private String MosquName;
+     private   List<MosquesLatLng> mosquesLatLngs2;
 
-       mosquesLatLngs2 = mosques;
 
+protected  void addMoreMarker ( List<MosquesLatLng> mosques ){
+
+
+    mosquesLatLngs2 = mosques;
+    System.out.println(mosquesLatLngs2 + "\n Test Mosque List\n");
         //Used To calc Distance:
         locationA.setLatitude(lat);
         locationA.setLongitude(log);
@@ -294,7 +294,8 @@ public void AddOtherLocation(){
 //--------------------------------------------------------------------------------------------------
 
 
-           Marker marker=  MgoogleMap.addMarker(new MarkerOptions()
+           Marker marker=  MgoogleMap.addMarker(
+                    new MarkerOptions()
                     .position(latLngAPI)
                     .title(MosquName)////title on the marker
                     .snippet("موقعي")//Description
@@ -345,6 +346,22 @@ public void AddOtherLocation(){
 
 
     }//end function
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (MgoogleMap != null) { //prevent crashing if the map doesn't exist yet (eg. on starting activity)
+            MgoogleMap.clear();
+
+            // add markers from database to the map
+        }
+
+
+    }
+
+
 
 //Info Window (Used On Marker)
     @Override

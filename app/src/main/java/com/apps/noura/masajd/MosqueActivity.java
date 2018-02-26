@@ -1,9 +1,11 @@
 package com.apps.noura.masajd;
 
 import android.Manifest;
+
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,19 +16,20 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.test.mock.MockPackageManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import android.view.SearchEvent;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,9 +40,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import static android.os.Build.VERSION_CODES.N;
-
 
 public class MosqueActivity extends AppCompatActivity implements
 GoogleApiClient.ConnectionCallbacks,
@@ -63,7 +63,14 @@ GoogleApiClient.ConnectionCallbacks,
     private List<MosquesLatLng> mosquesLatLngs;
 
 
+    //-----------------------------------------------------------
+    private MosqueListAdapter adapter;
+    //Recycle View (Mosque List)
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
     //------------------------------------------------------
+
+
     //create Retrofit instance
     //TODO :CAHNGE
     private static Retrofit.Builder builder = new Retrofit.Builder()
@@ -81,6 +88,10 @@ GoogleApiClient.ConnectionCallbacks,
     // GPSTracker class
     GPSTracker gps;
 //----------------------------------------------------
+
+
+    //Search---
+    private ImageButton imageButton ;
 //------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +109,9 @@ GoogleApiClient.ConnectionCallbacks,
 
         //latitude = intentThatCalled.getDoubleExtra("LAT",0.0);
        // longitude = intentThatCalled.getDoubleExtra("LONG",0.0);
+
+
+
 //-----------------------------------------------------
         try {
             if (ActivityCompat.checkSelfPermission(this, mPermission)
@@ -152,6 +166,18 @@ GoogleApiClient.ConnectionCallbacks,
         TabLayout tabLayout =(TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mviewPager);
 
+
+    //-----Puop:
+        imageButton = (ImageButton) findViewById(R.id.SearchFilter);
+            imageButton.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v) {
+
+
+                   startActivity(new Intent(MosqueActivity.this,AdvanceSearch.class));
+                }
+            });
     }
 //-----------------------------------------------------
 
@@ -165,19 +191,24 @@ GoogleApiClient.ConnectionCallbacks,
 //Search-------
 //Search-------
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_mosque_information,menu);
 
-
         //SEARCH --------------------------------
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView(); // Menu Item
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+//----Update Recycler View
 
-        final Context context= this;
+        recyclerView = (RecyclerView) findViewById(R.id.MosqueRecyclerView);
+        layoutManager = new LinearLayoutManager(MosqueActivity.this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+
+
+//----
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -198,14 +229,16 @@ GoogleApiClient.ConnectionCallbacks,
          final String MosqueName = Search_String;
         System.out.println(MosqueName);  //Test Print
         //Convert latitude and longitude to String
-        final String lat= Double.toString(latitude);
-        final String lon= Double.toString(longitude);
+         String lat= Double.toString(latitude);
+         String lon= Double.toString(longitude);
 
         //New Test:
         Map<String, Object> map = new HashMap<>();
+        //map.put("WHERE"," user_name LIKE :name AND last_name LIKE :last")
         map.put("where","Mosque_Name = N"+"\'"+MosqueName+"\'");
-
         System.out.println(map + " MAP \n");
+
+
 
         //Call SearchRequest interface
         Call<List<MosquesLatLng>> call = searchClient.getMosqueList(lat,lon,map,5);
@@ -228,27 +261,99 @@ GoogleApiClient.ConnectionCallbacks,
                 String latitude= mosquesLatLngs.get(1).getLatitude();
                 String longitude =mosquesLatLngs.get(1).getLongitude();
 
+                System.out.print("latitude" +latitude+"\n");
+                System.out.print("longitude" +longitude+"\n");
+
+
+
                 double lat=  Double.parseDouble(latitude);
                 double lon =Double.parseDouble( longitude);
 
+                adapter = new MosqueListAdapter(MosqueActivity.this, mosquesLatLngs, lat, lon);
+
+                recyclerView.setAdapter(adapter);
+               // MosqueMap myObj = new MosqueMap();
+
+              //  myObj.addMoreMarker(mosquesLatLngs);
 
 
-               /* Bundle bundle = new Bundle();
+
+
+/*
+@Override
+			public void onClick(View arg0) {
+
+				// get prompts.xml view
+				LayoutInflater li = LayoutInflater.from(context);
+				View promptsView = li.inflate(R.layout.prompts, null);
+
+				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+						context);
+
+				// set prompts.xml to alertdialog builder
+				alertDialogBuilder.setView(promptsView);
+
+				final EditText userInput = (EditText) promptsView
+						.findViewById(R.id.editTextDialogUserInput);
+
+				// set dialog message
+				alertDialogBuilder
+					.setCancelable(false)
+					.setPositiveButton("OK",
+					  new DialogInterface.OnClickListener() {
+					    public void onClick(DialogInterface dialog,int id) {
+						// get user input and set it to result
+						// edit text
+						result.setText(userInput.getText());
+					    }
+					  })
+					.setNegativeButton("Cancel",
+					  new DialogInterface.OnClickListener() {
+					    public void onClick(DialogInterface dialog,int id) {
+						dialog.cancel();
+					    }
+					  });
+
+				// create alert dialog
+				AlertDialog alertDialog = alertDialogBuilder.create();
+
+				// show it
+				alertDialog.show();
+
+			}
+		});
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+                //Send Data To Fragment List---
+
+                adapter = new MosqueListAdapter(MosqueActivity.this, mosquesLatLngs, lat, lon);
+                recyclerView.setAdapter(adapter);
+*/
+               /*
+               Bundle bundle = new Bundle();
                 bundle.putString("LAT", latitude);
                 bundle.putString("LONG", longitude);
 
                     // set MyFragment Arguments
                 MosqueList myObj = new MosqueList();
                 myObj.setArguments(bundle);
-
                 */
-                     // set Fragmentclass Arguments
-                    //MosqueList fragobj = new MosqueList();
-                    //fragobj.ConnectWithAPI(latitude,longitude);
 
 
 
-            }
+               //Send Data To RecyclerView
+        }
 
             @Override
             public void onFailure(Call<List<MosquesLatLng>> call, Throwable t) {
@@ -311,4 +416,10 @@ return true;
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
+
+    //________open Advance Search----------------
+
+
+
 }//end Class

@@ -16,11 +16,9 @@ public interface SearchRequest {
 
     @GET("MobileApi/index.jsp?")
     Call<List<MosquesLatLng>>
-  //  getMosqueList(@Query("lat") String latitude, @Query("lon") String longitude, @Query("where") String MosqueName, @Query("limit") int limit);
 
    getMosqueList(@Query("lat") String latitude , @Query("lon") String longitude,
-                 @QueryMap(encoded = true) Map<String, Object> map,
-                  @Query("limit") int limit);
+                 @QueryMap(encoded=true) Map<String, Object> map,
+                   @Query("limit") int limit);
 }
-    //  getMosqueList(@Query("lat") String latitude , @Query("lon") String longitude, @Query("Mosque_Name") String MosqueName, @Query("limit") int limit);
 

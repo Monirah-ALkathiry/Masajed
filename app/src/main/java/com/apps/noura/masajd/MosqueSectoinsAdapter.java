@@ -33,7 +33,7 @@ public class MosqueSectoinsAdapter  extends FragmentPagerAdapter{
 
 
     //Default Constructor
-    public MosqueSectoinsAdapter(FragmentManager fm) {
+    public MosqueSectoinsAdapter(FragmentManager fm)  {
         super(fm);
     }
 

@@ -179,8 +179,7 @@ public class MosqueList extends Fragment{
         setHasOptionsMenu(true);
 
 
-    }//end On create
-
+    }
 
 //--------- TODO : Search ----------------
 
@@ -192,8 +191,11 @@ public class MosqueList extends Fragment{
         Log.e(" After Search lat : ", lat);
         Log.e(" After Search long : ", lon);
 
+        /*
+        String strtext = getArguments().getString("LAT");
+        System.out.println(strtext + "tt ):-----------------------\n");
        //ConnectWithAPI(lat,lon);
-
+        */
     }
 
 
