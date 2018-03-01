@@ -37,17 +37,7 @@ public class MosqueInformationActivity extends AppCompatActivity  {
 
     //Adapter------------------------
     private TextView MasijedName ;
-    //Get Data From Mosque_List ---
-           /* private String    MOSQUE_CODE;
-            private String  Masijed_Name;
-            private String Latitude;
-            private String Longitude;
-            private String MOSQUE_TYPE;
-            private String MOSQUE_REGION;
-            private String CITY_VILLAGE;
-            private String DISTRICT;
-            private String STREET_NAME;
-             */
+
 
       //---------------------------------
 

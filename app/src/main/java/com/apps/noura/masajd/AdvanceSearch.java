@@ -1,24 +1,41 @@
 package com.apps.noura.masajd;
 
+import android.app.Fragment;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 
 import android.support.v7.app.AppCompatActivity;
 
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class AdvanceSearch extends AppCompatActivity {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-    private static final String TAG= "Search dialog";
+
+public class AdvanceSearch extends AppCompatActivity  {
+
+    private static final String TAG = "Search dialog";
 
     private ViewPager mViewPager;
     private AdvanceSearchPageAdapter advanceSearchPageAdapter;
 
+    Intent intent;
+    protected String latitude;
+    protected String longitude;
+
     private Button bSearch;
     private Button bExit;
 
+    //-----------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,30 +43,43 @@ public class AdvanceSearch extends AppCompatActivity {
 
         advanceSearchPageAdapter = new AdvanceSearchPageAdapter(getSupportFragmentManager());
 
-
-         bSearch = (Button) findViewById(R.id.search);
-         bExit= (Button) findViewById(R.id.exit);
-
         //set up the viewpager with Section adapter
         mViewPager = (ViewPager) findViewById(R.id.container);
-        setUpViewPager(mViewPager);
+
 
         //Tab
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
 
-        }
+        intent=getIntent();
+        latitude = intent.getStringExtra("LAT");
+        longitude =  intent.getStringExtra("LON");
+         System.out.print(latitude + ":(((((((((( LAT \n Lone )))))))))): " +longitude);
 
-        private void setUpViewPager(ViewPager viewPager){
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        setUpViewPager(mViewPager);
+    }
+
+    private void setUpViewPager(ViewPager viewPager) {
+
+        //System.out.print("\n ADAPTER : "+latitude + ":(((((((((( LAT  \n Lone )))))))))): " +longitude+"\n :::: )  ");
+
 
         AdvanceSearchPageAdapter adapter = new AdvanceSearchPageAdapter(getSupportFragmentManager());
 
-        adapter.addFragment(new ImamaSearch(),"البحث عن امام");
-        adapter.addFragment(new KhateebSearch(),"البحث عن خطيب");
-        adapter.addFragment(new MosqueSearch(),"البحث عن مسجد");
 
-            viewPager.setAdapter(adapter);
-        }
+        adapter.addFragment(new ImamaSearch(latitude , longitude), "البحث عن امام" );
+        adapter.addFragment(new KhateebSearch(latitude , longitude), "البحث عن خطيب");
+        adapter.addFragment(new MosqueSearch(latitude , longitude), "البحث عن مسجد");
+
+        viewPager.setAdapter(adapter);
+    }
+
+
 
 }

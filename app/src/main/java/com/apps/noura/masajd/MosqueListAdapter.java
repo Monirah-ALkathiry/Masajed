@@ -216,20 +216,28 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
             final StringBuilder builder = new StringBuilder();
 
             try {//+CodNumber+
-                doc = Jsoup.connect("http://gis.moia.gov.sa/Mosques/Content/images/mosques/EST_DMB146/")
+                doc = Jsoup.connect("http://gis.moia.gov.sa/Mosques/Content/images/mosques/"+CodNumber+"/")
                         .userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")
                         .referrer("http://www.google.com")
                         .get();
                 Log.d("EXAMPLE " , doc.toString());
+
                 Elements links = doc.getElementsByTag("a");
 
-                Log.d("Elements ",links.toString());
+                if(links.get(1).attr("href").endsWith(".JPG")){
+                    a=links.get(1).attr("href");
+
+                }else{
+                  a= String.valueOf(R.drawable.mosqueicon);
+                }
+
+               /* Log.d("Elements ",links.toString());
                 Log.d("Elements 222 ",links.get(1).attr("href"));
 
                 a = links.get(1).attr("href");
                 System.out.print(a + " New Link");
                 Log.d("Elements aaaaa:  ",a);
-
+                */
                  imgurl= "http://gis.moia.gov.sa/"+a;
 // Download image from URL
                 //InputStream input = new java.net.URL(imgurl).openStream();

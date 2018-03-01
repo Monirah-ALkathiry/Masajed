@@ -18,6 +18,8 @@ public class AdvanceSearchPageAdapter extends FragmentPagerAdapter {
     private final List<Fragment> fragments = new ArrayList<>();
     private final List<String> mFragmentTitle = new ArrayList<>();
 
+
+
     public AdvanceSearchPageAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -27,6 +29,7 @@ public class AdvanceSearchPageAdapter extends FragmentPagerAdapter {
 
         fragments.add(fragment);
         mFragmentTitle.add(title);
+
 
     }
 

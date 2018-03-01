@@ -1,5 +1,6 @@
 package com.apps.noura.masajd;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
  * Created by Monirah on 2/22/2018.
  */
 
+@SuppressLint("ValidFragment")
 public class KhateebSearch extends Fragment {
     private static final String TAG= "Khateeb Search";
 
@@ -43,6 +45,19 @@ public class KhateebSearch extends Fragment {
 
     private String RejionID;
     private String CitiesId;
+
+
+//----------------------------
+    private  String lat;
+    private  String lon;
+
+
+    @SuppressLint("ValidFragment")
+    public  KhateebSearch(String lat, String lon) {
+        this.lat = lat;
+        this.lon = lon;
+    }
+
 
     @Nullable
     @Override

@@ -118,9 +118,6 @@ public class MosqueInformation extends Fragment implements OnMapReadyCallback {
                 .title(MosqueName)////title on the marker
                 .snippet("موقعي")//Description
         );
-        //.icon(BitmapDescriptorFactory.fromResource(R.drawable.icons))
-        //
-        //Mosques Locations : Form API
 
         //-----------------------
         //Set Camera Position:

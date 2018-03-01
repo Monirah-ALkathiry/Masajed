@@ -110,10 +110,10 @@ public class MosqueList extends Fragment{
     }
 
 
-    double New_lat;
-    double New_log;
-    String lat2;
-    String long2;
+   private double New_lat;
+   private double New_log;
+  private   String lat2;
+   private String long2;
     public void ConnectWithAPI(String latitude , String longitude){
 
          lat2 = latitude;
@@ -179,23 +179,6 @@ public class MosqueList extends Fragment{
         setHasOptionsMenu(true);
 
 
-    }
-
-//--------- TODO : Search ----------------
-
-
-
-    public void searchQuery(String lat , String lon ) {
-       // String strtext = getArguments().getString("MOSQUE_LAT");
-       // System.out.print("LAt From BUNDEL : " + strtext);
-        Log.e(" After Search lat : ", lat);
-        Log.e(" After Search long : ", lon);
-
-        /*
-        String strtext = getArguments().getString("LAT");
-        System.out.println(strtext + "tt ):-----------------------\n");
-       //ConnectWithAPI(lat,lon);
-        */
     }
 
 

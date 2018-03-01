@@ -20,5 +20,6 @@ public interface SearchRequest {
    getMosqueList(@Query("lat") String latitude , @Query("lon") String longitude,
                  @QueryMap(encoded=true) Map<String, Object> map,
                    @Query("limit") int limit);
+
 }
 
