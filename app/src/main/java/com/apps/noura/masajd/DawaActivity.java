@@ -15,6 +15,8 @@ import android.test.mock.MockPackageManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -45,6 +47,9 @@ public class DawaActivity extends AppCompatActivity  implements
     GPSTracker gps;
 //----------------------------------------------------
     //--------------------------------------
+//Search---
+private ImageButton imageButton ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +118,29 @@ public class DawaActivity extends AppCompatActivity  implements
         tabLayout.setupWithViewPager(mviewPager);
 
 
+
+        //-----Advance Search :
+        imageButton = (ImageButton) findViewById(R.id.SearchFilter);
+        imageButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+
+                String lat= String.valueOf(latitude);
+                String lon= String.valueOf(longitude);
+
+
+                Intent intent = new Intent(DawaActivity.this,DawaAdvanceSearch.class);
+                intent.putExtra("LAT",lat);
+                intent.putExtra("LON",lon);
+                startActivity(intent);
+
+            }
+        });
+
+//-----------------------------------------------------
     }
+
 //-----------------------------------SEARCH------------------------------------------
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

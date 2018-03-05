@@ -55,7 +55,9 @@ public class AdvanceSearch extends AppCompatActivity  {
         intent=getIntent();
         latitude = intent.getStringExtra("LAT");
         longitude =  intent.getStringExtra("LON");
-         System.out.print(latitude + ":(((((((((( LAT \n Lone )))))))))): " +longitude);
+
+
+   System.out.print(latitude + "  LAT: \n Lone: " +longitude);
 
     }
 
@@ -67,15 +69,11 @@ public class AdvanceSearch extends AppCompatActivity  {
 
     private void setUpViewPager(ViewPager viewPager) {
 
-        //System.out.print("\n ADAPTER : "+latitude + ":(((((((((( LAT  \n Lone )))))))))): " +longitude+"\n :::: )  ");
-
-
         AdvanceSearchPageAdapter adapter = new AdvanceSearchPageAdapter(getSupportFragmentManager());
 
-
-        adapter.addFragment(new ImamaSearch(latitude , longitude), "البحث عن امام" );
-        adapter.addFragment(new KhateebSearch(latitude , longitude), "البحث عن خطيب");
-        adapter.addFragment(new MosqueSearch(latitude , longitude), "البحث عن مسجد");
+        adapter.addFragment(new MosqueSearch(latitude , longitude), "إسم  المسجد");
+        adapter.addFragment(new ImamaSearch(latitude , longitude), "إسم الإمام" );
+        adapter.addFragment(new KhateebSearch(latitude , longitude), "إسم  الخطيب");
 
         viewPager.setAdapter(adapter);
     }

@@ -148,7 +148,7 @@ public class DawaMap extends Fragment implements OnMapReadyCallback, GoogleMap.I
         MgoogleMap.getUiSettings().setScrollGesturesEnabled(true);
         MgoogleMap.getUiSettings().setTiltGesturesEnabled(true);
 
-        Toast.makeText(getContext(),"Test_Toast_Massage",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(),"Dawa Map Activity",Toast.LENGTH_SHORT).show();
         AddOtherLocation();
 
     }
@@ -162,7 +162,7 @@ public class DawaMap extends Fragment implements OnMapReadyCallback, GoogleMap.I
         //Call Function form Inter Face And Send Parameter to it
 
 
-        Call<List<DawaLatLng>> call = dawaClient.getDawaLatLng(latitude,longitude);
+        Call<List<DawaLatLng>> call = dawaClient.getDawaLatLng(latitude,longitude , "25");
         //  Create Response:
         call.enqueue(new Callback<List<DawaLatLng>>() {
             @Override

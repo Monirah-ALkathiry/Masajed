@@ -46,6 +46,7 @@ import retrofit2.Response;
  * Created by Monirah on 2/22/2018.
  */
 
+//TODO :Remove Search View
 
 // implements AdapterView.OnItemSelectedListener
 @SuppressLint("ValidFragment")
@@ -58,24 +59,31 @@ public class ImamaSearch extends Fragment {
     private Spinner spinner;
     private Spinner spinnerCities;
     private Spinner spinnerDistricts;
+    private Spinner spinnerMosque;
 
-    private SearchView searchView;
+
+   // private SearchView searchView;
 
     //Spinner Data
     private ArrayList<String> Regions = new ArrayList<>();
     private ArrayList<String> Cities = new ArrayList<>();
     private ArrayList<String> Districts = new ArrayList<>();
+    private ArrayList<String> Mosque = new ArrayList<>();
+
 
 
     private String RejionID;
     private String ministry_region_id;
     private String CitiesId;
 
+    private String SelectAll ;
     protected String City;
     protected String CitieID2;
 
     protected String Distric;
     protected String query;
+    protected  String MosqueId;
+    protected  String MosqueValue;
 
     //--------------------------------------
     //Retrofit InterFace:
@@ -90,9 +98,15 @@ public class ImamaSearch extends Fragment {
     EditText textView;
  //-----------------------------------------------------------
 
+    //-----------------------------------------------------------
+    private MosqueListAdapter adapter;
+    //Recycle View (Mosque List)
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    //------------------------------------------------------
 
 
-//-------------------------
+//--------Constructor-------------
     public  ImamaSearch(String lat, String lon) {
         this.lat = lat;
         this.lon = lon;
@@ -103,17 +117,26 @@ public class ImamaSearch extends Fragment {
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-         view = inflater.inflate(R.layout.imam_search, container, false);
-        searchView = (SearchView) view.findViewById(R.id.search);
+       view = inflater.inflate(R.layout.imam_search, container, false);
+       // searchView = (SearchView) view.findViewById(R.id.search);
         textView = (EditText) view.findViewById(R.id.TestSeach);
-
-
-
+        //First Value of All Array list (used On spinner)
+        SelectAll = "الكل";
 
         System.out.println("\n :::: )  "+lat + " :Constractore lat \n lone : " +lon);
 
 
         System.out.println("\n test" + query +"\n");
+
+        //----Update Recycler View
+        /*
+        recyclerView = (RecyclerView) view.findViewById(R.id.MosqueRecyclerView);
+        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        */
+
+        query = null;
 
 //TODO : Onclick Search Do Advance Search:
 
@@ -121,32 +144,41 @@ public class ImamaSearch extends Fragment {
         SearchView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                query = textView.getText().toString();
 
+
+                    query = textView.getText().toString();
 
                 System.out.print(RejionID + "\n" + "  " + "\n"
                 +City + "\n" + "  " + "\n"+
                         Distric + "\n" + "  " + "\n"+
-                        query + "\n" + "  " + "\n");
+                        query + "\n" + "  " + "\n" + " Mosque Type : " +MosqueId);
 
-//TODO : Advance Search
+
 
 
 //----
-                //Recycler View
+//TODO : Advance Search View Result
+
+    String map2;
+
+if(query != null) {
+    if (ministry_region_id == null && City == SelectAll && Distric == SelectAll) {
 
 
-
-                //New Test:
-            //    Map<String, Object> map = new HashMap<>();
- // map.put("where","Mosque_Name like N'\'%"+ query+"\'%' AND Region = '"+ministry_region_id+"' AND City_Village like N'%"+City+"%' AND District like N'%"+Distric+"%' AND Mosque_Catogery = '1'");
-/// System.out.println(map + " :MAP \n");
+        map2 = "Imam_Name = N" + "\'" + query + "\'";
+        System.out.println("\n Query :  " + map2 + "\n");
 
 
-  String map2="Mosque_Name like N'%"+query+"%' AND Region = '"+ministry_region_id+"' AND City_Village like N'%"+City+"%' AND District like N'%"+Distric+"%' AND Mosque_Catogery = '1'";
+    } else {
+        map2 = "Imam_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
+                + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric + "%' AND Mosque_Catogery = '" + MosqueId + "'";
+    }
+}else {
+    Toast.makeText(getContext().getApplicationContext(), "الرجاء ادخال اسم مسجد", Toast.LENGTH_LONG).show();
+    map2 = null;
+}
 
-
-  System.out.println("\n :::: )  "+lat + " :lat \n lone : " +lon);
+  System.out.println("\n :)  "+lat + " :lat \n lone : " +lon);
 
 //Make A Connection With API :
                 searchClient = ApiRetrofitClint.getApiRetrofitClint().create(AdvanceSearchClint.class);
@@ -154,7 +186,7 @@ public class ImamaSearch extends Fragment {
                 //24.70476920400006,46.63042159500003
 
                 //Call SearchRequest interface
-                Call<List<MosquesLatLng>> call = searchClient.getMosqueList2(2,lat,lon,map2);
+                Call<List<MosquesLatLng>> call = searchClient.getMosqueList2(25,lat,lon,map2);
                 //  Create Response:
                 call.enqueue(new Callback<List<MosquesLatLng>>() {
                     @Override
@@ -184,7 +216,6 @@ public class ImamaSearch extends Fragment {
                             double lat = Double.parseDouble(latitude);
                             double lon = Double.parseDouble(longitude);
 
-
                         }
 
                     }
@@ -192,6 +223,9 @@ public class ImamaSearch extends Fragment {
                     @Override
                     public void onFailure(Call<List<MosquesLatLng>> call, Throwable t) {
                         System.out.print(":( :( \n" );
+
+                        Toast.makeText(getContext().getApplicationContext(), "الرجاء اعاده ادخال كلمات بحث اخرى", Toast.LENGTH_LONG).show();
+
 
                     }
                 });
@@ -219,9 +253,15 @@ public class ImamaSearch extends Fragment {
         spinner = (Spinner) view.findViewById(R.id.myspinner);
         spinnerCities = (Spinner) view.findViewById(R.id.spinnerCities);
         spinnerDistricts = (Spinner) view.findViewById(R.id.spinnerDistricts);
+        spinnerMosque = (Spinner) view.findViewById(R.id.spinnerMosque);
 
 
         //Jason Object:
+        Regions.add(SelectAll);
+        //  Cities.add(SelectAll);
+        // Districts.add(SelectAll);
+
+        //Regions.clear();
         loadJSONFromAsset();
         //
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, Regions);
@@ -241,7 +281,7 @@ public class ImamaSearch extends Fragment {
                 //----------------------Cities -----------------
                 Cities.clear();
                 loadJSONFromAssetCities(RejionID2);
-                System.out.println("--------------------ERErrrr---------------------------" + RejionID2);
+                System.out.println("--------------------RejionID---------------------------" + RejionID2);
 
 
                 ArrayAdapter<String> adapterCities = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, Cities);
@@ -259,8 +299,8 @@ public class ImamaSearch extends Fragment {
 
 
                         //---------------------Districts-------------------
-
                         Districts.clear();
+
                         loadJSONFromAssetDistricts(CitieID2);
                         ArrayAdapter<String> adapterDistricts = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, Districts);
                         spinnerDistricts.setAdapter(adapterDistricts);
@@ -274,7 +314,53 @@ public class ImamaSearch extends Fragment {
                                 Toast.makeText(getContext().getApplicationContext(), RejionID + " \n" + City + "\n" + Distric, Toast.LENGTH_LONG).show();
 
 
-                                //TODO : Add Mosque Type
+
+
+                                //---------------------Mosque-------------------
+
+                                Mosque.clear();
+                                Mosque.add(SelectAll);
+                                Mosque.add("مسجد");
+                                Mosque.add("مصلى");
+                                Mosque.add("جامع");
+                                Mosque.add("مصلى عيد");
+
+
+                                ArrayAdapter<String> adapterMosque = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, Mosque);
+                                spinnerMosque.setAdapter(adapterMosque);
+
+
+                                spinnerMosque.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                                        MosqueValue = parent.getSelectedItem().toString();
+                                        Toast.makeText(getContext().getApplicationContext(), MosqueId, Toast.LENGTH_LONG).show();
+
+                                        switch(MosqueValue){
+                                            case "مسجد":
+                                                MosqueId ="1";
+                                                break;
+                                            case "مصلى":
+                                                MosqueId ="2";
+                                                break;
+                                            case "جامع":
+                                                MosqueId ="3";
+                                                break;
+                                            case "مصلى عيد":
+                                                MosqueId ="4";
+                                                break;
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
+
+                                    }
+                                });
+
+
                             }
 
                             @Override
@@ -303,10 +389,10 @@ public class ImamaSearch extends Fragment {
         return view;
     }
 
-    //------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------------------
     public void loadJSONFromAsset() {
         String json = null;
-
+        // Regions.clear();
 
         try {
             InputStream is = getActivity().getAssets().open("regions.json");
@@ -327,9 +413,10 @@ public class ImamaSearch extends Fragment {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                 //Region_id.add(jsonObject.getString("region_id"));
+                // Regions.add(SelectAll);
                 Regions.add(jsonObject.getJSONObject("name").getString("ar"));
 
-                System.out.println("json Object : " + Regions.get(i));
+                System.out.println("json Object Regions: " + Regions.get(i));
             }
             System.out.println("-------------------------------------------------------");
 
@@ -372,7 +459,7 @@ public class ImamaSearch extends Fragment {
                     // Region_id.add(jsonObject.getString("region_id"));
                     RejionID = (jsonObject.getString("region_id"));
                     ministry_region_id = (jsonObject.getString("ministry_region_id"));
-                    System.out.println("json Object Selected ID is : " + RejionID);
+                    System.out.println("json Object Selected ID is REJION : " + RejionID);
                 }
             }
 
@@ -410,7 +497,7 @@ public class ImamaSearch extends Fragment {
 
             json = new String(buffer, "UTF-8");
             JSONArray jsonArray = new JSONArray(json);
-
+            Cities.add(SelectAll);
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -418,6 +505,7 @@ public class ImamaSearch extends Fragment {
                 if (jsonObject.getString("region_id").equals(SelectedRejoinId)) {
 
                     //Cities_id.add(jsonObject.getString("city_id"));
+                    //Cities.add(SelectAll);
                     Cities.add(jsonObject.getJSONObject("name").getString("ar"));
                 }
 
@@ -503,14 +591,14 @@ public class ImamaSearch extends Fragment {
 
             json = new String(buffer, "UTF-8");
             JSONArray jsonArray = new JSONArray(json);
-
+            Districts.add(SelectAll);
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
 
                 if (jsonObject.getString("city_id").equals(SelectedCityId)) {
-
+                    //Districts.add(SelectAll);
                     Districts.add(jsonObject.getJSONObject("name").getString("ar"));
 
 
@@ -529,9 +617,6 @@ public class ImamaSearch extends Fragment {
 
 
     }
-
-
-    //---------------
 
 
 }

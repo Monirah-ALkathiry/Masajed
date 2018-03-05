@@ -307,7 +307,7 @@ return true;
         intent.putExtra("LON",longitude);
 
 
-        System.out.println(latitude + " :ADAPETTTTTTT lat \n lone : " +longitude);
+        System.out.println(latitude + " : lat \n lone : " +longitude);
 
         MosqueSectoinsAdapter adapter = new MosqueSectoinsAdapter(getSupportFragmentManager());
 

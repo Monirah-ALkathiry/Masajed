@@ -61,12 +61,18 @@
             android:name=".MosqueInformationActivity"
             android:label="@string/title_activity_mosque_information"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".AdvanceSearch"
             android:label="@string/title_activity_advance_search"
             android:theme="@style/Custom">
         </activity>
 
+        <activity
+            android:name=".DawaAdvanceSearch"
+            android:label="@string/title_activity_advance_search"
+            android:theme="@style/Custom">
+        </activity>
     </application>
 
 </manifest>

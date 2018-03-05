@@ -16,5 +16,5 @@ public interface DawaClient2 {
 
     @GET("mosques/DawaActivity.jsp?")
 
-        Call<JsonObject> getDawaInfo (@Query("lat") String latitude, @Query("lon") String longitude );
+        Call<JsonObject> getDawaInfo (@Query("lat") String latitude, @Query("lon") String longitude, @Query("limit") int limit );
 }

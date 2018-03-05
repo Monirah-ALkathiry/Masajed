@@ -109,7 +109,7 @@ public class DawaList extends Fragment {
         //DawaClient = ApiRetrofitClint.getApiRetrofitClint().create(DawaClient.class);
         //Make A Connection With API :
         DawaClient= ApiRetrofitClint.getApiRetrofitClint().create(DawaClient.class);
-        Call<List<DawaLatLng>> call = DawaClient.getDawaLatLng(latitude,longitude);
+        Call<List<DawaLatLng>> call = DawaClient.getDawaLatLng(latitude,longitude, "25");
 
         call.enqueue(new Callback<List<DawaLatLng>>(){
 

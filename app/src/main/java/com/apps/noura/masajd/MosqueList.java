@@ -149,8 +149,7 @@ public class MosqueList extends Fragment{
                 }else{
                     System.out.println("Context null\n" );
                 }
-                //-------
-
+        //---------------------------------------------------------------------------------------------
                 //Test Result and Print Data
                 System.out.println("Responce toString: " + response.toString());
                 System.out.println("Responce body : "+ response.body());

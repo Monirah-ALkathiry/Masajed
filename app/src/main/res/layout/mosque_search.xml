@@ -11,30 +11,46 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/lightgray">
-        <SearchView
+       <!-- <SearchView
             android:id="@+id/Search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginBottom="5dp"
             android:hint="ادخل كلمة البحث">
-        </SearchView>
+        </SearchView>-->
+        <EditText
+            android:id="@+id/TestSeach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="25"
+            android:layout_gravity="right"
+            android:hint="أدخل إسم المسجد"
+            android:layout_marginTop="20dp"
+                        android:inputType="textPersonName"
+            android:layout_marginBottom="20dp"
+            android:ellipsize="start"
+            android:gravity="right"
+            android:drawableLeft="@android:drawable/ic_search_category_default"
+            android:background="@drawable/edit_text_style"
+            />
+
 
         <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_marginBottom="20dp"
-            android:layout_gravity="right"
-            >
+            android:layout_gravity="right">
 
-            <TableRow >
+            <TableRow  android:layout_marginBottom="3.5dp">
 
                 <Spinner
                     android:id="@+id/myspinner"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
-                    android:spinnerMode="dialog">
+                    android:spinnerMode="dialog"
+                    >
 
                 </Spinner>
 
@@ -54,7 +70,7 @@
 
 
 
-            <TableRow>
+            <TableRow android:layout_marginBottom="3.5dp" >
 
                 <Spinner
                     android:layout_marginTop="8dp"
@@ -78,7 +94,7 @@
             </TableRow>
 
 
-            <TableRow>
+            <TableRow android:layout_marginBottom="3.5dp" >
                 <Spinner
                     android:layout_marginTop="8dp"
                     android:id="@+id/spinnerDistricts"
@@ -105,7 +121,37 @@
 
             </TableRow>
 
-        </TableLayout>
 
+
+            <TableRow android:layout_marginBottom="3.5dp" >
+                <Spinner
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/spinnerMosque"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog">
+
+
+
+                </Spinner>
+
+                <TextView
+
+                    android:id="@+id/Mosque"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:padding="18dip"
+                    android:text="@string/MosqueType"
+                    android:textColor="#fff"
+                    android:textSize="12dp" />
+
+
+
+
+
+            </TableRow>
+
+        </TableLayout>
     </LinearLayout>
 </RelativeLayout>
