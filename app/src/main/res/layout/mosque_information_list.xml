@@ -1,180 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="1.5dp"
     android:id="@+id/linearLayoutInfo"
     android:orientation="vertical"
-    android:background="@color/lightGry"
-    >
+    android:background="@color/lightGry">
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="right">
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
+
+   <TableRow android:layout_marginBottom="3.5dp" >
         <TextView
             android:id="@+id/MosqueType"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
+
             android:text="@string/Null"
-            android:textColor="@color/colorAccent"
-            />
+            android:textColor="@color/black"
+            android:padding="18dip"
+            android:background="@color/lightgray"
+            android:textSize="12dp"/>
+
+
 
 
         <TextView
             android:id="@+id/Mosque_Type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/MosqueType" />
+            android:text="@string/MosqueType"
+            android:background="@color/colorPrimary"
+            android:padding="18dip"
+            android:textColor="#fff"
+            android:textSize="12dp"
+            />
+                </TableRow>
 
 
-</RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
+                <TableRow android:layout_marginBottom="3.5dp" >
         <TextView
             android:id="@+id/MosqueRegion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Null"
-            android:textColor="@color/colorAccent"/>
+            android:textColor="@color/black"
+            android:padding="18dip"
+            android:background="@color/lightgray"
+            android:textSize="12dp"/>
 
         <TextView
             android:id="@+id/Mosque_Region"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/MosqueRegion" />
-        </RelativeLayout>
+            android:text="@string/MosqueRegion"
+            android:background="@color/colorPrimary"
+            android:padding="18dip"
+            android:textColor="#fff"
+            android:textSize="12dp"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                </TableRow>
 
+
+       <TableRow android:layout_marginBottom="3.5dp" >
         <TextView
             android:id="@+id/CityVillage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Null"
-            android:textColor="@color/colorAccent"/>
+            android:textColor="@color/black"
+            android:padding="18dip"
+            android:background="@color/lightgray"
+            android:textSize="12dp"/>
 
         <TextView
             android:id="@+id/City_Village"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/CityVillage" />
-        </RelativeLayout>
+            android:text="@string/CityVillage"
+            android:background="@color/colorPrimary"
+            android:padding="18dip"
+            android:textColor="#fff"
+            android:textSize="12dp"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+       </TableRow>
 
+     <TableRow android:layout_marginBottom="3.5dp" >
         <TextView
             android:id="@+id/District"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Null"
-            android:textColor="@color/colorAccent"/>
+            android:textColor="@color/black"
+            android:padding="18dip"
+            android:background="@color/lightgray"
+            android:textSize="12dp"/>
 
         <TextView
             android:id="@+id/District_Tag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/District" />
-        </RelativeLayout>
+            android:text="@string/District"
+            android:background="@color/colorPrimary"
+            android:padding="18dip"
+            android:textColor="#fff"
+            android:textSize="12dp"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+     </TableRow>
 
+                <TableRow android:layout_marginBottom="3.5dp" >
         <TextView
             android:id="@+id/StreetName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Null"
-            android:textColor="@color/colorAccent"/>
+            android:textColor="@color/black"
+            android:padding="18dip"
+            android:background="@color/lightgray"
+            android:textSize="12dp"/>
 
         <TextView
             android:id="@+id/Street_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/StreetName" />
-        </RelativeLayout>
+            android:text="@string/StreetName"
+            android:background="@color/colorPrimary"
+            android:padding="18dip"
+            android:textColor="#fff"
+            android:textSize="12dp"/>
+                </TableRow>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+                <TableRow android:layout_marginBottom="3.5dp" >
         <TextView
             android:id="@+id/ImamName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Null"
-            android:textColor="@color/colorAccent"/>
+            android:textColor="@color/black"
+            android:padding="18dip"
+            android:background="@color/lightgray"
+            android:textSize="12dp"/>
 
 
         <TextView
             android:id="@+id/Imam_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/ImamName" />
+            android:text="@string/ImamName"
+            android:background="@color/colorPrimary"
+            android:padding="18dip"
+            android:textColor="#fff"
+            android:textSize="12dp"/>
+                </TableRow>
 
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <TableRow android:layout_marginBottom="3.5dp" >
         <TextView
             android:id="@+id/KhateebName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Null"
-            android:textColor="@color/colorAccent"/>
+            android:textColor="@color/black"
+            android:padding="18dip"
+            android:background="@color/lightgray"
+            android:textSize="12dp"/>
 
 
         <TextView
             android:id="@+id/Khateeb_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/KhateebName" />
+            android:text="@string/KhateebName"
+            android:background="@color/colorPrimary"
+            android:padding="18dip"
+            android:textColor="#fff"
+            android:textSize="12dp"/>
+                </TableRow>
 
-        </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <TableRow android:layout_marginBottom="3.5dp" >
         <TextView
             android:id="@+id/MoathenName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Null"
-            android:textColor="@color/colorAccent"/>
+            android:textColor="@color/black"
+            android:padding="18dip"
+            android:background="@color/lightgray"
+            android:textSize="12dp"/>
 
         <TextView
             android:id="@+id/Moathen_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/MoathenName" />
-        </RelativeLayout>
+            android:text="@string/MoathenName"
+            android:background="@color/colorPrimary"
+            android:padding="18dip"
+            android:textColor="#fff"
+            android:textSize="12dp"/>
+                </TableRow>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+                <TableRow android:layout_marginBottom="3.5dp" >
         <TextView
             android:id="@+id/ObserverName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Null"
-            android:textColor="@color/colorAccent"/>
+            android:textColor="@color/black"
+            android:padding="18dip"
+            android:background="@color/lightgray"
+            android:textSize="12dp"/>
 
         <TextView
             android:id="@+id/Observer_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/ObserverName" />
-
-</RelativeLayout>
-
+            android:text="@string/ObserverName"
+            android:background="@color/colorPrimary"
+            android:padding="18dip"
+            android:textColor="#fff"
+            android:textSize="12dp"/>
+                </TableRow>
+</TableLayout>
 
 </LinearLayout>

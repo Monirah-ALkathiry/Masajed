@@ -20,7 +20,12 @@
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:src="@mipmap/ic_launcher"
+            />
         <TextView
             android:id="@+id/MasijedNameTag"
             android:layout_width="wrap_content"
@@ -33,7 +38,10 @@
             android:typeface="sans"
             tools:layout_margin="2dp" />
 
+
+
     </GridLayout>
+
 
     <TextView
         android:id="@+id/MasijedName"
@@ -44,7 +52,9 @@
         android:text="@string/Text_name"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
-        android:textSize="24sp" />
+        android:textSize="24sp" >
+
+    </TextView>
 
 
     <android.support.design.widget.AppBarLayout

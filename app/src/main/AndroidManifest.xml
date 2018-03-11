@@ -56,6 +56,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCw7UChXGjRNO0S27lC1CCs1nfOMJMKMqk" />
+
         <!-- Map -->
         <activity
             android:name=".MosqueInformationActivity"
@@ -73,6 +74,8 @@
             android:label="@string/title_activity_advance_search"
             android:theme="@style/Custom">
         </activity>
+
+
     </application>
 
 </manifest>

@@ -90,11 +90,11 @@ public class MosqueImage extends Fragment {
         protected String doInBackground(String... strings) {
 
             final StringBuilder builder = new StringBuilder();
-            System.out.println(" :)0 ");
+           // System.out.println(" :)0 ");
 
             try {
 
-                System.out.println(" :)1 ");
+              //  System.out.println(" :)1 ");
                 doc = Jsoup.connect("http://gis.moia.gov.sa/Mosques/Content/images/mosques/"+CodNumber)
                         .userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")
                         .referrer("http://www.google.com")

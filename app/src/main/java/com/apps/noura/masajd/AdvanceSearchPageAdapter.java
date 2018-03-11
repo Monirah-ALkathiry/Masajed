@@ -30,8 +30,7 @@ public class AdvanceSearchPageAdapter extends FragmentPagerAdapter {
         fragments.add(fragment);
         mFragmentTitle.add(title);
 
-
-    }
+        }
 
 
 
@@ -44,8 +43,7 @@ public class AdvanceSearchPageAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-
-        //return Fragment
+          //return Fragment
         return fragments.get(position);
     }
 

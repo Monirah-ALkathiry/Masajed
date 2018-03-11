@@ -11,23 +11,19 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/lightgray">
-       <!-- <SearchView
-            android:id="@+id/Search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginBottom="5dp"
-            android:hint="ادخل كلمة البحث">
-        </SearchView>-->
+
+
+
+
         <EditText
-            android:id="@+id/TestSeach"
+            android:id="@+id/MosqueSeach"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="25"
             android:layout_gravity="right"
             android:hint="أدخل إسم المسجد"
             android:layout_marginTop="20dp"
-                        android:inputType="textPersonName"
+             android:inputType="textPersonName"
             android:layout_marginBottom="20dp"
             android:ellipsize="start"
             android:gravity="right"
