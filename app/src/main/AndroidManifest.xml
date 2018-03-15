@@ -40,9 +40,18 @@
         <activity android:name=".RigisterActivity" />
         <activity android:name=".UserAreaActivity" />
         <activity android:name=".MosqueActivity" />
-        <activity android:name=".DawaActivity" />
+        <activity android:name=".DawaActivity"/>
         <activity android:name=".DawaInformationActivity" />
         <activity android:name=".forgetPassActivity" />
+
+
+      <!--  <activity android:name=".MosqueActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>-->
 
         <!-- Map Android Key -->
         <!--
@@ -62,20 +71,14 @@
             android:name=".MosqueInformationActivity"
             android:label="@string/title_activity_mosque_information"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".AdvanceSearch"
             android:label="@string/title_activity_advance_search"
-            android:theme="@style/Custom">
-        </activity>
-
+            android:theme="@style/Custom" />
         <activity
             android:name=".DawaAdvanceSearch"
             android:label="@string/title_activity_advance_search"
-            android:theme="@style/Custom">
-        </activity>
-
-
+            android:theme="@style/Custom" />
     </application>
 
 </manifest>

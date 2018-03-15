@@ -57,7 +57,7 @@
     <string name="office">المكتب</string>
     <string name="fromDate">من تاريخ</string>
     <string name="toDate">الى تاريخ</string>
-
+    <string name="title_activity_new_maps">Map</string>
 
 
 </resources>

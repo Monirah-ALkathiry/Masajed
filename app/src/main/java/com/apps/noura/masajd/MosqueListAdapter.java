@@ -27,6 +27,7 @@ import org.jsoup.select.Elements;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ProgressDialog;
@@ -58,9 +59,8 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         this.lat =lat;
         this.log=log;
 
+
     }
-
-
 
 
     @Override
@@ -79,6 +79,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
     @Override
     public void onBindViewHolder(final MosqueViewList holder, final int position) {
+
 
 
         holder.MosqueCode = (mosquesLatLngs.get(position).getCode());
@@ -162,7 +163,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
         ParseHTML  ParseH = new ParseHTML();
 
-        ParseH.mos(holder.MosqueCode,holder.imageView);
+       ParseH.mos(holder.MosqueCode,holder.imageView);
          ParseH.execute();
 
         System.out.println(ParseH.a + " LINK ");

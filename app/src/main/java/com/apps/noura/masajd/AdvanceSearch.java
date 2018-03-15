@@ -96,13 +96,6 @@ public class AdvanceSearch extends AppCompatActivity implements Sender{
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
-
-
 
     private void setUpViewPager(ViewPager viewPager) {
 
@@ -114,6 +107,11 @@ public class AdvanceSearch extends AppCompatActivity implements Sender{
 
         viewPager.setAdapter(adapter);
     }
+
+    //-----------------------------------------------------------------
+    double lat;
+    double lon;
+
 
 
     @Override
@@ -181,12 +179,25 @@ public class AdvanceSearch extends AppCompatActivity implements Sender{
                     System.out.print("longitude" + longitude + "\n");
 
 
-                    double lat = Double.parseDouble(latitude);
-                    double lon = Double.parseDouble(longitude);
+                     lat = Double.parseDouble(latitude);
+                     lon = Double.parseDouble(longitude);
 
-                    //adapter = new MosqueListAdapter(AdvanceSearch.this, mosquesLatLngs, lat, lon);
 
-                   // recyclerView.setAdapter(adapter);
+                  //adapter = new MosqueListAdapter(AdvanceSearch.this, mosquesLatLngs, lat, lon);
+                  //recyclerView.setAdapter(adapter);
+
+                    System.out.println(latitude + " : lat \n lone : " +longitude);
+
+                    /*
+                    MosqueSectoinsAdapter adapter = new MosqueSectoinsAdapter(getSupportFragmentManager());
+
+                            adapter.AddFragment(new MosqueMap(lat,lon), "خريطه" );
+                            adapter.AddFragment(new MosqueList(lat,lon), "قائمة" );
+
+                            mViewPager.setAdapter(adapter);
+
+                     */
+
                 }
 
             }

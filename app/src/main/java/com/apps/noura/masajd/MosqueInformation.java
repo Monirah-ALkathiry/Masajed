@@ -2,15 +2,19 @@ package com.apps.noura.masajd;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -18,9 +22,13 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.Locale;
 
 
 /**
@@ -28,7 +36,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
  */
 
 //View Mosque Information (Fragment)
-public class MosqueInformation extends Fragment implements OnMapReadyCallback {
+public class MosqueInformation extends Fragment implements OnMapReadyCallback
+    ,GoogleMap.OnMarkerClickListener
+{
 
     //Recycle View (Mosque List)
     private RecyclerView recyclerView;
@@ -44,11 +54,13 @@ public class MosqueInformation extends Fragment implements OnMapReadyCallback {
     private Double Lat;
     private Double Lon;
 
+
+    private Button Back;
     GoogleMap MgoogleMap;
     MapView mapView;
     View view;
 
-
+Marker marker;
     //Constructor:
     public MosqueInformation() {
 
@@ -84,6 +96,9 @@ public class MosqueInformation extends Fragment implements OnMapReadyCallback {
 
         recyclerView.setAdapter(adapter);
 
+
+
+
         return view;
     }
 
@@ -108,15 +123,17 @@ public class MosqueInformation extends Fragment implements OnMapReadyCallback {
         MapsInitializer.initialize(getContext());
         MgoogleMap = googleMap;
 
-        googleMap.setMapType(googleMap.MAP_TYPE_NORMAL);
+        MgoogleMap.setMapType(googleMap.MAP_TYPE_NORMAL);
 
         //Add Marker and Map Properties (User Location)
 
         LatLng latLng = new LatLng(Lat, Lon);
 
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(Lat, Lon))
+        marker= MgoogleMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(Lat, Lon))
                 .title(MosqueName)////title on the marker
-                .snippet("موقعي")//Description
+                .snippet("موقعي")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.icons))//Description
         );
 
         //-----------------------
@@ -127,8 +144,24 @@ public class MosqueInformation extends Fragment implements OnMapReadyCallback {
                 .tilt(15)
                 .build();
         //Move Camera
-        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
+        MgoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
+        MgoogleMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener) this);
 
 
+    }
+
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+
+        if(marker.equals(marker)){
+            Log.w("Click", "test");
+            String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Lat, Lon);
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+            this.startActivity(intent);
+            return true;
+        }
+
+        return false;
     }
 }

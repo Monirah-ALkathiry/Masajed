@@ -2,22 +2,24 @@ package com.apps.noura.masajd;
 
 import android.Manifest;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 
 
 import android.os.Bundle;
+
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
+
 import android.support.design.widget.TabLayout;
 
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
@@ -29,6 +31,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -37,14 +40,13 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,11 +60,14 @@ import retrofit2.Response;
 public class MosqueActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener
-        {
+  {
+
+    private GoogleMap mMap;
+
 
     private static final String TAG = "MosqueActivity";
     private ViewPager mviewPager;
-
+    private ViewPager mviewPager2;
 
     ///--------------MAP------------------------------
     Intent intentThatCalled;
@@ -74,7 +79,7 @@ public class MosqueActivity extends AppCompatActivity implements
     //Retrofit InterFace:
     private SearchRequest searchClient;
     //To get Mosque Information
-    private List<MosquesLatLng> mosquesLatLngs;
+    public List<MosquesLatLng> mosquesLatLngs;
 
 
     //-----------------------------------------------------------
@@ -91,11 +96,11 @@ public class MosqueActivity extends AppCompatActivity implements
     // GPSTracker class
     GPSTracker gps;
 //----------------------------------------------------
-            protected   MosqueMap mosqueMap;
+   public  MosqueMap mosqueMap;
 
     //Search---
     private ImageButton imageButton ;
-//------------------------------------------------------
+//------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +111,7 @@ public class MosqueActivity extends AppCompatActivity implements
 
         //Set Up the view Pager with Section Adapter:
         mviewPager = (ViewPager) findViewById(R.id.container);
+        mviewPager2 = (ViewPager) findViewById(R.id.container);
 
         //MAP
         intentThatCalled = getIntent();
@@ -114,7 +120,7 @@ public class MosqueActivity extends AppCompatActivity implements
         //longitude = intentThatCalled.getDoubleExtra("LONG",0.0);
 
 
-//-----------------------------------------------------
+ //-----------------------------------------------------
         try {
             if (ActivityCompat.checkSelfPermission(this, mPermission)
                     != MockPackageManager.PERMISSION_GRANTED) {
@@ -151,7 +157,7 @@ public class MosqueActivity extends AppCompatActivity implements
             // Ask user to enable GPS/network in settings
             gps.showSettingsAlert();
         }
-//----------------------------------------------------
+    //----------------------------------------------------
         Toast.makeText(getApplicationContext(), "lat From Intent - \n Lat: "
                 + latitude + "\n Long: " + longitude, Toast.LENGTH_LONG).show();
 
@@ -160,6 +166,8 @@ public class MosqueActivity extends AppCompatActivity implements
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mviewPager);
 
+        TabLayout tabLayout2 = (TabLayout) findViewById(R.id.tabs);
+        tabLayout2.setupWithViewPager(mviewPager2);
 
         //-----Advance Search :
         imageButton = (ImageButton) findViewById(R.id.SearchFilter);
@@ -180,7 +188,7 @@ public class MosqueActivity extends AppCompatActivity implements
             }
         });
 
-      //------------------------------------------------------------------------------------------------------------
+  //------------------------------------------------------------------------------------------------------------
 
 
 
@@ -191,13 +199,21 @@ public class MosqueActivity extends AppCompatActivity implements
     protected void onStart() {
         super.onStart();
         //end check if Not Null
-      setupViewPager(mviewPager);
+
+        setupViewPager(mviewPager);
+
     }
 
-//Search-------
-//Search-------
+      @Override
+      protected void onPostResume() {
+          super.onPostResume();
+          setupViewPager(mviewPager);
 
-    @Override
+
+      }
+//Search--------------------------------------------------------------------------------------
+
+  @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_mosque_information,menu);
@@ -218,17 +234,18 @@ public class MosqueActivity extends AppCompatActivity implements
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-    public boolean onQueryTextSubmit(String query) {
+          public boolean onQueryTextSubmit(String query) {
         //on-click submit
         // Toast.makeText(context,query,Toast.LENGTH_LONG).show();
-        try {
-            String Search_String = query;
-            Search(Search_String);
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
+                try {
+                    String Search_String = query;
+                    Search(Search_String);
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            return false;
     }
+
     // Search Method
     private void Search(String Search_String) {
 
@@ -263,29 +280,38 @@ public class MosqueActivity extends AppCompatActivity implements
 
                 Log.e("  URL KK : ", call.request().url().toString());
 
-                if(mosquesLatLngs.size() ==0){
+                if(mosquesLatLngs.size() == 0){
                     Log.e("  URL KK : ", "There is NO data ");
 
                 }else {
 
-                    String Newlatitude = mosquesLatLngs.get(1).getLatitude();
-                    String Newlongitude = mosquesLatLngs.get(1).getLongitude();
+                    String Newlatitude = mosquesLatLngs.get(0).getLatitude();
+                    String Newlongitude = mosquesLatLngs.get(0).getLongitude();
 
                     System.out.print("Newlatitude" + Newlatitude + "\n");
                     System.out.print("longitude" + Newlongitude + "\n");
 
+                    System.out.print("MOSQU NAME ++++ 0000000000 " +mosquesLatLngs.get(0).getMosqueName() + "\n"
+                    + "Array Size" + mosquesLatLngs.size() );
 
+                    for (int i=0 ; i < mosquesLatLngs.size() ; i++){
+
+                        System.out.print("New  NAME ++++ AAAAAA : " + mosquesLatLngs.get(i).getMosqueName());
+
+                    }
                     double latNew = Double.parseDouble(Newlatitude);
                     double lonNew = Double.parseDouble(Newlongitude);
 
+                  mosqueMap = new MosqueMap(mosquesLatLngs);
+                    mosqueMap.showPointerOnMap(mosquesLatLngs);
+
+
                     adapter = new MosqueListAdapter(MosqueActivity.this, mosquesLatLngs, latNew, lonNew);
+//
+                   recyclerView.setAdapter(adapter);
 
-                    recyclerView.setAdapter(adapter);
+                  //  setupViewPager(mviewPager2);
 
-                    //TODO : Update Map
-
-                    mosqueMap = new MosqueMap();
-                    mosqueMap.addMoreMarker(mosquesLatLngs);
 
 
                 }
@@ -298,10 +324,12 @@ public class MosqueActivity extends AppCompatActivity implements
             }
         });
 
-}   //
+}
 
 @Override
-    public boolean onQueryTextChange(String newText) {//on change
+    public boolean onQueryTextChange(String newText)
+{//on change
+
         return false;
     }
 });
@@ -311,12 +339,11 @@ public class MosqueActivity extends AppCompatActivity implements
 return true;
 }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id= item.getItemId();
-
-        //if(id == R.id.collapseActionView)
 
         return super.onOptionsItemSelected(item);
     }
@@ -327,26 +354,27 @@ return true;
 
     private void setupViewPager(ViewPager viewPager ){
 
+              MosqueSectoinsAdapter adapter = new MosqueSectoinsAdapter(getSupportFragmentManager());
 
-        Intent intent = new Intent();
-        intent.putExtra("LAT", latitude);
-        intent.putExtra("LON",longitude);
+            System.out.print("List item Empity\n");
+
+            System.out.println(latitude + " : lat \n lone : " + longitude);
 
 
-        System.out.println(latitude + " : lat \n lone : " +longitude);
+            adapter.AddFragment(new MosqueMap(latitude, longitude), "خريطه");
+            adapter.AddFragment(new MosqueList(latitude, longitude), "قائمة");
 
-        MosqueSectoinsAdapter adapter = new MosqueSectoinsAdapter(getSupportFragmentManager());
+            viewPager.setAdapter(adapter);
 
-       adapter.AddFragment(new MosqueMap(latitude,longitude), "خريطه" );
-       adapter.AddFragment(new MosqueList(latitude,longitude), "قائمة" );
-
-        viewPager.setAdapter(adapter);
 
     }//end Function ViewPager
 
 
+
+
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+
 
     }
 
@@ -360,6 +388,36 @@ return true;
 
     }
 
-//--------------------------------------------------------------------------------------
 
+
+    /*
+protected List<MosquesLatLng> mo;
+
+            MarkerOptions marker;
+
+            public void onSearch ( List<MosquesLatLng> mosquesLatLngs){
+
+        mo = mosquesLatLngs;
+    System.out.println( mo.get(0).getMosqueName()+"[[[[[[[[[[[[[[[[[[[[[[[[[[[[");
+
+    double lat = Double.parseDouble(mo.get(0).getLatitude());
+    double lon = Double.parseDouble(mo.get(0).getLongitude());
+    String mosq =mo.get(0).getMosqueName();
+    LatLng latLng= new LatLng(lat,lon);
+                marker = new MarkerOptions()
+                     .position(latLng)
+                    .title(mosq)////title on the marker
+                    .snippet("NNNNNNNNNNNNNNNNN");
+
+
+
+}
+GoogleMap map;
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                map = googleMap;
+                map.addMarker(marker);
+            }
+//--------------------------------------------------------------------------------------
+*/
         }//end Class

@@ -10,13 +10,13 @@
     tools:context="com.apps.noura.masajd.MosqueInformationActivity">
 
 
-    <Button
+    <!--<Button
         android:id="@+id/Back"
         android:layout_width="140dp"
         android:layout_height="40dp"
         android:layout_gravity="right"
-        android:text="@string/Back" />
-
+        android:text="@string/Back"
+        />-->
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
