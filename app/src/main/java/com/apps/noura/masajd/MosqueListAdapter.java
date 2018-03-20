@@ -27,12 +27,10 @@ import org.jsoup.select.Elements;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ProgressDialog;
 
-import static com.apps.noura.masajd.R.color.grey;
 
 /**
  * Created by Monirah on 14/12/17.
@@ -55,24 +53,18 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
         this.context = context;
         this.mosquesLatLngs = latLngs;
-
         this.lat =lat;
         this.log=log;
 
-
     }
-
 
     @Override
     public MosqueViewList onCreateViewHolder(ViewGroup parent, int viewType) {
 
-
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_mosque_item, parent, false);
-
         //Mosque Code :
 
         return new MosqueViewList(view);
-
 
     }
 
@@ -80,12 +72,8 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
     @Override
     public void onBindViewHolder(final MosqueViewList holder, final int position) {
 
-
-
         holder.MosqueCode = (mosquesLatLngs.get(position).getCode());
-
         System.out.println(holder.imageView + " holder.imageView ");
-
 
         // ((MosqueViewList) holder).FillList(position);
         holder.mTextView.setText(mosquesLatLngs.get(position).getMosqueName());
@@ -100,11 +88,10 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         locationA.setLongitude(log);
 
         String latAPI= mosquesLatLngs.get(position).getLatitude();
-
         String logAPI= mosquesLatLngs.get(position).getLongitude();
       //  System.out.println(" Distance is :) :) :0  ******* " + logAPI  + "\n d by meeter :" +latAPI + "\n In Kilo **********: " );
 
-        latd=Double.parseDouble(latAPI);
+         latd=Double.parseDouble(latAPI);
          logd= Double.parseDouble(logAPI);
 
         locationB.setLatitude(latd);
@@ -116,15 +103,11 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         //rad * 180.0 / Math.PI
         System.out.println(" Distance is :) :) :0  ******* " + distance  + "\n d by meeter :" +dm + "\n In Kilo **********: " +dk );
 
-
         //Convert To String:
         dk = Math.floor(dk * 100) / 100;
         String Dstance= Double.toString(dk);
         holder.Distance.setText(Dstance + "كيلو");
-
 //--------------------------------------------------------------------------------------------------
-
-
         //Onclick : Open New Activity
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
            //USED in color
@@ -259,7 +242,30 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         @Override
         protected void onPostExecute(String s) {
 
-            if(doc != null){
+            try {
+                if ((this.mProgressDialog != null) && this.mProgressDialog.isShowing()) {
+
+
+                    if(doc != null){
+                        Log.d("IMG :  ", "Download Image" +a);
+                        System.out.println(a + " New Link " +CodNumber+ "  CODE NUMBER\n" +imgurl);
+
+                        Picasso.with(context)
+                                .load(imgurl)
+                                .placeholder(R.drawable.mosqueicon)
+                                .into(imageView); }
+
+                    this.mProgressDialog.dismiss();
+                }
+            } catch (final IllegalArgumentException e) {
+                // Handle or log or ignore
+            } catch (final Exception e) {
+                // Handle or log or ignore
+            } finally {
+                this.mProgressDialog = null;
+            }
+
+          /*  if(doc != null){
                 Log.d("IMG :  ", "Download Image" +a);
                 System.out.println(a + " New Link " +CodNumber+ "  CODE NUMBER\n" +imgurl);
 
@@ -272,7 +278,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
                 mProgressDialog.dismiss();
 
-            }
+          }*/
             //super.onPostExecute(s);
         }
 

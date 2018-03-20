@@ -1,6 +1,7 @@
 package com.apps.noura.masajd;
 
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -130,7 +131,7 @@ Marker marker;
         LatLng latLng = new LatLng(Lat, Lon);
 
         marker= MgoogleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(Lat, Lon))
+                .position(new LatLng(Lat, Lon))
                 .title(MosqueName)////title on the marker
                 .snippet("موقعي")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.icons))//Description
@@ -154,13 +155,22 @@ Marker marker;
     @Override
     public boolean onMarkerClick(Marker marker) {
 
-        if(marker.equals(marker)){
-            Log.w("Click", "test");
+       if(marker.equals(marker)){
+
+           marker.getPosition();
+
+           Log.w("Click", "test");
             String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Lat, Lon);
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-            this.startActivity(intent);
+
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+           mapIntent.setPackage("com.google.android.apps.maps");
+           this.startActivity(mapIntent);
+
             return true;
+
         }
+
+
 
         return false;
     }

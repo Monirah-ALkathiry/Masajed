@@ -1,38 +1,26 @@
 package com.apps.noura.masajd;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.SearchManager;
-import android.content.Context;
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.SearchView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
 import static android.support.v7.widget.RecyclerView.*;
+
+
+
 
 public class MosqueList extends Fragment{
     // the fragment initialization
@@ -57,10 +45,14 @@ public class MosqueList extends Fragment{
     private  double lat;
     private  double log;
 
-    String latitude;
-    String longitude;
+   protected String latitude;
+   protected String longitude;
 
-
+//Connect With API :
+    private double New_lat;
+    private double New_log;
+    private   String lat2;
+    private String long2;
 
     @SuppressLint("ValidFragment")
     public  MosqueList(double lat, double log){
@@ -77,18 +69,16 @@ public class MosqueList extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable  ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-
-
-
         view = inflater.inflate(R.layout.fragment_mosque_list, container, false);
 
         latitude= Double.toString(lat);
         longitude= Double.toString(log);
 
-        System.out.print(lat +" Lat kkkk " + log + "\n");
+     //   System.out.print(lat +" Lat kkkk " + log + "\n");
 
-        System.out.print(latitude +" Lat STRING  " + longitude + "\n");
+      //  System.out.print(latitude +" Lat STRING  " + longitude + "\n");
 
 
 //Recycler View
@@ -102,31 +92,21 @@ public class MosqueList extends Fragment{
 
         ConnectWithAPI(latitude,longitude);
 
-
-
-
-
-        return  view;
+     return  view;
     }
 
 
-   private double New_lat;
-   private double New_log;
-  private   String lat2;
-   private String long2;
+
     public void ConnectWithAPI(String latitude , String longitude){
 
          lat2 = latitude;
         long2 = longitude;
         //----------------------------------
-        System.out.println("----:" + lat2 + ")P)----------------" + long2);
-
-
+      //  System.out.println("----:" + lat2 + ")P)----------------" + long2);
 
         //Make A Connection With API :
         mosquesLatLngClint = ApiRetrofitClint.getApiRetrofitClint().create(MosquesLatLngClint.class);
         //Call Function form Inter Face And Send Parameter to it
-//24.710684, 46.630387
         Call<List<MosquesLatLng>> call = mosquesLatLngClint.getMosqueLatLng(lat2,long2,25);
         //  Create Response:
         call.enqueue(new Callback<List<MosquesLatLng>>() {
@@ -147,18 +127,18 @@ public class MosqueList extends Fragment{
 
                     recyclerView.setAdapter(adapter);
                 }else{
-                    System.out.println("Context null\n" );
+                    System.out.println("لا يوجد بيانات\n" );
                 }
         //---------------------------------------------------------------------------------------------
                 //Test Result and Print Data
-                System.out.println("Responce toString: " + response.toString());
-                System.out.println("Responce body : "+ response.body());
-                System.out.println("Responce headers : "+ response.headers());
-                System.out.println("Responce errorBody : "+ response.errorBody());
-                System.out.print("URL : " + response.isSuccessful());
+                //System.out.println("Responce toString: " + response.toString());
+                //System.out.println("Responce body : "+ response.body());
+                //System.out.println("Responce headers : "+ response.headers());
+                //System.out.println("Responce errorBody : "+ response.errorBody());
+                //System.out.print("URL : " + response.isSuccessful());
                 //Storing the data in our list
 
-                System.out.println("Size Is on Responce :----" +mosquesLatLngs.size());
+                //System.out.println("Size Is on Responce :----" +mosquesLatLngs.size());
                 //-----------------------------------------------------------------------
 
             }

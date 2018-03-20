@@ -37,18 +37,7 @@ public class DawaList extends Fragment {
     private static final String TAG = "DawaLIST";
     //------------------------------------------------------
     //------------------------------------------------------
-    // Retrofit
-    //create Retrofit instance
-    //http://mosquesapi.azurewebsites.net/mosques/DawaActivity.jsp?lat=24.0006&lon=46.000&limit=5
 
-   /*
-   private static Retrofit.Builder builder = new Retrofit.Builder()
-            .baseUrl("http://mosquesapi.azurewebsites.net/")
-            .addConverterFactory(GsonConverterFactory.create());
-    public static Retrofit retrofit = builder.build();
-
-    DawaClient dawaClient =retrofit.create(DawaClient.class);
-    */
     //-----------------------------------------------------------------
 
     //Recycle View (Mosque List)

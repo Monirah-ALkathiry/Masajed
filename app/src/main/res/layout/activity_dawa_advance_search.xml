@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.apps.noura.masajd.AdvanceSearch">
+    tools:context="com.apps.noura.masajd.DawaAdvanceSearch">
 
 
     <android.support.design.widget.AppBarLayout
@@ -39,8 +39,6 @@
                 android:textSize="12dp"
                 android:text="@string/search_Button" />
 
-
-
             <TextView
 
                 android:id="@+id/simpleTextView"
@@ -63,12 +61,15 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="8dp"
                 android:padding="16dp"
+
                 android:textAllCaps="false"
                 android:text="@string/Exit_Button"
                 android:textColor="#fff"
+
                 android:textSize="12dp"/>
 
-  -->
+
+
         </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
@@ -78,13 +79,12 @@
 
     </android.support.design.widget.AppBarLayout>
 
-
-
     <android.support.v4.view.ViewPager
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
 
 
 </android.support.design.widget.CoordinatorLayout>

@@ -11,9 +11,12 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.test.mock.MockPackageManager;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -22,6 +25,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Noura Alsomaikhi on 12/31/2017.
@@ -49,6 +60,21 @@ public class DawaActivity extends AppCompatActivity  implements
     //--------------------------------------
 //Search---
 private ImageButton imageButton ;
+    //--------------------------------------
+    //Retrofit InterFace:
+    private DawaAdvanceSearchClint searchClient;
+    //To get Mosque Information
+    public List<DawaLatLng> dawaLatLngs;
+
+    //--------------Update list View-----------------------------------------
+    //Recycle View (Mosque List)
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private DawaListAdapter adapter;
+    //------------------------------------------------------
+
+    //Used To Update Map_Marker
+    public DawaFragmentCommunicator dawaFragmentCommunicator;
 
 
     @Override
@@ -145,7 +171,10 @@ private ImageButton imageButton ;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.menu_mosque_information,menu);
+        //getMenuInflater().inflate(R.menu.menu_mosque_information,menu);
+        // Inflate the options menu from XML
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_mosque_information, menu);
 
         //SEARCH --------------------------------
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -159,7 +188,14 @@ private ImageButton imageButton ;
             public boolean onQueryTextSubmit(String query) {
                 //on-click submit
                 Toast.makeText(context,query,Toast.LENGTH_LONG).show();
-                String Search_by_Name = query;
+
+                try {
+                    String Search_by_Name = query;
+                    Search(Search_by_Name);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
 
                 return false;
             }
@@ -183,6 +219,93 @@ private ImageButton imageButton ;
         //if(id == R.id.collapseActionView)
 
         return super.onOptionsItemSelected(item);
+    }
+
+  //----------------------Connection With API-----------------------------------
+
+    //Search
+    protected String SearchQuery;
+
+    public void Search(String query) {
+        SearchQuery = query;
+        //Convert latitude and longitude to String
+        final String lat = Double.toString(latitude);
+        final String lon = Double.toString(longitude);
+
+
+        //New Test:
+        final Map<String, Object> map = new HashMap<>();
+        map.put("where", "DawaActivitiesInfo.DawaAddress = N" + "\'" + SearchQuery + "\'");
+        System.out.println(map + " MAP \n");
+
+        final String dawa;
+        dawa = "DawaActivitiesInfo.DawaAddress = N" + "\'" + SearchQuery + "\'";
+
+        //Make A Connection With API :
+        searchClient = ApiRetrofitClint.getApiRetrofitClint().create(DawaAdvanceSearchClint.class);
+
+        //Call SearchRequest interface
+        Call<List<DawaLatLng>> call = searchClient.getDawaSearchResult(25,lat,lon,dawa);
+        //  Create Response:
+        call.enqueue(new Callback<List<DawaLatLng>>() {
+            @Override
+            public void onResponse(Call<List<DawaLatLng>> call, Response<List<DawaLatLng>> response) {
+                dawaLatLngs = response.body();
+                //Test Result and Print Data
+                //  System.out.println("Search Responce :");
+                // System.out.println("Responce toString" + response.toString());
+                //  System.out.println("Responce body" + response.body());
+                // System.out.println("Responce Headers" + response.headers());
+                // System.out.print("URL" + response.isSuccessful());
+
+                //  Log.e("  URL KK : ", call.request().url().toString());
+
+                if (dawaLatLngs.size() == 0) {
+                    // Log.e("  URL KK : ", "There is NO data ");
+                    Toast.makeText(DawaActivity.this," لاتوجد بيانات" +SearchQuery,Toast.LENGTH_LONG).show();
+
+                } else {
+
+                    String Newlatitude = dawaLatLngs.get(0).getLocYCoord();
+                    String Newlongitude = dawaLatLngs.get(0).getLocXCoord();
+
+
+                    double latNew = Double.parseDouble(Newlatitude);
+                    double lonNew = Double.parseDouble(Newlongitude);
+
+
+                    //Recycler View
+                    recyclerView = (RecyclerView) findViewById(R.id.DawaRecyclerView);
+                    layoutManager = new LinearLayoutManager(DawaActivity.this);
+                    recyclerView.setLayoutManager(layoutManager);
+                    recyclerView.setHasFixedSize(true);
+                    //-------------------------------------------------------
+
+                    //Send Data To Fragment List---
+                    adapter = new DawaListAdapter(DawaActivity.this,dawaLatLngs , latNew , lonNew);
+
+                    recyclerView.setAdapter(adapter);
+
+                    //Map -----
+                    dawaFragmentCommunicator.passData(dawaLatLngs);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<DawaLatLng>> call, Throwable t) {
+                System.out.print(":( :( \n");
+
+            }
+        });
+
+
+    }
+
+    //Here is new method
+    public void passVal(DawaFragmentCommunicator dawaFragmentCommunicator) {
+        this.dawaFragmentCommunicator = dawaFragmentCommunicator;
+
     }
 //---------------------------------------------------------------------------------
 

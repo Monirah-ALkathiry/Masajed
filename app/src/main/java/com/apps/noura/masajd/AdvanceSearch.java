@@ -1,29 +1,24 @@
 package com.apps.noura.masajd;
 
-import android.app.Fragment;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.support.design.widget.TabLayout;
 
 import android.support.v7.app.AppCompatActivity;
 
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//TODO : View Search Result on map And List
 
 public class AdvanceSearch extends AppCompatActivity implements Sender{
 
@@ -32,26 +27,27 @@ public class AdvanceSearch extends AppCompatActivity implements Sender{
     private ViewPager mViewPager;
     private AdvanceSearchPageAdapter advanceSearchPageAdapter;
 
-    Intent intent;
+    protected Intent intent;
     protected String latitude;
     protected String longitude;
+    protected   double lat;
+    protected   double lon;
+
 
    private Button bSearch;
    private Button bExit;
 
 
+   //Used To Update Map_Marker
+
    //-----------------------------------------------
    //Retrofit InterFace:
    private AdvanceSearchClint searchClient;
     //To get Mosque Information
-    private List<MosquesLatLng> mosquesLatLngs;
-    String Mesage2;
+   protected List<MosquesLatLng> mosquesLatLngs;
+
+    protected String Mesage2;
     //-----------------------------------------------------------
-    private MosqueListAdapter adapter;
-    //Recycle View (Mosque List)
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
-    //-----------------------------------------------------
     //-----------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,13 +82,15 @@ public class AdvanceSearch extends AppCompatActivity implements Sender{
             }
         });
 
-
+        setUpViewPager(mViewPager);
     }
+
+
+
 
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        setUpViewPager(mViewPager);
 
     }
 
@@ -104,13 +102,10 @@ public class AdvanceSearch extends AppCompatActivity implements Sender{
         adapter.addFragment(new MosqueSearch(latitude , longitude), "إسم  المسجد");
         adapter.addFragment(new ImamaSearch(latitude , longitude), "إسم الإمام" );
         adapter.addFragment(new KhateebSearch(latitude , longitude), "إسم  الخطيب");
-
         viewPager.setAdapter(adapter);
     }
 
     //-----------------------------------------------------------------
-    double lat;
-    double lon;
 
 
 
@@ -123,35 +118,29 @@ public class AdvanceSearch extends AppCompatActivity implements Sender{
 
         }
 
-
         //----------------------------------------
-//----Update Recycler View
+        //TODO : Onclick Search Do Advance Search:
+        // TODO : Advance Search View Result
 
-        recyclerView = (RecyclerView) findViewById(R.id.MosqueRecyclerView);
-        layoutManager = new LinearLayoutManager(AdvanceSearch.this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-
-
-//----
         //--------------------------------------
-
-
 
     bSearch.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
 
-    Toast.makeText(AdvanceSearch.this, Mesage2, Toast.LENGTH_SHORT).show();
 
+        Intent intent = new Intent(AdvanceSearch.this,MosqueActivity.class);
+        intent.putExtra("Query",Mesage2);
+        startActivity(intent);
+
+
+        //Toast.makeText(AdvanceSearch.this, Mesage2, Toast.LENGTH_SHORT).show();
     //Make A Connection With API :
     searchClient = ApiRetrofitClint.getApiRetrofitClint().create(AdvanceSearchClint.class);
 
-    //24.70476920400006,46.63042159500003
-
     //Call SearchRequest interface
-    Call<List<MosquesLatLng>> call = searchClient.getMosqueList2(25, latitude, longitude, Mesage2);
-        //  Create Response:
+     Call<List<MosquesLatLng>> call = searchClient.getMosqueList2(25, latitude, longitude, Mesage2);
+        //Create Response:
         call.enqueue(new Callback<List<MosquesLatLng>>() {
             @Override
             public void onResponse(Call<List<MosquesLatLng>> call, Response<List<MosquesLatLng>> response) {
@@ -178,25 +167,13 @@ public class AdvanceSearch extends AppCompatActivity implements Sender{
                     System.out.print("latitude" + latitude + "\n");
                     System.out.print("longitude" + longitude + "\n");
 
-
-                     lat = Double.parseDouble(latitude);
-                     lon = Double.parseDouble(longitude);
-
-
-                  //adapter = new MosqueListAdapter(AdvanceSearch.this, mosquesLatLngs, lat, lon);
-                  //recyclerView.setAdapter(adapter);
+                    lat = Double.parseDouble(latitude);
+                    lon = Double.parseDouble(longitude);
 
                     System.out.println(latitude + " : lat \n lone : " +longitude);
 
-                    /*
-                    MosqueSectoinsAdapter adapter = new MosqueSectoinsAdapter(getSupportFragmentManager());
 
-                            adapter.AddFragment(new MosqueMap(lat,lon), "خريطه" );
-                            adapter.AddFragment(new MosqueList(lat,lon), "قائمة" );
-
-                            mViewPager.setAdapter(adapter);
-
-                     */
+                    //Map -----
 
                 }
 
@@ -205,12 +182,10 @@ public class AdvanceSearch extends AppCompatActivity implements Sender{
                 @Override
                 public void onFailure(Call<List<MosquesLatLng>> call, Throwable t) {
                     System.out.print(":( :( \n");
-
-                    Toast.makeText(AdvanceSearch.this, "الرجاء اعاده ادخال كلمات بحث اخرى", Toast.LENGTH_LONG).show();
-
-
+                    Toast.makeText(AdvanceSearch.this, "الرجاء ادخال كلمات بحث اخرى", Toast.LENGTH_LONG).show();
                 }
             });
+
 
 
             finish();
@@ -219,7 +194,8 @@ public class AdvanceSearch extends AppCompatActivity implements Sender{
         }
         });
 
+
     } //end Function
 
 
-}
+}//end Class

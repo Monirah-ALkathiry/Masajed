@@ -13,7 +13,7 @@
     <string name="search">أدخل كلمة البحث</string>
     <string name="mosqueName">إسم المسجد</string>
     <string name="Text_name_Tag">إسم المسجد :</string>
-    <string name="Text_name">لايوجد </string>
+    <string name="Text_name">  </string>
     <string name="Back">الرجوع</string>
     <string name="MosqueInfo">معلومات المسجد</string>
     <string name="MosqueDistrict">الحي</string>
@@ -29,7 +29,7 @@
     <string name="ObserverName"> إسم المراقب </string>
     <string name="StreetName">إسم الشارع</string>
     <string name="MosqueDistance">المسافة</string>
-
+    <string name="DawaTitle">عنوان المنشط :</string>
 
     <string name="search_Button">بحث</string>
     <string name="Exit_Button">الغاء</string>
@@ -47,7 +47,7 @@
     <string name="DawaImage">صورة المنشط</string>
     <string name="DawaInfo">معلومات المنشط</string>
     <string name="title_activity_maps">Map</string>
-    <string name="title_activity_advance_search">AdvanceSearch</string>
+    <string name="title_activity_advance_search">البحث النتقدم</string>
     <string name="action_settings">Settings</string>
 
     <!-- Spinner -->
@@ -57,7 +57,10 @@
     <string name="office">المكتب</string>
     <string name="fromDate">من تاريخ</string>
     <string name="toDate">الى تاريخ</string>
-    <string name="title_activity_new_maps">Map</string>
+    <string name="title_activity_new_maps">الخريطة</string>
 
+    <!-- SEARCH -->
+ <string name="search_view">بحث</string>
+<string name="search_hint">أدخل كلمة البحث</string>
 
 </resources>

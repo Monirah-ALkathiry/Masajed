@@ -6,6 +6,8 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,34 +36,45 @@ import retrofit2.Response;
  */
 
 public class DawaMap extends Fragment implements OnMapReadyCallback, GoogleMap.InfoWindowAdapter
-        ,GoogleMap.OnInfoWindowClickListener {
+        ,GoogleMap.OnInfoWindowClickListener, DawaFragmentCommunicator {
 
 
     //-----------------------------------------------------------------
 
     private static final String TAG = "DawaMap";
 
-
-    MapView mapView;
+    protected MapView mapView;
     protected GoogleMap MgoogleMap;
-    View mView;
-
+    private View mView;
+    // SupportMapFragment mapFragment;
+    protected Marker marker;
 
     private  double lat;
     private  double log;
 
-    String latitude;
-    String longitude;
+    private String latitude;
+    private String longitude;
 
     //Location Distance :
-    Location locationA = new Location("point A");
-    Location locationB = new Location("point B");
+    protected Location locationA = new Location("point A");
+    protected Location locationB = new Location("point B");
 
 
     private DawaClient dawaClient;
     //To get dawa activity Information
     private List<DawaLatLng> dawaLatLngs;
     //----------------------------------
+
+    protected Marker MosqueMarker;
+    //Used If Map Marker Clicked Open this Activity
+    protected DawaListAdapter adapter;
+
+
+    //Retrofit InterFace:
+    protected DawaLatLng dawaLatLng;
+    //To get Mosque Information
+    protected List<DawaLatLng> NewdawaLatLngs;
+
 
     public DawaMap() {
 
@@ -90,12 +103,19 @@ public class DawaMap extends Fragment implements OnMapReadyCallback, GoogleMap.I
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        try {
+            mView = inflater.inflate(R.layout.fragment_dawa_map, container, false);
+            MapsInitializer.initialize(this.getActivity());
+            mapView = (MapView) mView.findViewById(R.id.mapView);
+            mapView.onCreate(savedInstanceState);
+            mapView.getMapAsync(this);
 
-        mView = inflater.inflate(R.layout.fragment_dawa_map, container, false);
 
-        latitude= Double.toString(lat);
-        longitude= Double.toString(log);
-
+            latitude = Double.toString(lat);
+            longitude = Double.toString(log);
+        }catch (InflateException e) {
+            Log.e(TAG, "Inflate exception");
+        }
         return mView;
     }
 
@@ -104,15 +124,65 @@ public class DawaMap extends Fragment implements OnMapReadyCallback, GoogleMap.I
     public void onViewCreated(View view,  Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mapView = (MapView) mView.findViewById(R.id.mapView);
+        ((DawaActivity) getActivity()).passVal(new DawaFragmentCommunicator() {
+            @Override
+            public void passData(List<DawaLatLng> dawaLatLngs) {
+                NewdawaLatLngs = dawaLatLngs;
+                Toast.makeText(getContext(),
+                        "From Inter_Face\n " + NewdawaLatLngs.get(0).getDawaActivitiesInfoId(), Toast.LENGTH_SHORT).show();
 
-        if(mapView != null){
-            mapView.onCreate(null);
-            mapView.onResume();
-            mapView.getMapAsync(this);
-        }
+                onResume();
+            }
+
+
+        });
     }
 
+ //-----------------------------------------------------------------------------
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+
+        if (NewdawaLatLngs != null) {
+            MgoogleMap.clear();
+            onMapReady(MgoogleMap);
+        }
+
+  }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+//------------------------------------------------------------------------------
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
@@ -148,8 +218,13 @@ public class DawaMap extends Fragment implements OnMapReadyCallback, GoogleMap.I
         MgoogleMap.getUiSettings().setScrollGesturesEnabled(true);
         MgoogleMap.getUiSettings().setTiltGesturesEnabled(true);
 
-        Toast.makeText(getContext(),"Dawa Map Activity",Toast.LENGTH_SHORT).show();
-        AddOtherLocation();
+        if (NewdawaLatLngs == null) {
+            //System.out.println("NULLL Datat : ");
+            AddOtherLocation();
+        } else {
+
+            addMoreMarker(dawaLatLngs);
+        }
 
     }
 
@@ -200,8 +275,8 @@ public class DawaMap extends Fragment implements OnMapReadyCallback, GoogleMap.I
     }
 
 
-    private TextView MosqueName ;
-    private String MosquName;
+    private TextView DawaTitle ;
+    private String DawaName;
     private List<DawaLatLng> dawaLatLngs2;
 
     protected  void addMoreMarker ( List<DawaLatLng> dawa){
@@ -225,7 +300,7 @@ public class DawaMap extends Fragment implements OnMapReadyCallback, GoogleMap.I
             LatLng latLngAPI = new LatLng(latd,logd);
 
             System.out.println(latLngAPI + "  Id " + i  +  dawaLatLngs2.size());
-            MosquName  = dawaLatLngs2.get(i).getDawaAddress();
+            DawaName  = dawaLatLngs2.get(i).getDawaAddress();
 
 //-----------------------------Calc Distance --------------------------------
             locationB.setLatitude(latd);
@@ -243,14 +318,14 @@ public class DawaMap extends Fragment implements OnMapReadyCallback, GoogleMap.I
 //--------------------------------------------------------------------------------------------------
 
 
-            Marker marker=  MgoogleMap.addMarker(new MarkerOptions()
+             marker=  MgoogleMap.addMarker(new MarkerOptions()
                     .position(latLngAPI)
-                    .title(MosquName)////title on the marker
+                    .title(DawaName)////title on the marker
                     .snippet("موقعي")//Description
 
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.icons)));
 
-            System.out.println(MosquName + " Name");
+            System.out.println(DawaName + " Name");
             marker.setTag(dawaLatLngs2.get(i));
 
 //---------------------------------------------------------------------------------
@@ -313,11 +388,11 @@ public class DawaMap extends Fragment implements OnMapReadyCallback, GoogleMap.I
 
     @Override
     public View getInfoContents(Marker marker) {
-        View view = getLayoutInflater().inflate(R.layout.dawa_info_window, null, false);
+        View view = getLayoutInflater().inflate(R.layout.dawa_map_info_window, null, false);
 
 
-        MosqueName = (TextView) view.findViewById(R.id.MosqueName);
-        MosqueName.setText(marker.getTitle());
+        DawaTitle = (TextView) view.findViewById(R.id.DawaName);
+        DawaTitle.setText(marker.getTitle());
 
         return view;
     }
@@ -325,6 +400,11 @@ public class DawaMap extends Fragment implements OnMapReadyCallback, GoogleMap.I
     @Override
     public void onInfoWindowClick(Marker marker) {
         System.out.print("CLICKED");
+
+    }
+
+    @Override
+    public void passData(List<DawaLatLng> dawaLatLngs) {
 
     }
 }

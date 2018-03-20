@@ -78,10 +78,6 @@ public class MosqueSearch extends Fragment {
     protected  String MosqueValue;
 
     //--------------------------------------
-    //Retrofit InterFace:
-    private AdvanceSearchClint searchClient;
-    //To get Mosque Information
-    private List<MosquesLatLng> mosquesLatLngs;
 
     //----------------------------------------------------
     private  String lat;
@@ -154,7 +150,7 @@ public class MosqueSearch extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 String Regions = parent.getSelectedItem().toString();
-                Toast.makeText(parent.getContext().getApplicationContext(),Regions +"REJON IS  ",Toast.LENGTH_LONG).show();
+              //  Toast.makeText(parent.getContext().getApplicationContext(),Regions +"REJON IS  ",Toast.LENGTH_LONG).show();
 
                 String RejionID2;
                 RejionID2 = getRijonID(Regions);
@@ -192,7 +188,7 @@ public class MosqueSearch extends Fragment {
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                                 Distric = parent.getSelectedItem().toString();
-                                Toast.makeText(getContext().getApplicationContext(), RejionID + " \n" + City + "\n" + Distric +" : update", Toast.LENGTH_LONG).show();
+                                //Toast.makeText(getContext().getApplicationContext(), RejionID + " \n" + City + "\n" + Distric +" : update", Toast.LENGTH_LONG).show();
 
 
 
@@ -216,7 +212,7 @@ public class MosqueSearch extends Fragment {
                                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                                         MosqueValue = parent.getSelectedItem().toString();
-                                        Toast.makeText(getContext().getApplicationContext(), MosqueId +" mosquId", Toast.LENGTH_LONG).show();
+                                       // Toast.makeText(getContext().getApplicationContext(), MosqueId +" mosquId", Toast.LENGTH_LONG).show();
 
                                         switch(MosqueValue){
                                             case "مسجد":
@@ -298,10 +294,10 @@ Sender sender;
             public void onClick(View v) {
                 query = textView.getText().toString();
                 if (query.matches("")){
-                    Toast.makeText(getContext().getApplicationContext(), "الرجاءادخال كلمة بحث صحيحه", Toast.LENGTH_LONG).show();
+                   // Toast.makeText(getContext().getApplicationContext(), "الرجاءادخال كلمة بحث صحيحه", Toast.LENGTH_LONG).show();
                     return;
                 }else {
-                    Toast.makeText(getContext().getApplicationContext(), query, Toast.LENGTH_LONG).show();
+                   // Toast.makeText(getContext().getApplicationContext(), query, Toast.LENGTH_LONG).show();
 
                     String map2;
                     Map<String, Object> map = new HashMap<>();
@@ -331,103 +327,9 @@ Sender sender;
             }
         });
 
-        //TODO : Onclick Search Do Advance Search:
-
-   /*  SearchView.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                query = textView.getText().toString();
-                System.out.println("\n test 2 dddddddddd : " + query +"\n");
-
-                System.out.print(RejionID + "\n" + "  " + "\n"
-                        + City + "\n" + "  " + "\n" +
-                        Distric + "\n" + "  " + "\n" +
-                        query + "\n" + "  " + "\n" + " Mosque Type : " + MosqueId);
-
-                String map2;
-                Map<String, Object> map = new HashMap<>();
-
-                    //----
-                    //TODO : Advance Search View Result
-
-                    if (ministry_region_id == null || City == SelectAll || Distric == SelectAll || MosqueId == SelectAll)
-                    {
-                        map2 = "Mosque_Name = N" + "\'" + query + "\'";
-                        //map.put("where", "Mosque_Name = N" + "\'" + query + "\'");
-                        System.out.println("\n Query :  " + map + "\n");
-                    }
-                    else {
-
-                       /* map.put("where", "Mosque_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
-                                + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric +
-                                "%' AND Mosque_Catogery = '" + MosqueId + "'");
-                        */
-                    /* map2 = "Mosque_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
-                                + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric +
-                                "%' AND Mosque_Catogery = '" + MosqueId + "'";
-                    }
 
 
-                    System.out.println("\n :)  " + lat + " :lat \n lone : " + lon);
 
-//Make A Connection With API :
-                    searchClient = ApiRetrofitClint.getApiRetrofitClint().create(AdvanceSearchClint.class);
-
-                    //24.70476920400006,46.63042159500003
-
-                    //Call SearchRequest interface
-                    Call<List<MosquesLatLng>> call = searchClient.getMosqueList2(25, lat, lon, map2);
-                    //  Create Response:
-                    call.enqueue(new Callback<List<MosquesLatLng>>() {
-                        @Override
-                        public void onResponse(Call<List<MosquesLatLng>> call, Response<List<MosquesLatLng>> response) {
-                            mosquesLatLngs = response.body();
-                            //Test Result and Print Data
-                            System.out.println("Search Responce :");
-                            System.out.println("Responce toString" + response.toString());
-                            System.out.println("Responce body" + response.body());
-                            System.out.println("Responce Headers" + response.headers());
-                            System.out.print("URL" + response.isSuccessful());
-
-                            Log.e("  URL KK : ", call.request().url().toString());
-
-                            if (mosquesLatLngs.size() == 0) {
-                                Toast.makeText(getContext().getApplicationContext(), "لايوجد بيانات", Toast.LENGTH_LONG).show();
-
-                            } else {
-
-                                String latitude = mosquesLatLngs.get(0).getLatitude();
-                                String longitude = mosquesLatLngs.get(0).getLongitude();
-
-                                System.out.print("latitude" + latitude + "\n");
-                                System.out.print("longitude" + longitude + "\n");
-
-
-                                double lat = Double.parseDouble(latitude);
-                                double lon = Double.parseDouble(longitude);
-
-
-                            }
-
-                        }
-
-                        @Override
-                        public void onFailure(Call<List<MosquesLatLng>> call, Throwable t) {
-                            System.out.print(":( :( \n");
-
-                            Toast.makeText(getContext().getApplicationContext(), "الرجاء اعاده ادخال كلمات بحث اخرى", Toast.LENGTH_LONG).show();
-
-
-                        }
-                    });
-
-
-                }
-
-        });
-
-*/
-//=======================
 
     }
 
@@ -518,7 +420,7 @@ Sender sender;
                     // Region_id.add(jsonObject.getString("region_id"));
                     RejionID = (jsonObject.getString("region_id"));
                     ministry_region_id = (jsonObject.getString("ministry_region_id"));
-                    System.out.println("json Object Selected ID is REJION : " + RejionID);
+                   // System.out.println("json Object Selected ID is REJION : " + RejionID);
                 }
             }
 
@@ -678,3 +580,100 @@ Sender sender;
     }
 
 }
+
+
+ /*  SearchView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                query = textView.getText().toString();
+                System.out.println("\n test 2 dddddddddd : " + query +"\n");
+
+                System.out.print(RejionID + "\n" + "  " + "\n"
+                        + City + "\n" + "  " + "\n" +
+                        Distric + "\n" + "  " + "\n" +
+                        query + "\n" + "  " + "\n" + " Mosque Type : " + MosqueId);
+
+                String map2;
+                Map<String, Object> map = new HashMap<>();
+
+                    //----
+                    //TODO : Advance Search View Result
+
+                    if (ministry_region_id == null || City == SelectAll || Distric == SelectAll || MosqueId == SelectAll)
+                    {
+                        map2 = "Mosque_Name = N" + "\'" + query + "\'";
+                        //map.put("where", "Mosque_Name = N" + "\'" + query + "\'");
+                        System.out.println("\n Query :  " + map + "\n");
+                    }
+                    else {
+
+                       /* map.put("where", "Mosque_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
+                                + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric +
+                                "%' AND Mosque_Catogery = '" + MosqueId + "'");
+                        */
+                    /* map2 = "Mosque_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
+                                + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric +
+                                "%' AND Mosque_Catogery = '" + MosqueId + "'";
+                    }
+
+
+                    System.out.println("\n :)  " + lat + " :lat \n lone : " + lon);
+
+//Make A Connection With API :
+                    searchClient = ApiRetrofitClint.getApiRetrofitClint().create(AdvanceSearchClint.class);
+
+                    //24.70476920400006,46.63042159500003
+
+                    //Call SearchRequest interface
+                    Call<List<MosquesLatLng>> call = searchClient.getMosqueList2(25, lat, lon, map2);
+                    //  Create Response:
+                    call.enqueue(new Callback<List<MosquesLatLng>>() {
+                        @Override
+                        public void onResponse(Call<List<MosquesLatLng>> call, Response<List<MosquesLatLng>> response) {
+                            mosquesLatLngs = response.body();
+                            //Test Result and Print Data
+                            System.out.println("Search Responce :");
+                            System.out.println("Responce toString" + response.toString());
+                            System.out.println("Responce body" + response.body());
+                            System.out.println("Responce Headers" + response.headers());
+                            System.out.print("URL" + response.isSuccessful());
+
+                            Log.e("  URL KK : ", call.request().url().toString());
+
+                            if (mosquesLatLngs.size() == 0) {
+                                Toast.makeText(getContext().getApplicationContext(), "لايوجد بيانات", Toast.LENGTH_LONG).show();
+
+                            } else {
+
+                                String latitude = mosquesLatLngs.get(0).getLatitude();
+                                String longitude = mosquesLatLngs.get(0).getLongitude();
+
+                                System.out.print("latitude" + latitude + "\n");
+                                System.out.print("longitude" + longitude + "\n");
+
+
+                                double lat = Double.parseDouble(latitude);
+                                double lon = Double.parseDouble(longitude);
+
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<MosquesLatLng>> call, Throwable t) {
+                            System.out.print(":( :( \n");
+
+                            Toast.makeText(getContext().getApplicationContext(), "الرجاء اعاده ادخال كلمات بحث اخرى", Toast.LENGTH_LONG).show();
+
+
+                        }
+                    });
+
+
+                }
+
+        });
+
+*/
+//=======================

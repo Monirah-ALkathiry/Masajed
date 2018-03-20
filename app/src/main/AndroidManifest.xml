@@ -39,19 +39,20 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".RigisterActivity" />
         <activity android:name=".UserAreaActivity" />
-        <activity android:name=".MosqueActivity" />
+      <!--  <activity android:name=".MosqueActivity" /> -->
         <activity android:name=".DawaActivity"/>
         <activity android:name=".DawaInformationActivity" />
         <activity android:name=".forgetPassActivity" />
 
 
-      <!--  <activity android:name=".MosqueActivity" >
+        <activity android:name=".MosqueActivity"
+                    android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
             <meta-data android:name="android.app.searchable"
                 android:resource="@xml/searchable"/>
-        </activity>-->
+        </activity>
 
         <!-- Map Android Key -->
         <!--

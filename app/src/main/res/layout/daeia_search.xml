@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+
+    <LinearLayout
+        android:id="@+id/Tab3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/lightgray">
+        <!-- <SearchView
+             android:id="@+id/Search"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_gravity="right"
+             android:layout_marginBottom="5dp"
+             android:hint="ادخل كلمة البحث">
+         </SearchView>-->
+        <EditText
+            android:id="@+id/DaiaSeach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="20"
+            android:layout_gravity="right"
+            android:hint="أدخل عنوان المنشط"
+            android:layout_marginTop="20dp"
+            android:inputType="textPersonName"
+            android:layout_marginBottom="20dp"
+            android:ellipsize="start"
+            android:gravity="right"
+            android:drawableLeft="@android:drawable/ic_search_category_default"
+            android:background="@drawable/edit_text_style"
+            />
+
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="right">
+
+            <TableRow  android:layout_marginBottom="3.5dp">
+
+                <Spinner
+                    android:id="@+id/myspinner"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:spinnerMode="dialog"
+                    >
+
+                </Spinner>
+
+                <TextView
+
+                    android:id="@+id/simpleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:padding="18dip"
+                    android:textColor="#fff"
+                    android:textSize="12dp"
+                    android:text="@string/MosqueRegion"
+                     />
+
+
+            </TableRow>
+
+
+
+            <TableRow android:layout_marginBottom="3.5dp" >
+
+                <Spinner
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/spinnerCities"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog">
+
+                </Spinner>
+                <TextView
+
+                    android:id="@+id/simpleTextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:padding="18dip"
+                    android:text="@string/CityVillage"
+                    android:textColor="#fff"
+                    android:textSize="12dp"/>
+
+            </TableRow>
+
+
+            <TableRow android:layout_marginBottom="3.5dp" >
+                <Spinner
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/spinnerDistricts"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog">
+
+                </Spinner>
+
+                <TextView
+
+                    android:id="@+id/simpleTextView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:padding="18dip"
+                    android:text="@string/District"
+                    android:textColor="#fff"
+                    android:textSize="12dp" />
+
+
+
+
+
+            </TableRow>
+
+            <TableRow android:layout_marginBottom="3.5dp" >
+                <Spinner
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/spinnerActivity"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog">
+
+
+
+                </Spinner>
+
+                <TextView
+
+                    android:id="@+id/activity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:padding="18dip"
+                    android:text="@string/spinnerActivity"
+                    android:textColor="#fff"
+                    android:textSize="12dp" />
+
+
+            </TableRow>
+
+
+            <TableRow android:layout_marginBottom="3.5dp" >
+                <Spinner
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/spinnerDomain"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog">
+                </Spinner>
+
+                <TextView
+
+                    android:id="@+id/Domain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:padding="18dip"
+                    android:text="@string/spinnerDomian"
+                    android:textColor="#fff"
+                    android:textSize="12dp" />
+            </TableRow>
+
+            <TableRow android:layout_marginBottom="3.5dp" >
+                <Spinner
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/spinnerLanguage"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog">
+                </Spinner>
+
+                <TextView
+
+                    android:id="@+id/language"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:padding="18dip"
+                    android:text="@string/language"
+                    android:textColor="#fff"
+                    android:textSize="12dp" />
+            </TableRow>
+
+
+            <TableRow android:layout_marginBottom="3.5dp" >
+                <Spinner
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/spinneroffice"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog">
+                </Spinner>
+
+                <TextView
+
+                    android:id="@+id/office"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:padding="18dip"
+                    android:text="@string/office"
+                    android:textColor="#fff"
+                    android:textSize="12dp" />
+            </TableRow>
+
+
+            <TableRow android:layout_marginBottom="3.5dp" >
+                <Spinner
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/spinnerfromDate"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog">
+                </Spinner>
+
+                <TextView
+
+                    android:id="@+id/fromDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:padding="18dip"
+                    android:text="@string/fromDate"
+                    android:textColor="#fff"
+                    android:textSize="12dp" />
+            </TableRow>
+
+            <TableRow android:layout_marginBottom="3.5dp" >
+                <Spinner
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/spinnertoDate"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog">
+                </Spinner>
+
+                <TextView
+
+                    android:id="@+id/toDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:padding="18dip"
+                    android:text="@string/toDate"
+                    android:textColor="#fff"
+                    android:textSize="12dp" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+</RelativeLayout>
