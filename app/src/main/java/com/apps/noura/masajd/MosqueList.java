@@ -79,16 +79,11 @@ public class MosqueList extends Fragment{
      //   System.out.print(lat +" Lat kkkk " + log + "\n");
 
       //  System.out.print(latitude +" Lat STRING  " + longitude + "\n");
-
-
 //Recycler View
-
-
         recyclerView = (RecyclerView) view.findViewById(R.id.MosqueRecyclerView);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-
 
         ConnectWithAPI(latitude,longitude);
 
@@ -124,7 +119,6 @@ public class MosqueList extends Fragment{
                 //Send Data To Fragment List---
                 if(getContext()  != null) {
                     adapter = new MosqueListAdapter(getContext(), mosquesLatLngs, New_lat, New_log);
-
                     recyclerView.setAdapter(adapter);
                 }else{
                     System.out.println("لا يوجد بيانات\n" );

@@ -1,21 +1,24 @@
 package com.apps.noura.masajd;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.Context;
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,11 +27,10 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import java.util.Locale;
 
 /**
  * Created by Monirah on 2/22/2018.
@@ -48,11 +50,16 @@ public class DaeiaSearch extends Fragment {
     private Spinner spinnerDomain;
     private Spinner spinnerLanguage;
     private Spinner spinneroffice;
-    private Spinner spinnerfromDate;
-    private Spinner spinnertoDate;
+   // private Spinner spinnerfromDate;
+    //private Spinner spinnertoDate;
+
+    private TextView simpleDatePicker ;
+    private TextView spinnerfromDate;
+    private DatePickerDialog picker;
 
 
-    private SearchView searchView;
+
+    //private SearchView searchView;
 
     //Spinner Data
     private ArrayList<String> Regions = new ArrayList<>();
@@ -63,6 +70,19 @@ public class DaeiaSearch extends Fragment {
     private ArrayList<String> DawaMainCategoryList = new ArrayList<>();
     private ArrayList<String> DawaOfficesList = new ArrayList<>();
 
+    //Data Variables:
+    private int FromDay ;
+    private int FromMonth ;
+    private int FromYear;
+
+    private int ToDay ;
+    private int ToMonth ;
+    private int ToYear;
+
+    private String DateFrom;
+    private String DateTo;
+
+    //-----
 
     private String RejionID;
     private String dawa_region_id;//TODO change to Dawa
@@ -207,8 +227,13 @@ public class DaeiaSearch extends Fragment {
         spinnerDomain = (Spinner) view.findViewById(R.id.spinnerDomain);
         spinnerLanguage = (Spinner) view.findViewById(R.id.spinnerLanguage);
         spinneroffice = (Spinner) view.findViewById(R.id.spinneroffice);
-        spinnerfromDate = (Spinner) view.findViewById(R.id.spinnerfromDate);
-        spinnertoDate = (Spinner) view.findViewById(R.id.spinnertoDate);
+       // spinnerfromDate = (Spinner) view.findViewById(R.id.spinnerfromDate);
+        //spinnertoDate = (Spinner) view.findViewById(R.id.spinnertoDate);
+//-----------------------------------------------------------------------------------------
+        simpleDatePicker = (TextView) view.findViewById(R.id.simpleDatePicker);
+        spinnerfromDate = (TextView) view.findViewById(R.id.spinnerfromDate);
+
+//-----------------------------------------------------------------------------------------------
         //Jason Object:
         Regions.add(SelectAll);
         //Cities.add(SelectAll);
@@ -537,11 +562,60 @@ public class DaeiaSearch extends Fragment {
             }
         });
 
+        //TODO : ONclik open date picker
+        //TODO : Add um Al qura Date Picker
 //-----------------------------------------Date From---------------------------------------------------------
+
+       spinnerfromDate.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+
+             final Calendar cldr =Calendar.getInstance();
+               FromDay = cldr.get(Calendar.DAY_OF_MONTH);
+               FromMonth = cldr.get(Calendar.MONTH);
+               FromYear = cldr.get(Calendar.YEAR);
+
+
+               // date picker dialog
+               picker = new DatePickerDialog(getContext(),
+                       new DatePickerDialog.OnDateSetListener() {
+                           @Override
+                           public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                              // spinnerfromDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+
+                               DateFrom =String.format("%d-%02d-%02d", year,monthOfYear+1,dayOfMonth);
+                               spinnerfromDate.setText(DateFrom);
+                           }
+                       }, FromYear, FromMonth, FromDay);
+
+               picker.show();
+
+           }
+       });
 //-----------------------------------------Date To---------------------------------------------------------
+        simpleDatePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                ToDay = cldr.get(Calendar.DAY_OF_MONTH);
+                ToMonth = cldr.get(Calendar.MONTH);
+                ToYear = cldr.get(Calendar.YEAR);
+                // date picker dialog
+                picker = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                              //  simpleDatePicker.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                DateTo= String.format("%d-%02d-%02d", year,monthOfYear+1,dayOfMonth);
+                                simpleDatePicker.setText(DateTo);
+                            }
+                        }, ToYear, ToMonth, ToDay);
+                picker.show();
 
+            }
+        });
 
-
+        //--------------------------------------------------------------------------------------------------------
 
         return view;
     }

@@ -7,7 +7,8 @@
     android:orientation="vertical"
     tools:context="com.apps.noura.masajd.MosqueInformation">
 
-<android.support.v4.widget.NestedScrollView
+
+    <android.support.v4.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="350dp"
     android:background="@drawable/border_style">

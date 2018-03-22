@@ -32,7 +32,8 @@ ImageView imageView;
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-
+                finish();
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
         });
     }

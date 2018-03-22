@@ -1,6 +1,7 @@
 package com.apps.noura.masajd;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,9 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -24,6 +27,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -48,11 +52,10 @@ public class DawaSearch extends Fragment {
     private Spinner spinnerDomain;
     private Spinner spinnerLanguage;
     private Spinner spinneroffice;
-    private Spinner spinnerfromDate;
-    private Spinner spinnertoDate;
+    private TextView spinnerfromDate;
+    private TextView spinnertoDate;
+    private DatePickerDialog picker;
 
-
-    private SearchView searchView;
 
     //Spinner Data
     private ArrayList<String> Regions = new ArrayList<>();
@@ -62,6 +65,21 @@ public class DawaSearch extends Fragment {
     private ArrayList<String> DawaActivLanguageList = new ArrayList<>();
     private ArrayList<String> DawaMainCategoryList = new ArrayList<>();
     private ArrayList<String> DawaOfficesList = new ArrayList<>();
+
+
+    //Data Variables:
+    private int FromDay ;
+    private int FromMonth ;
+    private int FromYear;
+
+    private int ToDay ;
+    private int ToMonth ;
+    private int ToYear;
+
+    private String DateFrom;
+    private String DateTo;
+
+    //-----
 
 
     private String RejionID;
@@ -171,8 +189,8 @@ public class DawaSearch extends Fragment {
                                  +"AND DawaActivitiesInfo.DawaActivLanguage = "+LanguageId
                                  +"AND DawaActivitiesReq.DawaOffice ="+OfficeId
                                  +"AND DawaActivitiesInfo.DawaActivityDateH >= '"+
-                                "1439-05-29"+"' AND DawaActivitiesInfo.DawaActivityDateH <= '"+
-                                "1439-06-29"+"'";
+                                DateFrom+"' AND DawaActivitiesInfo.DawaActivityDateH <= '"+
+                                DateTo+"'";
                     }
                 } else {
                     Toast.makeText(getContext().getApplicationContext(), "الرجاء ادخال اسم المنشط", Toast.LENGTH_LONG).show();
@@ -199,8 +217,8 @@ public class DawaSearch extends Fragment {
                 spinnerDomain = (Spinner) view.findViewById(R.id.spinnerDomain);
                 spinnerLanguage = (Spinner) view.findViewById(R.id.spinnerLanguage);
                 spinneroffice = (Spinner) view.findViewById(R.id.spinneroffice);
-                spinnerfromDate = (Spinner) view.findViewById(R.id.spinnerfromDate);
-                spinnertoDate = (Spinner) view.findViewById(R.id.spinnertoDate);
+                spinnerfromDate = (TextView) view.findViewById(R.id.spinnerfromDate);
+                spinnertoDate = (TextView) view.findViewById(R.id.spinnertoDate);
                 //Jason Object:
                 Regions.add(SelectAll);
 
@@ -529,8 +547,55 @@ public class DawaSearch extends Fragment {
         });
 
 //-----------------------------------------Date From---------------------------------------------------------
-//-----------------------------------------Date To---------------------------------------------------------
 
+
+        spinnerfromDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                 FromDay = cldr.get(Calendar.DAY_OF_MONTH);
+                 FromMonth = cldr.get(Calendar.MONTH);
+                 FromYear = cldr.get(Calendar.YEAR);
+                // date picker dialog
+                picker = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                //spinnerfromDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+
+                                DateFrom =String.format("%d-%02d-%02d", year,monthOfYear+1,dayOfMonth);
+                                spinnerfromDate.setText(DateFrom);
+                            }
+                        }, FromYear, FromMonth, FromDay);
+                picker.show();
+
+            }
+        });
+
+        //1439-05-29
+//-----------------------------------------Date To---------------------------------------------------------
+        spinnertoDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                 ToDay = cldr.get(Calendar.DAY_OF_MONTH);
+                 ToMonth = cldr.get(Calendar.MONTH);
+                 ToYear = cldr.get(Calendar.YEAR);
+                // date picker dialog
+                picker = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                //spinnertoDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                DateTo= String.format("%d-%02d-%02d", year,monthOfYear+1,dayOfMonth);
+                                spinnertoDate.setText(DateTo);
+                            }
+                        }, ToYear, ToMonth, ToDay);
+                picker.show();
+
+            }
+        });
+//-----------------------------------------------------------------
 
         return view;
     }

@@ -199,7 +199,7 @@ public class MosqueActivity extends AppCompatActivity implements
 
         //------------------------------------------------------------------------------------------------------------
         String s = getIntent().getStringExtra("Query");
-        Toast.makeText(MosqueActivity.this," New Query \n"+s,Toast.LENGTH_LONG).show();
+       // Toast.makeText(MosqueActivity.this," New Query \n"+s,Toast.LENGTH_LONG).show();
 
         if(s != null) {
 //Convert latitude and longitude to String
@@ -217,13 +217,13 @@ public class MosqueActivity extends AppCompatActivity implements
                 public void onResponse(Call<List<MosquesLatLng>> call, Response<List<MosquesLatLng>> response) {
                     AdvanceMosquesLatLngs = response.body();
                     //Test Result and Print Data
-                    System.out.println("Search Responce :");
-                    System.out.println("Responce toString" + response.toString());
-                    System.out.println("Responce body" + response.body());
-                    System.out.println("Responce Headers" + response.headers());
-                    System.out.print("URL" + response.isSuccessful());
+                  //  System.out.println("Search Responce :");
+                  //  System.out.println("Responce toString" + response.toString());
+                   // System.out.println("Responce body" + response.body());
+                   // System.out.println("Responce Headers" + response.headers());
+                  //  System.out.print("URL" + response.isSuccessful());
 
-                    Log.e("  URL KK : ", call.request().url().toString());
+                  //  Log.e("  URL KK : ", call.request().url().toString());
 
                     if (AdvanceMosquesLatLngs.size() == 0) {
                         Toast.makeText(MosqueActivity.this, "لايوجد بيانات", Toast.LENGTH_LONG).show();
@@ -266,7 +266,7 @@ public class MosqueActivity extends AppCompatActivity implements
 
                 @Override
                 public void onFailure(Call<List<MosquesLatLng>> call, Throwable t) {
-                    System.out.print(":( :( \n");
+                    //System.out.print(":( :( \n");
                     Toast.makeText(MosqueActivity.this, "الرجاء ادخال كلمات بحث اخرى", Toast.LENGTH_LONG).show();
                 }
             });
@@ -409,15 +409,15 @@ public class MosqueActivity extends AppCompatActivity implements
     protected void onStart() {
       super.onStart();
     //end check if Not Null
-    setupViewPager(mviewPager);
+    //setupViewPager(mviewPager);
 
  }
 
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        //setupViewPager(mviewPager);
-
+        setupViewPager(mviewPager);
+        mviewPager.setCurrentItem(1);
     }
 
 
@@ -427,8 +427,9 @@ public class MosqueActivity extends AppCompatActivity implements
 
         MosqueSectoinsAdapter adapter = new MosqueSectoinsAdapter(getSupportFragmentManager());
 
-        adapter.AddFragment(new MosqueMap(latitude, longitude), "خريطه");
         adapter.AddFragment(new MosqueList(latitude, longitude), "قائمة");
+        adapter.AddFragment(new MosqueMap(latitude, longitude), "خريطه");
+
         viewPager.setAdapter(adapter);
 
     }//end Function ViewPager

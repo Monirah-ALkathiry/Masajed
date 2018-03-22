@@ -47,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
         final TextView Mosque = (TextView) findViewById(R.id.Mosqu);
         final TextView dawa = (TextView) findViewById(R.id.tvdawalink);
 
+        //Monirah Added
+        final TextView Favorite = (TextView) findViewById(R.id.Favorite);
+
 
         //DawaActivity link open Mnasht Dawa Activity
         dawa.setOnClickListener(new View.OnClickListener() {
@@ -143,7 +146,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(LinkIntent);
             }
         });
+//------------------------------Monirah Added------------------------------------------------
 
+        Favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent FavoriteIntent = new Intent(MainActivity.this,FavoriteActivity.class);
+                MainActivity.this.startActivity(FavoriteIntent);
+            }
+        });
     }
 
 

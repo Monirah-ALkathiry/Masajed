@@ -8,6 +8,8 @@
     <string name="phoneerr">Enter Correct Mobile no</string>
     <string name="passerr">كلمة المرور يجب أن تكون 6 خانات وتحوي أحرف كبيرة وصغيرة و رموز </string>
     <string name="cnfpasserr">كلمة المرور غير متطابقة</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="notification">الرجاء تسجيل الدخول لتتمكن من ارسال ملاحظة</string>
 
     <!-- Monirah -->
     <string name="search">أدخل كلمة البحث</string>
@@ -33,6 +35,7 @@
 
     <string name="search_Button">بحث</string>
     <string name="Exit_Button">الغاء</string>
+    <string name="Ok_Button">موافق</string>
 
 
     <string name="hello_blank_fragment">Image fragment</string>
@@ -60,7 +63,11 @@
     <string name="title_activity_new_maps">الخريطة</string>
 
     <!-- SEARCH -->
- <string name="search_view">بحث</string>
-<string name="search_hint">أدخل كلمة البحث</string>
+    <string name="search_view">بحث</string>
+    <string name="search_hint">أدخل كلمة البحث</string>
+    <string name="title_activity_favorite">FavoriteActivity</string>
+<string name="AddNewNote">إضافة ملاحظه جديدة</string>
+    <!--Favorite -->
 
+    <string name="Favorite">لم تقم بتسجيل الدخول</string>
 </resources>

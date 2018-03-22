@@ -314,14 +314,16 @@ private ImageButton imageButton ;
         super.onStart();
         //end check if Not Null
         setupViewPager(mviewPager);
+        mviewPager.setCurrentItem(1);
+
     }
 
     private void setupViewPager(ViewPager viewPager){
 
         DawaSectionAdapter adapter = new DawaSectionAdapter(getSupportFragmentManager());
 
-        adapter.AddFragment(new DawaMap(latitude,longitude), "خريطه");
         adapter.AddFragment(new DawaList(latitude,longitude), "قائمة");
+        adapter.AddFragment(new DawaMap(latitude,longitude), "خريطه");
 
         viewPager.setAdapter(adapter);
 

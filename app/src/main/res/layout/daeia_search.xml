@@ -13,14 +13,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/lightgray">
-        <!-- <SearchView
-             android:id="@+id/Search"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_gravity="right"
-             android:layout_marginBottom="5dp"
-             android:hint="ادخل كلمة البحث">
-         </SearchView>-->
+
         <EditText
             android:id="@+id/DaiaSeach"
             android:layout_width="wrap_content"
@@ -37,12 +30,34 @@
             android:background="@drawable/edit_text_style"
             />
 
+        <ScrollView
+            android:id="@+id/layout"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal|vertical"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dip"
+            android:scrollbarStyle="outsideInset"
+            android:fillViewport="true"
+            android:layout_marginBottom="80dip">
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalView"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal|vertical"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="80dip">
+
 
         <TableLayout
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:layout_marginBottom="20dp"
-            android:layout_gravity="right">
+            android:layout_gravity="right"
+            android:paddingBottom="25dp">
+
+
+
 
             <TableRow  android:layout_marginBottom="3.5dp">
 
@@ -52,6 +67,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
                     android:spinnerMode="dialog"
+
                     >
 
                 </Spinner>
@@ -215,15 +231,28 @@
                     android:textSize="12dp" />
             </TableRow>
 
-
             <TableRow android:layout_marginBottom="3.5dp" >
-                <Spinner
+              <!--  <Spinner
                     android:layout_marginTop="8dp"
                     android:id="@+id/spinnerfromDate"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:spinnerMode="dialog">
-                </Spinner>
+                </Spinner>-->
+                <TextView
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/spinnerfromDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Enter Date"
+                />
+              <!--  <DatePicker
+                    android:id="@+id/spinnerfromDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:datePickerMode="spinner"
+                    />-->
 
                 <TextView
 
@@ -238,14 +267,29 @@
             </TableRow>
 
             <TableRow android:layout_marginBottom="3.5dp" >
-                <Spinner
-                    android:layout_marginTop="8dp"
-                    android:id="@+id/spinnertoDate"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:spinnerMode="dialog">
-                </Spinner>
+                <!-- <Spinner
+                     android:layout_marginTop="8dp"
+                     android:id="@+id/spinnertoDate"
+                     android:layout_width="fill_parent"
+                     android:layout_height="wrap_content"
+                     android:spinnerMode="dialog">
 
+             -->
+                <TextView
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/simpleDatePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Enter Date"
+                  />
+                <!--
+                <DatePicker
+                    android:id="@+id/simpleDatePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:datePickerMode="spinner"
+                    />-->
                 <TextView
 
                     android:id="@+id/toDate"
@@ -257,6 +301,11 @@
                     android:textColor="#fff"
                     android:textSize="12dp" />
             </TableRow>
+
         </TableLayout>
+        </HorizontalScrollView>
+        </ScrollView>
     </LinearLayout>
+
+
 </RelativeLayout>

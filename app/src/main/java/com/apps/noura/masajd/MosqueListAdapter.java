@@ -118,9 +118,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
                 //view.setBackgroundColor(grey);
                 Toast.makeText(context, "Click", Toast.LENGTH_SHORT).show();
                 //Create Object From Activity:
-
                 Intent intent = new Intent(context, MosqueInformationActivity.class);
-
 
                 intent.putExtra("MOSQUE_CODE", mosquesLatLngs.get(position).getCode());
                 //USED IN MAP

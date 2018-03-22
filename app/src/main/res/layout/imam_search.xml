@@ -39,6 +39,26 @@
             android:background="@drawable/edit_text_style"
              />
 
+
+        <ScrollView
+            android:id="@+id/layout"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal|vertical"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dip"
+            android:scrollbarStyle="outsideInset"
+            android:fillViewport="true"
+            android:layout_marginBottom="80dip">
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalView"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal|vertical"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="80dip">
+
+
         <TableLayout
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
@@ -157,12 +177,9 @@
 
         </TableLayout>
 
+        </HorizontalScrollView>
+        </ScrollView>
     </LinearLayout>
 
-   <!-- <android.support.v7.widget.RecyclerView
-        android:id="@+id/MosqueRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/grey"
-        />-->
+
 </RelativeLayout>
