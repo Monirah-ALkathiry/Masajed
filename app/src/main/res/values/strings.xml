@@ -2,6 +2,8 @@
     <string name="app_name">مساجد</string>
 
     <string name="nameerr">ادخل اسم صحيح </string>
+    <string name="UserName">اسم المستخدم</string>
+    <string name="Password">كلمة المرور</string>
     <string name="usernamerr">ادخل اسم مستخدم صحيح</string>
     <string name="usernamerr2">اسم المستخدم موجود مسبقاً</string>
     <string name="emailerr">Enter Correct Email</string>
@@ -10,6 +12,8 @@
     <string name="cnfpasserr">كلمة المرور غير متطابقة</string>
     <string name="login">تسجيل الدخول</string>
     <string name="notification">الرجاء تسجيل الدخول لتتمكن من ارسال ملاحظة</string>
+    <string name="Register">مستخدم جديد؟</string>
+    <string name="ForgotPassword">هل نسيت كلمة المرور؟</string>
 
     <!-- Monirah -->
     <string name="search">أدخل كلمة البحث</string>
@@ -22,7 +26,6 @@
     <string name="MosqueImage">صورة المسجد</string>
     <string name="MosqueType">فئه المسجد</string>
     <string name="District">الحي</string>
-    <string name="Null">غير متوفر</string>
     <string name="MosqueRegion">المنطقة</string>
     <string name="CityVillage">المدينة</string>
     <string name="ImamName">إسم الإمام </string>
@@ -37,7 +40,7 @@
     <string name="Exit_Button">الغاء</string>
     <string name="Ok_Button">موافق</string>
 
-
+    <string name="Null">غير متوفر</string>
     <string name="hello_blank_fragment">Image fragment</string>
     <string name="title_activity_mosque_information">مسجد</string>
     <string name="tab_text_1">Tab 1</string>
@@ -66,8 +69,26 @@
     <string name="search_view">بحث</string>
     <string name="search_hint">أدخل كلمة البحث</string>
     <string name="title_activity_favorite">FavoriteActivity</string>
-<string name="AddNewNote">إضافة ملاحظه جديدة</string>
+    <string name="AddNewNote">إضافة ملاحظه جديدة</string>
     <!--Favorite -->
 
     <string name="Favorite">لم تقم بتسجيل الدخول</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+
+    <!--Dawa -->
+    <string name="NameTag">عنوان المنشط</string>
+    <string name="ActivityType">نوع النشاط</string>
+    <string name="MainClassification">التصنيف الرئيسي</string>
+    <string name="SubClassification">التصنيف الفرعي</string>
+    <string name="Dawa_Office">المكتب</string>
+    <string name="Date">التاريخ</string>
+    <string name="Time">الوقت</string>
+    <string name="Repetition">التكرار</string>
+    <string name="Preacher">الداعية</string>
+    <string name="Language">اللغة</string>
+    <string name="WomanRoom">قاعة النساء</string>
+    <string name="Distance">المسافة</string>
+    <string name="Evaluation">التقييم</string>
+
 </resources>

@@ -56,6 +56,7 @@ class DawaListAdapter extends RecyclerView.Adapter<DawaListAdapter.DawaViewList>
 
 
     }
+    protected  String Dstance;
 
     @Override
     public void onBindViewHolder(DawaListAdapter.DawaViewList holder, final int position) {
@@ -64,14 +65,23 @@ class DawaListAdapter extends RecyclerView.Adapter<DawaListAdapter.DawaViewList>
         holder.DawaID=(DawaLatLng.get(position).getId());
 
         holder.mTextView.setText(DawaLatLng.get(position).getDawaAddress());
-        holder.InfoTextView.setText(DawaLatLng.get(position).getCityVillage());
-        holder.DawaDistrict.setText(DawaLatLng.get(position).getDistrict());
+      //  holder.InfoTextView.setText(DawaLatLng.get(position).getCityVillage());
+      //  holder.DawaDistrict.setText(DawaLatLng.get(position).getDistrict());
 
 
         Picasso.with(context)
                 .load("http://gis.moia.gov.sa/Mosques/Content/images/mosques/"+holder.DawaID+"/IMG_"+holder.i+".JPG")
-                .placeholder(R.drawable.markericonsmall)
+                .placeholder(R.drawable.dawalabel)
                 .into(holder.imageView);
+
+        String FirstName, FatherName, GrandFatherName, FamilyName , Name;
+        FirstName = DawaLatLng.get(position).getFirstName();
+        FatherName =  DawaLatLng.get(position).getFatherName();
+        GrandFatherName =  DawaLatLng.get(position).getGrandFatherName();
+        FamilyName =  DawaLatLng.get(position).getFamilyName();
+        Name = FirstName+" "+FatherName+" "+GrandFatherName+ " " +FamilyName;
+
+     holder.Preacher.setText("الداعية :"+Name);
 
 
 
@@ -104,7 +114,7 @@ class DawaListAdapter extends RecyclerView.Adapter<DawaListAdapter.DawaViewList>
 
         //Convert To String:
         dk = Math.floor(dk * 100) / 100;
-        String Dstance= Double.toString(dk);
+        Dstance= Double.toString(dk);
         holder.Distance.setText(Dstance + "كيلو");
 
 //--------------------------------------------------------------------------------------------------
@@ -118,6 +128,13 @@ class DawaListAdapter extends RecyclerView.Adapter<DawaListAdapter.DawaViewList>
 
                 Intent intent = new Intent(context,DawaInformationActivity.class);
                 // Dawa Activity Information:
+
+
+                intent.putExtra("DawaActivityType", DawaLatLng.get(position).getDawaActivityType());
+                intent.putExtra("DawaMainCategory",DawaLatLng.get(position).getDawaMainCategory());
+                intent.putExtra("DawaSubCategory",DawaLatLng.get(position).getDawaSubCategory());
+                //intent.putExtra("Distance",Dstance);
+
                 intent.putExtra("DAWA_ID",DawaLatLng.get(position).getId());
                 intent.putExtra("DawaAddress",DawaLatLng.get(position).getDawaAddress());
                 intent.putExtra("DawaOffice",DawaLatLng.get(position).getDawaOffice());
@@ -126,19 +143,27 @@ class DawaListAdapter extends RecyclerView.Adapter<DawaListAdapter.DawaViewList>
                 intent.putExtra("DawaActivityRepDays",DawaLatLng.get(position).getDawaActivityRepDays());
                 intent.putExtra("LocX_Coord",DawaLatLng.get(position).getLocYCoord());
                 intent.putExtra("LocY_Coord",DawaLatLng.get(position).getLocXCoord());
+                //Send Current Location :
+                //Used To calc Distance:
+               // locationA.setLatitude(lat);
+                //locationA.setLongitude(log);
+                String Userlat = String.valueOf(lat);
+                String Userlon = String.valueOf(log);
 
+                intent.putExtra("LAT",Userlat);
+                intent.putExtra("LON",Userlon);
 
                 intent.putExtra("MOSQUE_NAME",DawaLatLng.get(position).getMosqueName());
                 intent.putExtra("MOSQUE_REGION",DawaLatLng.get(position).getRegion());
                 intent.putExtra("CITY_VILLAGE",DawaLatLng.get(position).getCityVillage());
                 intent.putExtra("DISTRICT",DawaLatLng.get(position).getDistrict());
                 intent.putExtra("STREET_NAME",DawaLatLng.get(position).getStreetName());
-
+                //
                 intent.putExtra("FirstName",DawaLatLng.get(position).getFirstName());
                 intent.putExtra("FatherName", DawaLatLng.get(position).getFatherName());
                 intent.putExtra("GrandFatherName", DawaLatLng.get(position).getGrandFatherName());
-
                 intent.putExtra("FamilyName", DawaLatLng.get(position).getFamilyName());
+
                 intent.putExtra("DawaActivLanguage", DawaLatLng.get(position).getDawaActivLanguage());
                 intent.putExtra("WomenPlaceAvailability", DawaLatLng.get(position).getWomenPlaceAvailability());
 
@@ -168,12 +193,13 @@ class DawaListAdapter extends RecyclerView.Adapter<DawaListAdapter.DawaViewList>
 
 
         private TextView mTextView;
-        private TextView InfoTextView;
+     //   private TextView InfoTextView;
         private ImageView imageView;
-        private TextView DawaDistrict;
+        //private TextView DawaDistrict;
         private LinearLayout linearLayout;
         private String DawaID;
         private TextView Distance;
+        private TextView Preacher;
 
 
         //Image :
@@ -184,11 +210,12 @@ class DawaListAdapter extends RecyclerView.Adapter<DawaListAdapter.DawaViewList>
         public DawaViewList(View view) {
             super(view);
             mTextView = (TextView) view.findViewById(R.id.DawaName);
-            InfoTextView = (TextView) view.findViewById(R.id.DawaInfo);
+           // InfoTextView = (TextView) view.findViewById(R.id.DawaInfo);
             imageView = (ImageView) view.findViewById(R.id.DawaImage);
-            DawaDistrict =(TextView) view.findViewById(R.id.DawaDistrict);
+           // DawaDistrict =(TextView) view.findViewById(R.id.DawaDistrict);
             linearLayout = (LinearLayout) view.findViewById(R.id.linearLayout);
             Distance = (TextView) view.findViewById(R.id.Distance);
+            Preacher = (TextView) view.findViewById(R.id.PreacherName);
 
         }
 

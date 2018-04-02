@@ -283,13 +283,77 @@ public class KhateebSearch extends Fragment {
             public void onClick(View v) {
                 query = textView.getText().toString();
                 if (query.matches("")){
-                    Toast.makeText(getContext().getApplicationContext(), "الرجاءادخال كلمة بحث صحيحه", Toast.LENGTH_LONG).show();
+                   // Toast.makeText(getContext().getApplicationContext(), "الرجاءادخال كلمة بحث صحيحه", Toast.LENGTH_LONG).show();
                     return;
                 }else {
                     Toast.makeText(getContext().getApplicationContext(), query, Toast.LENGTH_LONG).show();
                     String map2;
 
-                    if (ministry_region_id == null || City == SelectAll || Distric == SelectAll || MosqueId == SelectAll){
+
+                    if(ministry_region_id == null ){
+
+                        if(MosqueId ==(null)) {
+
+                            map2 = "Khateeb_Name like N'%" + query +"%'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        }else{
+                            map2 = "Khateeb_Name like N'%"+ query + "%' AND Mosque_Catogery = '" + MosqueId + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        }
+
+                    }else  if (City.equals(SelectAll)
+                            && Distric.equals( SelectAll)) {
+
+                        if(MosqueId ==(null)) {
+
+                            map2 = "Khateeb_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
+                                    + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        }else{
+                            map2 = "Khateeb_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
+                                    + "'AND Mosque_Catogery = '" + MosqueId + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        }
+
+
+                        //map.put("where", "Khateeb_Name = N" + "\'" + query + "\'");
+                        System.out.println("\n Query ttt :  " + map2 + "\n");
+
+
+                    }else if (Distric.equals( SelectAll)){
+
+                        if(MosqueId ==(null)) {
+
+                            map2 = "Khateeb_Name like N'%" + query +"%' AND Region = '" + ministry_region_id
+                                    + "' AND City_Village like N'%" + City + "%'";
+
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        }else{
+                            map2 = "Khateeb_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
+                                    + "' AND City_Village like N'%" + City + "%'AND Mosque_Catogery = '" + MosqueId + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        }
+
+
+                        System.out.println("\n Query bbb :  " + map2 + "\n");
+
+                    }else if( MosqueId==null){
+
+                        map2 = "Khateeb_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
+                                + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric +
+                                "%'";
+                        System.out.println("\n Query jjj :  " + map2 + "\n");
+
+                    } else{
+
+                        map2 = "Khateeb_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
+                                + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric +
+                                "%' AND Mosque_Catogery = '" + MosqueId + "'";
+                        System.out.println("\n Query xxx :  " + map2 + "\n");
+
+                    }
+
+                  /*  if (ministry_region_id == null || City == SelectAll || Distric == SelectAll || MosqueId == SelectAll){
                         map2 = "Khateeb_Name = N" + "\'" + query + "\'";
                         //  map.put("where", "Imam_Name like N'%" + query+ "\'");
 
@@ -304,7 +368,7 @@ public class KhateebSearch extends Fragment {
                         System.out.println("\n Query :  " + map2 + "\n");
 
                     }
-
+                    */
                     sender.SendMassage(map2);
 
 

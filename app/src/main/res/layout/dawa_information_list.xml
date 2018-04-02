@@ -6,148 +6,290 @@
     android:layout_margin="1.5dp"
     android:id="@+id/linearLayoutInfo"
     android:orientation="vertical"
-    android:background="@color/lightGry"
-    >
+    android:background="@color/lightGry" >
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="right">
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+
+
+        <TableRow android:layout_marginBottom="3.5dp" >
+
+            <TextView
+                android:id="@+id/ActivityType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="غير متوفر"
+                android:textColor="@color/black"
+                android:padding="18dip"
+                android:background="@color/lightgray"
+                />
+
+            <TextView
+                android:id="@+id/Activity_Type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:padding="18dip"
+                android:textColor="#fff"
+                android:text="@string/ActivityType" />
+        </TableRow>
+
+        <TableRow android:layout_marginBottom="3.5dp" >
+
+        <TextView
+            android:id="@+id/MainClassification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="غير متوفر"
+            android:textColor="@color/black"
+            android:padding="18dip"
+            android:background="@color/lightgray"
+            />
+
+        <TextView
+            android:id="@+id/Main_Classification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:padding="18dip"
+            android:textColor="#fff"
+            android:text="@string/MainClassification" />
+    </TableRow>
+
+
+        <TableRow android:layout_marginBottom="3.5dp" >
+
+            <TextView
+                android:id="@+id/SubClassification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="غير متوفر"
+                android:textColor="@color/black"
+                android:padding="18dip"
+                android:background="@color/lightgray"
+                />
+
+            <TextView
+                android:id="@+id/Sub_Classification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:padding="18dip"
+                android:textColor="#fff"
+                android:text="@string/SubClassification" />
+        </TableRow>
+
+        <TableRow android:layout_marginBottom="3.5dp" >
         <TextView
             android:id="@+id/DawaOffice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:text="غير متوفر"
-            android:textColor="@color/colorPrimary"
+
+            android:textColor="@color/black"
+            android:padding="18dip"
+            android:background="@color/lightgray"
             />
         <TextView
             android:id="@+id/Dawa_Office"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimary"
-            android:text="تابع لي : " />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/DawaActivityDateH"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/Dawa_Office"
+            android:background="@color/colorPrimary"
+            android:padding="18dip"
+            android:textColor="#fff"/>
+        </TableRow>
+
+        <TableRow android:layout_marginBottom="3.5dp" >
+        <TextView
+            android:id="@+id/DawaActivityDateH"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="غير متوفر"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/black"
+            android:padding="18dip"
+            android:background="@color/lightgray"
+            android:layout_gravity="end"
             />
         <TextView
             android:id="@+id/DawaActivity_DateH"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimary"
-            android:text="تقام في تاريخ : " />
-    </RelativeLayout>
+            android:background="@color/colorPrimary"
+            android:padding="18dip"
+            android:textColor="#fff"
+            android:text="@string/Date" />
+        </TableRow>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <TableRow android:layout_marginBottom="3.5dp" >
 
         <TextView
             android:id="@+id/DawaActivityTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="غير متوفر"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/black"
+            android:padding="18dip"
+            android:background="@color/lightgray"
+            android:layout_gravity="end"
             />
 
         <TextView
             android:id="@+id/City_Village"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimary"
-            android:text="وقت إقامة النشاط" />
-    </RelativeLayout>
+            android:background="@color/colorPrimary"
+            android:padding="18dip"
+            android:textColor="#fff"
+            android:text="@string/Time" />
+        </TableRow>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <TableRow android:layout_marginBottom="3.5dp" >
 
         <TextView
             android:id="@+id/DawaActivityRepDays"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="غير متوفر"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/black"
+            android:padding="18dip"
+            android:background="@color/lightgray"
             />
 
         <TextView
             android:id="@+id/DawaActivity_RepDays"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimary"
-            android:text="أيام إعادة النشاط" />
-    </RelativeLayout>
+            android:background="@color/colorPrimary"
+            android:padding="18dip"
+            android:textColor="#fff"
+            android:text="@string/Repetition" />
+        </TableRow>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <TableRow android:layout_marginBottom="3.5dp" >
 
         <TextView
             android:id="@+id/Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="غير متوفر"
-            android:textColor="@color/colorPrimary"
+             android:textColor="@color/black"
+            android:padding="18dip"
+            android:background="@color/lightgray"
             />
 
         <TextView
             android:id="@+id/Daiah_Name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimary"
-            android:text="الداعية" />
-    </RelativeLayout>
+            android:background="@color/colorPrimary"
+            android:padding="18dip"
+            android:textColor="#fff"
+            android:text="@string/Preacher" />
+        </TableRow>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <TableRow android:layout_marginBottom="3.5dp" >
 
         <TextView
             android:id="@+id/DawaActivLanguage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="غير متوفر"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/black"
+            android:padding="18dip"
+            android:background="@color/lightgray"
             />
 
 
         <TextView
             android:id="@+id/DawaActiv_Language"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimary"
-            android:text="تلقى باللغة" />
+            android:background="@color/colorPrimary"
+            android:padding="18dip"
+            android:textColor="#fff"
+            android:text="@string/Language" />
 
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        </TableRow>
+        <TableRow android:layout_marginBottom="3.5dp" >
         <TextView
             android:id="@+id/WomenPlaceAvailability"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="غير متوفر"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/black"
+            android:padding="18dip"
+            android:background="@color/lightgray"/>
 
 
         <TextView
             android:id="@+id/WomenPlace_Availability"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimary"
-            android:text="قاعة للنساء" />
+            android:background="@color/colorPrimary"
+            android:padding="18dip"
+            android:textColor="#fff"
+            android:text="@string/WomanRoom" />
 
-    </RelativeLayout>
+        </TableRow>
 
+
+
+        <!-- -->
+
+        <TableRow android:layout_marginBottom="3.5dp" >
+
+            <TextView
+                android:id="@+id/Distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="غير متوفر"
+                android:textColor="@color/black"
+                android:padding="18dip"
+                android:background="@color/lightgray"
+                />
+
+            <TextView
+                android:id="@+id/Distance_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:padding="18dip"
+                android:textColor="#fff"
+                android:text="@string/Distance" />
+        </TableRow>
+
+
+        <TableRow android:layout_marginBottom="3.5dp" >
+
+            <TextView
+                android:id="@+id/Evaluation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="غير متوفر"
+                android:textColor="@color/black"
+                android:padding="18dip"
+                android:background="@color/lightgray"
+                />
+
+            <TextView
+                android:id="@+id/Evaluation_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:padding="18dip"
+                android:textColor="#fff"
+                android:text="@string/Evaluation" />
+        </TableRow>
+
+
+
+    </TableLayout>
 
 
 </LinearLayout>

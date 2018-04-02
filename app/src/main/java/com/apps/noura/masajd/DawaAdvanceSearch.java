@@ -101,7 +101,11 @@ public class DawaAdvanceSearch extends AppCompatActivity  implements Sender{
             Toast.makeText(DawaAdvanceSearch.this, "لايوجد مدخلات ", Toast.LENGTH_LONG).show();
 
         }
+        //----------------------------------------
+        //TODO : Onclick Search Do Advance Search:
+        // TODO : Advance Search View Result
 
+        //--------------------------------------
         Toast.makeText(DawaAdvanceSearch.this, Mesage2, Toast.LENGTH_LONG).show();
         System.out.println("Advance Searc Querey Dawa \n"+Mesage2 + "\n");
 ////TODO : Advance Search View Result
@@ -109,6 +113,9 @@ public class DawaAdvanceSearch extends AppCompatActivity  implements Sender{
             @Override
             public void onClick(View v) {
 
+                Intent intent = new Intent(DawaAdvanceSearch.this,DawaActivity.class);
+                intent.putExtra("Query",Mesage2);
+                startActivity(intent);
 
 
                 //Make A Connection With API :
@@ -147,12 +154,11 @@ public class DawaAdvanceSearch extends AppCompatActivity  implements Sender{
 
 
                     }
-                    }
+                   }
 
                     @Override
                     public void onFailure(Call<List<DawaLatLng>> call, Throwable t) {
                         Toast.makeText(DawaAdvanceSearch.this, "الرجاء ادخال كلمات بحث اخرى", Toast.LENGTH_LONG).show();
-
                     }
                 });
 

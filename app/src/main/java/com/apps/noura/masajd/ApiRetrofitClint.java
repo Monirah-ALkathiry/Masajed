@@ -17,6 +17,7 @@ public class ApiRetrofitClint {
     public static Retrofit getApiRetrofitClint(){
 
         if (retrofit == null){
+
             retrofit = new Retrofit
                     .Builder()
                     .baseUrl(BASE_URL)

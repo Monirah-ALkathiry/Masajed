@@ -48,7 +48,9 @@ public class DawaActivity extends AppCompatActivity  implements
     private Intent intent;
     private double latitude;
     private double longitude;
-    //----------------------
+    //-------Search------------
+
+    private DawaAdvanceSearchClint dawaAdvanceSearchClint;
 
     //-------------------GPS-------------------------------------
     private static final int REQUEST_CODE_PERMISSION = 2;
@@ -171,23 +173,101 @@ private ImageButton imageButton ;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        //getMenuInflater().inflate(R.menu.menu_mosque_information,menu);
+
+        //------------------------------------------------------------------------------------------------------------
+        String s = getIntent().getStringExtra("Query");
+
+
+
+        if(s != null) {
+//Convert latitude and longitude to String
+            final String lat = Double.toString(latitude);
+            final String lon = Double.toString(longitude);
+            //Toast.makeText(AdvanceSearch.this, Mesage2, Toast.LENGTH_SHORT).show();
+            //Make A Connection With API :
+
+
+            dawaAdvanceSearchClint= ApiRetrofitClint.getApiRetrofitClint().create(DawaAdvanceSearchClint.class);
+
+            Call<List<DawaLatLng>> call = dawaAdvanceSearchClint.getDawaSearchResult(25,lat,lon,s);
+
+            call.enqueue(new Callback<List<DawaLatLng>>() {
+                @Override
+                public void onResponse(Call<List<DawaLatLng>> call, Response<List<DawaLatLng>> response) {
+                    dawaLatLngs = response.body();
+                    //Test Result and Print Data
+                    //  System.out.println("Search Responce :");
+                    // System.out.println("Responce toString" + response.toString());
+                    //  System.out.println("Responce body" + response.body());
+                    // System.out.println("Responce Headers" + response.headers());
+                    // System.out.print("URL" + response.isSuccessful());
+
+                    //  Log.e("  URL KK : ", call.request().url().toString());
+
+                    if (dawaLatLngs.size() == 0) {
+                        // Log.e("  URL KK : ", "There is NO data ");
+                        Toast.makeText(DawaActivity.this," لاتوجد بيانات" +SearchQuery,Toast.LENGTH_LONG).show();
+
+                    } else {
+
+                        String Newlatitude = dawaLatLngs.get(0).getLocYCoord();
+                        String Newlongitude = dawaLatLngs.get(0).getLocXCoord();
+
+
+                        double latNew = Double.parseDouble(Newlatitude);
+                        double lonNew = Double.parseDouble(Newlongitude);
+
+
+                        //Recycler View
+                        recyclerView = (RecyclerView) findViewById(R.id.DawaRecyclerView);
+                        layoutManager = new LinearLayoutManager(DawaActivity.this);
+                        recyclerView.setLayoutManager(layoutManager);
+                        recyclerView.setHasFixedSize(true);
+                        //-------------------------------------------------------
+
+                        //Send Data To Fragment List---
+                        adapter = new DawaListAdapter(DawaActivity.this, dawaLatLngs, latNew, lonNew);
+
+                        recyclerView.setAdapter(adapter);
+
+                        //Map -----
+                        dawaFragmentCommunicator.passData(dawaLatLngs);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<DawaLatLng>> call, Throwable t) {
+                    System.out.print(":( :( \n");
+
+                }
+            });
+
+        }
+
+         //getMenuInflater().inflate(R.menu.menu_mosque_information,menu);
         // Inflate the options menu from XML
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_mosque_information, menu);
 
+      //  final Context context= this;
+
+        // Get the SearchView and set the searchable configuration
+
         //SEARCH --------------------------------
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView(); // Menu Item
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
-        final Context context= this;
+        // Assumes current activity is the searchable activity
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
+
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 //on-click submit
-                Toast.makeText(context,query,Toast.LENGTH_LONG).show();
+               // Toast.makeText(context,query,Toast.LENGTH_LONG).show();
 
                 try {
                     String Search_by_Name = query;
@@ -208,10 +288,10 @@ private ImageButton imageButton ;
         //-------------------------------------------------------
 
         //super.onCreateOptionsMenu(menu)  default return
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
+   /* @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id= item.getItemId();
@@ -220,7 +300,7 @@ private ImageButton imageButton ;
 
         return super.onOptionsItemSelected(item);
     }
-
+*/
   //----------------------Connection With API-----------------------------------
 
     //Search
@@ -232,10 +312,9 @@ private ImageButton imageButton ;
         final String lat = Double.toString(latitude);
         final String lon = Double.toString(longitude);
 
-
         //New Test:
         final Map<String, Object> map = new HashMap<>();
-        map.put("where", "DawaActivitiesInfo.DawaAddress = N" + "\'" + SearchQuery + "\'");
+        map.put("where", "DawaActivitiesInfo.ActivityExecution ='2' AND DawaActivitiesInfo.AmaraApproval ='2' AND DawaActivitiesInfo.DawaAddress = N" + "\'" + SearchQuery + "\'");
         System.out.println(map + " MAP \n");
 
         final String dawa;
@@ -313,9 +392,17 @@ private ImageButton imageButton ;
     protected void onStart() {
         super.onStart();
         //end check if Not Null
+
+
+    }
+
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+
         setupViewPager(mviewPager);
         mviewPager.setCurrentItem(1);
-
     }
 
     private void setupViewPager(ViewPager viewPager){

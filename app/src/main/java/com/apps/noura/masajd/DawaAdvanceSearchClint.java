@@ -13,7 +13,8 @@ import retrofit2.http.Query;
 
 public interface DawaAdvanceSearchClint {
 
-    @GET("MobileApi/index.jsp?")
+    //http://gis.moia.gov.sa/MobileApi/DawaActivity.jsp?
+    @GET("MobileApi/DawaActivity.jsp?")
     Call<List<DawaLatLng>>
 
     getDawaSearchResult(@Query("limit") int limit, @Query("lat") String latitude, @Query("lon") String longitude,

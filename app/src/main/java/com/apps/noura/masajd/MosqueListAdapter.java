@@ -142,10 +142,10 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
             }
         });
 
-        ParseHTML  ParseH = new ParseHTML();
+       ParseHTML  ParseH = new ParseHTML();
 
        ParseH.mos(holder.MosqueCode,holder.imageView);
-         ParseH.execute();
+       ParseH.execute();
 
         System.out.println(ParseH.a + " LINK ");
     }
@@ -170,6 +170,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         ImageView imageView;
         ProgressDialog mProgressDialog;
         String imgurl;
+        Elements links;
       //  Bitmap bitmap;
 
 
@@ -184,13 +185,17 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            mProgressDialog = new ProgressDialog(context);
-            //mProgressDialog.setTitle("Android Basic JSoup Tutorial");
-            mProgressDialog.setMessage("جاري التنزيل");
-            mProgressDialog.setIndeterminate(false);
-            mProgressDialog.show();
-        }
+            if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                mProgressDialog.dismiss();
+            } else {
+                mProgressDialog = new ProgressDialog(context);
+                mProgressDialog.setTitle("جاري التحميل");
+                mProgressDialog.setMessage("جاري التحميل");
+                mProgressDialog.setIndeterminate(false);
+                mProgressDialog.show();
+            }
 
+        }
         @Override
         protected String doInBackground(String... strings) {
 
@@ -204,14 +209,16 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
                         .get();
                 Log.d("EXAMPLE " , doc.toString());
 
-                Elements links = doc.getElementsByTag("a");
+                 links = doc.getElementsByTag("a");
 
-                if(links.get(1).attr("href").endsWith(".JPG")){
-                    a=links.get(1).attr("href");
 
-                }else{
-                  a= String.valueOf(R.drawable.mosqueicon);
-                }
+
+               // if(links.get(1).attr("href").endsWith(".JPG")){
+                 //   a=links.get(1).attr("href");
+
+                //}else{
+                  a = String.valueOf(R.drawable.mosqueicon);
+                //}
 
                /* Log.d("Elements ",links.toString());
                 Log.d("Elements 222 ",links.get(1).attr("href"));

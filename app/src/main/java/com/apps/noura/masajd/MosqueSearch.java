@@ -297,38 +297,121 @@ Sender sender;
                    // Toast.makeText(getContext().getApplicationContext(), "الرجاءادخال كلمة بحث صحيحه", Toast.LENGTH_LONG).show();
                     return;
                 }else {
-                   // Toast.makeText(getContext().getApplicationContext(), query, Toast.LENGTH_LONG).show();
-
+                    // Toast.makeText(getContext().getApplicationContext(), query, Toast.LENGTH_LONG).show();
                     String map2;
                     Map<String, Object> map = new HashMap<>();
-
                     //----
                     //TODO : Advance Search View Result
                     System.out.print(RejionID + "\n" + "  " + "\n"
                             + City + "\n" + "  " + "\n" +
                             Distric + "\n" + "  " + "\n" +
-                            query + "\n" + "  " + "\n" + " Mosque Type : " + MosqueId);
+                            query + "\n" + "  " + "\n" + " Mosque Type : " + MosqueId + "\n minstry rajion id : "+ ministry_region_id);
 
-                    if (ministry_region_id == null || City == SelectAll || Distric == SelectAll || MosqueId == SelectAll)
-                    {
-                        map2 = "Mosque_Name = N" + "\'" + query + "\'";
+                    if(ministry_region_id == null ){
+
+                        if(MosqueId ==(null)) {
+
+                            map2 = "Mosque_Name = N" + "\'" + query + "\'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        }else{
+                            map2 = "Mosque_Name = N" + "\'" + query + "\' AND Mosque_Catogery = '" + MosqueId + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        }
+
+                    }else  if (City.equals(SelectAll)
+                            && Distric.equals( SelectAll)) {
+
+                        if(MosqueId ==(null)) {
+
+                            map2 = "Mosque_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
+                                    + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        }else{
+                            map2 = "Mosque_Name = N" + "\'" + query + "\'"+ "%' AND Region = '" + ministry_region_id
+                                    + "'AND Mosque_Catogery = '" + MosqueId + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        }
+
+
                         //map.put("where", "Mosque_Name = N" + "\'" + query + "\'");
-                        System.out.println("\n Query :  " + map + "\n");
-                    }
-                    else {
+                        System.out.println("\n Query ttt :  " + map2 + "\n");
+
+
+                    }else if (Distric.equals( SelectAll)){
+
+                        if(MosqueId ==(null)) {
+
+                            map2 = "Mosque_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
+                                    + "' AND City_Village like N'%" + City + "%'";
+
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        }else{
+                            map2 = "Mosque_Name = N" + "\'" + query + "\'"+ "%' AND Region = '" + ministry_region_id
+                                    + "' AND City_Village like N'%" + City + "%'AND Mosque_Catogery = '" + MosqueId + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        }
+
+
+                        System.out.println("\n Query bbb :  " + map2 + "\n");
+
+                    }else if( MosqueId==null){
 
                         map2 = "Mosque_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
                                 + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric +
-                                "%' AND Mosque_Catogery = '" + MosqueId + "'";
-                    }
-                    sender.SendMassage(map2);
+                                "%'";
+                        System.out.println("\n Query jjj :  " + map2 + "\n");
+
+                    } else{
+
+                    map2 = "Mosque_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
+                            + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric +
+                            "%' AND Mosque_Catogery = '" + MosqueId + "'";
+                    System.out.println("\n Query xxx :  " + map2 + "\n");
 
                 }
+
+                /*  if(RejionID == null && City.equals(SelectAll) ||  City == null
+                           && Distric.equals( SelectAll) || Distric ==(null)
+                           && MosqueId.equals (SelectAll) ||  MosqueId==(null)){
+
+                       map2 = "Mosque_Name = N" + "\'" + query + "\'";
+                       //map.put("where", "Mosque_Name = N" + "\'" + query + "\'");
+                       System.out.println("\n sss :  \n" + map2 + "\n");
+                   }else {
+
+                       if (City.equals(SelectAll)
+                               && Distric.equals( SelectAll)
+                               &&  MosqueId==null) {
+
+                           map2 = "Mosque_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
+                                   + "'\'";
+                           //map.put("where", "Mosque_Name = N" + "\'" + query + "\'");
+                           System.out.println("\n Query xxx :  " + map2 + "\n");
+                       } else {
+                           map2 = "Mosque_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
+                                   + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric +
+                                   "%' AND Mosque_Catogery = '" + MosqueId + "'";
+                       }
+                   }*/
+                    System.out.println("\n new query :  " + map2 + "\n");
+                    sender.SendMassage(map2);
+
+                }//end outer else
             }
         });
 
 
-
+/*
+ if (ministry_region_id == null || City == SelectAll || Distric == SelectAll || MosqueId == SelectAll) {
+                           map2 = "Mosque_Name = N" + "\'" + query + "\'";
+                           //map.put("where", "Mosque_Name = N" + "\'" + query + "\'");
+                           System.out.println("\n Query :  " + map2 + "\n");
+                       } else {
+                           map2 = "Mosque_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
+                                   + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric +
+                                   "%' AND Mosque_Catogery = '" + MosqueId + "'";
+                       }
+ */
 
 
     }

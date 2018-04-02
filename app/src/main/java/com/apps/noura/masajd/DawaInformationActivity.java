@@ -47,9 +47,6 @@ public class DawaInformationActivity extends AppCompatActivity {
         Intent intent = getIntent();
         DawaAdress.setText(intent.getStringExtra("DawaAddress"));
 
-
-
-
     }
 
     //create view Pager

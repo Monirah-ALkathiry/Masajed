@@ -2,27 +2,16 @@ package com.apps.noura.masajd;
 
 import android.Manifest;
 
-import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-
-
 import android.os.Bundle;
-
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
 import android.support.design.widget.TabLayout;
-
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.test.mock.MockPackageManager;
@@ -30,26 +19,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.Toast;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,12 +36,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
+
 public class MosqueActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "MosqueActivity";
     private ViewPager mviewPager;
+
+
 
     ///--------------MAP------------------------------
     Intent intentThatCalled;
@@ -110,8 +90,8 @@ public class MosqueActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_mosque);
 
 
-        //Log to start
-        Log.d(TAG, "Start");
+       //Log to start
+        //Log.d(TAG, "Start");
 
         //Set Up the view Pager with Section Adapter:
         mviewPager = (ViewPager) findViewById(R.id.container);
@@ -154,8 +134,8 @@ public class MosqueActivity extends AppCompatActivity implements
             latitude = gps.getLatitude();
             longitude = gps.getLongitude();
 
-            Toast.makeText(getApplicationContext(), " FROM FIRST Your Location is - \nLat: "
-                    + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+          //  Toast.makeText(getApplicationContext(), " FROM FIRST Your Location is - \nLat: "
+               //     + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
 
 
         } else {
@@ -165,8 +145,8 @@ public class MosqueActivity extends AppCompatActivity implements
             gps.showSettingsAlert();
         }
         //----------------------------------------------------
-        Toast.makeText(getApplicationContext(), "lat From Intent - \n Lat: "
-                + latitude + "\n Long: " + longitude, Toast.LENGTH_LONG).show();
+      // Toast.makeText(getApplicationContext(), "lat From Intent - \n Lat: "
+            //    + latitude + "\n Long: " + longitude, Toast.LENGTH_LONG).show();
 
 
         //-----Advance Search :
@@ -217,13 +197,13 @@ public class MosqueActivity extends AppCompatActivity implements
                 public void onResponse(Call<List<MosquesLatLng>> call, Response<List<MosquesLatLng>> response) {
                     AdvanceMosquesLatLngs = response.body();
                     //Test Result and Print Data
-                  //  System.out.println("Search Responce :");
-                  //  System.out.println("Responce toString" + response.toString());
-                   // System.out.println("Responce body" + response.body());
-                   // System.out.println("Responce Headers" + response.headers());
-                  //  System.out.print("URL" + response.isSuccessful());
+                   System.out.println("Search Responce :");
+                   System.out.println("Responce toString" + response.toString());
+                    System.out.println("Responce body" + response.body());
+                    System.out.println("Responce Headers" + response.headers());
+                   System.out.print("URL" + response.isSuccessful());
 
-                  //  Log.e("  URL KK : ", call.request().url().toString());
+                    Log.e("  URL KK : ", call.request().url().toString());
 
                     if (AdvanceMosquesLatLngs.size() == 0) {
                         Toast.makeText(MosqueActivity.this, "لايوجد بيانات", Toast.LENGTH_LONG).show();
@@ -319,10 +299,6 @@ public class MosqueActivity extends AppCompatActivity implements
         //Convert latitude and longitude to String
         final String lat = Double.toString(latitude);
         final String lon = Double.toString(longitude);
-
-
-
-
 
         //New Test:
         final Map<String, Object> map = new HashMap<>();
@@ -450,6 +426,7 @@ public class MosqueActivity extends AppCompatActivity implements
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
 
 
 }

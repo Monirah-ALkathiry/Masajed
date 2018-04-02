@@ -60,8 +60,7 @@ public class MosqueInformation extends Fragment implements OnMapReadyCallback
     GoogleMap MgoogleMap;
     MapView mapView;
     View view;
-
-Marker marker;
+   Marker marker;
     //Constructor:
     public MosqueInformation() {
 
@@ -96,9 +95,6 @@ Marker marker;
         adapter = new MosqueInformationRecyclerView(intent);
 
         recyclerView.setAdapter(adapter);
-
-
-
 
         return view;
     }

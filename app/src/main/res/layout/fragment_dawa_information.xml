@@ -9,14 +9,14 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         android:background="@drawable/border_style">
 
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/DawaRecyclerViewINFO"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="350dp">
 
         </android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.NestedScrollView>
@@ -24,7 +24,7 @@
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginTop="5dp"
         android:background="@drawable/border_style">

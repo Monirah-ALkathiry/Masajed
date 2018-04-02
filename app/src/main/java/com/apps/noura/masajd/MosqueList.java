@@ -94,7 +94,7 @@ public class MosqueList extends Fragment{
 
     public void ConnectWithAPI(String latitude , String longitude){
 
-         lat2 = latitude;
+        lat2 = latitude;
         long2 = longitude;
         //----------------------------------
       //  System.out.println("----:" + lat2 + ")P)----------------" + long2);
@@ -139,10 +139,9 @@ public class MosqueList extends Fragment{
 
             @Override
             public void onFailure(Call<List<MosquesLatLng>> call, Throwable t) {
-                System.out.println("Error bad  ):-----------------------\n");
+                System.out.println("Error bad  connection\n");
             }
         });
-
 
     }
 

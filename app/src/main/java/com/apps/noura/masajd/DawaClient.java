@@ -15,6 +15,6 @@ public interface DawaClient {
 
     @GET("MobileApi/DawaActivity.jsp?")
    Call<List<DawaLatLng>>
-    getDawaLatLng(@Query("lat") String locYCoord , @Query("lon") String locXCoord , @Query("limit") String limit);
+    getDawaLatLng(@Query("lat") String locYCoord , @Query("lon") String locXCoord , @Query("limit") int limit);
 
 }

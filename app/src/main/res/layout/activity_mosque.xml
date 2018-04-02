@@ -16,9 +16,11 @@
         android:id="@+id/SearchFilter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+
         android:onClick="open"
-        app:srcCompat="@drawable/filter_outline" />
+        android:contentDescription="@string/search"
+        app:srcCompat="@drawable/filter_outline"
+        />
     </GridLayout>
 
 <!--
@@ -48,8 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        />
+        android:layout_centerVertical="true"/>
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -67,7 +68,7 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="5dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
@@ -77,6 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/grey"/>
+
 
 
 

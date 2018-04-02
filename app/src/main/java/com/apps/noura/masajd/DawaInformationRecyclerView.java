@@ -1,12 +1,14 @@
 package com.apps.noura.masajd;
 
 import android.content.Intent;
+import android.location.Location;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Noura Alsomaikhi on 1/10/2018.
@@ -27,25 +29,51 @@ class DawaInformationRecyclerView extends RecyclerView.Adapter<DawaInformationRe
         return new DawaInformationRecyclerView.DawaViewInformationList(view);
     }
 
+    protected  String DawaActivity_Type;
+    protected  String DawaMain_Category;
+    protected String DawaSub_Category;
+
+
+    protected String LocX_Coord;
+    protected String LocY_Coord;
+
     @Override
     public void onBindViewHolder(DawaInformationRecyclerView.DawaViewInformationList holder, int position) {
 // Dawa Activity information :
-        // #1 Office
+
+
+        //1:DawaActivityType
+        DawaActivity_Type =intent.getStringExtra("DawaActivityType");
+        holder.DawaActivityType.setText(DawaActivity_Type);
+
+        System.out.println("\n DawaActivity_Type Place DawaActivity_Type : " + DawaActivity_Type);
+
+        //2: Dawa Main Category
+
+        DawaMain_Category = intent.getStringExtra("DawaMainCategory");
+        holder.DawaMainCategory.setText(DawaMain_Category);
+        //3: DawaSubCategory
+        DawaSub_Category = intent.getStringExtra("DawaSubCategory");
+        holder.DawaSubCategory.setText(DawaSub_Category);
+
+
+
+        // #4 Office
         String DawaOffice;
         DawaOffice = intent.getStringExtra("DawaOffice");
         holder.DawaOffice.setText(intent.getStringExtra("DawaOffice"));
 
-        //#2 Date DawaActivityDateH
+        //#5 Date DawaActivityDateH
         String DawaReqDateH;
         holder.DawaActivityDateH.setText(intent.getStringExtra("DawaActivityDateH"));
 
-        //#3 Time  DawaActivityTime
+        //#6 Time  DawaActivityTime
         holder.DawaActivityTime.setText(intent.getStringExtra("DawaActivityTime"));
 
-        //#4 Days  DawaActivityRepDays
+        //#7 Days  DawaActivityRepDays
         holder.DawaActivityRepDays.setText(intent.getStringExtra("DawaActivityRepDays"));
 
-        //#5 Daiah name FirstName + FatherName + GrandFatherName + FamilyName
+        //#8 Daiah name FirstName + FatherName + GrandFatherName + FamilyName
         String FirstName, FatherName, GrandFatherName, FamilyName , Name;
         FirstName = intent.getStringExtra("FirstName");
         FatherName = intent.getStringExtra("FatherName");
@@ -54,23 +82,65 @@ class DawaInformationRecyclerView extends RecyclerView.Adapter<DawaInformationRe
         Name = FirstName+" "+FatherName+" "+GrandFatherName+ " " +FamilyName;
         holder.Name.setText(Name);
 
-        //#6 language DawaActivLanguage
+        //#9 language DawaActivLanguage
         holder.DawaActivLanguage.setText(intent.getStringExtra("DawaActivLanguage"));
 
-        //#7 WomenPlaceAvailability
+        //#10 WomenPlaceAvailability
         String WomenPlaceAvailability;
         WomenPlaceAvailability = intent.getStringExtra("WomenPlaceAvailability");
-        System.out.println("(:(:(:(" + WomenPlaceAvailability);
-       int WA = Integer.parseInt(WomenPlaceAvailability);
-        if (WA == 0) {
+        System.out.println("\n Women Place Availability : " + WomenPlaceAvailability);
+        int WA;
+        if(WomenPlaceAvailability != null) {
+             WA = Integer.parseInt(WomenPlaceAvailability);
+             if ( WA == 0 ) {
             holder.WomenPlaceAvailability.setText("غير متوفر");
-        } else if (WA == 1) {
-            holder.WomenPlaceAvailability.setText("متوفر");
+        } else {
+                holder.WomenPlaceAvailability.setText("متوفر");
+            }
         }
+        else {
+            holder.WomenPlaceAvailability.setText("غير متوفر");
+
+        }
+        //11 : Distance :
+       // DistanceFromUser = intent.getStringExtra("Distance");
+
+        LocX_Coord = intent.getStringExtra("LocX_Coord");
+        LocY_Coord = intent.getStringExtra("LocY_Coord");
+
+        String Userlat = intent.getStringExtra("LAT");
+        String Userlon =  intent.getStringExtra("LON");
+
+        Location locationA = new Location("point A");
+        Location locationB = new Location("point B");
+//Check If Not Null
+        if(Userlat != null && Userlon != null) {
+            double lat = Double.parseDouble(Userlat);
+            double log = Double.parseDouble(Userlon);
+            //Used To calc Distance:
+            locationA.setLatitude(lat);
+            locationA.setLongitude(log);
+
+            double latd = Double.parseDouble(LocY_Coord);
+            double logd = Double.parseDouble(LocX_Coord);
+            locationB.setLatitude(logd);
+            locationB.setLongitude(latd);
 
 
+            float distance = locationA.distanceTo(locationB);
+            double dm = distance * Math.PI / 180.0;
+            double dk = dm / 10.0;
 
+            //Convert To String:
+            dk = Math.floor(dk * 100) / 100;
+            String Dstance = Double.toString(dk);
 
+            holder.Distance.setText(Dstance);
+        }else{
+
+            holder.Distance.setText(" ");
+
+        }
     }
 
     @Override
@@ -88,6 +158,11 @@ class DawaInformationRecyclerView extends RecyclerView.Adapter<DawaInformationRe
         private TextView Name;
         private TextView DawaActivLanguage;
         private TextView WomenPlaceAvailability;
+
+        private TextView DawaActivityType;
+        private TextView DawaMainCategory;
+        private TextView DawaSubCategory;
+        private TextView Distance;
         private LinearLayout linearLayout;
 
 
@@ -101,6 +176,13 @@ class DawaInformationRecyclerView extends RecyclerView.Adapter<DawaInformationRe
             Name = (TextView) itemView.findViewById(R.id.Name);
             DawaActivLanguage = (TextView) itemView.findViewById(R.id.DawaActivLanguage);
             WomenPlaceAvailability = (TextView) itemView.findViewById(R.id.WomenPlaceAvailability);
+
+            DawaActivityType = (TextView) itemView.findViewById(R.id.ActivityType);
+            DawaMainCategory = (TextView) itemView.findViewById(R.id.MainClassification);
+            DawaSubCategory = (TextView) itemView.findViewById(R.id.SubClassification);
+            Distance = (TextView) itemView.findViewById(R.id.Distance);
+
+
             //linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayoutInfo);
 
 

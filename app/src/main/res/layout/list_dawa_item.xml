@@ -11,79 +11,106 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
 
-        <ImageView
-            android:id="@+id/DawaImage"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_gravity="right"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:scaleType="fitCenter"
-            tools:padding="2dp"
-            android:radius="15dp"
-            android:contentDescription="@string/DawaImage"
-            />
 
-        <TextView
-            android:id="@+id/DawaName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin=".5dp"
-            android:layout_weight="1"
-            android:fontFamily="sans-serif"
-            android:gravity="end"
-            android:padding="2dp"
-            android:paddingBottom="2dp"
-            android:paddingRight="5dp"
-            android:text="اسم المنشط "
-            android:textAlignment="textEnd"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/DawaInfo"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="15dp"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:paddingBottom="5dp"
-            android:text="معلومات المنشط"
-            android:textColor="@color/colorPrimary"
-            android:textSize="12sp" />
-*
-        <TextView
-            android:id="@+id/DawaDistrict"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="15dp"
-            android:layout_weight="1"
-            android:gravity="left"
-            android:text="@string/District"
-            android:textColor="@color/colorPrimary"
-            android:textSize="12sp" />
+            android:padding="16dp"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/Distance"
+    <TextView
+        android:id="@+id/Distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="1dp"
+        android:layout_marginBottom="5.5dp"
+        android:layout_weight="1"
+        android:gravity="start"
+        android:padding=".5dp"
+        android:text="@string/MosqueDistance"
+        android:textColor="@color/colorPrimary"
+        android:textSize="10sp" />
+
+
+
+<!--
+      <TextView
+            android:id="@+id/DawaDistrict"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start|fill_vertical"
-            android:layout_margin="2dp"
-            android:layout_marginBottom="5.5dp"
+            android:layout_gravity="bottom"
+            android:layout_margin="15dp"
             android:layout_weight="1"
-            android:gravity="start"
-            android:padding="1.5dp"
-            android:text="@string/MosqueDistance"
+            android:gravity="fill_horizontal"
+            android:text="@string/District"
             android:textColor="@color/colorPrimary"
-            android:textSize="10sp" />
+            android:textSize="12sp"
+          />-->
 
+
+            <TextView
+                android:id="@+id/PreacherName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:gravity="start"
+                android:text="@string/Preacher"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:layout_marginBottom="5dp"/>
+
+        <!--   <TextView
+                android:id="@+id/DawaInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="15dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:paddingBottom="5dp"
+                android:text="معلومات المنشط"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
+        -->
+            <TextView
+                android:id="@+id/DawaName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin=".5dp"
+                android:gravity="center_horizontal"
+                android:text="@string/NameTag"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:ignore="RtlHardcoded" />
+
+
+            <ImageView
+                android:id="@+id/DawaImage"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="end"
+                android:layout_margin="8dp"
+                android:scaleType="fitEnd"
+                tools:padding="2dp"
+                android:radius="15dp"
+                android:contentDescription="@string/DawaImage"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp" />
+
+</LinearLayout>
+
+
+        </GridLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>
 

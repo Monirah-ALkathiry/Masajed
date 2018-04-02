@@ -56,8 +56,16 @@ public class DawaList extends Fragment {
     private  double lat;
     private  double log;
 
-    String latitude;
-    String longitude;
+    protected String latitude;
+    protected String longitude;
+
+
+    //Connect With API :
+    private double New_lat;
+    private double New_log;
+    private   String lat2;
+    private String long2;
+
 
     @SuppressLint("ValidFragment")
     public  DawaList(double lat, double log){
@@ -76,15 +84,14 @@ public class DawaList extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view;
         view = inflater.inflate(R.layout.fragment_dawa_list, container, false);
 
-        latitude= Double.toString(lat);
-        longitude= Double.toString(log);
+        latitude = Double.toString(lat);
+        longitude = Double.toString(log);
 
-        System.out.print(lat +" Lat from dawa List " + log + "\n");
+        System.out.print(lat + " Lat from dawa List " + log + "\n");
 
-        System.out.print(latitude +" Lat from dawa List  " + longitude + "\n");
+        System.out.print(latitude + " Lat from dawa List  " + longitude + "\n");
 
 
         //Recycler View
@@ -93,12 +100,22 @@ public class DawaList extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         //-------------------------------------------------------
+        ConnectWithAPI(latitude,longitude);
+        return  view;
+    }
+
+
+    public void ConnectWithAPI(String latitude , String longitude){
+
+
+        lat2 = latitude;
+        long2 = longitude;
 
         //Connect to API :
         //DawaClient = ApiRetrofitClint.getApiRetrofitClint().create(DawaClient.class);
         //Make A Connection With API :
         DawaClient= ApiRetrofitClint.getApiRetrofitClint().create(DawaClient.class);
-        Call<List<DawaLatLng>> call = DawaClient.getDawaLatLng(latitude,longitude, "25");
+        Call<List<DawaLatLng>> call = DawaClient.getDawaLatLng(lat2,long2, 25);
 
         call.enqueue(new Callback<List<DawaLatLng>>(){
 
@@ -107,21 +124,30 @@ public class DawaList extends Fragment {
 
                 dawaLatLngs = response.body();
 
-                //Send Data To Fragment List---
-                adapter = new DawaListAdapter(getContext(),dawaLatLngs , lat , log);
+                New_lat= Double.parseDouble(lat2);
+                New_log=Double.parseDouble(long2);
 
-                recyclerView.setAdapter(adapter);
+                System.out.print("lat : "+ New_lat);
+                System.out.print("long: "+ New_log + " \n CONTEXT IS : " +getContext() +"\n");
+
+                if (getContext() != null) {
+                    //Send Data To Fragment List---
+                    adapter = new DawaListAdapter(getContext(), dawaLatLngs, lat, log);
+
+                    recyclerView.setAdapter(adapter);
+                } else {
 
 
-
-                if (response.isSuccessful())
+                    Toast.makeText(getContext(), "لا توجد بيانات", Toast.LENGTH_SHORT).show();
+                }
+             /* if (response.isSuccessful())
                 {
                     System.out.print("Success ");
                 }
                 else
                 {
                     System.out.print(" Not Success ");
-                }
+                }*/
 
                 //Test Result and Print Data
                 System.out.println("Responce Value "+response.body().toString());
@@ -147,7 +173,7 @@ public class DawaList extends Fragment {
 
 
 
-        return  view;
+
     }
 
 
@@ -155,12 +181,8 @@ public class DawaList extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setHasOptionsMenu(true);
     }
-
-
-
-
 
 }
 

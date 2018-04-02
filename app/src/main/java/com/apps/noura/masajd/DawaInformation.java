@@ -1,12 +1,14 @@
 package com.apps.noura.masajd;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +18,20 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.Locale;
 
 /**
  * Created by Noura Alsomaikhi on 1/10/2018.
  */
- public class DawaInformation extends Fragment implements OnMapReadyCallback {
+ public class DawaInformation extends Fragment implements OnMapReadyCallback
+        ,GoogleMap.OnMarkerClickListener
+{
 
         //Recycle View (Mosque List)
         private RecyclerView recyclerView;
@@ -43,7 +51,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
         GoogleMap MgoogleMap;
         MapView mapView;
         View view;
-
+        Marker marker;
 
         //Constructor:
         public DawaInformation(){
@@ -77,7 +85,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
             layoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setHasFixedSize(true);
-            adapter = new DawaInformationRecyclerView( intent);
+            adapter = new DawaInformationRecyclerView(intent);
             recyclerView.setAdapter(adapter);
 
             return view;
@@ -104,16 +112,16 @@ import com.google.android.gms.maps.model.MarkerOptions;
             MapsInitializer.initialize(getContext());
             MgoogleMap = googleMap;
 
-            googleMap.setMapType(googleMap.MAP_TYPE_NORMAL);
+            MgoogleMap.setMapType(googleMap.MAP_TYPE_NORMAL);
 
             //Add Marker and Map Properties (User Location)
 
             LatLng latLng =new LatLng(Lat,Lon);
 
-            googleMap.addMarker(new MarkerOptions().position(new LatLng(Lat,Lon))
+            MgoogleMap.addMarker(new MarkerOptions().position(new LatLng(Lat,Lon))
                     .title(DawaAddress)////title on the marker
-                    .snippet("موقعي")//Description
-            );
+                    .snippet(MosqueName)//Description
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.icons)));
 
             //Set Camera Position:
             CameraPosition CameraMosque = CameraPosition.builder().target(latLng)
@@ -122,9 +130,33 @@ import com.google.android.gms.maps.model.MarkerOptions;
                     .tilt(15)
                     .build();
             //Move Camera
-            googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
+            MgoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
+            MgoogleMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener) this);
+        }
+
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+
+        if(marker.equals(marker)){
+
+            marker.getPosition();
+
+            Log.w("Click", "test");
+            String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Lat, Lon);
+
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+            mapIntent.setPackage("com.google.android.apps.maps");
+            this.startActivity(mapIntent);
+
+            return true;
 
         }
+
+
+
+        return false;
+    }
 
     }
 

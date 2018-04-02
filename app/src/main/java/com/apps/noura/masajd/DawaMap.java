@@ -24,6 +24,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.clustering.ClusterManager;
 
 import java.util.List;
 
@@ -35,8 +36,11 @@ import retrofit2.Response;
  * Created by Noura Alsomaikhi on 12/31/2017.
  */
 
-public class DawaMap extends Fragment implements OnMapReadyCallback, GoogleMap.InfoWindowAdapter
-        ,GoogleMap.OnInfoWindowClickListener, DawaFragmentCommunicator {
+public class DawaMap extends Fragment implements OnMapReadyCallback
+        , GoogleMap.InfoWindowAdapter
+        ,GoogleMap.OnInfoWindowClickListener
+        ,GoogleMap.OnCameraMoveStartedListener
+        , DawaFragmentCommunicator {
 
 
     //-----------------------------------------------------------------
@@ -63,17 +67,11 @@ public class DawaMap extends Fragment implements OnMapReadyCallback, GoogleMap.I
     private DawaClient dawaClient;
     //To get dawa activity Information
     private List<DawaLatLng> dawaLatLngs;
+    //To get Mosque Information //Retrofit InterFace:
+    protected List<DawaLatLng> NewdawaLatLngs;
     //----------------------------------
-
-    protected Marker MosqueMarker;
     //Used If Map Marker Clicked Open this Activity
     protected DawaListAdapter adapter;
-
-
-    //Retrofit InterFace:
-    protected DawaLatLng dawaLatLng;
-    //To get Mosque Information
-    protected List<DawaLatLng> NewdawaLatLngs;
 
 
     public DawaMap() {
@@ -205,9 +203,9 @@ public class DawaMap extends Fragment implements OnMapReadyCallback, GoogleMap.I
         //-----------------------
         //Set Camera Position:
         CameraPosition CameraMosque = CameraPosition.builder().target(latLng)
-                .zoom(16)
+                .zoom(13)
                 .bearing(0)
-                .tilt(45)
+                .tilt(40)
                 .build();
         //Move Camera
        // MgoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
@@ -218,59 +216,77 @@ public class DawaMap extends Fragment implements OnMapReadyCallback, GoogleMap.I
         MgoogleMap.getUiSettings().setScrollGesturesEnabled(true);
         MgoogleMap.getUiSettings().setTiltGesturesEnabled(true);
 
+        //  Google Map Onclick:
+        MgoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
+        MgoogleMap.setOnCameraMoveStartedListener(this);
+
         if (NewdawaLatLngs == null) {
             //System.out.println("NULLL Datat : ");
-            AddOtherLocation();
+            AddOtherLocation(latitude, longitude);
         } else {
 
-            addMoreMarker(dawaLatLngs);
+            addMoreMarker(NewdawaLatLngs);
         }
 
     }
 
-
-    public void AddOtherLocation(){
-
-
-        //Make A Connection With API :
-        dawaClient = ApiRetrofitClint.getApiRetrofitClint().create(DawaClient.class);
-        //Call Function form Inter Face And Send Parameter to it
-
-
-        Call<List<DawaLatLng>> call = dawaClient.getDawaLatLng(latitude,longitude , "25");
-        //  Create Response:
-        call.enqueue(new Callback<List<DawaLatLng>>() {
-            @Override
-            public void onResponse(Call<List<DawaLatLng>> call, Response<List<DawaLatLng>> response) {
-
-                dawaLatLngs = response.body();
-                System.out.println(dawaLatLngs.size() + " SIZE IS");
-                //Send Data To Fragment List---
-                //  adapter = new MosqueListAdapter(getContext(),mosquesLatLngs);
-
-                ///recyclerView.setAdapter(adapter);
-                //-------
-
-                //Test Result and Print Data
-                System.out.println("Responce toString"+ response.toString());
-                System.out.println("Responce body"+ response.body());
-                System.out.println("Responce headers"+ response.headers());
-                System.out.println("Responce errorBody"+ response.errorBody());
-                System.out.print("URL" + response.isSuccessful());
-                //Storing the data in our list
-
-                System.out.println("Size Is onResponce :----" +dawaLatLngs.size());
-                //-----------------------------------------------------------------------
-
-                addMoreMarker(dawaLatLngs);
-
+    protected String Newlat;
+    protected String Newlon;
+    public void AddOtherLocation(String lat, String lon){
+        if (NewdawaLatLngs == null) {
+            if (marker != null) {
+                marker.remove();
             }
 
-            @Override
-            public void onFailure(Call<List<DawaLatLng>> call, Throwable t) {
-                System.out.println("Error bad  ):-----------------------");
-            }
-        });
+
+            Newlat = lat;
+            Newlon = lon;
+
+            //Make A Connection With API :
+            dawaClient = ApiRetrofitClint.getApiRetrofitClint().create(DawaClient.class);
+            //Call Function form Inter Face And Send Parameter to it
+
+
+            Call<List<DawaLatLng>> call = dawaClient.getDawaLatLng(latitude,longitude , 25);
+            //  Create Response:
+            call.enqueue(new Callback<List<DawaLatLng>>() {
+                @Override
+                public void onResponse(Call<List<DawaLatLng>> call, Response<List<DawaLatLng>> response) {
+
+                    dawaLatLngs = response.body();
+                    System.out.println(dawaLatLngs.size() + " SIZE IS");
+                    //Send Data To Fragment List---
+                    //  adapter = new MosqueListAdapter(getContext(),mosquesLatLngs);
+
+                    ///recyclerView.setAdapter(adapter);
+                    //-------
+
+                    //Test Result and Print Data
+                    System.out.println("Responce toString"+ response.toString());
+                    System.out.println("Responce body"+ response.body());
+                    System.out.println("Responce headers"+ response.headers());
+                    System.out.println("Responce errorBody"+ response.errorBody());
+                    System.out.print("URL" + response.isSuccessful());
+                    //Storing the data in our list
+
+                    System.out.println("Size Is onResponce :----" +dawaLatLngs.size());
+                    //-----------------------------------------------------------------------
+
+                    addMoreMarker(dawaLatLngs);
+
+                }
+
+                @Override
+                public void onFailure(Call<List<DawaLatLng>> call, Throwable t) {
+                    System.out.println("Error bad  ):-----------------------");
+                }
+            });
+        }
+        else {
+
+            Toast.makeText(getContext(), "لا يوجد إتصال ", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 
@@ -280,7 +296,9 @@ public class DawaMap extends Fragment implements OnMapReadyCallback, GoogleMap.I
     private List<DawaLatLng> dawaLatLngs2;
 
     protected  void addMoreMarker ( List<DawaLatLng> dawa){
-
+        if(marker != null){
+            marker.remove();
+        }
         dawaLatLngs2 = dawa;
 
         //Used To calc Distance:
@@ -288,7 +306,7 @@ public class DawaMap extends Fragment implements OnMapReadyCallback, GoogleMap.I
         locationA.setLongitude(log);
 
 
-        //Add All mosqu
+        //Add All Dawa
         for(int i=0 ; i< dawaLatLngs2.size(); i++){
 
 
@@ -316,7 +334,6 @@ public class DawaMap extends Fragment implements OnMapReadyCallback, GoogleMap.I
 
 
 //--------------------------------------------------------------------------------------------------
-
 
              marker=  MgoogleMap.addMarker(new MarkerOptions()
                     .position(latLngAPI)
@@ -399,7 +416,7 @@ public class DawaMap extends Fragment implements OnMapReadyCallback, GoogleMap.I
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-        System.out.print("CLICKED");
+       // System.out.print("CLICKED");
 
     }
 
@@ -407,6 +424,76 @@ public class DawaMap extends Fragment implements OnMapReadyCallback, GoogleMap.I
     public void passData(List<DawaLatLng> dawaLatLngs) {
 
     }
+
+
+
+
+
+    //-----------------------Map Cluster---------------------------------------------------------
+    protected  double newLat;
+    protected  double newLon;
+
+
+    // Declare a variable for the cluster manager.
+    private ClusterManager<MarkerCluster> mClusterManager;
+
+    private void setUpClusterer() {
+
+
+
+        MgoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                 Toast.makeText(getContext(), latLng + "\n lat lon on click",
+                       Toast.LENGTH_SHORT).show();
+
+                newLat = latLng.latitude;
+                newLon = latLng.longitude;
+                // Position the map.
+                MgoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(newLat, newLon), 10));
+
+                // Initialize the manager with the context and the map.
+                // (Activity extends context, so we can pass 'this' in the constructor.)
+                mClusterManager = new ClusterManager<MarkerCluster>(getContext(), MgoogleMap);
+
+                // Point the map's listeners at the listeners implemented by the cluster
+                //  // manager.
+                MgoogleMap.setOnCameraIdleListener(mClusterManager);
+                MgoogleMap.setOnMarkerClickListener(mClusterManager);
+
+               // Add cluster items (markers) to the cluster manager.
+                addItems();
+            }
+        });
+
+
+
+
+    }
+
+    private void addItems() {
+
+        // Set some lat/lng coordinates to start with.
+        String lat = Double.toString(newLat);
+        String lng =Double.toString(newLon);
+        AddOtherLocation(lat,lng);
+
+        // Add ten cluster items in close proximity, for purposes of this example.
+      /*  for (int i = 0; i < 10; i++) {
+            double offset = i / 60d;
+            lat = lat + offset;
+            lng = lng + offset;
+            MarkerCluster offsetItem = new MarkerCluster(newLat, newLon,"tt","ss");
+            mClusterManager.addItem(offsetItem);
+        }*/
+
+    }
+
+    @Override
+    public void onCameraMoveStarted(int i) {
+        setUpClusterer();
+    }
+
 }
 
 

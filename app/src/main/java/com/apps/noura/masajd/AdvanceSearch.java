@@ -118,11 +118,7 @@ public class AdvanceSearch extends AppCompatActivity implements Sender{
 
         }
 
-        //----------------------------------------
-        //TODO : Onclick Search Do Advance Search:
-        // TODO : Advance Search View Result
 
-        //--------------------------------------
 
     bSearch.setOnClickListener(new View.OnClickListener() {
     @Override
