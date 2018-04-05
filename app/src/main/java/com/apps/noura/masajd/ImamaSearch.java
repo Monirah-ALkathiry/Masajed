@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-;
+
 import android.widget.Spinner;
 
 import android.widget.Toast;
@@ -109,7 +109,7 @@ public class ImamaSearch extends Fragment {
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
        view = inflater.inflate(R.layout.imam_search, container, false);
-        //searchView = (SearchView) view.findViewById(R.id.search);
+        //SearchView = (SearchView) view.findViewById(R.id.search);
         textView = (EditText) view.findViewById(R.id.TestSeach);
         //First Value of All Array list (used On spinner)
         SelectAll = "الكل";
@@ -118,7 +118,7 @@ public class ImamaSearch extends Fragment {
 
 
         System.out.println("\n test" + query +"\n");
-         SearchView = getActivity().findViewById(R.id.search);
+         //SearchView = getActivity().findViewById(R.id.search);
 
 
         //----Update Recycler View
@@ -320,7 +320,7 @@ public class ImamaSearch extends Fragment {
                             map2 = "Imam_Name  like N'%" +  query + "%' AND Mosque_Catogery = '" + MosqueId + "'";
                             System.out.println("\n sss :  \n" + map2 + "\n");
                         }
-
+//------------------------------------------------------------------------------------------------------
                     }else  if (City.equals(SelectAll)
                             && Distric.equals( SelectAll)) {
 
@@ -339,7 +339,7 @@ public class ImamaSearch extends Fragment {
                         //map.put("where", "Imam_Name = N" + "\'" + query + "\'");
                         System.out.println("\n Query ttt :  " + map2 + "\n");
 
-
+//----------------------------------------------------------------------------------------
                     }else if (Distric.equals( SelectAll)){
 
                         if(MosqueId ==(null)) {
@@ -356,7 +356,7 @@ public class ImamaSearch extends Fragment {
 
 
                         System.out.println("\n Query bbb :  " + map2 + "\n");
-
+//---------------------------------------------------------------------------------------------------------
                     }else if( MosqueId==null){
 
                         map2 = "Imam_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
@@ -364,7 +364,9 @@ public class ImamaSearch extends Fragment {
                                 "%'";
                         System.out.println("\n Query jjj :  " + map2 + "\n");
 
-                    } else{
+                    }
+     //---------------------------------------------------------------------------------------------------
+                    else{
 
                         map2 = "Imam_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
                                 + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric +
@@ -373,28 +375,6 @@ public class ImamaSearch extends Fragment {
 
                     }
 
-
-
-
-
-
-                  /*  if (ministry_region_id == null || City == SelectAll || Distric == SelectAll || MosqueId == SelectAll){
-                        map2 ="Imam_Name like N'%" + query+ "\'";
-                        //  map.put("where", "Imam_Name like N'%" + query+ "\'");
-
-                    }else {
-                        // map.put("where", "Imam_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
-                        //       + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric + "%' AND Mosque_Catogery = '" + MosqueId + "'");
-
-
-                        map2 = "Imam_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
-                                + "' AND City_Village like N'%" + City + "%' AND District like N'%"
-                                + Distric + "%' AND Mosque_Catogery = '" + MosqueId + "'";
-
-                        System.out.println("\n Query :  " + map2 + "\n");
-
-                    }
-                    */
                     sender.SendMassage(map2);
 
 

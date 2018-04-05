@@ -48,7 +48,7 @@
     <string name="tab_text_3">Tab 3</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
-
+    <string name="NoImage">لا تتوفر صور لهذا المسجد</string>
     <!-- Dawa Activity -->
     <string name="DawaImage">صورة المنشط</string>
     <string name="DawaInfo">معلومات المنشط</string>

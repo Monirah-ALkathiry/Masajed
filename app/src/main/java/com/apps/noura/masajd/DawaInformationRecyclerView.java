@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -141,6 +143,9 @@ class DawaInformationRecyclerView extends RecyclerView.Adapter<DawaInformationRe
             holder.Distance.setText(" ");
 
         }
+//ToDO: Get Rating From API
+      //  holder.ratingBar.setNumStars(2);
+        holder.ratingBar.setRating(2.22f);
     }
 
     @Override
@@ -163,6 +168,8 @@ class DawaInformationRecyclerView extends RecyclerView.Adapter<DawaInformationRe
         private TextView DawaMainCategory;
         private TextView DawaSubCategory;
         private TextView Distance;
+        private RatingBar ratingBar;
+
         private LinearLayout linearLayout;
 
 
@@ -181,7 +188,7 @@ class DawaInformationRecyclerView extends RecyclerView.Adapter<DawaInformationRe
             DawaMainCategory = (TextView) itemView.findViewById(R.id.MainClassification);
             DawaSubCategory = (TextView) itemView.findViewById(R.id.SubClassification);
             Distance = (TextView) itemView.findViewById(R.id.Distance);
-
+            ratingBar = (RatingBar) itemView.findViewById(R.id.ratingBar);
 
             //linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayoutInfo);
 

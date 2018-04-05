@@ -173,44 +173,339 @@ public class DaeiaSearch extends Fragment {
 //TODO : Advance Search View Result
 
                 String map2;
-
-                if (query != null) {
-                    if (dawa_region_id == null && City == SelectAll && Distric == SelectAll) {
-
-
-                        map2 = "DawaActivitiesInfo.DawaAddress like N" + "\'" + query + "\'";
-                        System.out.println("\n Query :  " + map2 + "\n");
+                if (query.matches("")){
+                    // Toast.makeText(getContext().getApplicationContext(), "الرجاءادخال كلمة بحث صحيحه", Toast.LENGTH_LONG).show();
+                    return;
+                }else {
 
 
+                    if (dawa_region_id == null) {
+
+
+                        if (DawaActivityId == "1" && DomainId == "1" && LanguageId == "1"
+                                && OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
+                                && spinnerfromDate.getText().toString().matches("")) {
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query + "%'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        } else if (DomainId == "1" && LanguageId == "1" && OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
+                                && spinnerfromDate.getText().toString().matches("")) {
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query + "%' AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+
+                        } else if (LanguageId == "1" && OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
+                                && spinnerfromDate.getText().toString().matches("")) {
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query + "%'\"%' AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "' AND DawaActivitiesInfo.DawaMainCategory = '" + DomainId + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+
+                        } else if (OfficeId == null && simpleDatePicker.getText().toString().matches("")
+                                && spinnerfromDate.getText().toString().matches("")) {
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query + "%'\"%' AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "' AND DawaActivitiesInfo.DawaMainCategory = '"
+                                    + DomainId + "' AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        } else if (simpleDatePicker.getText().toString().matches("")
+                                && spinnerfromDate.getText().toString().matches("")) {
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query + "%'\"%' AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "' AND DawaActivitiesInfo.DawaMainCategory = '"
+                                    + DomainId + "' AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId + "'"
+                                    + "AND DawaActivitiesReq.DawaOffice = '" + OfficeId + "'";
+
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        } else if (spinnerfromDate.getText().toString().matches("")) {
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query + "%'\"%' AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "' AND DawaActivitiesInfo.DawaMainCategory = '"
+                                    + DomainId + "' AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId + "'"
+                                    + "AND DawaActivitiesReq.DawaOffice = '" + OfficeId + "' AND DawaActivitiesInfo.DawaActivityDateH >= '" +
+                                    DateFrom + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        } else {
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query + "%'\"%' AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "' AND DawaActivitiesInfo.DawaMainCategory = '"
+                                    + DomainId + "' AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId + "'"
+                                    + "AND DawaActivitiesReq.DawaOffice = '" + OfficeId + "' AND DawaActivitiesInfo.DawaActivityDateH >= '" +
+                                    DateFrom + "'AND DawaActivitiesInfo.DawaActivityDateH <= '" + DateTo + "'";
+                            System.out.println("\n Query :  " + map2 + "\n");
+                        }
+                        //End First If-----------------------------------------------------------------------
+                    } else if (City.equals(SelectAll) && Distric.equals(SelectAll)) {
+
+
+                        if (DawaActivityId == "1" && DomainId == "1" && LanguageId == "1"
+                                && OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
+                                && spinnerfromDate.getText().toString().matches("")) {
+
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
+                                    + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id + "'";
+                            System.out.println("\n Dawa Region selected :  " + map2 + "\n");
+
+
+                        } else if (DomainId == "1" && LanguageId == "1" && OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
+                                && spinnerfromDate.getText().toString().matches("")) {
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query + "%'AND DawaActivitiesReq.Region = '"
+                                    + dawa_region_id + "' AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+
+                        } else if (LanguageId == "1" && OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
+                                && spinnerfromDate.getText().toString().matches("")) {
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
+                                    + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id
+                                    + "' AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "' AND DawaActivitiesInfo.DawaMainCategory = '" + DomainId + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+
+                        } else if (OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
+                                && spinnerfromDate.getText().toString().matches("")) {
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
+                                    + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id
+                                    + "' AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "' AND DawaActivitiesInfo.DawaMainCategory = '"
+                                    + DomainId + "'AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        } else if (simpleDatePicker.getText().toString().matches("")
+                                && spinnerfromDate.getText().toString().matches("")) {
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
+                                    + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id
+                                    + "' AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "' AND DawaActivitiesInfo.DawaMainCategory = '"
+                                    + DomainId + "' AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId
+                                    + "'AND DawaActivitiesReq.DawaOffice = '" + OfficeId + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        } else if (spinnerfromDate.getText().toString().matches("")) {
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
+                                    + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id
+                                    + "' AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "' AND DawaActivitiesInfo.DawaMainCategory = '"
+                                    + DomainId + "' AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId
+                                    + "'AND DawaActivitiesReq.DawaOffice = '" + OfficeId
+                                    + "' AND DawaActivitiesInfo.DawaActivityDateH >= '" +
+                                    DateFrom + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+
+                        } else {
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
+                                    + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id
+                                    + "' AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "' AND DawaActivitiesInfo.DawaMainCategory = '"
+                                    + DomainId + "' AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId
+                                    + "'AND DawaActivitiesReq.DawaOffice = '" + OfficeId
+                                    + "' AND DawaActivitiesInfo.DawaActivityDateH >= '" +
+                                    DateFrom + "'AND DawaActivitiesInfo.DawaActivityDateH <= '" + DateTo + "'";
+
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        }
+
+
+       //end Second if  -----------------------------------------------------------------------
+
+                    } else if (Distric.equals(SelectAll)) {
+
+                        if (DawaActivityId == "1" && DomainId == "1" && LanguageId == "1"
+                                && OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
+                                && spinnerfromDate.getText().toString().matches(""))
+
+                        {
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
+                                    + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id
+                                    + "'AND DawaActivitiesReq.City_Village like N'%" + City + "%'";
+                            //+"%'AND DawaActivitiesReq.District like N'%"+ Distric +
+
+
+                            System.out.println("\n Dawa City selected :  " + map2 + "\n");
+
+                        } else if (DomainId == "1" && LanguageId == "1" && OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
+                                && spinnerfromDate.getText().toString().matches("")) {
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
+                                    + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id
+                                    + "'AND DawaActivitiesReq.City_Village like N'%" + City
+                                    + "%'AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+// +"%'AND DawaActivitiesReq.District like N'%"+ Distric
+
+
+                        } else if (LanguageId == "1" && OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
+                                && spinnerfromDate.getText().toString().matches("")) {
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
+                                    + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id
+                                    + "'AND DawaActivitiesReq.City_Village like N'%" + City + "%'AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId
+                                    + "'AND DawaActivitiesInfo.DawaMainCategory = '" + DomainId + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+
+                            //+"%'AND DawaActivitiesReq.District like N'%"+ Distric
+
+                        } else if (OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
+                                && spinnerfromDate.getText().toString().matches("")) {
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
+                                    + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id
+                                    + "'AND DawaActivitiesReq.City_Village like N'%" + City + "%'AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "'AND DawaActivitiesInfo.DawaMainCategory = '"
+                                    + DomainId + "' AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId + "'";
+
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                            //+"%'AND DawaActivitiesReq.District like N'%"+ Distric +
+
+                        } else if (simpleDatePicker.getText().toString().matches("")
+                                && spinnerfromDate.getText().toString().matches("")) {
+
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
+                                    + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id
+                                    + "'AND DawaActivitiesReq.City_Village like N'%" + City + "%'AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "'AND DawaActivitiesInfo.DawaMainCategory = '"
+                                    + DomainId + "' AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId +
+                                    "'AND DawaActivitiesReq.DawaOffice = '" + OfficeId + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+
+                            ///+"%'AND DawaActivitiesReq.District like N'%"+ Distric
+
+
+                        } else if (spinnerfromDate.getText().toString().matches("")) {
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
+                                    + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id
+                                    + "'AND DawaActivitiesReq.City_Village like N'%" + City + "%'AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "'AND DawaActivitiesInfo.DawaMainCategory = '"
+                                    + DomainId + "' AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId +
+                                    "'AND DawaActivitiesReq.DawaOffice = '" + OfficeId + "' AND DawaActivitiesInfo.DawaActivityDateH >= '" +
+                                    DateFrom + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                            //+"%'AND DawaActivitiesReq.District like N'%"+ Distric
+
+                        } else {
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
+                                    + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id
+                                    + "'AND DawaActivitiesReq.City_Village like N'%" + City + "%'AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "'AND DawaActivitiesInfo.DawaMainCategory = '"
+                                    + DomainId + "' AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId +
+                                    "'AND DawaActivitiesReq.DawaOffice = '" + OfficeId + "' AND DawaActivitiesInfo.DawaActivityDateH >= '" +
+                                    DateFrom + "'AND DawaActivitiesInfo.DawaActivityDateH <= '" + DateTo + "'";
+
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+
+                            //+"%'AND DawaActivitiesReq.District like N'%"+ Distric
+                        }
+
+                        //--------------------------------------------------------------------------------------
                     } else {
-                     //   map2 = "Mosque_Name like N'%" + query + "%' AND Region = '" + dawa_region_id
-                       //         + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric + "%' AND Mosque_Catogery = '" + DawaActivityId + "'";
+
+                        if (DawaActivityId == "1" && DomainId == "1" && LanguageId == "1"
+                                && OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
+                                && spinnerfromDate.getText().toString().matches("")) {
 
 
-                        //TODO : Search Query (Daia Name)
-                        map2 = "DawaActivitiesInfo.ActivityExecution = '2'"+
-                                "AND DawaActivitiesInfo.AmaraApproval = '2'"+
-                                "AND DawaActivitiesInfo.DawaAddress like N'%"+query+
-                                "%' AND DawaActivitiesReq.Region ="+ RejionID+
-                                "AND DawaActivitiesReq.City_Village like N'%"+City+
-                                "%' AND DawaActivitiesReq.District like N'%"+Distric+
-                                "%' AND DawaActivitiesInfo.DawaActivityType ="+DawaActivityId
-                                +" AND DawaActivitiesInfo.DawaMainCategory ="+DomainId
-                                +"AND DawaActivitiesInfo.DawaActivLanguage = "+LanguageId
-                                +"AND DawaActivitiesReq.DawaOffice ="+OfficeId
-                                +"AND DawaActivitiesInfo.DawaActivityDateH >= '"+
-                                "1439-05-29"+"' AND DawaActivitiesInfo.DawaActivityDateH <= '"+
-                                "1439-06-29"+"'";
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
+                                    + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id
+                                    + "'AND DawaActivitiesReq.City_Village like N'%"
+                                    + City + "%'AND DawaActivitiesReq.District like N'%"
+                                    + Distric + "%'";
+
+
+                            System.out.println("\n Dawa City selected :  " + map2 + "\n");
+                        } else if (DomainId == "1" && LanguageId == "1" && OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
+                                && spinnerfromDate.getText().toString().matches("")) {
+
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
+                                    + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id
+                                    + "'AND DawaActivitiesReq.City_Village like N'%"
+                                    + City + "%'AND DawaActivitiesReq.District like N'%"
+                                    + Distric + "%'AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "'";
+
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+
+                        } else if (LanguageId == "1" && OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
+                                && spinnerfromDate.getText().toString().matches("")) {
+
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
+                                    + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id
+                                    + "'AND DawaActivitiesReq.City_Village like N'%"
+                                    + City + "%'AND DawaActivitiesReq.District like N'%"
+                                    + Distric + "%'AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "'AND DawaActivitiesInfo.DawaMainCategory = '" + DomainId + "'";
+
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+
+                        } else if (OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
+                                && spinnerfromDate.getText().toString().matches("")) {
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
+                                    + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id
+                                    + "'AND DawaActivitiesReq.City_Village like N'%"
+                                    + City + "%'AND DawaActivitiesReq.District like N'%"
+                                    + Distric + "%'AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "'AND DawaActivitiesInfo.DawaMainCategory = '" + DomainId
+                                    + "'AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId + "'";
+
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        } else if (simpleDatePicker.getText().toString().matches("")
+                                && spinnerfromDate.getText().toString().matches("")) {
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
+                                    + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id
+                                    + "'AND DawaActivitiesReq.City_Village like N'%"
+                                    + City + "%'AND DawaActivitiesReq.District like N'%"
+                                    + Distric + "%'AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "'AND DawaActivitiesInfo.DawaMainCategory = '" + DomainId
+                                    + "'AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId
+                                    + "'AND DawaActivitiesReq.DawaOffice = '" + OfficeId + "'";
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        } else if (spinnerfromDate.getText().toString().matches("")) {
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
+                                    + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id
+                                    + "'AND DawaActivitiesReq.City_Village like N'%"
+                                    + City + "%'AND DawaActivitiesReq.District like N'%"
+                                    + Distric + "%'AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "'AND DawaActivitiesInfo.DawaMainCategory = '" + DomainId
+                                    + "'AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId
+                                    + "'AND DawaActivitiesReq.DawaOffice = '" + OfficeId
+                                    + "'AND DawaActivitiesInfo.DawaActivityDateH >= '" +
+                                    DateFrom + "'";
+
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        } else {
+
+                            map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
+                                    + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id
+                                    + "'AND DawaActivitiesReq.City_Village like N'%"
+                                    + City + "%'AND DawaActivitiesReq.District like N'%"
+                                    + Distric + "%'AND DawaActivitiesInfo.DawaActivityType = '"
+                                    + DawaActivityId + "'AND DawaActivitiesInfo.DawaMainCategory = '" + DomainId
+                                    + "'AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId
+                                    + "'AND DawaActivitiesReq.DawaOffice = '" + OfficeId
+                                    + "'AND DawaActivitiesInfo.DawaActivityDateH >= '" +
+                                    DateFrom + "'AND DawaActivitiesInfo.DawaActivityDateH <= '" + DateTo + "'";
+
+                            System.out.println("\n sss :  \n" + map2 + "\n");
+                        }
+
                     }
-                } else {
-                    Toast.makeText(getContext().getApplicationContext(), "الرجاء ادخال اسم الداعية", Toast.LENGTH_LONG).show();
-                    map2 = null;
+
+
+                    System.out.println("\n :)  " + lat + " :lat \n lone : " + lon);
+
+                    sender.SendMassage(map2);
                 }
-
-                System.out.println("\n :)  " + lat + " :lat \n lone : " + lon);
-
-                sender.SendMassage(map2);
-
 
 
             }//onclick
@@ -227,8 +522,8 @@ public class DaeiaSearch extends Fragment {
         spinnerDomain = (Spinner) view.findViewById(R.id.spinnerDomain);
         spinnerLanguage = (Spinner) view.findViewById(R.id.spinnerLanguage);
         spinneroffice = (Spinner) view.findViewById(R.id.spinneroffice);
-       // spinnerfromDate = (Spinner) view.findViewById(R.id.spinnerfromDate);
-        //spinnertoDate = (Spinner) view.findViewById(R.id.spinnertoDate);
+        //spinnerfromDate = (TextView) view.findViewById(R.id.simpleDatePicker);
+       // spinnertoDate = (TextView) view.findViewById(R.id.spinnerfromDate);
 //-----------------------------------------------------------------------------------------
         simpleDatePicker = (TextView) view.findViewById(R.id.simpleDatePicker);
         spinnerfromDate = (TextView) view.findViewById(R.id.spinnerfromDate);
@@ -251,7 +546,7 @@ public class DaeiaSearch extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 String Regions = parent.getSelectedItem().toString();
-                Toast.makeText(parent.getContext().getApplicationContext(), Regions + "REJON IS  ", Toast.LENGTH_LONG).show();
+                //Toast.makeText(parent.getContext().getApplicationContext(), Regions + "REJON IS  ", Toast.LENGTH_LONG).show();
 
                 String RejionID2;
                 RejionID2 = getRijonID(Regions);
@@ -289,7 +584,7 @@ public class DaeiaSearch extends Fragment {
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                                 Distric = parent.getSelectedItem().toString();
-                                Toast.makeText(getContext().getApplicationContext(), RejionID + " \n" + City + "\n" + Distric, Toast.LENGTH_LONG).show();
+                               // Toast.makeText(getContext().getApplicationContext(), RejionID + " \n" + City + "\n" + Distric, Toast.LENGTH_LONG).show();
 
 
                             }
@@ -338,7 +633,7 @@ public class DaeiaSearch extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 DawaActivityValue = parent.getSelectedItem().toString();
-                Toast.makeText(getContext().getApplicationContext(), DawaActivityId, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext().getApplicationContext(), DawaActivityId, Toast.LENGTH_LONG).show();
 
                 switch (DawaActivityValue) {
                     case "الكل":
@@ -407,7 +702,7 @@ public class DaeiaSearch extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 DomainValue = parent.getSelectedItem().toString();
-                Toast.makeText(getContext().getApplicationContext(), DomainId, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext().getApplicationContext(), DomainId, Toast.LENGTH_LONG).show();
 
                 switch (DomainValue) {
                     case "الكل":
@@ -489,7 +784,7 @@ public class DaeiaSearch extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 LanguageValue = parent.getSelectedItem().toString();
-                Toast.makeText(getContext().getApplicationContext(), LanguageId, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext().getApplicationContext(), LanguageId, Toast.LENGTH_LONG).show();
 
                 switch (LanguageValue) {
                     case "الكل":
@@ -540,7 +835,7 @@ public class DaeiaSearch extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 OfficeValue = parent.getSelectedItem().toString();
-                Toast.makeText(getContext().getApplicationContext(), OfficeId, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext().getApplicationContext(), OfficeId, Toast.LENGTH_LONG).show();
 
                 switch (OfficeValue) {
                     case "الكل":
@@ -569,6 +864,16 @@ public class DaeiaSearch extends Fragment {
        spinnerfromDate.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+
+
+               /*
+
+               DatePickerBuilder dpb = new DatePickerBuilder()
+                        .setFragmentManager(getSupportFragmentManager())
+                        .setStyleResId(R.style.BetterPickersDialogFragment);
+                             dpb.show();
+
+                */
 
              final Calendar cldr =Calendar.getInstance();
                FromDay = cldr.get(Calendar.DAY_OF_MONTH);

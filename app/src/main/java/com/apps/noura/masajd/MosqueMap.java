@@ -251,7 +251,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
 
         //  MgoogleMap.setOnMarkerClickListener(this);
 
-        //Google Map Onclick:
+        //  Google Map Onclick:
         MgoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
         // Toast.makeText(getContext(),"Test_Toast_Massage",Toast.LENGTH_SHORT).show();
 

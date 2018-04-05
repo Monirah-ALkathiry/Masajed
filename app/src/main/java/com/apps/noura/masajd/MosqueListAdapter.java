@@ -183,11 +183,13 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
 
         @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            if (mProgressDialog != null && mProgressDialog.isShowing()) {
-                mProgressDialog.dismiss();
-            } else {
+    protected void onPreExecute() {
+        super.onPreExecute();
+
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+         }
+        else {
                 mProgressDialog = new ProgressDialog(context);
                 mProgressDialog.setTitle("جاري التحميل");
                 mProgressDialog.setMessage("جاري التحميل");
@@ -199,7 +201,6 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         @Override
         protected String doInBackground(String... strings) {
 
-
             final StringBuilder builder = new StringBuilder();
 
             try {//+CodNumber+
@@ -208,17 +209,21 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
                         .referrer("http://www.google.com")
                         .get();
                 Log.d("EXAMPLE " , doc.toString());
+                links = doc.getElementsByTag("a");
 
-                 links = doc.getElementsByTag("a");
+                Log.d("EXAMPLE " , CodNumber);
+                System.out.print("Array Size :" + links.size() + "\n");
+                //TODO : Check if there is no image:
 
+            if(links.size()>=2) {
+                if (links.get(1).attr("href").endsWith(".JPG")) {
+                    a = links.get(1).attr("href");
 
-
-               // if(links.get(1).attr("href").endsWith(".JPG")){
-                 //   a=links.get(1).attr("href");
-
-                //}else{
+                }
+            }
+             else{
                   a = String.valueOf(R.drawable.mosqueicon);
-                //}
+                }
 
                /* Log.d("Elements ",links.toString());
                 Log.d("Elements 222 ",links.get(1).attr("href"));

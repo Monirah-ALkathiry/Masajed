@@ -122,8 +122,8 @@ private ImageButton imageButton ;
             longitude = gps.getLongitude();
 
             // \n is for new line
-            Toast.makeText(getApplicationContext(), " FROM FIRST Your Location is - \nLat: "
-                    + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), " FROM FIRST Your Location is - \nLat: "
+                 //   + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
 
           //  Intent dawaIntent = new Intent(DawaActivity.this,DawaMap.class);
             //Mosque.putExtra("LAT",latitude);
@@ -138,8 +138,8 @@ private ImageButton imageButton ;
         }
 
 //---------------------------------------------------------------------------------------------------------
-        Toast.makeText(getApplicationContext(), "lat From Intent - \n Lat: "
-                + latitude + "\n Long: " + longitude, Toast.LENGTH_LONG).show();
+       // Toast.makeText(getApplicationContext(), "lat From Intent - \n Lat: "
+             //   + latitude + "\n Long: " + longitude, Toast.LENGTH_LONG).show();
 
         //TabLayout
         TabLayout tabLayout =(TabLayout) findViewById(R.id.tabs);

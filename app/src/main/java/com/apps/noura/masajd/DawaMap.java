@@ -126,8 +126,8 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
             @Override
             public void passData(List<DawaLatLng> dawaLatLngs) {
                 NewdawaLatLngs = dawaLatLngs;
-                Toast.makeText(getContext(),
-                        "From Inter_Face\n " + NewdawaLatLngs.get(0).getDawaActivitiesInfoId(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(),
+              //  "From Inter_Face\n " + NewdawaLatLngs.get(0).getDawaActivitiesInfoId(), Toast.LENGTH_SHORT).show();
 
                 onResume();
             }
@@ -233,7 +233,7 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
     protected String Newlat;
     protected String Newlon;
     public void AddOtherLocation(String lat, String lon){
-        if (NewdawaLatLngs == null) {
+       // if (NewdawaLatLngs == null) {
             if (marker != null) {
                 marker.remove();
             }
@@ -281,11 +281,11 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
                     System.out.println("Error bad  ):-----------------------");
                 }
             });
-        }
-        else {
+       // }
+      //  else {
 
-            Toast.makeText(getContext(), "لا يوجد إتصال ", Toast.LENGTH_SHORT).show();
-        }
+         //   Toast.makeText(getContext(), "لا يوجد إتصال ", Toast.LENGTH_SHORT).show();
+       // }
 
 
     }
@@ -334,7 +334,8 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
 
 
 //--------------------------------------------------------------------------------------------------
-
+            if (MgoogleMap != null) {
+                //addItems();
              marker=  MgoogleMap.addMarker(new MarkerOptions()
                     .position(latLngAPI)
                     .title(DawaName)////title on the marker
@@ -355,8 +356,8 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
                 public void onInfoWindowClick(Marker marker) {
                     DawaLatLng infoAttached = (DawaLatLng) marker.getTag();
 
-                    Toast.makeText(getContext(),"Test_Toast_Massage: " +infoAttached.getDawaActivitiesInfoId()
-                            +"  " +infoAttached.getMosqueName(),Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(getContext(),"Test_Toast_Massage: " +infoAttached.getDawaActivitiesInfoId()
+                         //   +"  " +infoAttached.getMosqueName(),Toast.LENGTH_SHORT).show();
 
 
                     Intent intent = new Intent(getContext(),DawaInformationActivity.class);
@@ -391,7 +392,12 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
 
                 }
             });
+            }//end if
+            else {
+                Toast.makeText(getContext(), "لا توجد بيانات ", Toast.LENGTH_SHORT).show();
 
+
+            }
         }//end for
 
 
@@ -420,16 +426,13 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
 
     }
 
+    //-----------------Communication with Fragment-----------------------
     @Override
     public void passData(List<DawaLatLng> dawaLatLngs) {
 
     }
 
-
-
-
-
-    //-----------------------Map Cluster---------------------------------------------------------
+ //-----------------------Map Cluster---------------------------------------------------------
     protected  double newLat;
     protected  double newLon;
 
@@ -444,13 +447,13 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
         MgoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                 Toast.makeText(getContext(), latLng + "\n lat lon on click",
-                       Toast.LENGTH_SHORT).show();
+                 //Toast.makeText(getContext(), latLng + "\n lat lon on click",
+                  //     Toast.LENGTH_SHORT).show();
 
                 newLat = latLng.latitude;
                 newLon = latLng.longitude;
                 // Position the map.
-                MgoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(newLat, newLon), 10));
+                MgoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(newLat, newLon), 15));
 
                 // Initialize the manager with the context and the map.
                 // (Activity extends context, so we can pass 'this' in the constructor.)

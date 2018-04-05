@@ -5,20 +5,22 @@
     android:background="@drawable/border_style"
     tools:context="com.apps.noura.masajd.MosqueImage">
 
-    <!-- TODO: Update blank fragment layout -->
-   <!--  <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/Listimag">
-
-    </ListView>
-    -->
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/RecyclerViewImag"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-       >
+        android:layout_height="wrap_content">
 
     </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/NoImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/NoImage"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
 </FrameLayout>

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
@@ -31,7 +32,7 @@ public class MosqueImage extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private MosqueImagAdapter adapter;
-
+    private TextView Noimage;
 
     ArrayList<String> ImageUrls = new ArrayList<String>();
     Intent intent;
@@ -43,6 +44,7 @@ public class MosqueImage extends Fragment {
         View view;
 
         view = inflater.inflate(R.layout.fragment_mosque_image, container, false);
+         Noimage = view.findViewById(R.id.NoImage);
 
         intent= getActivity().getIntent();
         mosqCode = intent.getStringExtra("MOSQUE_CODE");
@@ -116,21 +118,26 @@ public class MosqueImage extends Fragment {
 
             if(doc != null  ){
 
+                if(links.size() >1) {
+                    for (Element E : links) {
+                        myUrl = E.attr("href");
+                        System.out.println(" Link is : " + myUrl);
 
-                for (Element E : links) {
-                    myUrl = E.attr("href");
-                    System.out.println(" Link is : " + myUrl);
-
-                    if(E.attr("href").endsWith(".JPG")){
-                        ImageUrls.add(E.attr("href"));
-                        Log.d("IMG :  ", "Download Image"+ E.attr("href").endsWith(".JPG"));
+                        if (E.attr("href").endsWith(".JPG")) {
+                            ImageUrls.add(E.attr("href"));
+                            Log.d("IMG :  ", "Download Image" + E.attr("href").endsWith(".JPG"));
 
 
-                    }//end if
+                        }//end if
 
-                }//end for
+                    }//end for
+                }//end if
+                else {
+                    Noimage.setVisibility(View.VISIBLE);
+                }
 
-                for (String imag: ImageUrls  ){
+
+           /*  for (String imag: ImageUrls  ){
                     System.out.println(" size is  ()Mosque Image : " + ImageUrls.size());
 
                     System.out.println("Url Is" + imag);
@@ -140,8 +147,9 @@ public class MosqueImage extends Fragment {
                                 .load("http://gis.moia.gov.sa/"+imag)
                                 .placeholder(R.drawable.mosqueicon)
                                 .into(imageView);
-                                */
+                                * /
                 }
+               */
 
             }//end if
             adapter = new MosqueImagAdapter( getContext(),ImageUrls);
