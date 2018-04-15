@@ -3,14 +3,38 @@ package com.apps.noura.masajd;
 import android.content.Intent;
 import android.location.Location;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.http.GET;
 
 /**
  * Created by Noura Alsomaikhi on 1/10/2018.
@@ -38,6 +62,14 @@ class DawaInformationRecyclerView extends RecyclerView.Adapter<DawaInformationRe
 
     protected String LocX_Coord;
     protected String LocY_Coord;
+
+    //---Connect to API Yo get Rating:
+    protected DawaRating dawaRating;
+    private int ForID;// Dawa ID After Convert
+    private String DawaID;
+    protected  float Average_Rating;
+    protected String Average_R;
+
 
     @Override
     public void onBindViewHolder(DawaInformationRecyclerView.DawaViewInformationList holder, int position) {
@@ -143,10 +175,75 @@ class DawaInformationRecyclerView extends RecyclerView.Adapter<DawaInformationRe
             holder.Distance.setText(" ");
 
         }
-//ToDO: Get Rating From API
       //  holder.ratingBar.setNumStars(2);
-        holder.ratingBar.setRating(2.22f);
+
+        //Dawa ID :
+
+        DawaID = intent.getStringExtra("DAWA_ID");
+        ForID = Integer.parseInt(DawaID);
+
+
+        //Connect to API :
+
+        //TODO : Check If User Loged in To Get User ID
+        dawaRating = ApiRetrofitClint.getApiRetrofitClint().create(DawaRating.class);
+        Call<JsonObject> call = dawaRating.getRating(26,ForID,3);
+
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                String Rurl= call.request().url().toString();
+                Log.i("test: ", Rurl);
+
+
+                System.out.print( "\n\n\n responce \n\n\n"+response.body().toString());
+                System.out.print(response.toString());
+                System.out.print(response.headers());
+                System.out.print(response.isSuccessful());
+
+               Log.e("  URL KK : ", call.request().url().toString());
+
+                try {
+                    System.out.println(response.body().toString());
+
+                    //JSONObject InfoResponse = new JSONObject(String.valueOf(response.body()));
+
+                    String jsonData = response.body().toString();
+                    JSONObject Jobject= new JSONObject(jsonData);
+                    Average_R = Jobject.getJSONObject("Result").getString("Average_Rating");
+                    Average_Rating = Float.parseFloat(Average_R);
+
+                    System.out.print("\n Rating : " + Average_Rating + "\n");
+
+                    //JSONObject Jobject = new JSONObject(response.body().string());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                System.out.print("\nThere is No Data\n");
+
+
+
+            }
+        });
+
+
+
+
+        holder.ratingBar.setRating(Average_Rating);
     }
+
+
+
+
+
 
     @Override
     public int getItemCount() {

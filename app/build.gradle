@@ -59,6 +59,7 @@ dependencies {
 //Nav
 
     compile 'com.android.support:appcompat-v7:27.0.2'
+
 //BottomNavigationViewEx library
     compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
     compile group: 'com.github.msarhan', name: 'ummalqura-calendar', version:'1.1.7'

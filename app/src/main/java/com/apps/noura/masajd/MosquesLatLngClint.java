@@ -14,7 +14,9 @@ public interface MosquesLatLngClint {
 
     @GET("MobileApi/index.jsp?")
     Call<List<MosquesLatLng>>
-    getMosqueLatLng(@Query("lat") String latitude , @Query("lon") String longitude, @Query("limit") int limit);
+    getMosqueLatLng(@Query("lat") String latitude ,
+                    @Query("lon") String longitude,
+                    @Query("limit") int limit);
 
 
 }

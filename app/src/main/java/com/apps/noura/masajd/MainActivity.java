@@ -1,15 +1,23 @@
 package com.apps.noura.masajd;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.test.mock.MockPackageManager;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -20,13 +28,54 @@ public class MainActivity extends AppCompatActivity {
     // GPSTracker class
     GPSTracker gps;
 
+
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent Mosque = new Intent(MainActivity.this,MosqueActivity.class);
+        MainActivity.this.startActivity(Mosque);
+
+        /*
+        dl = (DrawerLayout)findViewById(R.id.activity_main);
+        t = new ActionBarDrawerToggle(this, dl,R.string.Back, R.string.Null);
+
+        dl.addDrawerListener(t);
+        t.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
+
+
+        nv = (NavigationView)findViewById(R.id.nv);
+        nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch(id)
+                {
+                    case R.id.ic_more:
+                        Toast.makeText(MainActivity.this, "My Account",Toast.LENGTH_SHORT).show();
+                    case R.id.ic_praytime:
+                        Toast.makeText(MainActivity.this, "Settings",Toast.LENGTH_SHORT).show();
+                    case R.id.ic_masijed:
+                        Toast.makeText(MainActivity.this, "My Cart",Toast.LENGTH_SHORT).show();
+                    default:
+                        return true;
+                }
+
+
+
+
+            }
+        });
+
+        */
+
+        /*
         try {
             if (ActivityCompat.checkSelfPermission(this, mPermission)
                     != MockPackageManager.PERMISSION_GRANTED) {
@@ -82,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                     // Ask user to enable GPS/network in settings
                     gps.showSettingsAlert();
                 }
-*/
+* /
 
                 Intent dawaIntent = new Intent(MainActivity.this,DawaActivity.class);
                 MainActivity.this.startActivity(dawaIntent);
@@ -120,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                     // GPS or Network is not enabled
                     // Ask user to enable GPS/network in settings
                     gps.showSettingsAlert();
-                }*/
+                }* /
 
                 Intent Mosque = new Intent(MainActivity.this,MosqueActivity.class);
                 MainActivity.this.startActivity(Mosque);
@@ -156,6 +205,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+*/
+    }
+
 
 
 }

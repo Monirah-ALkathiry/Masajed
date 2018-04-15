@@ -22,6 +22,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,6 +30,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+
+
         <activity android:name=".WelcomMosqueApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,6 +40,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+
         <activity android:name=".LoginActivity" />
         <activity android:name=".RigisterActivity" />
         <activity android:name=".UserAreaActivity" />
@@ -43,6 +50,9 @@
         <activity android:name=".DawaActivity" />
         <activity android:name=".DawaInformationActivity" />
         <activity android:name=".forgetPassActivity" />
+
+
+
         <activity
             android:name=".MosqueActivity"
             android:launchMode="singleTop">
@@ -73,22 +83,27 @@
             android:name=".MosqueInformationActivity"
             android:label="@string/title_activity_mosque_information"
             android:theme="@style/AppTheme.NoActionBar" />
+
+
         <activity
             android:name=".AdvanceSearch"
             android:label="@string/title_activity_advance_search"
             android:theme="@style/Custom" />
+
         <activity
             android:name=".DawaAdvanceSearch"
             android:label="@string/title_activity_advance_search"
             android:theme="@style/Custom" />
+
         <activity
             android:name=".FavoriteActivity"
             android:label="@string/title_activity_favorite"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
+            android:theme="@style/AppTheme" />
+      <!--  <activity
             android:name=".Main2Activity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+            -->
     </application>
 
 </manifest>

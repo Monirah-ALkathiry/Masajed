@@ -4,12 +4,16 @@ import android.Manifest;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,8 +27,11 @@ import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.apps.noura.masajd.Utils.BottomNavigationViewHelper;
+import com.apps.noura.masajd.Utils.DrawerNavigation;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +48,9 @@ import retrofit2.Response;
 public class DawaActivity extends AppCompatActivity  implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener{
-    private static final String TAG = "DawaActivity";
+    private static final String TAG = "DawaActivity";//Used in BottomNav
+    private static final int ACTIVITY_NUM = 2;//Used in BottomNav
+
     private ViewPager mviewPager;
 
 
@@ -59,7 +68,12 @@ public class DawaActivity extends AppCompatActivity  implements
     // GPSTracker class
     GPSTracker gps;
 //----------------------------------------------------
-    //--------------------------------------
+
+    //-------Nav  drawerLayout
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+    private NavigationView navigationView;
+//--------------------------------------
 //Search---
 private ImageButton imageButton ;
     //--------------------------------------
@@ -89,6 +103,93 @@ private ImageButton imageButton ;
         //viewpager
         mviewPager = (ViewPager) findViewById(R.id.container);
        // setupViewPager(mviewPager);
+
+
+
+
+        //Navigation:----------------
+        drawerLayout = (DrawerLayout)findViewById(R.id.DrawerLayout);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.open, R.string.close);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        navigationView = (NavigationView)findViewById(R.id.navegation);
+        setupDrawerNavigation();
+
+        //-------------------Bottom Nav:
+
+        setupBottomNavigationView();
+        //---------------------------
+        /*
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                System.out.print("\n IDI ID :" + id +"\n");
+                switch(id)
+                {
+                    case R.id.login:
+
+                        Toast.makeText(DawaActivity.this, "LogIn",Toast.LENGTH_SHORT).show();
+                        Intent LoginIntent = new Intent(DawaActivity.this,LoginActivity.class);
+                        DawaActivity.this.startActivity(LoginIntent);
+                        break;
+
+
+                    case R.id.info:
+                        final String websiteurl= "http://www.moia.gov.sa/AboutMinistry/Pages/AboutMinistry.aspx";
+                        Intent LinkIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(websiteurl));
+                        startActivity(LinkIntent);
+                        Toast.makeText(DawaActivity.this, "Link",Toast.LENGTH_SHORT).show();
+                        break;
+
+
+                    case R.id.contactUs:
+                        Toast.makeText(DawaActivity.this, "Mosque",Toast.LENGTH_SHORT).show();
+
+                        break;
+
+
+                    case R.id.ic_Dawa:
+                        Toast.makeText(DawaActivity.this, "Dawa",Toast.LENGTH_SHORT).show();
+                        Intent dawaIntent = new Intent(DawaActivity.this,DawaActivity.class);
+                        DawaActivity.this.startActivity(dawaIntent);
+
+                        break;
+
+                    case R.id.ic_favorit:
+                        Toast.makeText(DawaActivity.this, "Favorite",Toast.LENGTH_SHORT).show();
+                        Intent FavoriteIntent = new Intent(DawaActivity.this,FavoriteActivity.class);
+                        DawaActivity.this.startActivity(FavoriteIntent);
+                        break;
+
+                    case R.id.ic_masijed:
+                        Toast.makeText(DawaActivity.this, "Mosque",Toast.LENGTH_SHORT).show();
+                        Intent Mosque = new Intent(DawaActivity.this,MosqueActivity.class);
+                        DawaActivity.this.startActivity(Mosque);
+                        break;
+
+                    case R.id.aboutApp:
+                        Toast.makeText(DawaActivity.this, "About App",Toast.LENGTH_SHORT).show();
+
+                        break;
+
+                    default:
+                        return true;
+                }
+
+
+                return false;
+            }
+        });
+
+        */
+//----------------------------------------------------------------
+
 
         //MAP
         intent = getIntent();
@@ -167,6 +268,7 @@ private ImageButton imageButton ;
         });
 
 //-----------------------------------------------------
+
     }
 
 //-----------------------------------SEARCH------------------------------------------
@@ -198,8 +300,8 @@ private ImageButton imageButton ;
                     //Test Result and Print Data
                     //  System.out.println("Search Responce :");
                     // System.out.println("Responce toString" + response.toString());
-                    //  System.out.println("Responce body" + response.body());
-                    // System.out.println("Responce Headers" + response.headers());
+                     // System.out.println("Responce body" + response.body());
+                     //System.out.println("Responce Headers" + response.headers());
                     // System.out.print("URL" + response.isSuccessful());
 
                     //  Log.e("  URL KK : ", call.request().url().toString());
@@ -368,6 +470,8 @@ private ImageButton imageButton ;
                     //Map -----
                     dawaFragmentCommunicator.passData(dawaLatLngs);
 
+
+
                 }
             }
 
@@ -428,6 +532,37 @@ private ImageButton imageButton ;
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(actionBarDrawerToggle.onOptionsItemSelected(item))
+            return true;
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    //Bottom Nav
+    private void setupBottomNavigationView() {
+        Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
+        BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavViewBar);
+        BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
+        BottomNavigationViewHelper.enableNavigation(this, bottomNavigationViewEx);
+        Menu menu = bottomNavigationViewEx.getMenu();
+        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+        menuItem.setChecked(true);
+    }
+
+    //Drawer Nav
+    private void setupDrawerNavigation() {
+        Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
+
+        DrawerNavigation.enableDrawerNavigation(this, navigationView);
+       // Menu menu = navigationView.getMenu();
+        //MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+       // menuItem.setChecked(true);
 
     }
 }

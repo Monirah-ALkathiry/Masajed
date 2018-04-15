@@ -5,12 +5,16 @@ import android.Manifest;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +27,9 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.Toast;
+
+import com.apps.noura.masajd.Utils.BottomNavigationViewHelper;
+import com.apps.noura.masajd.Utils.DrawerNavigation;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
@@ -41,7 +48,11 @@ public class MosqueActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
-    private static final String TAG = "MosqueActivity";
+    private static final String TAG = "MosqueActivity";//Used in BottomNav
+    private static final int ACTIVITY_NUM = 1;//Used in BottomNav
+
+
+
     private ViewPager mviewPager;
 
 
@@ -72,6 +83,12 @@ public class MosqueActivity extends AppCompatActivity implements
     private RecyclerView.LayoutManager layoutManager;
     //------------------------------------------------------
 
+    //-------Nav  drawerLayout
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+    protected NavigationView navigationView;
+
+
     //-------------------GPS-------------------------------------
     private static final int REQUEST_CODE_PERMISSION = 2;
     String mPermission = Manifest.permission.ACCESS_FINE_LOCATION;
@@ -89,7 +106,88 @@ public class MosqueActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mosque);
 
+        drawerLayout = (DrawerLayout)findViewById(R.id.DrawerLayout);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.open, R.string.close);
 
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    //Navigation:----------------
+        navigationView = (NavigationView)findViewById(R.id.navegation);
+
+        setupDrawerNavigation();
+
+        /*
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                System.out.print("\n IDI ID :" + id +"\n");
+                switch(id)
+                {
+                    case R.id.login:
+
+                        Toast.makeText(MosqueActivity.this, "LogIn",Toast.LENGTH_SHORT).show();
+                        Intent LoginIntent = new Intent(MosqueActivity.this,LoginActivity.class);
+                        MosqueActivity.this.startActivity(LoginIntent);
+                                                                                      break;
+
+
+                    case R.id.info:
+                        final String websiteurl= "http://www.moia.gov.sa/AboutMinistry/Pages/AboutMinistry.aspx";
+                        Intent LinkIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(websiteurl));
+                        startActivity(LinkIntent);
+                        Toast.makeText(MosqueActivity.this, "Link",Toast.LENGTH_SHORT).show();
+                        break;
+
+
+                    case R.id.contactUs:
+                        Toast.makeText(MosqueActivity.this, "Mosque",Toast.LENGTH_SHORT).show();
+
+                        break;
+
+
+                    case R.id.ic_Dawa:
+                        Toast.makeText(MosqueActivity.this, "Dawa",Toast.LENGTH_SHORT).show();
+                        Intent dawaIntent = new Intent(MosqueActivity.this,DawaActivity.class);
+                        MosqueActivity.this.startActivity(dawaIntent);
+
+                        break;
+
+                    case R.id.ic_favorit:
+                        Toast.makeText(MosqueActivity.this, "Favorite",Toast.LENGTH_SHORT).show();
+                        Intent FavoriteIntent = new Intent(MosqueActivity.this,FavoriteActivity.class);
+                        MosqueActivity.this.startActivity(FavoriteIntent);
+                        break;
+
+                    case R.id.ic_masijed:
+                        Toast.makeText(MosqueActivity.this, "Mosque",Toast.LENGTH_SHORT).show();
+                        Intent Mosque = new Intent(MosqueActivity.this,MosqueActivity.class);
+                        MosqueActivity.this.startActivity(Mosque);
+                        break;
+
+                    case R.id.aboutApp:
+                        Toast.makeText(MosqueActivity.this, "About App",Toast.LENGTH_SHORT).show();
+
+                        break;
+
+                    default:
+                        return true;
+                }
+
+
+                return false;
+            }
+        });
+        */
+   //-------------------Bottom Nav: 
+
+        setupBottomNavigationView();
+        
+  //----------------------------------------      
        //Log to start
         //Log.d(TAG, "Start");
 
@@ -170,6 +268,8 @@ public class MosqueActivity extends AppCompatActivity implements
 
 
   }
+
+
 
     //-------------------------Search -----------------------
 
@@ -264,6 +364,7 @@ public class MosqueActivity extends AppCompatActivity implements
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
 
         // Assumes current activity is the searchable activity
+        assert searchManager != null;
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
 
@@ -428,84 +529,36 @@ public class MosqueActivity extends AppCompatActivity implements
     }
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
+        if(actionBarDrawerToggle.onOptionsItemSelected(item))
+            return true;
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    //Bottom Nav
+    private void setupBottomNavigationView() {
+        Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
+        BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavViewBar);
+        BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
+        BottomNavigationViewHelper.enableNavigation(this, bottomNavigationViewEx);
+        Menu menu = bottomNavigationViewEx.getMenu();
+        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+        menuItem.setChecked(true);
+    }
+
+    //Drawer Nav
+    private void setupDrawerNavigation() {
+        Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
+
+        DrawerNavigation.enableDrawerNavigation(this, navigationView);
+      //  Menu menu = navigationView.getMenu();
+        //MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+       // menuItem.setChecked(true);
+
+    }
 }
 
-/*
-
-        //------------------------------------------------------------------------------------------------------------
-        String s = getIntent().getStringExtra("Query");
-        Toast.makeText(MosqueActivity.this," New Query \n"+s,Toast.LENGTH_LONG).show();
-
-        if(s != null) {
-//Convert latitude and longitude to String
-            final String lat = Double.toString(latitude);
-            final String lon = Double.toString(longitude);
-            //Toast.makeText(AdvanceSearch.this, Mesage2, Toast.LENGTH_SHORT).show();
-            //Make A Connection With API :
-            AdvanceSearchClient = ApiRetrofitClint.getApiRetrofitClint().create(AdvanceSearchClint.class);
-
-            //Call SearchRequest interface
-            Call<List<MosquesLatLng>> call = AdvanceSearchClient.getMosqueList2(25, lat, lon, s);
-            //Create Response:
-            call.enqueue(new Callback<List<MosquesLatLng>>() {
-                @Override
-                public void onResponse(Call<List<MosquesLatLng>> call, Response<List<MosquesLatLng>> response) {
-                    mosquesLatLngs = response.body();
-                    //Test Result and Print Data
-                    System.out.println("Search Responce :");
-                    System.out.println("Responce toString" + response.toString());
-                    System.out.println("Responce body" + response.body());
-                    System.out.println("Responce Headers" + response.headers());
-                    System.out.print("URL" + response.isSuccessful());
-
-                    Log.e("  URL KK : ", call.request().url().toString());
-
-                    if (mosquesLatLngs.size() == 0) {
-                        Toast.makeText(MosqueActivity.this, "لايوجد بيانات", Toast.LENGTH_LONG).show();
-                        return;
-
-                    }
-                    else {
-
-                        String latitude = mosquesLatLngs.get(0).getLatitude();
-                        String longitude = mosquesLatLngs.get(0).getLongitude();
-
-                        System.out.print("latitude" + latitude + "\n");
-                        System.out.print("longitude" + longitude + "\n");
-
-
-
-                        System.out.println(latitude + " : lat \n lone : " +longitude);
-
-
-                        //Map -----
-                        double latNew = Double.parseDouble(latitude);
-                        double lonNew = Double.parseDouble(longitude);
-
-
-                        recyclerView = (RecyclerView) findViewById(R.id.MosqueRecyclerView);
-                        layoutManager = new LinearLayoutManager(MosqueActivity.this);
-                        recyclerView.setLayoutManager(layoutManager);
-                        recyclerView.setHasFixedSize(true);
-
-                        adapter = new MosqueListAdapter(MosqueActivity.this, mosquesLatLngs, latNew, lonNew);
-//
-                        recyclerView.setAdapter(adapter);
-
-                        //Map -----
-                        // fragmentCommunicator.passData(mosquesLatLngs);
-
-                    }
-
-                }
-
-                @Override
-                public void onFailure(Call<List<MosquesLatLng>> call, Throwable t) {
-                    System.out.print(":( :( \n");
-                    Toast.makeText(MosqueActivity.this, "الرجاء ادخال كلمات بحث اخرى", Toast.LENGTH_LONG).show();
-                }
-            });
-
-        }
- */

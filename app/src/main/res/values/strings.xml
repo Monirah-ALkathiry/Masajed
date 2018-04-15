@@ -68,7 +68,7 @@
     <!-- SEARCH -->
     <string name="search_view">بحث</string>
     <string name="search_hint">أدخل كلمة البحث</string>
-    <string name="title_activity_favorite">FavoriteActivity</string>
+    <string name="title_activity_favorite">المفضله </string>
     <string name="AddNewNote">إضافة ملاحظه جديدة</string>
     <!--Favorite -->
 
@@ -90,5 +90,19 @@
     <string name="WomanRoom">قاعة النساء</string>
     <string name="Distance">المسافة</string>
     <string name="Evaluation">التقييم</string>
+
+    <!-- Menu-->
+
+    <string name="info">عن الوزارة</string>
+    <string name="praytime">أوقات الصلاة</string>
+    <string name="contactUs">اتصل بنا</string>
+    <string name="ic_masijed">المساجد</string>
+    <string name="Dawa">المناشط</string>
+    <string name="aboutApp"> عن التطبيق</string>
+    <string name="favorit">المضلة</string>
+
+    <string name="open"> فتح</string>
+    <string name="close">اغلاق</string>
+
 
 </resources>
