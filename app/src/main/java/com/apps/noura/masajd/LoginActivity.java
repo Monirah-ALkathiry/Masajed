@@ -86,8 +86,11 @@ public class LoginActivity extends AppCompatActivity {
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //Call Login Function:
             login(etUsername.getText().toString(), etPassword.getText().toString());
-            }
+
+                  }
         });
 
         //Forget password
@@ -104,8 +107,10 @@ public class LoginActivity extends AppCompatActivity {
 //private static String usernameR;
     private void login(String etUsername, String etPassword){
         final String grant_type = "password";
-        System.out.println(etUsername);
-       // Login login = new Login(option,etUsername,etPassword);
+        System.out.println("Name : " +etUsername);
+        System.out.println(" User Pasword : "+etPassword + "\n");
+
+        // Login login = new Login(option,etUsername,etPassword);
 
         // Calling interface
        // Call<JsonObject> call =userClient.login(option,etUsername,etPassword);
@@ -114,9 +119,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 //System.out.println(response.body().toString());
-
+                String Rurl= call.request().url().toString();
+                Log.i("test 22 : ", Rurl);
                   try {
-                        System.out.println(response.body().toString());
+                        System.out.println(" : : : : \n" +response.body().toString());
 
                        JSONObject InfoResponse = new JSONObject(String.valueOf(response.body()));
                         String usernameR = InfoResponse.getString("FullName");
@@ -214,6 +220,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
+
+                System.out.println("DDddddddddddddddddddddddffffffffffffffffffff");
 
             }
 

@@ -497,18 +497,14 @@ public class DaeiaSearch extends Fragment {
                                     DateFrom + "'AND DawaActivitiesInfo.DawaActivityDateH <= '" + DateTo + "'";
 
                             System.out.println("\n sss :  \n" + map2 + "\n");
-                        }
-
                     }
-
+                }
 
                     System.out.println("\n :)  " + lat + " :lat \n lone : " + lon);
-
                     sender.SendMassage(map2);
                 }
 
-
-            }//onclick
+         }//onclick
         });//onclick
 
 //----------------------------------------------------------------------------------------------

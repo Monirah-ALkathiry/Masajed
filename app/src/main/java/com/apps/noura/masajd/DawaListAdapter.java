@@ -71,7 +71,7 @@ class DawaListAdapter extends RecyclerView.Adapter<DawaListAdapter.DawaViewList>
 
         Picasso.with(context)
                 .load("http://gis.moia.gov.sa/Mosques/Content/images/mosques/"+holder.DawaID+"/IMG_"+holder.i+".JPG")
-                .placeholder(R.drawable.dawalabel)
+                .placeholder(R.drawable.ic_book)
                 .into(holder.imageView);
 
         String FirstName, FatherName, GrandFatherName, FamilyName , Name;

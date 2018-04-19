@@ -233,17 +233,20 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
                         .snippet("موقعي")//Description
                 );
 
-        //-----------------------
+    //--------------------------------------------------------------------------------------------
         //Set Camera Position:
         CameraPosition CameraMosque = CameraPosition.builder().target(latLng)
                 .zoom(13)
                 .bearing(0)
                 .tilt(40)
                 .build();
-        //Move Camera
-        // googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
-        //Google Map Zoom in zoom out
 
+            //Move Camera
+            // googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
+            //Google Map Zoom in zoom out
+        //Zoom controller position:
+        //leftPadding, topPadding, rightPadding, bottomPadding
+        MgoogleMap.setPadding(0,0,0,100);
         MgoogleMap.getUiSettings().setZoomControlsEnabled(true);
         MgoogleMap.getUiSettings().setRotateGesturesEnabled(true);
         MgoogleMap.getUiSettings().setScrollGesturesEnabled(true);

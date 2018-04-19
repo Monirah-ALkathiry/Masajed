@@ -15,7 +15,7 @@
 
     <item
         android:id="@+id/ic_masijed"
-        android:icon="@drawable/ic_masijed"
+        android:icon="@drawable/mosque_gbk"
         android:title="المساجد"
         >
     </item>
@@ -29,7 +29,7 @@
 
     <item
         android:id="@+id/ic_favorit"
-        android:icon="@drawable/ic_favorit"
+        android:icon="@drawable/addedfav"
         android:title="المفضلة">
     </item>
 

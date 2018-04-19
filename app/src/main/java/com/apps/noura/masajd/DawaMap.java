@@ -210,7 +210,9 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
         //Move Camera
        // MgoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
         MgoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
-
+        //Zoom controller position:
+        //leftPadding, topPadding, rightPadding, bottomPadding
+        MgoogleMap.setPadding(0,0,0,100);
         MgoogleMap.getUiSettings().setZoomControlsEnabled(true);
         MgoogleMap.getUiSettings().setRotateGesturesEnabled(true);
         MgoogleMap.getUiSettings().setScrollGesturesEnabled(true);

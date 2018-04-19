@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimary</item>
-        <item name="colorAccent">@color/white</item>
+        <item name="colorAccent">@color/orange</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -53,7 +53,7 @@
 
     <!-- Button Style -->
     <style name="PrimaryButton" parent="Widget.AppCompat.Button.Colored">
-        <item name="colorButtonNormal">@color/colorAccent</item>
+        <item name="colorButtonNormal">@color/orange</item>
         <item name="colorControlHighlight">@color/white</item>
     </style>
 </resources>

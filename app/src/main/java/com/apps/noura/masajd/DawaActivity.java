@@ -33,6 +33,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -471,7 +472,6 @@ private ImageButton imageButton ;
                     dawaFragmentCommunicator.passData(dawaLatLngs);
 
 
-
                 }
             }
 
@@ -480,6 +480,9 @@ private ImageButton imageButton ;
                 System.out.print(":( :( \n");
 
             }
+
+
+
         });
 
 
@@ -546,7 +549,7 @@ private ImageButton imageButton ;
 
     //Bottom Nav
     private void setupBottomNavigationView() {
-        Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
+        //Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
         BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavViewBar);
         BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
         BottomNavigationViewHelper.enableNavigation(this, bottomNavigationViewEx);
@@ -557,12 +560,12 @@ private ImageButton imageButton ;
 
     //Drawer Nav
     private void setupDrawerNavigation() {
-        Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
+        //Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
 
         DrawerNavigation.enableDrawerNavigation(this, navigationView);
-       // Menu menu = navigationView.getMenu();
-        //MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
-       // menuItem.setChecked(true);
+       //Menu menu = navigationView.getMenu();
+       // MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+        //menuItem.setChecked(true);
 
     }
 }

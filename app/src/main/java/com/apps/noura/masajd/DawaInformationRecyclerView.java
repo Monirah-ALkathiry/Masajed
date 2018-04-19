@@ -68,7 +68,9 @@ class DawaInformationRecyclerView extends RecyclerView.Adapter<DawaInformationRe
     private int ForID;// Dawa ID After Convert
     private String DawaID;
     protected  float Average_Rating;
+
     protected String Average_R;
+    protected RatingBar ratingBar2;
 
 
     @Override
@@ -181,8 +183,9 @@ class DawaInformationRecyclerView extends RecyclerView.Adapter<DawaInformationRe
 
         DawaID = intent.getStringExtra("DAWA_ID");
         ForID = Integer.parseInt(DawaID);
+        System.out.print( "\n\n\n responce DAWA_ID"+ DawaOffice);
 
-
+        ratingBar2 = holder.ratingBar;
         //Connect to API :
 
         //TODO : Check If User Loged in To Get User ID
@@ -215,7 +218,7 @@ class DawaInformationRecyclerView extends RecyclerView.Adapter<DawaInformationRe
                     Average_Rating = Float.parseFloat(Average_R);
 
                     System.out.print("\n Rating : " + Average_Rating + "\n");
-
+                    ratingBar2.setRating(Average_Rating);
                     //JSONObject Jobject = new JSONObject(response.body().string());
                 } catch (JSONException e) {
                     e.printStackTrace();

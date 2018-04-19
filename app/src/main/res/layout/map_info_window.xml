@@ -25,13 +25,14 @@
 
         <TextView
             android:id="@+id/Mosque"
-            android:text="@string/Text_name_Tag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_marginBottom="10dp"
-            android:textColor="@color/colorAccent"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
+            android:gravity="center"
+            android:text="@string/Text_name_Tag"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/MosqueName"
@@ -40,7 +41,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginBottom="10dp"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorPrimary"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
 

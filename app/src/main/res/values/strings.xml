@@ -18,7 +18,7 @@
     <!-- Monirah -->
     <string name="search">أدخل كلمة البحث</string>
     <string name="mosqueName">إسم المسجد</string>
-    <string name="Text_name_Tag">إسم المسجد :</string>
+    <string name="Text_name_Tag">إسم المسجد</string>
     <string name="Text_name">  </string>
     <string name="Back">الرجوع</string>
     <string name="MosqueInfo">معلومات المسجد</string>
@@ -34,7 +34,7 @@
     <string name="ObserverName"> إسم المراقب </string>
     <string name="StreetName">إسم الشارع</string>
     <string name="MosqueDistance">المسافة</string>
-    <string name="DawaTitle">عنوان المنشط :</string>
+    <string name="DawaTitle">عنوان المنشط </string>
 
     <string name="search_Button">بحث</string>
     <string name="Exit_Button">الغاء</string>
@@ -43,9 +43,11 @@
     <string name="Null">غير متوفر</string>
     <string name="hello_blank_fragment">Image fragment</string>
     <string name="title_activity_mosque_information">مسجد</string>
+
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>
+
     <string name="section_format">Hello World from section: %1$d</string>
 
     <string name="NoImage">لا تتوفر صور لهذا المسجد</string>
@@ -53,7 +55,7 @@
     <string name="DawaImage">صورة المنشط</string>
     <string name="DawaInfo">معلومات المنشط</string>
     <string name="title_activity_maps">Map</string>
-    <string name="title_activity_advance_search">البحث النتقدم</string>
+    <string name="title_activity_advance_search">البحث المتقدم</string>
     <string name="action_settings">Settings</string>
 
     <!-- Spinner -->
@@ -103,6 +105,7 @@
 
     <string name="open"> فتح</string>
     <string name="close">اغلاق</string>
+    <string name="logo">شعار</string>
 
 
 </resources>

@@ -6,7 +6,7 @@
     android:layout_margin="1.5dp"
     android:id="@+id/linearLayoutInfo"
     android:orientation="vertical"
-    android:background="@color/lightGry" >
+    android:background="@color/lightGry">
 
 
     <TableLayout
@@ -23,7 +23,7 @@
 
             <TextView
                 android:id="@+id/ActivityType"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/mdtp_date_picker_component_width"
                 android:layout_height="wrap_content"
                 android:text="@string/Null"
                 android:textColor="@color/black"
@@ -43,15 +43,14 @@
 
         <TableRow android:layout_marginBottom="3.5dp" >
 
-        <TextView
-            android:id="@+id/MainClassification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Null"
-            android:textColor="@color/black"
-            android:padding="18dip"
-            android:background="@color/lightgray"
-            />
+            <TextView
+                android:id="@+id/MainClassification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/lightgray"
+                android:padding="18dip"
+                android:text="@string/Null"
+                android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/Main_Classification"
@@ -282,12 +281,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/lightgray"
-                android:numStars="5"
+                android:numStars="6"
                 android:isIndicator="true"
                 android:padding="7dip"
                 android:layout_gravity="center"
-                 />
-            <!--  style="@style/Widget.AppCompat.RatingBar.Small"-->
+                style="@style/Widget.AppCompat.RatingBar.Indicator"
+
+                />
+            <!--  style="@style/Widget.AppCompat.RatingBar.Small"
+                  style="@style/Widget.AppCompat.RatingBar.Indicator"
+             -->
             <TextView
                 android:id="@+id/Evaluation_label"
                 android:layout_width="wrap_content"
