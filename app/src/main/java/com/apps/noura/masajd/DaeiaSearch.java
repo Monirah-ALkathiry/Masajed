@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,6 +21,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+
+import net.alhazmy13.hijridatepicker.date.hijri.HijriDatePickerDialog;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,24 +38,27 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
+import static net.alhazmy13.hijridatepicker.date.hijri.HijriDatePickerDialog.*;
+import static net.alhazmy13.hijridatepicker.date.hijri.HijriDatePickerDialog.newInstance;
+
 /**
  * Created by Monirah on 2/22/2018.
  */
 
 @SuppressLint("ValidFragment")
-public class DaeiaSearch extends Fragment {
+public class DaeiaSearch extends Fragment implements OnDateSetListener {
 
     private static final String TAG= "Mosque Search";
 
     private  View view;
 
-    private Spinner spinner;
-    private Spinner spinnerCities;
-    private Spinner spinnerDistricts;
-    private Spinner spinnerActivity;
-    private Spinner spinnerDomain;
-    private Spinner spinnerLanguage;
-    private Spinner spinneroffice;
+    private SearchableSpinner spinner;
+    private SearchableSpinner spinnerCities;
+    private SearchableSpinner spinnerDistricts;
+    private SearchableSpinner spinnerActivity;
+    private SearchableSpinner spinnerDomain;
+    private SearchableSpinner spinnerLanguage;
+    private SearchableSpinner spinneroffice;
    // private Spinner spinnerfromDate;
     //private Spinner spinnertoDate;
 
@@ -510,14 +519,14 @@ public class DaeiaSearch extends Fragment {
 //----------------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------
-        spinner = (Spinner) view.findViewById(R.id.myspinner);
-        spinnerCities = (Spinner) view.findViewById(R.id.spinnerCities);
-        spinnerDistricts = (Spinner) view.findViewById(R.id.spinnerDistricts);
-        spinnerActivity = (Spinner) view.findViewById(R.id.spinnerActivity);
+        spinner = (SearchableSpinner) view.findViewById(R.id.myspinner);
+        spinnerCities = (SearchableSpinner) view.findViewById(R.id.spinnerCities);
+        spinnerDistricts = (SearchableSpinner) view.findViewById(R.id.spinnerDistricts);
+        spinnerActivity = (SearchableSpinner) view.findViewById(R.id.spinnerActivity);
 
-        spinnerDomain = (Spinner) view.findViewById(R.id.spinnerDomain);
-        spinnerLanguage = (Spinner) view.findViewById(R.id.spinnerLanguage);
-        spinneroffice = (Spinner) view.findViewById(R.id.spinneroffice);
+        spinnerDomain = (SearchableSpinner) view.findViewById(R.id.spinnerDomain);
+        spinnerLanguage = (SearchableSpinner) view.findViewById(R.id.spinnerLanguage);
+        spinneroffice = (SearchableSpinner) view.findViewById(R.id.spinneroffice);
         //spinnerfromDate = (TextView) view.findViewById(R.id.simpleDatePicker);
        // spinnertoDate = (TextView) view.findViewById(R.id.spinnerfromDate);
 //-----------------------------------------------------------------------------------------
@@ -525,6 +534,17 @@ public class DaeiaSearch extends Fragment {
         spinnerfromDate = (TextView) view.findViewById(R.id.spinnerfromDate);
 
 //-----------------------------------------------------------------------------------------------
+
+  //------------------------------------------------------
+        spinner.setTitle("البحث عن المنطقة");
+        spinnerCities.setTitle("البحث عن المدينة");
+        spinnerDistricts.setTitle("البحث عن الحي");
+        spinnerActivity.setTitle("نوع النشاط");
+        spinnerDomain.setTitle("مجال النشاط");
+        spinnerLanguage.setTitle("اللغه");
+        spinneroffice.setTitle("المكتب");
+  //--------------------------------------------------------------
+
         //Jason Object:
         Regions.add(SelectAll);
         //Cities.add(SelectAll);
@@ -862,6 +882,26 @@ public class DaeiaSearch extends Fragment {
            public void onClick(View v) {
 
 
+               UmmalquraCalendar now = new UmmalquraCalendar();
+               HijriDatePickerDialog dpd = newInstance(DaeiaSearch.this,
+                       now.get(UmmalquraCalendar.YEAR),
+                       now.get(UmmalquraCalendar.MONTH),
+                       now.get(UmmalquraCalendar.DAY_OF_MONTH));
+
+               //color:
+               now.getDisplayName(Calendar.MONTH, UmmalquraCalendar.LONG, new Locale("ar"));
+               dpd.setAccentColor(Color.parseColor("#305252"));
+               dpd.vibrate(false);
+               dpd.setVersion(Version.VERSION_1);
+               //Highest day:
+               UmmalquraCalendar date1 = new UmmalquraCalendar();
+               UmmalquraCalendar date2 = new UmmalquraCalendar();
+               date2.add(Calendar.WEEK_OF_MONTH, -1);
+               UmmalquraCalendar date3 = new UmmalquraCalendar();
+               date3.add(Calendar.WEEK_OF_MONTH, 1);
+               UmmalquraCalendar[] days = {date1, date2, date3};
+               dpd.setHighlightedDays(days);
+
                /*
 
                DatePickerBuilder dpb = new DatePickerBuilder()
@@ -871,7 +911,7 @@ public class DaeiaSearch extends Fragment {
 
                 */
 
-             final Calendar cldr =Calendar.getInstance();
+            /* final Calendar cldr =Calendar.getInstance();
                FromDay = cldr.get(Calendar.DAY_OF_MONTH);
                FromMonth = cldr.get(Calendar.MONTH);
                FromYear = cldr.get(Calendar.YEAR);
@@ -890,13 +930,48 @@ public class DaeiaSearch extends Fragment {
                        }, FromYear, FromMonth, FromDay);
 
                picker.show();
-
+               */
+               dpd.show(getActivity().getFragmentManager(),"Test Dialoge Fragment");
            }
        });
 //-----------------------------------------Date To---------------------------------------------------------
         simpleDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                UmmalquraCalendar now = new UmmalquraCalendar();
+                HijriDatePickerDialog dpd = newInstance(DaeiaSearch.this,
+                        now.get(UmmalquraCalendar.YEAR),
+                        now.get(UmmalquraCalendar.MONTH),
+                        now.get(UmmalquraCalendar.DAY_OF_MONTH));
+
+                //color:
+                now.getDisplayName(Calendar.MONTH, UmmalquraCalendar.LONG, new Locale("ar"));
+                dpd.setAccentColor(Color.parseColor("#305252"));
+                dpd.vibrate(false);
+                dpd.setVersion(Version.VERSION_1);
+                //Highest day:
+                UmmalquraCalendar date1 = new UmmalquraCalendar();
+                UmmalquraCalendar date2 = new UmmalquraCalendar();
+                date2.add(Calendar.WEEK_OF_MONTH, -1);
+                UmmalquraCalendar date3 = new UmmalquraCalendar();
+                date3.add(Calendar.WEEK_OF_MONTH, 1);
+                UmmalquraCalendar[] days = {date1, date2, date3};
+                dpd.setHighlightedDays(days);
+
+
+
+
+                dpd.setOnDateSetListener(new OnDateSetListener() {
+                    @Override
+                    public void onDateSet(HijriDatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                        //String date = + dayOfMonth + "/" + (++monthOfYear) + "/" + year;
+                        DateTo= String.format("%d/%02d/%02d", year,monthOfYear+1,dayOfMonth);
+                        simpleDatePicker.setText(DateTo);
+                    }
+                });
+                dpd.show(getActivity().getFragmentManager(),"Test Dialoge Fragment");
+                /*
                 final Calendar cldr = Calendar.getInstance();
                 ToDay = cldr.get(Calendar.DAY_OF_MONTH);
                 ToMonth = cldr.get(Calendar.MONTH);
@@ -912,6 +987,7 @@ public class DaeiaSearch extends Fragment {
                             }
                         }, ToYear, ToMonth, ToDay);
                 picker.show();
+                */
 
             }
         });
@@ -1152,4 +1228,18 @@ public class DaeiaSearch extends Fragment {
 
     }
 
+
+    /**
+     * @param view        The view associated with this listener.
+     * @param year        The year that was set.
+     * @param monthOfYear The month that was set (0-11) for compatibility
+     *                    with {@link UmmalquraCalendar}.
+     * @param dayOfMonth  The day of the month that was set.
+     */
+    @Override
+    public void onDateSet(HijriDatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        DateFrom =String.format("%d/%02d/%02d", year,monthOfYear+1,dayOfMonth);
+
+        spinnerfromDate.setText(DateFrom);
+    }
 }

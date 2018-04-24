@@ -17,6 +17,8 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,10 +45,10 @@ public class KhateebSearch extends Fragment {
 
     private  View view;
 
-    private Spinner spinner;
-    private Spinner spinnerCities;
-    private Spinner spinnerDistricts;
-    private Spinner spinnerMosque;
+    private SearchableSpinner spinner;
+    private SearchableSpinner spinnerCities;
+    private SearchableSpinner spinnerDistricts;
+    private SearchableSpinner spinnerMosque;
 
 
     private SearchView searchView;
@@ -116,10 +118,16 @@ public class KhateebSearch extends Fragment {
         query = null;
 
 //-----------------------------------------------------------
-        spinner = (Spinner) view.findViewById(R.id.myspinner);
-        spinnerCities = (Spinner) view.findViewById(R.id.spinnerCities);
-        spinnerDistricts = (Spinner) view.findViewById(R.id.spinnerDistricts);
-        spinnerMosque = (Spinner) view.findViewById(R.id.spinnerMosque);
+        spinner = (SearchableSpinner) view.findViewById(R.id.myspinner);
+        spinnerCities = (SearchableSpinner) view.findViewById(R.id.spinnerCities);
+        spinnerDistricts = (SearchableSpinner) view.findViewById(R.id.spinnerDistricts);
+        spinnerMosque = (SearchableSpinner) view.findViewById(R.id.spinnerMosque);
+
+
+        spinner.setTitle("البحث عن المنطقة");
+        spinnerCities.setTitle("البحث عن المدينة");
+        spinnerDistricts.setTitle("البحث عن الحي");
+        spinnerMosque.setTitle("نوع المسجد");
 
 
         //Jason Object:

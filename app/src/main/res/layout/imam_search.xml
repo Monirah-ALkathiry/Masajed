@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/lightgray">
+        android:background="@color/lightgray"
+        tools:ignore="UselessParent">
 
 
     <!--    <SearchView
@@ -30,14 +31,14 @@
             android:layout_height="wrap_content"
             android:ems="25"
             android:layout_gravity="center"
-            android:hint="أدخل إسم الإمام"
+            android:hint="@string/InsertImamName"
             android:layout_marginTop="20dp"
             android:ellipsize="start"
             android:gravity="right"
             android:inputType="textPersonName"
             android:drawableLeft="@android:drawable/ic_search_category_default"
             android:background="@drawable/edit_text_style"
-             />
+            tools:ignore="RtlHardcoded" />
 
 
         <ScrollView
@@ -63,19 +64,17 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_marginBottom="20dp"
-            android:layout_gravity="right">
+            android:layout_gravity="right"
+            tools:ignore="RtlHardcoded">
 
             <TableRow  android:layout_marginBottom="3.5dp">
 
-                <Spinner
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:id="@+id/myspinner"
                     android:layout_width="fill_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
-                    android:spinnerMode="dialog"
-                  >
-
-                </Spinner>
+                    android:spinnerMode="dialog"/>
 
                 <TextView
 
@@ -86,7 +85,7 @@
                     android:padding="18dip"
                     android:text="@string/MosqueRegion"
                     android:textColor="#fff"
-                    android:textSize="12dp" />
+                    android:textSize="12sp" />
 
 
             </TableRow>
@@ -95,14 +94,13 @@
 
             <TableRow android:layout_marginBottom="3.5dp" >
 
-                <Spinner
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:layout_marginTop="8dp"
                     android:id="@+id/spinnerCities"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dialog">
+                    android:spinnerMode="dialog"/>
 
-                </Spinner>
                 <TextView
 
                     android:id="@+id/simpleTextView2"
@@ -112,20 +110,18 @@
                     android:padding="18dip"
                     android:text="@string/CityVillage"
                     android:textColor="#fff"
-                    android:textSize="12dp"/>
+                    android:textSize="12sp"/>
 
             </TableRow>
 
 
             <TableRow android:layout_marginBottom="3.5dp" >
-                <Spinner
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:layout_marginTop="8dp"
                     android:id="@+id/spinnerDistricts"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dialog">
-
-                </Spinner>
+                    android:spinnerMode="dialog"/>
 
                 <TextView
 
@@ -136,27 +132,19 @@
                     android:padding="18dip"
                     android:text="@string/District"
                     android:textColor="#fff"
-                    android:textSize="12dp" />
-
-
-
-
-
-            </TableRow>
+                    android:textSize="12sp" />
+             </TableRow>
 
 
 
             <TableRow android:layout_marginBottom="3.5dp" >
-                <Spinner
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:layout_marginTop="8dp"
                     android:id="@+id/spinnerMosque"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dialog">
+                    android:spinnerMode="dialog"/>
 
-
-
-                </Spinner>
 
                 <TextView
 
@@ -167,11 +155,7 @@
                     android:padding="18dip"
                     android:text="@string/MosqueType"
                     android:textColor="#fff"
-                    android:textSize="12dp" />
-
-
-
-
+                    android:textSize="12sp" />
 
             </TableRow>
 

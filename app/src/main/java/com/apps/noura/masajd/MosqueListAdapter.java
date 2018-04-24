@@ -6,16 +6,21 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -158,8 +163,6 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
     }
 
 
-
-
 //-----------------------------------------------------------------------------------------------------
 
     class ParseHTML extends AsyncTask<String,Void,String>{
@@ -169,33 +172,50 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         String CodNumber;
         ImageView imageView;
         ProgressDialog mProgressDialog;
+        ProgressBar progressBar;
         String imgurl;
         Elements links;
       //  Bitmap bitmap;
 
-
-        private void  mos( String MosquCode , ImageView img){
+        private void  mos( String MosquCode , ImageView img) {
             this.CodNumber = MosquCode;
             System.out.println(CodNumber + " Mosque Code Number");
             this.imageView = img;
             System.out.println(imageView + " holder.imageView ");
-                }
+        }
 
 
         @Override
     protected void onPreExecute() {
         super.onPreExecute();
 
+
+
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
          }
         else {
-                mProgressDialog = new ProgressDialog(context);
-                mProgressDialog.setTitle("جاري التحميل");
-                mProgressDialog.setMessage("جاري التحميل");
-                mProgressDialog.setIndeterminate(false);
-                mProgressDialog.show();
-            }
+
+         mProgressDialog = new ProgressDialog(context);
+        // Set progress style horizontal
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        // Set the maximum value of progress
+            mProgressDialog.setMax(100);
+            mProgressDialog.setIcon(0);
+
+            mProgressDialog.setIndeterminate(false);
+            mProgressDialog.show();
+
+           // mProgressDialog.setTitle("جاري التحميل");
+            //mProgressDialog.setMessage("جاري التحميل");
+            // Set the progress dialog background color
+            // mProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.YELLOW));
+
+            // Make the progress dialog cancellable
+            // mProgressDialog.setCancelable(true);
+
+        }
+
 
         }
         @Override
@@ -204,6 +224,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
             final StringBuilder builder = new StringBuilder();
 
             try {//+CodNumber+
+
                 doc = Jsoup.connect("http://gis.moia.gov.sa/Mosques/Content/images/mosques/"+CodNumber+"/")
                         .userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")
                         .referrer("http://www.google.com")
@@ -222,7 +243,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
                 }
             }
              else{
-                  a = String.valueOf(R.drawable.mosqueicon);
+                  a = String.valueOf(R.drawable.ic_mosque);
                 }
 
                /* Log.d("Elements ",links.toString());
@@ -262,8 +283,12 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
                         Picasso.with(context)
                                 .load(imgurl)
-                                .placeholder(R.drawable.mosqueicon)
-                                .into(imageView); }
+                                .placeholder(R.drawable.ic_mosque)
+                                .into(imageView);
+                    }else {
+
+                        imageView.setBackgroundResource(R.drawable.ic_mosque);
+                    }
 
                     this.mProgressDialog.dismiss();
                 }

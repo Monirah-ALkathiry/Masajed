@@ -22,6 +22,8 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,10 +50,10 @@ public class MosqueSearch extends Fragment {
 
     private  View view;
 
-    private Spinner spinner;
-    private Spinner spinnerCities;
-    private Spinner spinnerDistricts;
-    private Spinner spinnerMosque;
+    private SearchableSpinner spinner;
+    private SearchableSpinner spinnerCities;
+    private SearchableSpinner spinnerDistricts;
+    private SearchableSpinner spinnerMosque;
 
 
     private SearchView searchView;
@@ -127,10 +129,16 @@ public class MosqueSearch extends Fragment {
         textView.setText("");
 
 //-----------------------------------------------------------
-        spinner = (Spinner) view.findViewById(R.id.myspinner);
-        spinnerCities = (Spinner) view.findViewById(R.id.spinnerCities);
-        spinnerDistricts = (Spinner) view.findViewById(R.id.spinnerDistricts);
-        spinnerMosque = (Spinner) view.findViewById(R.id.spinnerMosque);
+        spinner = (SearchableSpinner) view.findViewById(R.id.myspinner);
+        spinnerCities = (SearchableSpinner) view.findViewById(R.id.spinnerCities);
+        spinnerDistricts = (SearchableSpinner) view.findViewById(R.id.spinnerDistricts);
+        spinnerMosque = (SearchableSpinner) view.findViewById(R.id.spinnerMosque);
+
+
+        spinner.setTitle("البحث عن المنطقة");
+        spinnerCities.setTitle("البحث عن المدينة");
+        spinnerDistricts.setTitle("البحث عن الحي");
+        spinnerMosque.setTitle("نوع المسجد");
 
 
         //Jason Object:
@@ -145,6 +153,7 @@ public class MosqueSearch extends Fragment {
         spinner.setAdapter(adapter);
 
 
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -155,7 +164,7 @@ public class MosqueSearch extends Fragment {
                 String RejionID2;
                 RejionID2 = getRijonID(Regions);
 
-                //----------------------Cities -----------------
+    //----------------------Cities -----------------
                  Cities.clear();
                 loadJSONFromAssetCities(RejionID2);
                 System.out.println("--------------------RejionID---------------------------" + RejionID2);
@@ -164,7 +173,7 @@ public class MosqueSearch extends Fragment {
                 ArrayAdapter<String> adapterCities = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, Cities);
                 spinnerCities.setAdapter(adapterCities);
                 System.out.println("-------------------------------------------------------");
-                //------------------------------Select District-----------------------------------------
+    //------------------------------Select District-----------------------------------------
                 spinnerCities.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -175,7 +184,7 @@ public class MosqueSearch extends Fragment {
                         System.out.println("--------------CitieID2---------------------------------" +CitiesId);
 
 
-                        //---------------------Districts-------------------
+    //---------------------Districts-------------------
                           Districts.clear();
 
                         loadJSONFromAssetDistricts(CitieID2);

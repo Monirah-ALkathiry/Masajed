@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import net.alhazmy13.hijridatepicker.date.hijri.HijriDatePickerDialog;
 
@@ -49,13 +50,13 @@ public class DawaSearch extends Fragment implements OnDateSetListener{
 
     private  View view;
 
-    private Spinner spinner;
-    private Spinner spinnerCities;
-    private Spinner spinnerDistricts;
-    private Spinner spinnerActivity;
-    private Spinner spinnerDomain;
-    private Spinner spinnerLanguage;
-    private Spinner spinneroffice;
+    private SearchableSpinner spinner;
+    private SearchableSpinner spinnerCities;
+    private SearchableSpinner spinnerDistricts;
+    private SearchableSpinner spinnerActivity;
+    private SearchableSpinner spinnerDomain;
+    private SearchableSpinner spinnerLanguage;
+    private SearchableSpinner spinneroffice;
     private TextView spinnerfromDate;
     private TextView spinnertoDate;
     private DatePickerDialog picker;
@@ -567,19 +568,28 @@ public class DawaSearch extends Fragment implements OnDateSetListener{
 //----------------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------
-                spinner = (Spinner) view.findViewById(R.id.myspinner);
-                spinnerCities = (Spinner) view.findViewById(R.id.spinnerCities);
-                spinnerDistricts = (Spinner) view.findViewById(R.id.spinnerDistricts);
-                spinnerActivity = (Spinner) view.findViewById(R.id.spinnerActivity);
+                spinner = (SearchableSpinner) view.findViewById(R.id.myspinner);
+                spinnerCities = (SearchableSpinner) view.findViewById(R.id.spinnerCities);
+                spinnerDistricts = (SearchableSpinner) view.findViewById(R.id.spinnerDistricts);
+                spinnerActivity = (SearchableSpinner) view.findViewById(R.id.spinnerActivity);
 
-                spinnerDomain = (Spinner) view.findViewById(R.id.spinnerDomain);
-                spinnerLanguage = (Spinner) view.findViewById(R.id.spinnerLanguage);
-                spinneroffice = (Spinner) view.findViewById(R.id.spinneroffice);
+                spinnerDomain = (SearchableSpinner) view.findViewById(R.id.spinnerDomain);
+                spinnerLanguage = (SearchableSpinner) view.findViewById(R.id.spinnerLanguage);
+                spinneroffice = (SearchableSpinner) view.findViewById(R.id.spinneroffice);
                 spinnerfromDate = (TextView) view.findViewById(R.id.spinnerfromDate);
                 spinnertoDate = (TextView) view.findViewById(R.id.spinnertoDate);
                 //Jason Object:
                 Regions.add(SelectAll);
 
+          //------------------------------------------------------
+                spinner.setTitle("البحث عن المنطقة");
+                spinnerCities.setTitle("البحث عن المدينة");
+                spinnerDistricts.setTitle("البحث عن الحي");
+                spinnerActivity.setTitle("نوع النشاط");
+                spinnerDomain.setTitle("مجال النشاط");
+                spinnerLanguage.setTitle("اللغه");
+                spinneroffice.setTitle("المكتب");
+            //--------------------------------------------------------------
 
                // Regions.clear();
                 loadJSONFromAsset();
