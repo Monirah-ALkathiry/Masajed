@@ -6,14 +6,19 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.apps.noura.masajd.ContactUs.ContactUsActivity;
 import com.apps.noura.masajd.DawaActivity;
 import com.apps.noura.masajd.FavoriteActivity;
 import com.apps.noura.masajd.LoginActivity;
 import com.apps.noura.masajd.MosqueActivity;
+import com.apps.noura.masajd.PrayTime.PrayTime;
 import com.apps.noura.masajd.R;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Monirah on 4/15/2018.
@@ -24,9 +29,6 @@ public class DrawerNavigation {
     public static void enableDrawerNavigation(final Context context , NavigationView view){
 
             view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-
-
-
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     int id = item.getItemId();
@@ -55,6 +57,8 @@ public class DrawerNavigation {
 
 
                         case R.id.contactUs:
+                            Intent ContactUs = new Intent(context,ContactUsActivity.class);
+                            context.startActivity(ContactUs);
                             Toast.makeText(context, "Mosque",Toast.LENGTH_SHORT).show();
 
                             break;
@@ -82,6 +86,11 @@ public class DrawerNavigation {
                         case R.id.aboutApp:
                             Toast.makeText(context, "About App",Toast.LENGTH_SHORT).show();
 
+                            break;
+
+                        case R.id.ic_praytime:
+                            Intent intent4 = new Intent(context, PrayTime.class);//ACTIVITY_NUM = 1
+                            context.startActivity(intent4);
                             break;
 
                         default:

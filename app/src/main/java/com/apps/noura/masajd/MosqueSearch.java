@@ -270,6 +270,7 @@ public class MosqueSearch extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+
         });
 
 
@@ -291,6 +292,9 @@ Sender sender;
         sender = (Sender) getActivity();
     }
 
+
+
+
     @Override
     public void onViewCreated(View view,  Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -310,7 +314,7 @@ Sender sender;
                     String map2;
                     Map<String, Object> map = new HashMap<>();
                     //----
-                    //TODO : Advance Search View Result
+                    //
                     System.out.print(RejionID + "\n" + "  " + "\n"
                             + City + "\n" + "  " + "\n" +
                             Distric + "\n" + "  " + "\n" +
@@ -689,7 +693,7 @@ Sender sender;
                 Map<String, Object> map = new HashMap<>();
 
                     //----
-                    //TODO : Advance Search View Result
+                    //
 
                     if (ministry_region_id == null || City == SelectAll || Distric == SelectAll || MosqueId == SelectAll)
                     {

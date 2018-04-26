@@ -1,11 +1,13 @@
 package com.apps.noura.masajd;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -121,28 +123,60 @@ public class LoginActivity extends AppCompatActivity {
                 //System.out.println(response.body().toString());
                 String Rurl= call.request().url().toString();
                 Log.i("test 22 : ", Rurl);
-                  try {
-                        System.out.println(" : : : : \n" +response.body().toString());
 
-                       JSONObject InfoResponse = new JSONObject(String.valueOf(response.body()));
-                        String usernameR = InfoResponse.getString("FullName");
-                        System.out.println("Welcome"+usernameR);
-                      Toast.makeText(LoginActivity.this,"Welcome"+ usernameR , Toast.LENGTH_SHORT).show();
-                      //2
-                      String jsonData = response.body().toString();
-                      JSONObject Jobject= new JSONObject(jsonData);
-                      String usernameR2  =  "Name:" + Jobject.get("UserName");
-                      System.out.println(usernameR2);
+                try {
 
-                      String username = Jobject.getString("UserName");
-                      System.out.println(username);
+                      if (response.isSuccessful()) {
+                          System.out.println(" : : : : \n" + response.body().toString());
+                          //JSONObject InfoResponse = new JSONObject(String.valueOf(response.body()));
+                          //boolean error = InfoResponse.getBoolean("error");
+
+                          JSONObject InfoResponse = new JSONObject(String.valueOf(response.body()));
+                        //  boolean error = InfoResponse.getBoolean("error");
+
+                              String usernameR = InfoResponse.getString("FullName");
+                              System.out.println("Welcome" + usernameR);
+                              Toast.makeText(LoginActivity.this, "السلام عليكم : "
+                                      + usernameR, Toast.LENGTH_SHORT).show();
+                              //2
+                              String jsonData = response.body().toString();
+                              JSONObject Jobject = new JSONObject(jsonData);
+                              String usernameR2 = "إسم المستخدم :" + Jobject.get("UserName");
+                              System.out.println(usernameR2);
+
+                              String username = Jobject.getString("UserName");
+                              System.out.println(username);
 
 
+                      }else {
 
+                          //String ErrorMsg = InfoResponse.getString("Messsage");
+                          //Toast.makeText(LoginActivity.this,ErrorMsg, Toast.LENGTH_SHORT).show();
+                          // Username or password false, display and an error
+                          AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(LoginActivity.this,R.style.MyDialogTheme);
+                          dlgAlert.setIcon(R.drawable.warning);
+
+                          dlgAlert.setTitle("تنبيه");
+                          dlgAlert.setMessage("الرجاء التاكد من اسم المستخدم و كلمة المرور");
+                          dlgAlert.setPositiveButton("موافق", null);
+                          dlgAlert.setCancelable(true);
+                          dlgAlert.create().show();
+
+                          dlgAlert.setPositiveButton("موافق",
+                                  new DialogInterface.OnClickListener() {
+                                      public void onClick(DialogInterface dialog, int which) {
+
+                                      }
+                                  });
+
+
+                      }
                       //JSONObject Jobject = new JSONObject(response.body().string());
-                   } catch (JSONException e) {
+                   }
+                   catch (JSONException e) {
                        e.printStackTrace();
-                    }
+
+                   }
 /*
                     try {
                     if (response.isSuccessful()) {
@@ -221,7 +255,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
-                System.out.println("DDddddddddddddddddddddddffffffffffffffffffff");
+                System.out.println("there is no connection");
 
             }
 

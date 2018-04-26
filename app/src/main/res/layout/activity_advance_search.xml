@@ -40,17 +40,16 @@
                 android:text="@string/search_Button" />
 
 
-
             <TextView
 
                 android:id="@+id/simpleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
+                android:gravity="center"
                 android:padding="18dip"
                 android:text="تصفية البحث"
                 android:textColor="#fff"
-                android:gravity="center"
                 android:textSize="12dp" />
             <Button
                 android:id="@+id/exit"

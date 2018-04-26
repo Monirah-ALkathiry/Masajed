@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import com.apps.noura.masajd.DawaActivity;
 import com.apps.noura.masajd.FavoriteActivity;
 import com.apps.noura.masajd.MosqueActivity;
+import com.apps.noura.masajd.PrayTime.PrayTime;
 import com.apps.noura.masajd.R;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
@@ -37,10 +38,10 @@ public class BottomNavigationViewHelper {
                 switch (item.getItemId()){
 
 
-                       /* case R.id.ic_praytime:
-                        Intent intent4 = new Intent(context, DawaActivity.class);//ACTIVITY_NUM = 1
+                       case R.id.ic_praytime:
+                        Intent intent4 = new Intent(context, PrayTime.class);//ACTIVITY_NUM = 1
                         context.startActivity(intent4);
-                        break;*/
+                        break;
 
                     case R.id.ic_masijed:
                         Intent intent3 = new Intent(context, MosqueActivity.class);//ACTIVITY_NUM = 2

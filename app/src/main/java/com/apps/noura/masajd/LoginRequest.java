@@ -16,7 +16,8 @@ public interface LoginRequest {
     @FormUrlEncoded
     @Headers({
             "Content-type: application/x-www-form-urlencoded",
-            "APIsKey:M0i@#@pI#2oI7#GiS"
+            "APIsKey:M0i@#@pI#2oI7#GiS",
+            "userType:1"
             })
     @POST("token")
     Call<JsonObject> login(

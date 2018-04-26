@@ -56,4 +56,16 @@
         <item name="colorButtonNormal">@color/orange</item>
         <item name="colorControlHighlight">@color/white</item>
     </style>
+
+<!-- Log in Pad Login -->
+  <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+
+        <item name="android:background">@color/red</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:padding">1dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+
+    </style>
 </resources>

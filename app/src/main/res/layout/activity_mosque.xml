@@ -9,8 +9,6 @@
     android:layout_height="match_parent"
     android:background="@android:color/background_light">
 
-
-
 <LinearLayout
 
     xmlns:android="http://schemas.android.com/apk/res/android"
