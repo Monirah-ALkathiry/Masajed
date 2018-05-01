@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import com.apps.noura.masajd.R;
 import com.apps.noura.masajd.Utils.BottomNavigationViewHelper;
 import com.apps.noura.masajd.Utils.DrawerNavigation;
+import com.apps.noura.masajd.Utils.SharedPreferencesConfig;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class ContactUsActivity extends AppCompatActivity {
@@ -25,6 +26,10 @@ public class ContactUsActivity extends AppCompatActivity {
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
 //--------------------------------------
+
+
+    //sharedpreferences
+    private SharedPreferencesConfig sharedConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,19 @@ public class ContactUsActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
 
         navigationView = (NavigationView)findViewById(R.id.navegation);
+
+        //Check If User Login
+        sharedConfig = new SharedPreferencesConfig(getApplicationContext());
+        if(sharedConfig.readLoginStatus())
+        {
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+            //finish();
+        }
+        else {
+
+            navigationView.getMenu().findItem(R.id.logOut).setVisible(false);
+
+        }
         setupDrawerNavigation();
 
 
@@ -88,5 +106,13 @@ public class ContactUsActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
 
+        if(sharedConfig.readLoginStatus())
+        {
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+        }
+    }
 }

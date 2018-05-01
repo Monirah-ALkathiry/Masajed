@@ -102,7 +102,8 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         -->
         <activity android:name=".PrayTime.PrayTime" />
-        <activity android:name=".ContactUs.ContactUsActivity"></activity>
+        <activity android:name=".ContactUs.ContactUsActivity" />
+        <activity android:name=".LogOut"></activity>
     </application>
 
 </manifest>

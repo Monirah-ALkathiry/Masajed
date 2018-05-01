@@ -26,6 +26,7 @@ import com.apps.noura.masajd.GPSTracker;
 import com.apps.noura.masajd.R;
 import com.apps.noura.masajd.Utils.BottomNavigationViewHelper;
 import com.apps.noura.masajd.Utils.DrawerNavigation;
+import com.apps.noura.masajd.Utils.SharedPreferencesConfig;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.io.IOException;
@@ -52,6 +53,10 @@ public class PrayTime extends AppCompatActivity {
     private static final String TAG = "PrayTimeActivity";//Used in BottomNav
     private static final int ACTIVITY_NUM = 1;//Used in BottomNav
 
+
+
+    //sharedpreferences
+    private SharedPreferencesConfig sharedConfig;
     //-------Nav  drawerLayout
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -110,6 +115,20 @@ public class PrayTime extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
 
         navigationView = (NavigationView)findViewById(R.id.navegation);
+
+
+        //Check If User Login
+        sharedConfig = new SharedPreferencesConfig(getApplicationContext());
+        if(sharedConfig.readLoginStatus())
+        {
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+            //finish();
+        }
+        else {
+
+            navigationView.getMenu().findItem(R.id.logOut).setVisible(false);
+
+        }
         setupDrawerNavigation();
 
         //-------------------Bottom Nav:
@@ -228,5 +247,15 @@ public class PrayTime extends AppCompatActivity {
         //MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         //  menuItem.setChecked(true);
 
+    }
+
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if(sharedConfig.readLoginStatus())
+        {
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+        }
     }
 }

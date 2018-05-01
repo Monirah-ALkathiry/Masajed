@@ -1,11 +1,13 @@
 package com.apps.noura.masajd.Utils;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import com.apps.noura.masajd.ContactUs.ContactUsActivity;
 import com.apps.noura.masajd.DawaActivity;
 import com.apps.noura.masajd.FavoriteActivity;
+import com.apps.noura.masajd.LogOut;
 import com.apps.noura.masajd.LoginActivity;
 import com.apps.noura.masajd.MosqueActivity;
 import com.apps.noura.masajd.PrayTime.PrayTime;
@@ -28,6 +31,8 @@ public class DrawerNavigation {
 
     public static void enableDrawerNavigation(final Context context , NavigationView view){
 
+
+
             view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -35,11 +40,12 @@ public class DrawerNavigation {
 
                     // set item as selected to persist highlight
                     item.setChecked(true);
-                    
+
 
                    // System.out.print("\n IDI ID :" + id +"\n");
                     switch(id)
                     {
+
                         case R.id.login:
 
                             Toast.makeText(context, "LogIn",Toast.LENGTH_SHORT).show();
@@ -47,6 +53,19 @@ public class DrawerNavigation {
                             context.startActivity(LoginIntent);
                             break;
 
+
+                        case R.id.logOut:
+
+                            AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(context,R.style.MyDialogTheme);
+                            dlgAlert.setTitle("");
+                            dlgAlert.setMessage("قمت بتسجيل الخروج");
+                            dlgAlert.setCancelable(true);
+                            dlgAlert.create().show();
+                            Intent LogoutIntent = new Intent(context,LogOut.class);
+                            context.startActivity(LogoutIntent);
+
+                            //Toast.makeText(context, "logout",Toast.LENGTH_SHORT).show();
+                            break;
 
                         case R.id.info:
                             final String websiteurl= "http://www.moia.gov.sa/AboutMinistry/Pages/AboutMinistry.aspx";
@@ -102,4 +121,7 @@ public class DrawerNavigation {
             });
 
     }
+
+
+
 }

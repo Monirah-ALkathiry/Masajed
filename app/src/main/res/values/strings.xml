@@ -11,9 +11,17 @@
     <string name="passerr">كلمة المرور يجب أن تكون 6 خانات وتحوي أحرف كبيرة وصغيرة و رموز </string>
     <string name="cnfpasserr">كلمة المرور غير متطابقة</string>
     <string name="login">تسجيل الدخول</string>
+    <string name="logOut">تسجيل الخروج</string>
+
     <string name="notification">الرجاء تسجيل الدخول لتتمكن من ارسال ملاحظة</string>
     <string name="Register">مستخدم جديد؟</string>
     <string name="ForgotPassword">هل نسيت كلمة المرور؟</string>
+
+
+    <!-- LogIn SharedPrefrencess -->
+
+    <string name="login_preferences">com.apps.noura.masajd_shared_preferences_LogIn</string>
+    <string name="login_status_preferences">com.apps.noura.masajd_shared_preferences_status</string>
 
     <!-- Monirah -->
     <string name="search">أدخل كلمة البحث</string>

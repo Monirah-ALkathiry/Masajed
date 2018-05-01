@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.apps.noura.masajd.Utils.BottomNavigationViewHelper;
 import com.apps.noura.masajd.Utils.DrawerNavigation;
+import com.apps.noura.masajd.Utils.SharedPreferencesConfig;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
@@ -56,6 +57,8 @@ public class MosqueActivity extends AppCompatActivity implements
     private ViewPager mviewPager;
 
 
+    //sharedpreferences
+    private SharedPreferencesConfig sharedConfig;
 
     ///--------------MAP------------------------------
     Intent intentThatCalled;
@@ -118,6 +121,20 @@ public class MosqueActivity extends AppCompatActivity implements
     //Navigation:----------------
         navigationView = (NavigationView)findViewById(R.id.navegation);
 
+        //Check if User Loge in Or not:
+//Check if User Loge in Or not:
+
+
+        sharedConfig = new SharedPreferencesConfig(getApplicationContext());
+        if(sharedConfig.readLoginStatus())
+        {
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+        }
+        else {
+
+            navigationView.getMenu().findItem(R.id.logOut).setVisible(false);
+
+        }
         setupDrawerNavigation();
 
         /*
@@ -467,7 +484,7 @@ public class MosqueActivity extends AppCompatActivity implements
 
             @Override
             public void onFailure(Call<List<MosquesLatLng>> call, Throwable t) {
-                System.out.print(":( :( \n");
+                System.out.print("لا يوجد اتصال \n");
 
             }
         });
@@ -487,6 +504,10 @@ public class MosqueActivity extends AppCompatActivity implements
       super.onStart();
     //end check if Not Null
     //setupViewPager(mviewPager);
+    if(sharedConfig.readLoginStatus())
+    {
+        navigationView.getMenu().findItem(R.id.login).setVisible(false);
+    }
 
  }
 
@@ -495,6 +516,12 @@ public class MosqueActivity extends AppCompatActivity implements
         super.onPostResume();
         setupViewPager(mviewPager);
         mviewPager.setCurrentItem(1);
+
+        //Update Drawer Nav
+        if(sharedConfig.readLoginStatus())
+        {
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+        }
     }
 
 
@@ -552,9 +579,13 @@ public class MosqueActivity extends AppCompatActivity implements
 
     //Drawer Nav
     private void setupDrawerNavigation() {
-        Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
+        //Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
+//Check if User Loge in Or not:
 
-        DrawerNavigation.enableDrawerNavigation(this, navigationView);
+
+            DrawerNavigation.enableDrawerNavigation(this, navigationView);
+
+
       //  Menu menu = navigationView.getMenu();
         //MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
        // menuItem.setChecked(true);

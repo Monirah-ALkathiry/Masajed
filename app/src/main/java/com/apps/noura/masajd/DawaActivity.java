@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.apps.noura.masajd.Utils.BottomNavigationViewHelper;
 import com.apps.noura.masajd.Utils.DrawerNavigation;
+import com.apps.noura.masajd.Utils.SharedPreferencesConfig;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
@@ -62,6 +63,9 @@ public class DawaActivity extends AppCompatActivity  implements
 
     private DawaAdvanceSearchClint dawaAdvanceSearchClint;
 
+
+    //sharedpreferences
+    private SharedPreferencesConfig sharedConfig;
     //-------------------GPS-------------------------------------
     private static final int REQUEST_CODE_PERMISSION = 2;
     String mPermission = Manifest.permission.ACCESS_FINE_LOCATION;
@@ -119,6 +123,20 @@ private ImageButton imageButton ;
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         navigationView = (NavigationView)findViewById(R.id.navegation);
+
+        //Check If User Login
+        sharedConfig = new SharedPreferencesConfig(getApplicationContext());
+        if(sharedConfig.readLoginStatus())
+        {
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+            //finish();
+        }
+        else {
+
+            navigationView.getMenu().findItem(R.id.logOut).setVisible(false);
+
+        }
+
         setupDrawerNavigation();
 
         //-------------------Bottom Nav:
@@ -499,7 +517,10 @@ private ImageButton imageButton ;
     protected void onStart() {
         super.onStart();
         //end check if Not Null
-
+        if(sharedConfig.readLoginStatus())
+        {
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+        }
 
     }
 
@@ -510,6 +531,11 @@ private ImageButton imageButton ;
 
         setupViewPager(mviewPager);
         mviewPager.setCurrentItem(1);
+
+        if(sharedConfig.readLoginStatus())
+        {
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+        }
     }
 
     private void setupViewPager(ViewPager viewPager){

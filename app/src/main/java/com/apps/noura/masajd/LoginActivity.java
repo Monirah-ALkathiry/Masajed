@@ -6,31 +6,19 @@ import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.android.volley.RequestQueue;
-//import com.android.volley.Response;
-//import com.android.volley.toolbox.Volley;
-
-import com.google.gson.Gson;
+import com.apps.noura.masajd.Utils.SharedPreferencesConfig;
 import com.google.gson.JsonObject;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,6 +26,12 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
+
+
+
+    //sharedpreferences
+    private SharedPreferencesConfig sharedConfig;
+
      /*  Old login Version
     //create Retrofit instance
     private static Retrofit.Builder builder = new Retrofit.Builder()
@@ -58,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +63,17 @@ public class LoginActivity extends AppCompatActivity {
         final Button bLogin = (Button) findViewById(R.id.bLogin);
         final TextView registerLink = (TextView) findViewById(R.id.tvRigisterHere);
         final TextView forgetPassLink = (TextView) findViewById(R.id.forgetPass);
+
+
+        //Check if User Loge in Or not:
+        sharedConfig = new SharedPreferencesConfig(getApplicationContext());
+
+        if(sharedConfig.readLoginStatus())
+        {
+            Toast.makeText(this,"أهلا بك ",Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
 
         //Register link open RegisterActivity
         registerLink.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +110,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
 //private static String usernameR;
@@ -121,8 +129,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 //System.out.println(response.body().toString());
-                String Rurl= call.request().url().toString();
-                Log.i("test 22 : ", Rurl);
+                //String Rurl= call.request().url().toString();
+                //Log.i("test 22 : ", Rurl);
 
                 try {
 
@@ -135,17 +143,20 @@ public class LoginActivity extends AppCompatActivity {
                         //  boolean error = InfoResponse.getBoolean("error");
 
                               String usernameR = InfoResponse.getString("FullName");
-                              System.out.println("Welcome" + usernameR);
+                              //System.out.println("Welcome" + usernameR);
                               Toast.makeText(LoginActivity.this, "السلام عليكم : "
                                       + usernameR, Toast.LENGTH_SHORT).show();
                               //2
                               String jsonData = response.body().toString();
                               JSONObject Jobject = new JSONObject(jsonData);
                               String usernameR2 = "إسم المستخدم :" + Jobject.get("UserName");
-                              System.out.println(usernameR2);
+                             // System.out.println(usernameR2);
 
                               String username = Jobject.getString("UserName");
                               System.out.println(username);
+                        //--------------------------------
+                          sharedConfig.writeLoginStatus(true);
+                          finish();
 
 
                       }else {

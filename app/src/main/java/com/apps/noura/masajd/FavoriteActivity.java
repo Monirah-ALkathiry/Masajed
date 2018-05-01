@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.apps.noura.masajd.Utils.BottomNavigationViewHelper;
 import com.apps.noura.masajd.Utils.DrawerNavigation;
+import com.apps.noura.masajd.Utils.SharedPreferencesConfig;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class FavoriteActivity extends AppCompatActivity {
@@ -39,6 +40,9 @@ public class FavoriteActivity extends AppCompatActivity {
     private FavoriteAdapter favoriteAdapter;
     private ViewPager viewPager;
 
+
+    //sharedpreferences
+    private SharedPreferencesConfig sharedConfig;
 
     //-------Nav  drawerLayout
     private DrawerLayout drawerLayout;
@@ -76,6 +80,21 @@ public class FavoriteActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
 
         navigationView = (NavigationView)findViewById(R.id.navegation);
+
+
+        //Check If User Login
+        sharedConfig = new SharedPreferencesConfig(getApplicationContext());
+        if(sharedConfig.readLoginStatus())
+        {
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+            //finish();
+        }
+        else {
+
+            navigationView.getMenu().findItem(R.id.logOut).setVisible(false);
+
+        }
+
         setupDrawerNavigation();
 
         //-------------------Bottom Nav:
@@ -190,5 +209,16 @@ public class FavoriteActivity extends AppCompatActivity {
        // MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
        // menuItem.setChecked(true);
 
+    }
+
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+
+        if(sharedConfig.readLoginStatus())
+        {
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+        }
     }
 }
