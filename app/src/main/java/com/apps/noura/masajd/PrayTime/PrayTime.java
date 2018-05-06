@@ -35,6 +35,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+
+//pray time code
 public class PrayTime extends AppCompatActivity {
 
     private TextView txtPrayerTime1,txtPrayerTime2, txtPrayerTime3,
@@ -55,7 +57,7 @@ public class PrayTime extends AppCompatActivity {
 
 
 
-    //sharedpreferences
+    //shared preferences
     private SharedPreferencesConfig sharedConfig;
     //-------Nav  drawerLayout
     private DrawerLayout drawerLayout;
