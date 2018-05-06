@@ -51,7 +51,8 @@
                 android:layout_weight="0.6"
                 android:paddingLeft="10dp"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/markericonsmall"/>
+                android:src="@drawable/location"
+                android:tint="@color/colorPrimary"/>
 
         </LinearLayout>
 
@@ -85,8 +86,8 @@
                 android:layout_weight="0.6"
                 android:paddingLeft="10dp"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/ic_phone_black_24dp"
-                />
+                android:src="@drawable/phone"
+                android:tint="@color/colorPrimary"/>
         </LinearLayout>
         <!-- create a Linear Layout with horizontal orientation and weightSum property -->
         <!-- third Child Layout -->
@@ -121,8 +122,8 @@
                 android:layout_weight="0.6"
                 android:paddingLeft="10dp"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/messages"
-                />
+                android:src="@drawable/email"
+                android:tint="@color/colorPrimary"/>
         </LinearLayout>
 
 

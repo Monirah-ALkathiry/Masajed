@@ -9,294 +9,300 @@
     android:layout_height="match_parent"
     android:background="@android:color/background_light">
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#fcfcfc"
-        android:gravity="center"
-        android:id="@+id/pt"
-        android:padding="10dp"
-        android:fitsSystemWindows="true"
-        tools:context="com.apps.noura.masajd.PrayerTime.PrayTimeActivity">
-
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:text=" مواقيت الصلاة في مدينة "/>
-
-        <!-- green Line under text -->
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/appbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/appbar_padding_top"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            android:gravity="right"
-            tools:ignore="RtlHardcoded">
-        </android.support.design.widget.AppBarLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:clipToPadding="false"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="15dp">
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/fajer"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_margin="10dp"
-                android:clickable="false"
-                android:foreground="?android:attr/selectableItemBackground">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    tools:ignore="UseCompoundDrawables">
-
-                    <TextView
-                        android:id="@+id/txtPrayerTime1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        android:textColor="@color/colorPrimary"
-                        android:textStyle="bold"
-                        android:textSize="16sp"/>
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="50dp"
-                        android:src="@drawable/ic_icon_fajr"
-                        android:contentDescription="TODO" />
-
-
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
+        android:layout_height="match_parent">
 
 
         <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:clipToPadding="false"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#fcfcfc"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="15dp">
+            android:id="@+id/pt"
+            android:padding="10dp"
+            android:fitsSystemWindows="true"
+            tools:context="com.apps.noura.masajd.PrayerTime.PrayTimeActivity">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/sunset"
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text=" مواقيت الصلاة في مدينة "/>
+
+            <!-- green Line under text
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/appbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/appbar_padding_top"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                android:gravity="right"
+                tools:ignore="RtlHardcoded">
+            </android.support.design.widget.AppBarLayout>-->
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_margin="10dp"
-                android:clickable="false"
-                android:foreground="?android:attr/selectableItemBackground">
+                android:clipToPadding="false"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="15dp">
 
-                <LinearLayout
+                <android.support.v7.widget.CardView
+                    android:id="@+id/fajer"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    tools:ignore="UseCompoundDrawables">
-                    <TextView
-                        android:id="@+id/txtPrayerTime2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimary"
-                        android:textStyle="bold"
-                        android:textSize="16sp"/>
+                    android:layout_margin="10dp"
+                    android:clickable="false"
+                    android:foreground="?android:attr/selectableItemBackground">
 
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="50dp"
-                        android:src="@drawable/ic_icon_sunrise"
-                        android:contentDescription="TODO" />
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        tools:ignore="UseCompoundDrawables">
+
+                        <TextView
+                            android:id="@+id/txtPrayerTime1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:textSize="16sp"/>
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="50dp"
+                            android:src="@drawable/ic_icon_fajr"
+                            android:contentDescription="TODO" />
 
 
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:clipToPadding="false"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="15dp">
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/dohor"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_margin="10dp"
-                android:clickable="false"
-                android:foreground="?android:attr/selectableItemBackground">
+                android:clipToPadding="false"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="15dp">
 
-                <LinearLayout
+                <android.support.v7.widget.CardView
+                    android:id="@+id/sunset"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    tools:ignore="UseCompoundDrawables">
-                    <TextView
-                        android:id="@+id/txtPrayerTime3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimary"
-                        android:textStyle="bold"
-                        android:textSize="16sp"/>
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="50dp"
-                        android:src="@drawable/ic_icon_dhuhr"
-                        android:contentDescription="TODO" />
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
+                    android:layout_margin="10dp"
+                    android:clickable="false"
+                    android:foreground="?android:attr/selectableItemBackground">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        tools:ignore="UseCompoundDrawables">
+                        <TextView
+                            android:id="@+id/txtPrayerTime2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:textSize="16sp"/>
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="50dp"
+                            android:src="@drawable/ic_icon_sunrise"
+                            android:contentDescription="TODO" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
 
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:clipToPadding="false"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="15dp">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/Aser"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_margin="10dp"
-                android:clickable="false"
-                android:foreground="?android:attr/selectableItemBackground">
+                android:clipToPadding="false"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="15dp">
 
-                <LinearLayout
+                <android.support.v7.widget.CardView
+                    android:id="@+id/dohor"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    tools:ignore="UseCompoundDrawables">
-                    <TextView
-                        android:id="@+id/txtPrayerTime4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimary"
-                        android:textStyle="bold"
-                        android:textSize="16sp"/>
+                    android:layout_margin="10dp"
+                    android:clickable="false"
+                    android:foreground="?android:attr/selectableItemBackground">
 
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="50dp"
-                        android:src="@drawable/ic_icon_asr"
-                        android:contentDescription="TODO" />
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        tools:ignore="UseCompoundDrawables">
+                        <TextView
+                            android:id="@+id/txtPrayerTime3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:textSize="16sp"/>
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="50dp"
+                            android:src="@drawable/ic_icon_dhuhr"
+                            android:contentDescription="TODO" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
 
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:clipToPadding="false"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="15dp">
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/Maghreb"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_margin="10dp"
-                android:clickable="false"
-                android:foreground="?android:attr/selectableItemBackground">
+                android:clipToPadding="false"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="15dp">
 
-                <LinearLayout
+                <android.support.v7.widget.CardView
+                    android:id="@+id/Aser"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    tools:ignore="UseCompoundDrawables">
-                    <TextView
-                        android:id="@+id/txtPrayerTime6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimary"
-                        android:textStyle="bold"
-                        android:textSize="16sp"/>
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="50dp"
-                        android:src="@drawable/ic_icon_maghrib"
-                        android:contentDescription="TODO" />
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
+                    android:layout_margin="10dp"
+                    android:clickable="false"
+                    android:foreground="?android:attr/selectableItemBackground">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        tools:ignore="UseCompoundDrawables">
+                        <TextView
+                            android:id="@+id/txtPrayerTime4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:textSize="16sp"/>
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="50dp"
+                            android:src="@drawable/ic_icon_asr"
+                            android:contentDescription="TODO" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
 
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:clipToPadding="false"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="15dp">
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/Isha"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_margin="10dp"
-                android:clickable="false"
-                android:foreground="?android:attr/selectableItemBackground">
+                android:clipToPadding="false"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="15dp">
 
-                <LinearLayout
+                <android.support.v7.widget.CardView
+                    android:id="@+id/Maghreb"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    tools:ignore="UseCompoundDrawables">
-                    <TextView
-                        android:id="@+id/txtPrayerTime7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimary"
-                        android:textStyle="bold"
-                        android:textSize="16sp"/>
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="50dp"
-                        android:src="@drawable/ic_icon_isha"
-                        android:contentDescription="TODO" />
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
+                    android:layout_margin="10dp"
+                    android:clickable="false"
+                    android:foreground="?android:attr/selectableItemBackground">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        tools:ignore="UseCompoundDrawables">
+                        <TextView
+                            android:id="@+id/txtPrayerTime6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:textSize="16sp"/>
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="50dp"
+                            android:src="@drawable/ic_icon_maghrib"
+                            android:contentDescription="TODO" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:clipToPadding="false"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="15dp">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/Isha"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_margin="10dp"
+                    android:clickable="false"
+                    android:foreground="?android:attr/selectableItemBackground">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        tools:ignore="UseCompoundDrawables">
+                        <TextView
+                            android:id="@+id/txtPrayerTime7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:textSize="16sp"/>
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="50dp"
+                            android:src="@drawable/ic_icon_isha"
+                            android:contentDescription="TODO" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+
         </LinearLayout>
 
-
-
+    </ScrollView>
 
 
     <RelativeLayout
@@ -312,7 +318,7 @@
         <include layout="@layout/layout_bottom_navigation"/>
     </RelativeLayout>
 
-  </LinearLayout>
+
     <android.support.design.widget.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -321,4 +327,5 @@
         app:headerLayout="@layout/nav_header_main"
         android:id="@+id/navegation">
     </android.support.design.widget.NavigationView>
+
 </android.support.v4.widget.DrawerLayout>

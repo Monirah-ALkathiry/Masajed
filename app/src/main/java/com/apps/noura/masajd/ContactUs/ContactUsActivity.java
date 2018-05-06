@@ -19,7 +19,7 @@ public class ContactUsActivity extends AppCompatActivity {
 
 
     private static final String TAG = "ContactUsActivity";//Used in BottomNav
-    //private static final int ACTIVITY_NUM = 1;//Used in BottomNav
+    private static final int ACTIVITY_NUM = 1;//Used in BottomNav
 
     //-------Nav  drawerLayout
     private DrawerLayout drawerLayout;
@@ -91,8 +91,8 @@ public class ContactUsActivity extends AppCompatActivity {
         BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
         BottomNavigationViewHelper.enableNavigation(this, bottomNavigationViewEx);
         Menu menu = bottomNavigationViewEx.getMenu();
-        //MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
-        // menuItem.setChecked(true);
+        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+        menuItem.setChecked(false);
     }
 
     //Drawer Nav
