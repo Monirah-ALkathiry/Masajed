@@ -36,6 +36,8 @@ import java.util.List;
 
 import android.app.ProgressDialog;
 
+import dmax.dialog.SpotsDialog;
+
 
 /**
  * Created by Monirah on 14/12/17.
@@ -78,9 +80,10 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
     public void onBindViewHolder(final MosqueViewList holder, final int position) {
 
         holder.MosqueCode = (mosquesLatLngs.get(position).getCode());
-        System.out.println(holder.imageView + " holder.imageView ");
+        //System.out.println(holder.imageView + " holder.imageView ");
 
         // ((MosqueViewList) holder).FillList(position);
+
         holder.mTextView.setText(mosquesLatLngs.get(position).getMosqueName());
         holder.InfoTextView.setText(mosquesLatLngs.get(position).getCityVillage());
         holder.MosqueDistrict.setText(mosquesLatLngs.get(position).getDistrict());
@@ -106,7 +109,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         double dk = dm / 10.0;
 
         //rad * 180.0 / Math.PI
-        System.out.println(" Distance is :) :) :0  ******* " + distance  + "\n d by meeter :" +dm + "\n In Kilo **********: " +dk );
+      //  System.out.println(" Distance is :) :) :0  ******* " + distance  + "\n d by meeter :" +dm + "\n In Kilo **********: " +dk );
 
         //Convert To String:
         dk = Math.floor(dk * 100) / 100;
@@ -121,7 +124,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
             public void onClick(View view) {
                 holder.cardView.setCardBackgroundColor(Color.parseColor("#D3D3D3"));
                 //view.setBackgroundColor(grey);
-                Toast.makeText(context, "Click", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Click", Toast.LENGTH_SHORT).show();
                 //Create Object From Activity:
                 Intent intent = new Intent(context, MosqueInformationActivity.class);
 
@@ -152,7 +155,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
        ParseH.mos(holder.MosqueCode,holder.imageView);
        ParseH.execute();
 
-        System.out.println(ParseH.a + " LINK ");
+       // System.out.println(ParseH.a + " LINK ");
     }
 
 
@@ -167,21 +170,20 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
     class ParseHTML extends AsyncTask<String,Void,String>{
 
-        Document doc = null;
+        private Document doc = null;
         private String a;
-        String CodNumber;
-        ImageView imageView;
-        ProgressDialog mProgressDialog;
-        ProgressBar progressBar;
-        String imgurl;
-        Elements links;
+        private String CodNumber;
+        private  ImageView imageView;
+        private SpotsDialog mProgressDialog;
+        private String imgurl;
+        private Elements links;
       //  Bitmap bitmap;
 
         private void  mos( String MosquCode , ImageView img) {
             this.CodNumber = MosquCode;
-            System.out.println(CodNumber + " Mosque Code Number");
+            //System.out.println(CodNumber + " Mosque Code Number");
             this.imageView = img;
-            System.out.println(imageView + " holder.imageView ");
+           // System.out.println(imageView + " holder.imageView ");
         }
 
 
@@ -196,14 +198,13 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
          }
         else {
 
-         mProgressDialog = new ProgressDialog(context);
-        // Set progress style horizontal
-            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        // Set the maximum value of progress
-            mProgressDialog.setMax(100);
-            mProgressDialog.setIcon(0);
+         mProgressDialog = new SpotsDialog(context,R.style.Progress_Dialog);
 
-            mProgressDialog.setIndeterminate(false);
+            // Set progress style horizontal
+           // mProgressDialog.setProgressStyle(R.style.Progress_Dialog);
+
+
+           // mProgressDialog.setIndeterminate(false);
             mProgressDialog.show();
 
            // mProgressDialog.setTitle("جاري التحميل");
@@ -229,12 +230,11 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
                         .userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")
                         .referrer("http://www.google.com")
                         .get();
-                Log.d("EXAMPLE " , doc.toString());
+              //  Log.d("EXAMPLE " , doc.toString());
                 links = doc.getElementsByTag("a");
 
-                Log.d("EXAMPLE " , CodNumber);
-                System.out.print("Array Size :" + links.size() + "\n");
-                //TODO : Check if there is no image:
+                //Log.d("EXAMPLE " , CodNumber);
+               // System.out.print("Array Size :" + links.size() + "\n");
 
             if(links.size()>=2) {
                 if (links.get(1).attr("href").endsWith(".JPG")) {
@@ -278,8 +278,8 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
 
                     if(doc != null){
-                        Log.d("IMG :  ", "Download Image" +a);
-                        System.out.println(a + " New Link " +CodNumber+ "  CODE NUMBER\n" +imgurl);
+                       // Log.d("IMG :  ", "Download Image" +a);
+                       // System.out.println(a + " New Link " +CodNumber+ "  CODE NUMBER\n" +imgurl);
 
                         Picasso.with(context)
                                 .load(imgurl)
@@ -337,13 +337,6 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         private String MosqueCode;//Form API To IMAGE VIEW
 
 
-        //Image :
-
-       // private String i="2066";
-      // private String url;
-     //   private String url;
-//="http://gis.moia.gov.sa/Mosques/Content/images/mosques/1234";
-
         public MosqueViewList(View view) {
             super(view);
             mTextView = (TextView) view.findViewById(R.id.MosqueName);
@@ -352,24 +345,15 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
             MosqueDistrict =(TextView) view.findViewById(R.id.District);
             linearLayout = (LinearLayout) view.findViewById(R.id.linearLayout);
             Distance = (TextView) view.findViewById(R.id.Distance);
-
-
             cardView = (CardView) view.findViewById(R.id.cardView);
 
         }
-        public void FillList(int position) {
 
-
-                  }
 
         @Override
         public void onClick(View view) {
 
         }
-
-
-
-
 
 
     }//end Inner Class
@@ -379,7 +363,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
 // String NewURL = extractImageUrl("http://gis.moia.gov.sa/Mosques/Content/images/mosques/"+holder.MosqueCode+"/");
 //System.out.println("NewURL : "  + NewURL +"\n\n\n");
-//TODO : Get Mosque Image
+//
 
        /* new Thread(new Runnable() {
             Bitmap bitmap;

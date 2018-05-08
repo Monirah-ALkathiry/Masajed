@@ -3,16 +3,23 @@ package com.apps.noura.masajd;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.apps.noura.masajd.Utils.DrawerNavigation;
 import com.apps.noura.masajd.Utils.SharedPreferencesConfig;
 import com.google.gson.JsonObject;
 
@@ -27,6 +34,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
+    //-------Nav  drawerLayout
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+    private NavigationView navigationView;
+    //--------------------------------------
 
 
     //sharedpreferences
@@ -65,14 +77,42 @@ public class LoginActivity extends AppCompatActivity {
         final TextView forgetPassLink = (TextView) findViewById(R.id.forgetPass);
 
 
+        //Navigation:----------------
+        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+
+        drawerLayout = (DrawerLayout)findViewById(R.id.DrawerLayout);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.open, R.string.close);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        navigationView = (NavigationView)findViewById(R.id.navegation);
+
+
+        //Check If User Login
+        sharedConfig = new SharedPreferencesConfig(getApplicationContext());
+
+        setupDrawerNavigation();
+
+
         //Check if User Loge in Or not:
         sharedConfig = new SharedPreferencesConfig(getApplicationContext());
 
         if(sharedConfig.readLoginStatus())
         {
             Toast.makeText(this,"أهلا بك ",Toast.LENGTH_SHORT).show();
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
             finish();
-        }
+
+        }else {
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+            navigationView.getMenu().findItem(R.id.logOut).setVisible(false);
+            }
 
 
         //Register link open RegisterActivity
@@ -274,6 +314,28 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    //Drawer Nav
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(actionBarDrawerToggle.onOptionsItemSelected(item))
+            return true;
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    //Drawer Nav
+    private void setupDrawerNavigation() {
+        //Log.d("", "setupBottomNavigationView: setting up BottomNavigationView");
+
+        DrawerNavigation.enableDrawerNavigation(this, navigationView);
+        //Menu menu = navigationView.getMenu();
+        // MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+        // menuItem.setChecked(true);
+
+    }
 
 }
 

@@ -148,8 +148,8 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
             @Override
             public void passData(List<MosquesLatLng> mosquesLatLngs) {
                 NewmosquesLatLngs = mosquesLatLngs;
-                Toast.makeText(getContext(),
-                        "From Inter_Face\n " + mosquesLatLngs.get(0).getMosqueName(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(),
+                  //      "From Inter_Face\n " + mosquesLatLngs.get(0).getMosqueName(), Toast.LENGTH_SHORT).show();
                 onResume();
             }
 
@@ -406,7 +406,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
                     public void onInfoWindowClick(Marker marker) {
                         MosquesLatLng infoAttached = (MosquesLatLng) marker.getTag();
 
-                        Toast.makeText(getContext(), "Test_Toast_Massage: " + infoAttached.getCode() + "  " + infoAttached.getMosqueName(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getContext(), "Test_Toast_Massage: " + infoAttached.getCode() + "  " + infoAttached.getMosqueName(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getContext(), MosqueInformationActivity.class);
 
 

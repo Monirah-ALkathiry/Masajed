@@ -14,7 +14,8 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_marginBottom="20dp"
-            android:layout_gravity="right">
+            android:layout_gravity="right"
+            tools:ignore="RtlHardcoded">
 
    <TableRow android:layout_marginBottom="3.5dp" >
         <TextView
@@ -25,10 +26,8 @@
             android:text="@string/Null"
             android:textColor="@color/black"
             android:padding="18dip"
-            android:background="@color/lightgray"
-            android:textSize="12dp"/>
-
-
+            android:background="@drawable/list_shape"
+            android:textSize="14sp"/>
 
 
         <TextView
@@ -36,12 +35,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/MosqueType"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/button_shape"
             android:padding="18dip"
             android:textColor="#fff"
-            android:textSize="12dp"
-            />
-                </TableRow>
+            android:textSize="14sp" />
+           </TableRow>
 
 
 
@@ -53,18 +51,18 @@
             android:text="@string/Null"
             android:textColor="@color/black"
             android:padding="18dip"
-            android:background="@color/lightgray"
-            android:textSize="12dp"/>
+            android:background="@drawable/list_shape"
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/Mosque_Region"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/MosqueRegion"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/button_shape"
             android:padding="18dip"
             android:textColor="#fff"
-            android:textSize="12dp"/>
+            android:textSize="14sp"/>
 
                 </TableRow>
 
@@ -77,18 +75,18 @@
             android:text="@string/Null"
             android:textColor="@color/black"
             android:padding="18dip"
-            android:background="@color/lightgray"
-            android:textSize="12dp"/>
+            android:background="@drawable/list_shape"
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/City_Village"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/CityVillage"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/button_shape"
             android:padding="18dip"
             android:textColor="#fff"
-            android:textSize="12dp"/>
+            android:textSize="14sp"/>
 
        </TableRow>
 
@@ -100,18 +98,18 @@
             android:text="@string/Null"
             android:textColor="@color/black"
             android:padding="18dip"
-            android:background="@color/lightgray"
-            android:textSize="12dp"/>
+            android:background="@drawable/list_shape"
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/District_Tag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/District"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/button_shape"
             android:padding="18dip"
             android:textColor="#fff"
-            android:textSize="12dp"/>
+            android:textSize="14sp"/>
 
      </TableRow>
 
@@ -123,18 +121,18 @@
             android:text="@string/Null"
             android:textColor="@color/black"
             android:padding="18dip"
-            android:background="@color/lightgray"
-            android:textSize="12dp"/>
+            android:background="@drawable/list_shape"
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/Street_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/StreetName"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/button_shape"
             android:padding="18dip"
             android:textColor="#fff"
-            android:textSize="12dp"/>
+            android:textSize="14sp"/>
                 </TableRow>
 
                 <TableRow android:layout_marginBottom="3.5dp" >
@@ -145,8 +143,8 @@
             android:text="@string/Null"
             android:textColor="@color/black"
             android:padding="18dip"
-            android:background="@color/lightgray"
-            android:textSize="12dp"/>
+            android:background="@drawable/list_shape"
+            android:textSize="14sp"/>
 
 
         <TextView
@@ -154,10 +152,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/ImamName"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/button_shape"
             android:padding="18dip"
             android:textColor="#fff"
-            android:textSize="12dp"/>
+            android:textSize="14sp"/>
                 </TableRow>
 
                 <TableRow android:layout_marginBottom="3.5dp" >
@@ -168,8 +166,8 @@
             android:text="@string/Null"
             android:textColor="@color/black"
             android:padding="18dip"
-            android:background="@color/lightgray"
-            android:textSize="12dp"/>
+            android:background="@drawable/list_shape"
+            android:textSize="14sp"/>
 
 
         <TextView
@@ -177,10 +175,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/KhateebName"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/button_shape"
             android:padding="18dip"
             android:textColor="#fff"
-            android:textSize="12dp"/>
+            android:textSize="14sp"/>
                 </TableRow>
 
 
@@ -192,18 +190,18 @@
             android:text="@string/Null"
             android:textColor="@color/black"
             android:padding="18dip"
-            android:background="@color/lightgray"
-            android:textSize="12dp"/>
+            android:background="@drawable/list_shape"
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/Moathen_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/MoathenName"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/button_shape"
             android:padding="18dip"
             android:textColor="#fff"
-            android:textSize="12dp"/>
+            android:textSize="14sp"/>
                 </TableRow>
 
                 <TableRow android:layout_marginBottom="3.5dp" >
@@ -214,18 +212,18 @@
             android:text="@string/Null"
             android:textColor="@color/black"
             android:padding="18dip"
-            android:background="@color/lightgray"
-            android:textSize="12dp"/>
+            android:background="@drawable/list_shape"
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/Observer_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/ObserverName"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/button_shape"
             android:padding="18dip"
             android:textColor="#fff"
-            android:textSize="12dp"/>
+            android:textSize="14sp"/>
                 </TableRow>
 </TableLayout>
 

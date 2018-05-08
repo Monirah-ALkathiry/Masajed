@@ -106,9 +106,9 @@ public class DawaAdvanceSearch extends AppCompatActivity  implements Sender{
         // TODO : Advance Search View Result
 
         //--------------------------------------
-        Toast.makeText(DawaAdvanceSearch.this, Mesage2, Toast.LENGTH_LONG).show();
-        System.out.println("Advance Searc Querey Dawa \n"+Mesage2 + "\n");
-////TODO : Advance Search View Result
+       // Toast.makeText(DawaAdvanceSearch.this, Mesage2, Toast.LENGTH_LONG).show();
+      //  System.out.println("Advance Searc Querey Dawa \n"+Mesage2 + "\n");
+
         bSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

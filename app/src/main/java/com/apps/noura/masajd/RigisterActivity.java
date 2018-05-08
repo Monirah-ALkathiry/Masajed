@@ -98,7 +98,9 @@ public class RigisterActivity extends AppCompatActivity {
                 else
 
                 {
+
                     Toast.makeText(RigisterActivity.this, "Error", Toast.LENGTH_SHORT).show();
+
                 }
 
               //  Register(etFullname.getText().toString(),etUsername.getText().toString(), etPass.getText().toString(),etConfirmPass.getText().toString());
@@ -155,12 +157,12 @@ return check;
                             //User user = gson.fromJson(usernameR, User.class);
                             //String usernameR2 = "Name:" + user.getUsername();
                             //System.out.println(usernameR2);
-                            Toast.makeText(RigisterActivity.this,"Success register" , Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(RigisterActivity.this,"Success register" , Toast.LENGTH_SHORT).show();
                         }
                         else{
                             String ErrorMsg = InfoResponse.getString("Messsage");
                             System.out.println(ErrorMsg);
-                            Toast.makeText(RigisterActivity.this,R.string.usernamerr2, Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(RigisterActivity.this,R.string.usernamerr2, Toast.LENGTH_SHORT).show();
 
                         }
                 } catch (JSONException e) {

@@ -82,7 +82,7 @@ class DawaInformationRecyclerView extends RecyclerView.Adapter<DawaInformationRe
         DawaActivity_Type =intent.getStringExtra("DawaActivityType");
         holder.DawaActivityType.setText(DawaActivity_Type);
 
-        System.out.println("\n DawaActivity_Type Place DawaActivity_Type : " + DawaActivity_Type);
+        //System.out.println("\n DawaActivity_Type Place DawaActivity_Type : " + DawaActivity_Type);
 
         //2: Dawa Main Category
 
@@ -183,7 +183,7 @@ class DawaInformationRecyclerView extends RecyclerView.Adapter<DawaInformationRe
 
         DawaID = intent.getStringExtra("DAWA_ID");
         ForID = Integer.parseInt(DawaID);
-        System.out.print( "\n\n\n responce DAWA_ID"+ DawaOffice);
+        //System.out.print( "\n\n\n responce DAWA_ID"+ DawaOffice);
 
         ratingBar2 = holder.ratingBar;
         //Connect to API :
@@ -199,13 +199,13 @@ class DawaInformationRecyclerView extends RecyclerView.Adapter<DawaInformationRe
                 String Rurl= call.request().url().toString();
                 Log.i("test: ", Rurl);
 
+            //Test Result
+               // System.out.print( "\n\n\n responce \n\n\n"+response.body().toString());
+               // System.out.print(response.toString());
+               // System.out.print(response.headers());
+              //  System.out.print(response.isSuccessful());
 
-                System.out.print( "\n\n\n responce \n\n\n"+response.body().toString());
-                System.out.print(response.toString());
-                System.out.print(response.headers());
-                System.out.print(response.isSuccessful());
-
-               Log.e("  URL KK : ", call.request().url().toString());
+              // Log.e("  URL KK : ", call.request().url().toString());
 
                 try {
                     System.out.println(response.body().toString());
@@ -217,7 +217,8 @@ class DawaInformationRecyclerView extends RecyclerView.Adapter<DawaInformationRe
                     Average_R = Jobject.getJSONObject("Result").getString("Average_Rating");
                     Average_Rating = Float.parseFloat(Average_R);
 
-                    System.out.print("\n Rating : " + Average_Rating + "\n");
+                    //System.out.print("\n Rating : " + Average_Rating + "\n");
+
                     ratingBar2.setRating(Average_Rating);
                     //JSONObject Jobject = new JSONObject(response.body().string());
                 } catch (JSONException e) {

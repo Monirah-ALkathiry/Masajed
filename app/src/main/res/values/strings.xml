@@ -119,6 +119,7 @@
     <string name="enter_date">Enter Date</string>
     <string name="ActivityName">أدخل عنوان المنشط</string>
     <string name="InsertMosqueName">أدخل إسم المسجد</string>
+    <string name="Search_Filter">تصفية البحث</string>
 
 
 </resources>

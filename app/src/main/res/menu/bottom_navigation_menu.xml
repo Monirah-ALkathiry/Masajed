@@ -10,13 +10,13 @@
     <item
         android:id="@+id/ic_praytime"
         android:icon="@drawable/ic_praytime"
-        android:title="أوقات الصلاة">
+        android:title="@string/praytime">
     </item>
 
     <item
         android:id="@+id/ic_masijed"
         android:icon="@drawable/mosque_gbk"
-        android:title="المساجد"
+        android:title="@string/ic_masijed"
         >
     </item>
 
@@ -24,13 +24,13 @@
     <item
         android:id="@+id/ic_activities"
         android:icon="@drawable/ic_activity"
-        android:title="المناشط الدعوية">
+        android:title="@string/Dawa">
     </item>
 
     <item
         android:id="@+id/ic_favorit"
         android:icon="@drawable/addedfav"
-        android:title="المفضلة">
+        android:title="@string/favorit">
     </item>
 
 

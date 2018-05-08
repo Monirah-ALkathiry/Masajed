@@ -196,20 +196,20 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                                 && spinnerfromDate.getText().toString().matches("")) {
 
                             map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query + "%'";
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                           // System.out.println("\n sss :  \n" + map2 + "\n");
                         } else if (DomainId == "1" && LanguageId == "1" && OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
                                 && spinnerfromDate.getText().toString().matches("")) {
 
                             map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query + "%' AND DawaActivitiesInfo.DawaActivityType = '"
                                     + DawaActivityId + "'";
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                           // System.out.println("\n sss :  \n" + map2 + "\n");
 
                         } else if (LanguageId == "1" && OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
                                 && spinnerfromDate.getText().toString().matches("")) {
 
                             map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query + "%'\"%' AND DawaActivitiesInfo.DawaActivityType = '"
                                     + DawaActivityId + "' AND DawaActivitiesInfo.DawaMainCategory = '" + DomainId + "'";
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                            //System.out.println("\n sss :  \n" + map2 + "\n");
 
                         } else if (OfficeId == null && simpleDatePicker.getText().toString().matches("")
                                 && spinnerfromDate.getText().toString().matches("")) {
@@ -217,7 +217,7 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                             map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query + "%'\"%' AND DawaActivitiesInfo.DawaActivityType = '"
                                     + DawaActivityId + "' AND DawaActivitiesInfo.DawaMainCategory = '"
                                     + DomainId + "' AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId + "'";
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                           // System.out.println("\n sss :  \n" + map2 + "\n");
                         } else if (simpleDatePicker.getText().toString().matches("")
                                 && spinnerfromDate.getText().toString().matches("")) {
                             map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query + "%'\"%' AND DawaActivitiesInfo.DawaActivityType = '"
@@ -225,21 +225,21 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                                     + DomainId + "' AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId + "'"
                                     + "AND DawaActivitiesReq.DawaOffice = '" + OfficeId + "'";
 
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                           // System.out.println("\n sss :  \n" + map2 + "\n");
                         } else if (spinnerfromDate.getText().toString().matches("")) {
                             map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query + "%'\"%' AND DawaActivitiesInfo.DawaActivityType = '"
                                     + DawaActivityId + "' AND DawaActivitiesInfo.DawaMainCategory = '"
                                     + DomainId + "' AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId + "'"
                                     + "AND DawaActivitiesReq.DawaOffice = '" + OfficeId + "' AND DawaActivitiesInfo.DawaActivityDateH >= '" +
                                     DateFrom + "'";
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                           // System.out.println("\n sss :  \n" + map2 + "\n");
                         } else {
                             map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query + "%'\"%' AND DawaActivitiesInfo.DawaActivityType = '"
                                     + DawaActivityId + "' AND DawaActivitiesInfo.DawaMainCategory = '"
                                     + DomainId + "' AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId + "'"
                                     + "AND DawaActivitiesReq.DawaOffice = '" + OfficeId + "' AND DawaActivitiesInfo.DawaActivityDateH >= '" +
                                     DateFrom + "'AND DawaActivitiesInfo.DawaActivityDateH <= '" + DateTo + "'";
-                            System.out.println("\n Query :  " + map2 + "\n");
+                         //   System.out.println("\n Query :  " + map2 + "\n");
                         }
                         //End First If-----------------------------------------------------------------------
                     } else if (City.equals(SelectAll) && Distric.equals(SelectAll)) {
@@ -252,7 +252,7 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
 
                             map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
                                     + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id + "'";
-                            System.out.println("\n Dawa Region selected :  " + map2 + "\n");
+                            //System.out.println("\n Dawa Region selected :  " + map2 + "\n");
 
 
                         } else if (DomainId == "1" && LanguageId == "1" && OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
@@ -261,7 +261,7 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                             map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query + "%'AND DawaActivitiesReq.Region = '"
                                     + dawa_region_id + "' AND DawaActivitiesInfo.DawaActivityType = '"
                                     + DawaActivityId + "'";
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                            //System.out.println("\n sss :  \n" + map2 + "\n");
 
                         } else if (LanguageId == "1" && OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
                                 && spinnerfromDate.getText().toString().matches("")) {
@@ -270,7 +270,7 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                                     + "%'AND DawaActivitiesReq.Region = '" + dawa_region_id
                                     + "' AND DawaActivitiesInfo.DawaActivityType = '"
                                     + DawaActivityId + "' AND DawaActivitiesInfo.DawaMainCategory = '" + DomainId + "'";
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                            //System.out.println("\n sss :  \n" + map2 + "\n");
 
                         } else if (OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
                                 && spinnerfromDate.getText().toString().matches("")) {
@@ -280,7 +280,7 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                                     + "' AND DawaActivitiesInfo.DawaActivityType = '"
                                     + DawaActivityId + "' AND DawaActivitiesInfo.DawaMainCategory = '"
                                     + DomainId + "'AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId + "'";
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                            //System.out.println("\n sss :  \n" + map2 + "\n");
                         } else if (simpleDatePicker.getText().toString().matches("")
                                 && spinnerfromDate.getText().toString().matches("")) {
 
@@ -290,7 +290,7 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                                     + DawaActivityId + "' AND DawaActivitiesInfo.DawaMainCategory = '"
                                     + DomainId + "' AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId
                                     + "'AND DawaActivitiesReq.DawaOffice = '" + OfficeId + "'";
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                           // System.out.println("\n sss :  \n" + map2 + "\n");
                         } else if (spinnerfromDate.getText().toString().matches("")) {
 
                             map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
@@ -301,7 +301,7 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                                     + "'AND DawaActivitiesReq.DawaOffice = '" + OfficeId
                                     + "' AND DawaActivitiesInfo.DawaActivityDateH >= '" +
                                     DateFrom + "'";
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                           // System.out.println("\n sss :  \n" + map2 + "\n");
 
                         } else {
 
@@ -314,7 +314,7 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                                     + "' AND DawaActivitiesInfo.DawaActivityDateH >= '" +
                                     DateFrom + "'AND DawaActivitiesInfo.DawaActivityDateH <= '" + DateTo + "'";
 
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                           // System.out.println("\n sss :  \n" + map2 + "\n");
                         }
 
 
@@ -333,7 +333,7 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                             //+"%'AND DawaActivitiesReq.District like N'%"+ Distric +
 
 
-                            System.out.println("\n Dawa City selected :  " + map2 + "\n");
+                           // System.out.println("\n Dawa City selected :  " + map2 + "\n");
 
                         } else if (DomainId == "1" && LanguageId == "1" && OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
                                 && spinnerfromDate.getText().toString().matches("")) {
@@ -342,7 +342,7 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                                     + "'AND DawaActivitiesReq.City_Village like N'%" + City
                                     + "%'AND DawaActivitiesInfo.DawaActivityType = '"
                                     + DawaActivityId + "'";
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                           // System.out.println("\n sss :  \n" + map2 + "\n");
 // +"%'AND DawaActivitiesReq.District like N'%"+ Distric
 
 
@@ -354,7 +354,7 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                                     + "'AND DawaActivitiesReq.City_Village like N'%" + City + "%'AND DawaActivitiesInfo.DawaActivityType = '"
                                     + DawaActivityId
                                     + "'AND DawaActivitiesInfo.DawaMainCategory = '" + DomainId + "'";
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                          //  System.out.println("\n sss :  \n" + map2 + "\n");
 
                             //+"%'AND DawaActivitiesReq.District like N'%"+ Distric
 
@@ -367,7 +367,7 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                                     + DawaActivityId + "'AND DawaActivitiesInfo.DawaMainCategory = '"
                                     + DomainId + "' AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId + "'";
 
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                           // System.out.println("\n sss :  \n" + map2 + "\n");
                             //+"%'AND DawaActivitiesReq.District like N'%"+ Distric +
 
                         } else if (simpleDatePicker.getText().toString().matches("")
@@ -380,7 +380,7 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                                     + DawaActivityId + "'AND DawaActivitiesInfo.DawaMainCategory = '"
                                     + DomainId + "' AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId +
                                     "'AND DawaActivitiesReq.DawaOffice = '" + OfficeId + "'";
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                           // System.out.println("\n sss :  \n" + map2 + "\n");
 
                             ///+"%'AND DawaActivitiesReq.District like N'%"+ Distric
 
@@ -394,7 +394,7 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                                     + DomainId + "' AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId +
                                     "'AND DawaActivitiesReq.DawaOffice = '" + OfficeId + "' AND DawaActivitiesInfo.DawaActivityDateH >= '" +
                                     DateFrom + "'";
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                          //  System.out.println("\n sss :  \n" + map2 + "\n");
                             //+"%'AND DawaActivitiesReq.District like N'%"+ Distric
 
                         } else {
@@ -407,7 +407,7 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                                     "'AND DawaActivitiesReq.DawaOffice = '" + OfficeId + "' AND DawaActivitiesInfo.DawaActivityDateH >= '" +
                                     DateFrom + "'AND DawaActivitiesInfo.DawaActivityDateH <= '" + DateTo + "'";
 
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                           // System.out.println("\n sss :  \n" + map2 + "\n");
 
                             //+"%'AND DawaActivitiesReq.District like N'%"+ Distric
                         }
@@ -427,7 +427,7 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                                     + Distric + "%'";
 
 
-                            System.out.println("\n Dawa City selected :  " + map2 + "\n");
+                          //  System.out.println("\n Dawa City selected :  " + map2 + "\n");
                         } else if (DomainId == "1" && LanguageId == "1" && OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
                                 && spinnerfromDate.getText().toString().matches("")) {
 
@@ -452,7 +452,7 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                                     + Distric + "%'AND DawaActivitiesInfo.DawaActivityType = '"
                                     + DawaActivityId + "'AND DawaActivitiesInfo.DawaMainCategory = '" + DomainId + "'";
 
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                           // System.out.println("\n sss :  \n" + map2 + "\n");
 
                         } else if (OfficeId == "1" && simpleDatePicker.getText().toString().matches("")
                                 && spinnerfromDate.getText().toString().matches("")) {
@@ -465,7 +465,7 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                                     + DawaActivityId + "'AND DawaActivitiesInfo.DawaMainCategory = '" + DomainId
                                     + "'AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId + "'";
 
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                           // System.out.println("\n sss :  \n" + map2 + "\n");
                         } else if (simpleDatePicker.getText().toString().matches("")
                                 && spinnerfromDate.getText().toString().matches("")) {
 
@@ -477,7 +477,7 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                                     + DawaActivityId + "'AND DawaActivitiesInfo.DawaMainCategory = '" + DomainId
                                     + "'AND DawaActivitiesInfo.DawaActivLanguage = '" + LanguageId
                                     + "'AND DawaActivitiesReq.DawaOffice = '" + OfficeId + "'";
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                            //System.out.println("\n sss :  \n" + map2 + "\n");
                         } else if (spinnerfromDate.getText().toString().matches("")) {
 
                             map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
@@ -491,7 +491,7 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                                     + "'AND DawaActivitiesInfo.DawaActivityDateH >= '" +
                                     DateFrom + "'";
 
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                           // System.out.println("\n sss :  \n" + map2 + "\n");
                         } else {
 
                             map2 = "DawaActivitiesInfo.DawaAddress like N'%" + query
@@ -505,11 +505,11 @@ public class DaeiaSearch extends Fragment implements OnDateSetListener {
                                     + "'AND DawaActivitiesInfo.DawaActivityDateH >= '" +
                                     DateFrom + "'AND DawaActivitiesInfo.DawaActivityDateH <= '" + DateTo + "'";
 
-                            System.out.println("\n sss :  \n" + map2 + "\n");
+                         //   System.out.println("\n sss :  \n" + map2 + "\n");
                     }
                 }
 
-                    System.out.println("\n :)  " + lat + " :lat \n lone : " + lon);
+                    //System.out.println("\n :)  " + lat + " :lat \n lone : " + lon);
                     sender.SendMassage(map2);
                 }
 

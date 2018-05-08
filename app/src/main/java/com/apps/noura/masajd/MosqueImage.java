@@ -125,7 +125,7 @@ public class MosqueImage extends Fragment {
 
                         if (E.attr("href").endsWith(".JPG")) {
                             ImageUrls.add(E.attr("href"));
-                            Log.d("IMG :  ", "Download Image" + E.attr("href").endsWith(".JPG"));
+                            //Log.d("IMG :  ", "Download Image" + E.attr("href").endsWith(".JPG"));
 
 
                         }//end if

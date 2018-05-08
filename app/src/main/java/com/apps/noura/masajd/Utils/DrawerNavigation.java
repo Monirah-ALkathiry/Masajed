@@ -48,7 +48,7 @@ public class DrawerNavigation {
 
                         case R.id.login:
 
-                            Toast.makeText(context, "LogIn",Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(context, "LogIn",Toast.LENGTH_SHORT).show();
                             Intent LoginIntent = new Intent(context,LoginActivity.class);
                             context.startActivity(LoginIntent);
                             break;
@@ -71,39 +71,39 @@ public class DrawerNavigation {
                             final String websiteurl= "http://www.moia.gov.sa/AboutMinistry/Pages/AboutMinistry.aspx";
                             Intent LinkIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(websiteurl));
                             context.startActivity(LinkIntent);
-                            Toast.makeText(context, "Link",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(context, "Link",Toast.LENGTH_SHORT).show();
                             break;
 
 
                         case R.id.contactUs:
                             Intent ContactUs = new Intent(context,ContactUsActivity.class);
                             context.startActivity(ContactUs);
-                            Toast.makeText(context, "Mosque",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(context, "Mosque",Toast.LENGTH_SHORT).show();
 
                             break;
 
 
                         case R.id.ic_Dawa:
-                            Toast.makeText(context, "Dawa",Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(context, "Dawa",Toast.LENGTH_SHORT).show();
                             Intent dawaIntent = new Intent(context,DawaActivity.class);
                             context.startActivity(dawaIntent);
 
                             break;
 
                         case R.id.ic_favorit:
-                            Toast.makeText(context, "Favorite",Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(context, "Favorite",Toast.LENGTH_SHORT).show();
                             Intent FavoriteIntent = new Intent(context,FavoriteActivity.class);
                             context.startActivity(FavoriteIntent);
                             break;
 
                         case R.id.ic_masijed:
-                            Toast.makeText(context, "Mosque",Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(context, "Mosque",Toast.LENGTH_SHORT).show();
                             Intent Mosque = new Intent(context,MosqueActivity.class);
                             context.startActivity(Mosque);
                             break;
 
                         case R.id.aboutApp:
-                            Toast.makeText(context, "About App",Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(context, "About App",Toast.LENGTH_SHORT).show();
 
                             break;
 

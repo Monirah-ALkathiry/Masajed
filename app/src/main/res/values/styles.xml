@@ -66,6 +66,14 @@
         <item name="android:padding">1dp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>
+    </style>
 
+
+    <!-- Progress_Dialog -->
+    <style name="Progress_Dialog" parent="android:Theme.Holo.Light.Dialog">
+        <item name="DialogTitleAppearance">@android:style/TextAppearance.Holo.Medium</item>
+        <item name="DialogTitleText">جاري التحميل</item>
+        <item name="DialogSpotColor">@color/orange</item>
+        <item name="DialogSpotCount">4</item>
     </style>
 </resources>

@@ -30,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="25"
+
             android:layout_gravity="center"
             android:hint="@string/InsertImamName"
             android:layout_marginTop="20dp"
@@ -77,15 +78,15 @@
                     android:spinnerMode="dialog"/>
 
                 <TextView
+                    android:background="@drawable/button_shape"
 
                     android:id="@+id/simpleTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
                     android:padding="18dip"
                     android:text="@string/MosqueRegion"
                     android:textColor="#fff"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
 
 
             </TableRow>
@@ -102,15 +103,14 @@
                     android:spinnerMode="dialog"/>
 
                 <TextView
-
+                    android:background="@drawable/button_shape"
                     android:id="@+id/simpleTextView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
                     android:padding="18dip"
                     android:text="@string/CityVillage"
                     android:textColor="#fff"
-                    android:textSize="12sp"/>
+                    android:textSize="14sp"/>
 
             </TableRow>
 
@@ -128,11 +128,11 @@
                     android:id="@+id/simpleTextView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/button_shape"
                     android:padding="18dip"
                     android:text="@string/District"
                     android:textColor="#fff"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
              </TableRow>
 
 
@@ -151,11 +151,11 @@
                     android:id="@+id/Mosque"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/button_shape"
                     android:padding="18dip"
                     android:text="@string/MosqueType"
                     android:textColor="#fff"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
 
             </TableRow>
 

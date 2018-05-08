@@ -163,7 +163,7 @@ public class ImamaSearch extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 String Regions = parent.getSelectedItem().toString();
-                Toast.makeText(parent.getContext().getApplicationContext(),Regions +"REJON IS  ",Toast.LENGTH_LONG).show();
+                //Toast.makeText(parent.getContext().getApplicationContext(),Regions +"REJON IS  ",Toast.LENGTH_LONG).show();
 
                 String RejionID2;
                 RejionID2 = getRijonID(Regions);
@@ -201,7 +201,7 @@ public class ImamaSearch extends Fragment {
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                                 Distric = parent.getSelectedItem().toString();
-                                Toast.makeText(getContext().getApplicationContext(), RejionID + " \n" + City + "\n" + Distric, Toast.LENGTH_LONG).show();
+                               // Toast.makeText(getContext().getApplicationContext(), RejionID + " \n" + City + "\n" + Distric, Toast.LENGTH_LONG).show();
 
 
 
@@ -225,7 +225,7 @@ public class ImamaSearch extends Fragment {
                                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                                         MosqueValue = parent.getSelectedItem().toString();
-                                        Toast.makeText(getContext().getApplicationContext(), MosqueId, Toast.LENGTH_LONG).show();
+                                      //  Toast.makeText(getContext().getApplicationContext(), MosqueId, Toast.LENGTH_LONG).show();
 
                                         switch(MosqueValue){
                                             case "مسجد":

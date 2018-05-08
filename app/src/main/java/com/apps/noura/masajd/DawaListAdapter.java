@@ -123,7 +123,7 @@ class DawaListAdapter extends RecyclerView.Adapter<DawaListAdapter.DawaViewList>
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,"Click",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context,"Click",Toast.LENGTH_SHORT).show();
 
 
                 Intent intent = new Intent(context,DawaInformationActivity.class);

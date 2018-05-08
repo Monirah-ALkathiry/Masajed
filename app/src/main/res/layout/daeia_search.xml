@@ -73,15 +73,14 @@
 
 
                 <TextView
-
                     android:id="@+id/simpleTextView"
+                    android:text="@string/MosqueRegion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/button_shape"
                     android:padding="18dip"
                     android:textColor="#fff"
-                    android:textSize="12sp"
-                    android:text="@string/MosqueRegion"
+                    android:textSize="14sp"
                      />
 
 
@@ -105,11 +104,11 @@
                     android:id="@+id/simpleTextView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/button_shape"
                     android:padding="18dip"
                     android:text="@string/CityVillage"
                     android:textColor="#fff"
-                    android:textSize="12sp"/>
+                    android:textSize="14sp"/>
 
             </TableRow>
 
@@ -130,11 +129,11 @@
                     android:id="@+id/simpleTextView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/button_shape"
                     android:padding="18dip"
                     android:text="@string/District"
                     android:textColor="#fff"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
 
 
 
@@ -157,11 +156,11 @@
                     android:id="@+id/activity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/button_shape"
                     android:padding="18dip"
                     android:text="@string/spinnerActivity"
                     android:textColor="#fff"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
 
 
             </TableRow>
@@ -182,11 +181,11 @@
                     android:id="@+id/Domain"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/button_shape"
                     android:padding="18dip"
                     android:text="@string/spinnerDomian"
                     android:textColor="#fff"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
             </TableRow>
 
             <TableRow android:layout_marginBottom="3.5dp" >
@@ -204,11 +203,11 @@
                     android:id="@+id/language"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/button_shape"
                     android:padding="18dip"
                     android:text="@string/language"
                     android:textColor="#fff"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
             </TableRow>
 
 
@@ -228,11 +227,11 @@
                     android:id="@+id/office"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/button_shape"
                     android:padding="18dip"
                     android:text="@string/office"
                     android:textColor="#fff"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
             </TableRow>
 
             <TableRow android:layout_marginBottom="3.5dp" >
@@ -263,11 +262,11 @@
                     android:id="@+id/fromDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/button_shape"
                     android:padding="18dip"
                     android:text="@string/fromDate"
                     android:textColor="#fff"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
             </TableRow>
 
             <TableRow android:layout_marginBottom="3.5dp" >
@@ -295,18 +294,17 @@
                     android:datePickerMode="spinner"
                     />-->
                 <TextView
-
                     android:id="@+id/toDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/button_shape"
                     android:padding="18dip"
                     android:text="@string/toDate"
                     android:textColor="#fff"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
             </TableRow>
-
         </TableLayout>
+
         </HorizontalScrollView>
         </ScrollView>
     </LinearLayout>

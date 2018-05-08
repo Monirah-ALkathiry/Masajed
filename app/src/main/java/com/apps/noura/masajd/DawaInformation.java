@@ -142,7 +142,7 @@ import java.util.Locale;
 
             marker.getPosition();
 
-            Log.w("Click", "test");
+           // Log.w("Click", "test");
             String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Lat, Lon);
 
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));

@@ -6,7 +6,6 @@
     android:background="@color/colorPrimary"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?attr/selectableItemBackgroundBorderless"
     android:gravity="bottom"
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
@@ -16,7 +15,7 @@
         android:id="@+id/nav_header_imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/login"
+        android:src="@drawable/logosignin"
         android:layout_gravity="center"
         android:contentDescription="@string/logo"/>
 
