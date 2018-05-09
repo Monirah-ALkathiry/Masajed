@@ -515,7 +515,8 @@ public class MosqueActivity extends AppCompatActivity implements
     protected void onPostResume() {
         super.onPostResume();
         setupViewPager(mviewPager);
-        mviewPager.setCurrentItem(1);
+        //tabs
+        mviewPager.setCurrentItem(0);
 
         //Update Drawer Nav
         if(sharedConfig.readLoginStatus())
@@ -531,8 +532,8 @@ public class MosqueActivity extends AppCompatActivity implements
 
         MosqueSectoinsAdapter adapter = new MosqueSectoinsAdapter(getSupportFragmentManager());
 
-        adapter.AddFragment(new MosqueList(latitude, longitude), "قائمة");
         adapter.AddFragment(new MosqueMap(latitude, longitude), "خريطه");
+        adapter.AddFragment(new MosqueList(latitude, longitude), "قائمة");
 
         viewPager.setAdapter(adapter);
 

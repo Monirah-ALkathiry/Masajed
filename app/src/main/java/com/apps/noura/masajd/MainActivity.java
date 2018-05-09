@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent Mosque = new Intent(MainActivity.this,MosqueActivity.class);
-        MainActivity.this.startActivity(Mosque);
+        //Intent Mosque = new Intent(MainActivity.this,MosqueActivity.class);
+        //MainActivity.this.startActivity(Mosque);
 
         /*
         dl = (DrawerLayout)findViewById(R.id.activity_main);

@@ -77,7 +77,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.Toolbar
+
+        <ImageButton
+            android:id="@+id/SearchFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="0.5dp"
+            android:layout_marginTop="3.5dp"
+            android:background="@color/colorPrimary"
+            android:contentDescription="@string/search"
+            android:onClick="open"
+            android:src="@drawable/filter"
+            android:tint="@color/white" />
+
+      <!--  <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -88,20 +102,13 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-            <ImageButton
-                android:id="@+id/SearchFilter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="open"
 
-                android:contentDescription="@string/search"
-                android:background="@drawable/filter"/>
 
-<!--
+<! - -
  ?attr/colorPrimary
- app:srcCompat="@drawable/filter_outline" -->
+ app:srcCompat="@drawable/filter_outline" - ->
 
-        </android.support.v7.widget.Toolbar>
+        </android.support.v7.widget.Toolbar>-->
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"

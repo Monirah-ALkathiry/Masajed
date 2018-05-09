@@ -71,13 +71,7 @@
 
                 </Spinner>-->
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/myspinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:spinnerMode="dialog"
-                    />
+
 
 
                 <TextView
@@ -91,20 +85,20 @@
                     android:textColor="#fff"
                     android:textSize="14sp" />
 
-
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/myspinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:spinnerMode="dialog"
+                    />
             </TableRow>
 
 
 
             <TableRow android:layout_marginBottom="3.5dp" >
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
 
-                android:layout_marginTop="8dp"
-                    android:id="@+id/spinnerCities"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:spinnerMode="dialog"/>
 
 
                 <TextView
@@ -118,16 +112,19 @@
                     android:textColor="#fff"
                     android:textSize="14sp"/>
 
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/spinnerCities"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog"/>
+
             </TableRow>
 
 
             <TableRow android:layout_marginBottom="3.5dp" >
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:layout_marginTop="8dp"
-                    android:id="@+id/spinnerDistricts"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:spinnerMode="dialog"/>
+
 
 
                 <TextView
@@ -141,8 +138,12 @@
                     android:textColor="#fff"
                     android:textSize="14sp" />
 
-
-
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/spinnerDistricts"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog"/>
 
 
             </TableRow>
@@ -150,12 +151,7 @@
 
 
             <TableRow android:layout_marginBottom="3.5dp" >
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:layout_marginTop="8dp"
-                    android:id="@+id/spinnerMosque"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:spinnerMode="dialog"/>
+
 
                 <TextView
 
@@ -167,6 +163,13 @@
                     android:text="@string/MosqueType"
                     android:textColor="#fff"
                     android:textSize="14sp" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/spinnerMosque"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog"/>
             </TableRow>
         </TableLayout>
         </HorizontalScrollView>

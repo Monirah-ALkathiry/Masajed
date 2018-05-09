@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apps.noura.masajd.Utils.SharedPreferencesConfig;
@@ -17,6 +18,7 @@ import com.apps.noura.masajd.Utils.SharedPreferencesConfig;
 public class MosqueNote extends Fragment {
 
     private Button button;
+    private TextView checkLogin;
 
 
     //sharedpreferences
@@ -31,12 +33,15 @@ public class MosqueNote extends Fragment {
         view =inflater.inflate(R.layout.fragment_mosque_note, container, false);
 
         button = (Button) view.findViewById(R.id.AddNewNote);
-
+        checkLogin=(TextView) view.findViewById(R.id.NoData);
 
         //Check If User Login
         sharedConfig = new SharedPreferencesConfig(getActivity().getApplicationContext());
         if(sharedConfig.readLoginStatus())
         {
+
+            checkLogin.setVisibility(View.GONE);
+
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -59,6 +64,8 @@ public class MosqueNote extends Fragment {
                             });
                }
             });
+
+
         }
         else {
 

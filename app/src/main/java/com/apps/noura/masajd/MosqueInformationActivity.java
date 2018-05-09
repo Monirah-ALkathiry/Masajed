@@ -55,7 +55,7 @@ public class MosqueInformationActivity extends AppCompatActivity  {
         //Set Up the view Pager with Section Adapter:
         mViewPager = (ViewPager) findViewById(R.id.container);
         setUpViewPager(mViewPager);
-        mViewPager.setCurrentItem(2);
+        mViewPager.setCurrentItem(0);
 
             //Map View :
        // mapViewPager = (ViewPager) findViewById(R.id.container2);
@@ -83,9 +83,9 @@ public class MosqueInformationActivity extends AppCompatActivity  {
         //TODO : Arrange The Links:
         //ToDo: Add onclick BackGround
          MosqueInformationAdapter adapter = new MosqueInformationAdapter(getSupportFragmentManager());
-        adapter.AddFragment(new MosqueNote(),  "ملاحظات" , this);
-        adapter.AddFragment(new MosqueImage(),  "الصور" ,this);
         adapter.AddFragment(new MosqueInformation(), "عام " , this);
+        adapter.AddFragment(new MosqueImage(),  "الصور" ,this);
+        adapter.AddFragment(new MosqueNote(),  "ملاحظات" , this);
 
         viewPager.setAdapter(adapter);
 

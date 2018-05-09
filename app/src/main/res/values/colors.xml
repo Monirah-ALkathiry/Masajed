@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#305252</color>
+    <color name="colorPrimary">#437272</color>
     <color name="grey">#d4d3d3d3</color>
     <color name="lightGry">#fafafa</color>
     <color name="colorPrimaryDark">#303F9F</color>
@@ -13,3 +13,6 @@
     <color name="red">#ff7f7f</color>
 
 </resources>
+<!--#437272
+ 305252
+ -->

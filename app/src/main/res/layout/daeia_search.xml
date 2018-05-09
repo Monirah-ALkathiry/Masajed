@@ -63,13 +63,7 @@
 
             <TableRow  android:layout_marginBottom="3.5dp">
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
 
-                    android:id="@+id/myspinner"
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="8dp"
-                    android:spinnerMode="dialog"/>
 
 
                 <TextView
@@ -83,20 +77,20 @@
                     android:textSize="14sp"
                      />
 
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
 
+                    android:id="@+id/myspinner"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:spinnerMode="dialog"/>
             </TableRow>
 
 
 
             <TableRow android:layout_marginBottom="3.5dp" >
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
 
-                    android:layout_marginTop="8dp"
-                    android:id="@+id/spinnerCities"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:spinnerMode="dialog"/>
 
 
                 <TextView
@@ -110,17 +104,19 @@
                     android:textColor="#fff"
                     android:textSize="14sp"/>
 
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/spinnerCities"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog"/>
+
             </TableRow>
 
 
             <TableRow android:layout_marginBottom="3.5dp" >
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
 
-                    android:layout_marginTop="8dp"
-                    android:id="@+id/spinnerDistricts"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:spinnerMode="dialog"/>
 
 
 
@@ -136,20 +132,18 @@
                     android:textSize="14sp" />
 
 
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
 
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/spinnerDistricts"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog"/>
 
 
             </TableRow>
 
             <TableRow android:layout_marginBottom="3.5dp" >
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-
-                    android:layout_marginTop="8dp"
-                    android:id="@+id/spinnerActivity"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:spinnerMode="dialog"/>
-
 
                 <TextView
 
@@ -162,18 +156,19 @@
                     android:textColor="#fff"
                     android:textSize="14sp" />
 
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/spinnerActivity"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog"/>
+
 
             </TableRow>
 
 
             <TableRow android:layout_marginBottom="3.5dp" >
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-
-                    android:layout_marginTop="8dp"
-                    android:id="@+id/spinnerDomain"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:spinnerMode="dialog"/>
 
 
                 <TextView
@@ -186,16 +181,18 @@
                     android:text="@string/spinnerDomian"
                     android:textColor="#fff"
                     android:textSize="14sp" />
-            </TableRow>
 
-            <TableRow android:layout_marginBottom="3.5dp" >
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
 
                     android:layout_marginTop="8dp"
-                    android:id="@+id/spinnerLanguage"
+                    android:id="@+id/spinnerDomain"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:spinnerMode="dialog"/>
+
+            </TableRow>
+
+            <TableRow android:layout_marginBottom="3.5dp" >
 
 
                 <TextView
@@ -208,19 +205,19 @@
                     android:text="@string/language"
                     android:textColor="#fff"
                     android:textSize="14sp" />
-            </TableRow>
-
-
-            <TableRow android:layout_marginBottom="3.5dp">
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
 
                     android:layout_marginTop="8dp"
-                    android:id="@+id/spinneroffice"
+                    android:id="@+id/spinnerLanguage"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:spinnerMode="dialog"/>
 
+            </TableRow>
+
+
+            <TableRow android:layout_marginBottom="3.5dp">
 
                 <TextView
 
@@ -232,6 +229,14 @@
                     android:text="@string/office"
                     android:textColor="#fff"
                     android:textSize="14sp" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/spinneroffice"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog"/>
             </TableRow>
 
             <TableRow android:layout_marginBottom="3.5dp" >
@@ -242,6 +247,19 @@
                     android:layout_height="wrap_content"
                     android:spinnerMode="dialog">
                 </Spinner>-->
+
+                <TextView
+
+                    android:id="@+id/fromDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_shape"
+                    android:padding="18dip"
+                    android:text="@string/fromDate"
+                    android:textColor="#fff"
+                    android:textSize="14sp" />
+
+
                 <TextView
                     android:layout_marginTop="8dp"
                     android:id="@+id/spinnerfromDate"
@@ -257,16 +275,7 @@
                     android:datePickerMode="spinner"
                     />-->
 
-                <TextView
 
-                    android:id="@+id/fromDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_shape"
-                    android:padding="18dip"
-                    android:text="@string/fromDate"
-                    android:textColor="#fff"
-                    android:textSize="14sp" />
             </TableRow>
 
             <TableRow android:layout_marginBottom="3.5dp" >
@@ -278,6 +287,17 @@
                      android:spinnerMode="dialog">
 
              -->
+
+                <TextView
+                    android:id="@+id/toDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_shape"
+                    android:padding="18dip"
+                    android:text="@string/toDate"
+                    android:textColor="#fff"
+                    android:textSize="14sp" />
+
                 <TextView
                     android:layout_marginTop="8dp"
                     android:id="@+id/simpleDatePicker"
@@ -293,15 +313,7 @@
                     android:layout_height="wrap_content"
                     android:datePickerMode="spinner"
                     />-->
-                <TextView
-                    android:id="@+id/toDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_shape"
-                    android:padding="18dip"
-                    android:text="@string/toDate"
-                    android:textColor="#fff"
-                    android:textSize="14sp" />
+
             </TableRow>
         </TableLayout>
 

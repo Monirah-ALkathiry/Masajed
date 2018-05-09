@@ -62,7 +62,7 @@ public class FavoriteActivity extends AppCompatActivity {
 
         tabLayout.setupWithViewPager(viewPager);
         setViewPager(viewPager);
-        viewPager.setCurrentItem(1);
+        viewPager.setCurrentItem(0);
 
 
         //Navigation:----------------
@@ -88,6 +88,8 @@ public class FavoriteActivity extends AppCompatActivity {
         {
             navigationView.getMenu().findItem(R.id.login).setVisible(false);
             //finish();
+
+
         }
         else {
 
@@ -172,8 +174,9 @@ public class FavoriteActivity extends AppCompatActivity {
     public void  setViewPager(ViewPager viewPager){
 
         FavoriteAdapter adapter = new FavoriteAdapter(getSupportFragmentManager());
-        adapter.AddFragment(new FavoriteDawa(),"المناشط");
         adapter.AddFragment(new FavoriteMosque(),"المساجد");
+
+        adapter.AddFragment(new FavoriteDawa(),"المناشط");
 
         viewPager.setAdapter(adapter);
     }

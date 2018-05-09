@@ -8,6 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.apps.noura.masajd.Utils.SharedPreferencesConfig;
 
 /**
  * Created by Monirah on 3/22/2018.
@@ -18,6 +21,12 @@ public class FavoriteDawa extends Fragment {
     private final static String TAG = "FavoriteDawa";
 
     private View view;
+
+    private TextView checkLogin;
+
+    //sharedpreferences
+    private SharedPreferencesConfig sharedConfig;
+
     /**
      * Called to have the fragment instantiate its user interface view.
      * This is optional, and non-graphical fragments can return null (which
@@ -42,6 +51,16 @@ public class FavoriteDawa extends Fragment {
          super.onCreateView(inflater, container, savedInstanceState);
 
          view = inflater.inflate(R.layout.dawa_favorite,container,false);
+        checkLogin = (TextView) view.findViewById(R.id.Favorite);
+
+        //Check If User Login
+        sharedConfig = new SharedPreferencesConfig(getContext());
+        if(sharedConfig.readLoginStatus())
+        {
+                checkLogin.setVisibility(View.GONE);
+
+        }
+
 
          return view;
     }

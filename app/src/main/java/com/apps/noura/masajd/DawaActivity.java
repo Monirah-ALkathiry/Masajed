@@ -530,7 +530,7 @@ private ImageButton imageButton ;
         super.onPostResume();
 
         setupViewPager(mviewPager);
-        mviewPager.setCurrentItem(1);
+        mviewPager.setCurrentItem(0);
 
         if(sharedConfig.readLoginStatus())
         {
@@ -542,8 +542,8 @@ private ImageButton imageButton ;
 
         DawaSectionAdapter adapter = new DawaSectionAdapter(getSupportFragmentManager());
 
-        adapter.AddFragment(new DawaList(latitude,longitude), "قائمة");
         adapter.AddFragment(new DawaMap(latitude,longitude), "خريطه");
+        adapter.AddFragment(new DawaList(latitude,longitude), "قائمة");
 
         viewPager.setAdapter(adapter);
 
