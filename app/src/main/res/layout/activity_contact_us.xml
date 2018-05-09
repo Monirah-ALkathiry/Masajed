@@ -21,6 +21,7 @@
         android:paddingRight="10dp"
         android:paddingTop="20dp">
 
+
         <LinearLayout
             android:id="@+id/firstLayout"
             android:layout_width="match_parent"
@@ -35,13 +36,14 @@
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:gravity="center_vertical"
                 android:layout_weight="0.6"
                 android:paddingLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/location"
-                android:tint="@color/colorPrimary"/>
+                android:tint="@color/colorPrimary"
+                tools:ignore="Suspicious0dp" />
 
 
             <TextView
@@ -51,8 +53,8 @@
                 android:layout_weight="1.4"
                 android:gravity="center_vertical"
                 android:paddingStart="10dp"
-                android:text=" العنوان \n \n المملكة العربية السعودية - الرياض \n طريق الملك فهد بجوار برج الفيصلية \n الرمز البريدي: 11232"
-                android:textSize="14dp"
+                android:text="@string/Location"
+                android:textSize="14sp"
                 android:textColor="@color/black" />
 
 
@@ -86,9 +88,9 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="1.4"
                 android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="الهاتف \n \n 00966-11-223-6222 \n"
-                android:textSize="14dp"
+                android:paddingStart="10dp"
+                android:text="@string/Telephone"
+                android:textSize="14sp"
                 android:textColor="@color/black" />
 
 
@@ -110,13 +112,14 @@
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:gravity="center_vertical"
                 android:layout_weight="0.6"
-                android:paddingLeft="10dp"
+                android:paddingStart="10dp"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/email"
-                android:tint="@color/colorPrimary"/>
+                android:tint="@color/colorPrimary"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:layout_width="0dp"
@@ -125,10 +128,12 @@
                 android:layout_weight="1.4"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
-                android:text="البريد الإلكتروني \n\n info@moia.gov.sa"
+                android:text="@string/Email"
                 android:layout_gravity="right"
-                android:textSize="14dp"
-                android:textColor="@color/black" />
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                tools:ignore="RtlHardcoded,RtlSymmetry"
+                android:textDirection="rtl"/>
 
 
         </LinearLayout>
