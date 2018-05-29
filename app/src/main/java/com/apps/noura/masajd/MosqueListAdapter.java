@@ -192,7 +192,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         super.onPreExecute();
 
 
-
+/*
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
          }
@@ -215,8 +215,11 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
             // Make the progress dialog cancellable
             // mProgressDialog.setCancelable(true);
 
-        }
 
+        }
+            */
+
+        super.onPreExecute();
 
         }
         @Override
@@ -274,7 +277,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         protected void onPostExecute(String s) {
 
             try {
-                if ((this.mProgressDialog != null) && this.mProgressDialog.isShowing()) {
+               // if ((this.mProgressDialog != null) && this.mProgressDialog.isShowing()) {
 
 
                     if(doc != null){
@@ -291,7 +294,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
                     }
 
                     this.mProgressDialog.dismiss();
-                }
+              //  }
             } catch (final IllegalArgumentException e) {
                 // Handle or log or ignore
             } catch (final Exception e) {

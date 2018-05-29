@@ -57,6 +57,7 @@ public class MosqueInformationActivity extends AppCompatActivity  {
         setUpViewPager(mViewPager);
         mViewPager.setCurrentItem(0);
 
+
             //Map View :
        // mapViewPager = (ViewPager) findViewById(R.id.container2);
       //  setUpViewPager(mapViewPager);
@@ -80,9 +81,8 @@ public class MosqueInformationActivity extends AppCompatActivity  {
 
     private void setUpViewPager(ViewPager viewPager ){
 
-        //TODO : Arrange The Links:
-        //ToDo: Add onclick BackGround
          MosqueInformationAdapter adapter = new MosqueInformationAdapter(getSupportFragmentManager());
+
         adapter.AddFragment(new MosqueInformation(), "عام " , this);
         adapter.AddFragment(new MosqueImage(),  "الصور" ,this);
         adapter.AddFragment(new MosqueNote(),  "ملاحظات" , this);

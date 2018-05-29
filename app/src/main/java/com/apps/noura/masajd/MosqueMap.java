@@ -3,6 +3,7 @@ package com.apps.noura.masajd;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
 
@@ -28,6 +29,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.VisibleRegion;
 import com.google.maps.android.clustering.ClusterManager;
 
 import java.util.List;
@@ -45,51 +47,51 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
     ,FragmentCommunicator
     ,GoogleMap.OnCameraMoveStartedListener
 
-//TODO: check MarkerCluster
 
 {
 
-    //,GoogleMap.OnMarkerClickListener
-    //-----------------------------------------------------------------
-    // the fragment initialization
-    private static final String TAG = "MosqueMap";
+            //,GoogleMap.OnMarkerClickListener
+            //-----------------------------------------------------------------
+            // the fragment initialization
+            private static final String TAG = "MosqueMap";
 
-    //Initialize Map variables :
-    protected MapView mapView;
-   protected GoogleMap MgoogleMap;
-   private View mView;
-  // SupportMapFragment mapFragment;
-   protected Marker marker;
-    //----------------------------------
+            //Initialize Map variables :
+            protected MapView mapView;
+           protected GoogleMap MgoogleMap;
+           private View mView;
+          // SupportMapFragment mapFragment;
+           protected Marker marker;
+            //----------------------------------
 
-    private double lat;
-    private double log;
+            private double lat;
+            private double log;
 
-    private String latitude;
-    private String longitude;
+            private String latitude;
+            private String longitude;
 
-    protected Marker MosqueMarker;
-    //Used If Map Marker Clicked Open this Activity
-    protected MosqueListAdapter adapter;
+            protected Marker MosqueMarker;
+            //Used If Map Marker Clicked Open this Activity
+            protected MosqueListAdapter adapter;
+
+                    //Location Distance :
+            protected Location locationA = new Location("point A");
+            protected Location locationB = new Location("point B");
+
+        //Retrofit InterFace:
+            protected MosquesLatLngClint mosquesLatLngClint;
+            //To get Mosque Information
+            protected List<MosquesLatLng> mosquesLatLngs;
+            protected List<MosquesLatLng> NewmosquesLatLngs;
 
 
-    //Location Distance :
-    protected Location locationA = new Location("point A");
-    protected Location locationB = new Location("point B");
 
-
-    //Retrofit InterFace:
-    protected MosquesLatLngClint mosquesLatLngClint;
-    //To get Mosque Information
-    protected List<MosquesLatLng> mosquesLatLngs;
-    protected List<MosquesLatLng> NewmosquesLatLngs;
+        //User Location:
+        protected LatLng latLng;
 
 
     @SuppressLint("ValidFragment")
     public MosqueMap(List<MosquesLatLng> test) {
-
         NewmosquesLatLngs = test;
-
     }
 
 
@@ -225,7 +227,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
         MgoogleMap.setMapType(googleMap.MAP_TYPE_NORMAL);
 
         //Add Marker and Map Properties (User Location)
-        LatLng latLng = new LatLng(lat, log);
+         latLng = new LatLng(lat, log);
         MosqueMarker = googleMap.addMarker
                 (new MarkerOptions()
                         .position(latLng)
@@ -256,8 +258,9 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
 
         //  Google Map Onclick:
         MgoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
-        // Toast.makeText(getContext(),"Test_Toast_Massage",Toast.LENGTH_SHORT).show();
 
+        //MapMove---
+        // MgoogleMap.setOnCameraMoveListener(this);
         MgoogleMap.setOnCameraMoveStartedListener(this);
 
 
@@ -479,7 +482,6 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
 protected  double newLat;
 protected  double newLon;
 
-
     // Declare a variable for the cluster manager.
     private ClusterManager<MarkerCluster> mClusterManager;
 
@@ -496,7 +498,7 @@ protected  double newLon;
             newLat = latLng.latitude;
             newLon = latLng.longitude;
                 // Position the map.
-            MgoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(newLat, newLon), 15));
+            MgoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(newLat, newLon), 13));
 
                 // Initialize the manager with the context and the map.
                 // (Activity extends context, so we can pass 'this' in the constructor.)
@@ -507,10 +509,8 @@ protected  double newLon;
                 MgoogleMap.setOnCameraIdleListener(mClusterManager);
                 MgoogleMap.setOnMarkerClickListener(mClusterManager);
 
-
-
-                // Add cluster items (markers) to the cluster manager.
-                addItems();
+                 // Add cluster items (markers) to the cluster manager.
+                    addItems();
             }
         });
 
@@ -539,16 +539,49 @@ protected  double newLon;
 
     @Override
     public void onCameraMoveStarted(int reason) {
+       // setUpClusterer();
         setUpClusterer();
+        Toast.makeText(getContext(), "@@@@@@@@@@@@@@@@@@.",
+                Toast.LENGTH_SHORT).show();
 
-       /* if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE) {
+        MgoogleMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+            @Override
+            public void onCameraMove() {
+
+
+              /*  newLat = latLng.latitude;
+                newLon = latLng.longitude;
+                // Position the map.
+                MgoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(newLat, newLon), 13));
+
+                // Initialize the manager with the context and the map.
+                // (Activity extends context, so we can pass 'this' in the constructor.)
+                mClusterManager = new ClusterManager<MarkerCluster>(getContext(), MgoogleMap);
+
+                // Point the map's listeners at the listeners implemented by the cluster
+                //  // manager.
+                MgoogleMap.setOnCameraIdleListener(mClusterManager);
+                MgoogleMap.setOnMarkerClickListener(mClusterManager);
+
+
+
+                // Add cluster items (markers) to the cluster manager.
+                addItems();
+                */
+
+            }
+        });
+
+
+
+        /*if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE) {
             setUpClusterer();
         } else
             if (reason == GoogleMap.OnCameraMoveStartedListener
                 .REASON_API_ANIMATION) {
             Toast.makeText(getContext(), "The user tapped something on the map.",
                     Toast.LENGTH_SHORT).show();
-                setUpClusterer();
+              //  setUpClusterer();
 
         } else
             if (reason == GoogleMap.OnCameraMoveStartedListener
@@ -557,10 +590,63 @@ protected  double newLon;
                     Toast.LENGTH_SHORT).show();
 
 
-            }
-            */
+            }*/
+
 
     }
 
+    //------------ latLng = new LatLng(lat, log);------------------------------
+
+    private Location currentLocation;
+    private Location UserLocation;
+
+
+  /*  @Override
+    public void onCameraMove() {
+       // setUpClusterer();
+
+         //Toast.makeText(getContext(), "The camera is moving :) :) :)  :)  :).",Toast.LENGTH_SHORT).show();
+
+        MgoogleMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+            @Override
+            public void onCameraMove() {
+
+
+                VisibleRegion visibleRegion = MgoogleMap.getProjection().getVisibleRegion();
+
+                Point x = MgoogleMap.getProjection().toScreenLocation(visibleRegion.farRight);
+                Point y = MgoogleMap.getProjection().toScreenLocation(visibleRegion.nearLeft);
+
+//                Log.i(TAG, "x , y : " + x + " , " + y);
+                Point center = new Point(x.x / 2, y.y / 2);
+
+
+                LatLng NewLocation = MgoogleMap.getProjection().fromScreenLocation(center);
+                currentLocation = new Location("NewLocatoin");
+                //NewLocation;
+                currentLocation.setLatitude(NewLocation.latitude);
+                currentLocation.setLongitude(NewLocation.longitude);
+
+
+
+                UserLocation =  new Location("UserLocation");
+                UserLocation.setLatitude(lat);
+                UserLocation.setLatitude(log);
+
+
+
+             //   Toast.makeText(getContext(), "The camera is moving :) :) :)  :)  :).\n"+ currentLocation,Toast.LENGTH_SHORT).show();
+
+
+          //  Toast.makeText(getContext(), newLat+"\n"+ newLon,Toast.LENGTH_SHORT).show();
+
+
+                // AddOtherLocation(newLat,newLon);
+
+            }
+        });
+
+
+    }*/
 
 }

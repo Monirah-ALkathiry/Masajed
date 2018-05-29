@@ -32,7 +32,7 @@
             android:background="@drawable/image_shape"
             android:scaleType="fitCenter"-->
 
-        <com.github.siyamed.shapeimageview.CircularImageView
+        <com.github.siyamed.shapeimageview.RoundedImageView
             android:id="@+id/MosqueImage"
             android:layout_width="96dp"
             android:layout_height="96dp"

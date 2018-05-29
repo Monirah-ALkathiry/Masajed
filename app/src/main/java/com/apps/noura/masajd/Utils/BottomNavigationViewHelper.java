@@ -1,5 +1,6 @@
 package com.apps.noura.masajd.Utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -37,11 +38,10 @@ public class BottomNavigationViewHelper {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
 
-
                        case R.id.ic_praytime:
                         Intent intent4 = new Intent(context, PrayTime.class);//ACTIVITY_NUM = 1
                         context.startActivity(intent4);
-                        break;
+                           break;
 
                     case R.id.ic_masijed:
                         Intent intent3 = new Intent(context, MosqueActivity.class);//ACTIVITY_NUM = 2
@@ -60,6 +60,7 @@ public class BottomNavigationViewHelper {
 
                 }
 
+                ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
                 return false;
             }

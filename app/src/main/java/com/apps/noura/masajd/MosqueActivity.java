@@ -314,11 +314,11 @@ public class MosqueActivity extends AppCompatActivity implements
                 public void onResponse(Call<List<MosquesLatLng>> call, Response<List<MosquesLatLng>> response) {
                     AdvanceMosquesLatLngs = response.body();
                     //Test Result and Print Data
-                   System.out.println("Search Responce :");
-                   System.out.println("Responce toString" + response.toString());
-                    System.out.println("Responce body" + response.body());
-                    System.out.println("Responce Headers" + response.headers());
-                   System.out.print("URL" + response.isSuccessful());
+                   //System.out.println("Search Responce :");
+                  // System.out.println("Responce toString" + response.toString());
+                  //  System.out.println("Responce body" + response.body());
+                  //  System.out.println("Responce Headers" + response.headers());
+                 //  System.out.print("URL" + response.isSuccessful());
 
                     Log.e("  URL KK : ", call.request().url().toString());
 
@@ -332,12 +332,12 @@ public class MosqueActivity extends AppCompatActivity implements
                         String latitude = AdvanceMosquesLatLngs.get(0).getLatitude();
                         String longitude = AdvanceMosquesLatLngs.get(0).getLongitude();
 
-                        System.out.print("latitude" + latitude + "\n");
-                        System.out.print("longitude" + longitude + "\n");
+                       // System.out.print("latitude" + latitude + "\n");
+                       // System.out.print("longitude" + longitude + "\n");
 
 
 
-                        System.out.println(latitude + " : lat \n lone : " +longitude);
+                       // System.out.println(latitude + " : lat \n lone : " +longitude);
 
 
                         //Map -----
@@ -569,7 +569,7 @@ public class MosqueActivity extends AppCompatActivity implements
 
     //Bottom Nav
     private void setupBottomNavigationView() {
-        Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
+        //Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
         BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavViewBar);
         BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
         BottomNavigationViewHelper.enableNavigation(this, bottomNavigationViewEx);
