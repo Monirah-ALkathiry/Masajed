@@ -1,14 +1,17 @@
 package com.apps.noura.masajd;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 
 import android.util.Log;
@@ -42,51 +45,50 @@ import retrofit2.Response;
 
 //SupportMapFragment
 public class MosqueMap extends Fragment implements OnMapReadyCallback
-    , GoogleMap.InfoWindowAdapter
-    ,GoogleMap.OnInfoWindowClickListener
-    ,FragmentCommunicator
-    ,GoogleMap.OnCameraMoveStartedListener
+        , GoogleMap.InfoWindowAdapter
+        , GoogleMap.OnInfoWindowClickListener
+        , FragmentCommunicator
+        , GoogleMap.OnCameraMoveStartedListener
 
 
 {
 
-            //,GoogleMap.OnMarkerClickListener
-            //-----------------------------------------------------------------
-            // the fragment initialization
-            private static final String TAG = "MosqueMap";
+    //,GoogleMap.OnMarkerClickListener
+    //-----------------------------------------------------------------
+    // the fragment initialization
+    private static final String TAG = "MosqueMap";
 
-            //Initialize Map variables :
-            protected MapView mapView;
-           protected GoogleMap MgoogleMap;
-           private View mView;
-          // SupportMapFragment mapFragment;
-           protected Marker marker;
-            //----------------------------------
+    //Initialize Map variables :
+    protected MapView mapView;
+    protected GoogleMap MgoogleMap;
+    private View mView;
+    // SupportMapFragment mapFragment;
+    protected Marker marker;
+    //----------------------------------
 
-            private double lat;
-            private double log;
+    private double lat;
+    private double log;
 
-            private String latitude;
-            private String longitude;
+    private String latitude;
+    private String longitude;
 
-            protected Marker MosqueMarker;
-            //Used If Map Marker Clicked Open this Activity
-            protected MosqueListAdapter adapter;
+    protected Marker MosqueMarker;
+    //Used If Map Marker Clicked Open this Activity
+    protected MosqueListAdapter adapter;
 
-                    //Location Distance :
-            protected Location locationA = new Location("point A");
-            protected Location locationB = new Location("point B");
+    //Location Distance :
+    protected Location locationA = new Location("point A");
+    protected Location locationB = new Location("point B");
 
-        //Retrofit InterFace:
-            protected MosquesLatLngClint mosquesLatLngClint;
-            //To get Mosque Information
-            protected List<MosquesLatLng> mosquesLatLngs;
-            protected List<MosquesLatLng> NewmosquesLatLngs;
+    //Retrofit InterFace:
+    protected MosquesLatLngClint mosquesLatLngClint;
+    //To get Mosque Information
+    protected List<MosquesLatLng> mosquesLatLngs;
+    protected List<MosquesLatLng> NewmosquesLatLngs;
 
 
-
-        //User Location:
-        protected LatLng latLng;
+    //User Location:
+    protected LatLng latLng;
 
 
     @SuppressLint("ValidFragment")
@@ -101,7 +103,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
         this.lat = lat;
         this.log = log;
 
-       }
+    }
 
     public MosqueMap() {
         // Required empty public constructor
@@ -151,13 +153,12 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
             public void passData(List<MosquesLatLng> mosquesLatLngs) {
                 NewmosquesLatLngs = mosquesLatLngs;
                 //Toast.makeText(getContext(),
-                  //      "From Inter_Face\n " + mosquesLatLngs.get(0).getMosqueName(), Toast.LENGTH_SHORT).show();
+                //      "From Inter_Face\n " + mosquesLatLngs.get(0).getMosqueName(), Toast.LENGTH_SHORT).show();
                 onResume();
             }
 
 
         });
-
 
 
     }
@@ -176,7 +177,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
         super.onDestroy();
         mapView.onDestroy();
 
-        }
+    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -212,30 +213,43 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
     }
 
 
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
 
         //Get Data From API :
-        System.out.println("Print----onMapReady-------test------------");
         MgoogleMap = googleMap;
+
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+
+            return;
+        }
+        MgoogleMap.setMyLocationEnabled(true);
 
         // Set a listener for marker click.
         //Initialize Map:
         MapsInitializer.initialize(getContext());
-        MgoogleMap.setMapType(googleMap.MAP_TYPE_NORMAL);
+        MgoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         //Add Marker and Map Properties (User Location)
-         latLng = new LatLng(lat, log);
-        MosqueMarker = googleMap.addMarker
+        latLng = new LatLng(lat, log);
+       /* MosqueMarker = googleMap.addMarker
                 (new MarkerOptions()
                         .position(latLng)
-                        .title("موقعك الحالي")////title on the marker
+                         .title("موقعك الحالي")////title on the marker
+
                         .snippet("موقعي")//Description
                 );
+            */
 
-    //--------------------------------------------------------------------------------------------
+
+
+
+        //--------------------------------------------------------------------------------------------
         //Set Camera Position:
         CameraPosition CameraMosque = CameraPosition.builder().target(latLng)
                 .zoom(13)
@@ -298,29 +312,33 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
                 @Override
                 public void onResponse(Call<List<MosquesLatLng>> call, Response<List<MosquesLatLng>> response) {
 
-                    mosquesLatLngs = response.body();
-                    System.out.println(mosquesLatLngs.size() + " SIZE IS");
-                    //Send Data To Fragment List---
-                    //  adapter = new MosqueListAdapter(getContext(),mosquesLatLngs);
+                    if(response.isSuccessful()) {
+                        mosquesLatLngs = response.body();
+                        System.out.println(mosquesLatLngs.size() + " SIZE IS");
+                        //Send Data To Fragment List---
+                        //  adapter = new MosqueListAdapter(getContext(),mosquesLatLngs);
 
-                    ///recyclerView.setAdapter(adapter);
-                    //-------
+                        ///recyclerView.setAdapter(adapter);
+                        //-------
 
-                    //Test Result and Print Data
-                    System.out.println("Responce toString" + response.toString());
-                    System.out.println("Responce body" + response.body());
-                    System.out.println("Responce headers" + response.headers());
-                    System.out.println("Responce errorBody" + response.errorBody());
-                    System.out.print("URL" + response.isSuccessful());
-                    //Storing the data in our list
+                        //Test Result and Print Data
+                       // System.out.println("Responce toString" + response.toString());
+                       // System.out.println("Responce body" + response.body());
+                      //  System.out.println("Responce headers" + response.headers());
+                      //  System.out.println("Responce errorBody" + response.errorBody());
+                      //  System.out.print("URL" + response.isSuccessful());
+                        //Storing the data in our list
 
-                    System.out.println("Size Is onResponce :----" + mosquesLatLngs.size());
-                    //-----------------------------------------------------------------------
+                      //  System.out.println("Size Is onResponce :----" + mosquesLatLngs.size());
+                        //-----------------------------------------------------------------------
 
 
-                    addMoreMarker(mosquesLatLngs);
-                    System.out.println("Size Is onResponce :----" + mosquesLatLngs.size());
+                        addMoreMarker(mosquesLatLngs);
+                        //System.out.println("Size Is onResponce :----" + mosquesLatLngs.size());
+                    }
+                    else {
 
+                    }
 
                 }
 
@@ -349,8 +367,10 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
     public void addMoreMarker(List<MosquesLatLng> mosques) {
 
         if(marker != null){
-            marker.remove();
-        }
+            //to remove All marker from Map when user change camera position
+            MgoogleMap.clear();
+             }
+
         mosquesLatLngs2 = mosques;
         System.out.println(mosquesLatLngs2 + "\n Test Mosque List\n");
         //Used To calc Distance:
@@ -397,7 +417,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
                                 .snippet("")//Description
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.icons)));
 
-                System.out.println(MosquName + " Name");
+               // System.out.println(MosquName + " Name");
                 marker.setTag(mosquesLatLngs2.get(i));
 
 
@@ -494,6 +514,7 @@ protected  double newLon;
             public void onMapClick(LatLng latLng) {
               //  Toast.makeText(getContext(), latLng + "\nlat lon.",
                  //       Toast.LENGTH_SHORT).show();
+
 
             newLat = latLng.latitude;
             newLon = latLng.longitude;

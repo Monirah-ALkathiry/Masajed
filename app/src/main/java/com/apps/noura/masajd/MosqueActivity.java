@@ -135,78 +135,14 @@ public class MosqueActivity extends AppCompatActivity implements
             navigationView.getMenu().findItem(R.id.logOut).setVisible(false);
 
         }
+
         setupDrawerNavigation();
 
-        /*
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                System.out.print("\n IDI ID :" + id +"\n");
-                switch(id)
-                {
-                    case R.id.login:
-
-                        Toast.makeText(MosqueActivity.this, "LogIn",Toast.LENGTH_SHORT).show();
-                        Intent LoginIntent = new Intent(MosqueActivity.this,LoginActivity.class);
-                        MosqueActivity.this.startActivity(LoginIntent);
-                                                                                      break;
-
-
-                    case R.id.info:
-                        final String websiteurl= "http://www.moia.gov.sa/AboutMinistry/Pages/AboutMinistry.aspx";
-                        Intent LinkIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(websiteurl));
-                        startActivity(LinkIntent);
-                        Toast.makeText(MosqueActivity.this, "Link",Toast.LENGTH_SHORT).show();
-                        break;
-
-
-                    case R.id.contactUs:
-                        Toast.makeText(MosqueActivity.this, "Mosque",Toast.LENGTH_SHORT).show();
-
-                        break;
-
-
-                    case R.id.ic_Dawa:
-                        Toast.makeText(MosqueActivity.this, "Dawa",Toast.LENGTH_SHORT).show();
-                        Intent dawaIntent = new Intent(MosqueActivity.this,DawaActivity.class);
-                        MosqueActivity.this.startActivity(dawaIntent);
-
-                        break;
-
-                    case R.id.ic_favorit:
-                        Toast.makeText(MosqueActivity.this, "Favorite",Toast.LENGTH_SHORT).show();
-                        Intent FavoriteIntent = new Intent(MosqueActivity.this,FavoriteActivity.class);
-                        MosqueActivity.this.startActivity(FavoriteIntent);
-                        break;
-
-                    case R.id.ic_masijed:
-                        Toast.makeText(MosqueActivity.this, "Mosque",Toast.LENGTH_SHORT).show();
-                        Intent Mosque = new Intent(MosqueActivity.this,MosqueActivity.class);
-                        MosqueActivity.this.startActivity(Mosque);
-                        break;
-
-                    case R.id.aboutApp:
-                        Toast.makeText(MosqueActivity.this, "About App",Toast.LENGTH_SHORT).show();
-
-                        break;
-
-                    default:
-                        return true;
-                }
-
-
-                return false;
-            }
-        });
-        */
    //-------------------Bottom Nav: 
 
         setupBottomNavigationView();
         
   //----------------------------------------      
-       //Log to start
-        //Log.d(TAG, "Start");
 
         //Set Up the view Pager with Section Adapter:
         mviewPager = (ViewPager) findViewById(R.id.container);
@@ -234,7 +170,9 @@ public class MosqueActivity extends AppCompatActivity implements
                 //execute every time, else your else part will work
             } else {
 
-                System.out.println("Please Check Your Location");
+                //Toast.makeText(getApplicationContext(), "الرجاء تفعيل الموقع", Toast.LENGTH_LONG).show();
+
+                //System.out.println("Please Check Your Location");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -249,10 +187,6 @@ public class MosqueActivity extends AppCompatActivity implements
             latitude = gps.getLatitude();
             longitude = gps.getLongitude();
 
-          //  Toast.makeText(getApplicationContext(), " FROM FIRST Your Location is - \nLat: "
-               //     + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
-
-
         } else {
             // can't get location
             // GPS or Network is not enabled
@@ -260,11 +194,9 @@ public class MosqueActivity extends AppCompatActivity implements
             gps.showSettingsAlert();
         }
         //----------------------------------------------------
-      // Toast.makeText(getApplicationContext(), "lat From Intent - \n Lat: "
-            //    + latitude + "\n Long: " + longitude, Toast.LENGTH_LONG).show();
 
 
-        //-----Advance Search :
+//-----Advance Search :
         imageButton = (ImageButton) findViewById(R.id.SearchFilter);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -320,7 +252,7 @@ public class MosqueActivity extends AppCompatActivity implements
                   //  System.out.println("Responce Headers" + response.headers());
                  //  System.out.print("URL" + response.isSuccessful());
 
-                    Log.e("  URL KK : ", call.request().url().toString());
+                    //Log.e("  URL KK : ", call.request().url().toString());
 
                     if (AdvanceMosquesLatLngs.size() == 0) {
                         Toast.makeText(MosqueActivity.this, "لايوجد بيانات", Toast.LENGTH_LONG).show();
@@ -332,15 +264,7 @@ public class MosqueActivity extends AppCompatActivity implements
                         String latitude = AdvanceMosquesLatLngs.get(0).getLatitude();
                         String longitude = AdvanceMosquesLatLngs.get(0).getLongitude();
 
-                       // System.out.print("latitude" + latitude + "\n");
-                       // System.out.print("longitude" + longitude + "\n");
-
-
-
-                       // System.out.println(latitude + " : lat \n lone : " +longitude);
-
-
-                        //Map -----
+                     //Map -----
                         double latNew = Double.parseDouble(latitude);
                         double lonNew = Double.parseDouble(longitude);
 
@@ -358,7 +282,6 @@ public class MosqueActivity extends AppCompatActivity implements
                          fragmentCommunicator.passData(AdvanceMosquesLatLngs);
 
                     }
-
                 }
 
                 @Override

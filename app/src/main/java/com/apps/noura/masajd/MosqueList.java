@@ -113,8 +113,8 @@ public class MosqueList extends Fragment{
                 New_lat= Double.parseDouble(lat2);
                 New_log=Double.parseDouble(long2);
 
-                System.out.print("lat : "+ New_lat);
-                System.out.print("long: "+ New_log + " \n CONTEXT IS : " +getContext() +"\n");
+              //  System.out.print("lat : "+ New_lat);
+                //System.out.print("long: "+ New_log + " \n CONTEXT IS : " +getContext() +"\n");
 
                 //Send Data To Fragment List---
                 if(getContext()  != null) {
