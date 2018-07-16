@@ -302,8 +302,6 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
         //MapMove---
         // MgoogleMap.setOnCameraMoveListener(this);
         // MgoogleMap.setOnCameraMoveStartedListener(this);
-        //TODo: Search with Camera Idle
-
          MgoogleMap.setOnCameraIdleListener(this);
 
 
