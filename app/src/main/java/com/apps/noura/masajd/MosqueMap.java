@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
@@ -30,10 +32,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.VisibleRegion;
-import com.google.maps.android.clustering.ClusterManager;
 
 import java.util.List;
 
@@ -48,7 +49,8 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
         , GoogleMap.InfoWindowAdapter
         , GoogleMap.OnInfoWindowClickListener
         , FragmentCommunicator
-        , GoogleMap.OnCameraMoveStartedListener
+    ,GoogleMap.OnCameraIdleListener
+
 
 
 {
@@ -89,7 +91,23 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
 
     //User Location:
     protected LatLng latLng;
+//Communication'
+    FirstFragmentListenerMAP firstFragmentListenerMAP;
 
+    /**
+     * Called when a fragment is first attached to its context.
+     * {@link #onCreate(Bundle)} will be called after this.
+     *
+     * @param context
+     */
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if(context instanceof FirstFragmentListenerMAP){
+            firstFragmentListenerMAP = (FirstFragmentListenerMAP)context;
+        }
+    }
 
     @SuppressLint("ValidFragment")
     public MosqueMap(List<MosquesLatLng> test) {
@@ -110,10 +128,13 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
     }
 
 
+
+
     //Retrofit
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
 
     }//end on create
@@ -124,6 +145,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
 
         try {
             mView = inflater.inflate(R.layout.fragment_mosque_map, container, false);
+            //Maps Initializer
             MapsInitializer.initialize(this.getActivity());
             mapView = (MapView) mView.findViewById(R.id.mapView);
             mapView.onCreate(savedInstanceState);
@@ -152,9 +174,11 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
             @Override
             public void passData(List<MosquesLatLng> mosquesLatLngs) {
                 NewmosquesLatLngs = mosquesLatLngs;
-                //Toast.makeText(getContext(),
-                //      "From Inter_Face\n " + mosquesLatLngs.get(0).getMosqueName(), Toast.LENGTH_SHORT).show();
-                onResume();
+
+
+                    onResume();
+
+               // addMoreMarker(NewmosquesLatLngs);
             }
 
 
@@ -237,17 +261,16 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
 
         //Add Marker and Map Properties (User Location)
         latLng = new LatLng(lat, log);
+
+
        /* MosqueMarker = googleMap.addMarker
                 (new MarkerOptions()
                         .position(latLng)
-                         .title("موقعك الحالي")////title on the marker
+                        .title("موقعك الحالي")////title on the marker
 
                         .snippet("موقعي")//Description
                 );
-            */
-
-
-
+        */
 
         //--------------------------------------------------------------------------------------------
         //Set Camera Position:
@@ -257,31 +280,39 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
                 .tilt(40)
                 .build();
 
-            //Move Camera
-            // googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
-            //Google Map Zoom in zoom out
+        //Move Camera
+        // googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
+        //Google Map Zoom in zoom out
         //Zoom controller position:
         //leftPadding, topPadding, rightPadding, bottomPadding
-        MgoogleMap.setPadding(0,0,0,100);
+        MgoogleMap.setPadding(0, 0, 0, 100);
         MgoogleMap.getUiSettings().setZoomControlsEnabled(true);
         MgoogleMap.getUiSettings().setRotateGesturesEnabled(true);
         MgoogleMap.getUiSettings().setScrollGesturesEnabled(true);
         MgoogleMap.getUiSettings().setTiltGesturesEnabled(true);
 
+        //USER LOCATION :
+        MgoogleMap.setMyLocationEnabled(true);
         //  MgoogleMap.setOnMarkerClickListener(this);
 
         //  Google Map Onclick:
         MgoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
 
+
         //MapMove---
         // MgoogleMap.setOnCameraMoveListener(this);
-        MgoogleMap.setOnCameraMoveStartedListener(this);
+        // MgoogleMap.setOnCameraMoveStartedListener(this);
+        //TODo: Search with Camera Idle
+
+         MgoogleMap.setOnCameraIdleListener(this);
 
 
-        if (NewmosquesLatLngs == null) {
+       if (NewmosquesLatLngs == null) {
             //System.out.println("NULLL Datat : ");
             AddOtherLocation(latitude, longitude);
-        } else {
+           //Change Position:
+
+       } else {
 
             addMoreMarker(NewmosquesLatLngs);
         }
@@ -294,63 +325,64 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
 
     public void AddOtherLocation(String lat, String lon) {
 
-      //  if (NewmosquesLatLngs == null) {
-            if(marker != null){
-                marker.remove();
+        //  if (NewmosquesLatLngs == null) {
+        if (marker != null) {
+            marker.remove();
+        }
+        Newlat = lat;
+        Newlon = lon;
+
+        //Make A Connection With API :
+        mosquesLatLngClint = ApiRetrofitClint.getApiRetrofitClint().create(MosquesLatLngClint.class);
+        //Call Function form Inter Face And Send Parameter to it
+
+
+        Call<List<MosquesLatLng>> call = mosquesLatLngClint.getMosqueLatLng(Newlat, Newlon, 25);
+        //  Create Response:
+        call.enqueue(new Callback<List<MosquesLatLng>>() {
+            @Override
+            public void onResponse(Call<List<MosquesLatLng>> call, Response<List<MosquesLatLng>> response) {
+
+                if (response.isSuccessful()) {
+                    mosquesLatLngs = response.body();
+                    System.out.println(mosquesLatLngs.size() + " SIZE IS");
+                    //Send Data To Fragment List---
+                    //  adapter = new MosqueListAdapter(getContext(),mosquesLatLngs);
+
+                    ///recyclerView.setAdapter(adapter);
+                    //-------
+
+                    //Test Result and Print Data
+                    // System.out.println("Responce toString" + response.toString());
+                    // System.out.println("Responce body" + response.body());
+                    //  System.out.println("Responce headers" + response.headers());
+                    //  System.out.println("Responce errorBody" + response.errorBody());
+                    //  System.out.print("URL" + response.isSuccessful());
+                    //Storing the data in our list
+
+                    //  System.out.println("Size Is onResponce :----" + mosquesLatLngs.size());
+                    //-----------------------------------------------------------------------
+
+                    firstFragmentListenerMAP.sendData(mosquesLatLngs);
+
+                    addMoreMarker(mosquesLatLngs);
+
+                    //System.out.println("Size Is onResponce :----" + mosquesLatLngs.size());
+                } else {
+
+                }
+
             }
-            Newlat = lat;
-            Newlon = lon;
 
-            //Make A Connection With API :
-            mosquesLatLngClint = ApiRetrofitClint.getApiRetrofitClint().create(MosquesLatLngClint.class);
-            //Call Function form Inter Face And Send Parameter to it
+            @Override
+            public void onFailure(Call<List<MosquesLatLng>> call, Throwable t) {
+                System.out.println("Error bad  ):-----------------------");
+            }
+        });
 
+        // } else {
 
-            Call<List<MosquesLatLng>> call = mosquesLatLngClint.getMosqueLatLng(Newlat, Newlon, 25);
-            //  Create Response:
-            call.enqueue(new Callback<List<MosquesLatLng>>() {
-                @Override
-                public void onResponse(Call<List<MosquesLatLng>> call, Response<List<MosquesLatLng>> response) {
-
-                    if(response.isSuccessful()) {
-                        mosquesLatLngs = response.body();
-                        System.out.println(mosquesLatLngs.size() + " SIZE IS");
-                        //Send Data To Fragment List---
-                        //  adapter = new MosqueListAdapter(getContext(),mosquesLatLngs);
-
-                        ///recyclerView.setAdapter(adapter);
-                        //-------
-
-                        //Test Result and Print Data
-                       // System.out.println("Responce toString" + response.toString());
-                       // System.out.println("Responce body" + response.body());
-                      //  System.out.println("Responce headers" + response.headers());
-                      //  System.out.println("Responce errorBody" + response.errorBody());
-                      //  System.out.print("URL" + response.isSuccessful());
-                        //Storing the data in our list
-
-                      //  System.out.println("Size Is onResponce :----" + mosquesLatLngs.size());
-                        //-----------------------------------------------------------------------
-
-
-                        addMoreMarker(mosquesLatLngs);
-                        //System.out.println("Size Is onResponce :----" + mosquesLatLngs.size());
-                    }
-                    else {
-
-                    }
-
-                }
-
-                @Override
-                public void onFailure(Call<List<MosquesLatLng>> call, Throwable t) {
-                    System.out.println("Error bad  ):-----------------------");
-                }
-            });
-
-       // } else {
-
-          //  Toast.makeText(getContext(), "لا يوجد إتصال ", Toast.LENGTH_SHORT).show();
+        //  Toast.makeText(getContext(), "لا يوجد إتصال ", Toast.LENGTH_SHORT).show();
 
 
         //}
@@ -366,10 +398,13 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
 
     public void addMoreMarker(List<MosquesLatLng> mosques) {
 
-        if(marker != null){
+
+
+        if (marker != null) {
             //to remove All marker from Map when user change camera position
             MgoogleMap.clear();
-             }
+            //Map Movment Marker
+        }
 
         mosquesLatLngs2 = mosques;
         System.out.println(mosquesLatLngs2 + "\n Test Mosque List\n");
@@ -402,7 +437,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
             double dk = dm / 10.0;
 
             //rad * 180.0 / Math.PI
-            System.out.println(" Distance is :) :) :0  " + distance + "\n d by meeter :" + dm + "\n In Kilo : " + dk);
+           // System.out.println(" Distance is :) :) :0  " + distance + "\n d by meeter :" + dm + "\n In Kilo : " + dk);
 
 
 //--------------------------------------------------------------------------------------------------
@@ -417,7 +452,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
                                 .snippet("")//Description
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.icons)));
 
-               // System.out.println(MosquName + " Name");
+                // System.out.println(MosquName + " Name");
                 marker.setTag(mosquesLatLngs2.get(i));
 
 
@@ -429,7 +464,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
                     public void onInfoWindowClick(Marker marker) {
                         MosquesLatLng infoAttached = (MosquesLatLng) marker.getTag();
 
-                       // Toast.makeText(getContext(), "Test_Toast_Massage: " + infoAttached.getCode() + "  " + infoAttached.getMosqueName(), Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(getContext(), "Test_Toast_Massage: " + infoAttached.getCode() + "  " + infoAttached.getMosqueName(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getContext(), MosqueInformationActivity.class);
 
 
@@ -457,7 +492,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
                 });
             }//end if
             else {
-                Toast.makeText(getContext(), "لا توجد بيانات ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "/n لا توجد بيانات /n", Toast.LENGTH_SHORT).show();
 
 
             }
@@ -493,14 +528,47 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
 
     }
 
-//-----------------Communication with Fragment-----------------------
+    //-----------------Communication with Fragment (Search) -----------------------
     @Override
     public void passData(List<MosquesLatLng> mosquesLatLngs) {
         //Toast.makeText(getContext(), "From Inter Face\n "+mosquesLatLngs.get(0).getMosqueName(), Toast.LENGTH_SHORT).show();
     }
-//-----------------------Map Cluster---------------------------------------------------------
-protected  double newLat;
-protected  double newLon;
+
+
+
+    //------------------------------
+
+
+
+
+   private String nlat;
+    private String nlng;
+    @Override
+    public void onCameraIdle() {
+        //Toast.makeText(getContext(), "The camera has stopped moving. Fetch the data from the server!", Toast.LENGTH_SHORT).show();
+        LatLngBounds bounds = MgoogleMap.getProjection().getVisibleRegion().latLngBounds;
+
+        LatLng nl= bounds.getCenter();
+        double lon= nl.longitude;
+        double lat = nl.latitude;
+
+        nlat= String.valueOf(lat);
+         nlng = String.valueOf(lon);
+    if(NewmosquesLatLngs == null ) {
+        AddOtherLocation(nlat, nlng);
+    }else {
+        Toast.makeText(getContext(), "Search ", Toast.LENGTH_SHORT).show();
+
+    }
+}
+
+
+
+
+/*
+    //-----------------------Map Cluster---------------------------------------------------------
+    protected double newLat;
+    protected double newLon;
 
     // Declare a variable for the cluster manager.
     private ClusterManager<MarkerCluster> mClusterManager;
@@ -508,34 +576,31 @@ protected  double newLon;
     private void setUpClusterer() {
 
 
-
         MgoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-              //  Toast.makeText(getContext(), latLng + "\nlat lon.",
-                 //       Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(getContext(), latLng + "\nlat lon.",
+                //       Toast.LENGTH_SHORT).show();
 
 
-            newLat = latLng.latitude;
-            newLon = latLng.longitude;
+                newLat = latLng.latitude;
+                newLon = latLng.longitude;
                 // Position the map.
-            MgoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(newLat, newLon), 13));
+                MgoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(newLat, newLon), 13));
 
                 // Initialize the manager with the context and the map.
                 // (Activity extends context, so we can pass 'this' in the constructor.)
                 mClusterManager = new ClusterManager<MarkerCluster>(getContext(), MgoogleMap);
 
                 // Point the map's listeners at the listeners implemented by the cluster
-              //  // manager.
+                //  // manager.
                 MgoogleMap.setOnCameraIdleListener(mClusterManager);
                 MgoogleMap.setOnMarkerClickListener(mClusterManager);
 
-                 // Add cluster items (markers) to the cluster manager.
-                    addItems();
+                // Add cluster items (markers) to the cluster manager.
+                addItems();
             }
         });
-
-
 
 
     }
@@ -544,8 +609,8 @@ protected  double newLon;
 
         // Set some lat/lng coordinates to start with.
         String lat = Double.toString(newLat);
-        String lng =Double.toString(newLon);
-        AddOtherLocation(lat,lng);
+        String lng = Double.toString(newLon);
+        AddOtherLocation(lat, lng);
 
       /*  // Add ten cluster items in close proximity, for purposes of this example.
         for (int i = 0; i < 10; i++) {
@@ -555,20 +620,21 @@ protected  double newLon;
             MarkerCluster offsetItem = new MarkerCluster(newLat, newLon,"tt","ss");
             mClusterManager.addItem(offsetItem);
         }
-        */
+        * /
     }
 
     @Override
     public void onCameraMoveStarted(int reason) {
-       // setUpClusterer();
-        setUpClusterer();
-        Toast.makeText(getContext(), "@@@@@@@@@@@@@@@@@@.",
-                Toast.LENGTH_SHORT).show();
+        // setUpClusterer();
+        //  setUpClusterer();
+        //  Toast.makeText(getContext(), "@@@@@@@@@@@@@@@@@@.",
+        //   Toast.LENGTH_SHORT).show();
 
         MgoogleMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
             @Override
             public void onCameraMove() {
 
+                Toast.makeText(getContext(), "ddddت ", Toast.LENGTH_SHORT).show();
 
               /*  newLat = latLng.latitude;
                 newLon = latLng.longitude;
@@ -588,7 +654,7 @@ protected  double newLon;
 
                 // Add cluster items (markers) to the cluster manager.
                 addItems();
-                */
+                * /
 
             }
         });
@@ -611,7 +677,7 @@ protected  double newLon;
                     Toast.LENGTH_SHORT).show();
 
 
-            }*/
+            }* /
 
 
     }
@@ -620,9 +686,19 @@ protected  double newLon;
 
     private Location currentLocation;
     private Location UserLocation;
+    private LatLng UserLatlon;
 
 
-  /*  @Override
+    @Override
+    public void onCameraIdle() {
+
+        Toast.makeText(getContext(), "dsssssss", Toast.LENGTH_SHORT).show();
+
+
+    }
+
+
+  / *  @Override
     public void onCameraMove() {
        // setUpClusterer();
 
@@ -668,6 +744,7 @@ protected  double newLon;
         });
 
 
-    }*/
+    }* /
+    */
 
 }

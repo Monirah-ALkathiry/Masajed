@@ -2,7 +2,10 @@ package com.apps.noura.masajd;
 
 import android.annotation.SuppressLint;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +14,9 @@ import android.view.LayoutInflater;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -22,10 +27,10 @@ import static android.support.v7.widget.RecyclerView.*;
 
 
 
-public class MosqueList extends Fragment{
+public class MosqueList extends Fragment {
     // the fragment initialization
 
-    private static final String TAG = "MosqueLIST";
+    public static final String TAG = "MosqueLIST";
 
     //-----------------------------------------------------------------
 
@@ -54,6 +59,8 @@ public class MosqueList extends Fragment{
     private   String lat2;
     private String long2;
 
+
+
     @SuppressLint("ValidFragment")
     public  MosqueList(double lat, double log){
 
@@ -65,6 +72,14 @@ public class MosqueList extends Fragment{
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+
+
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable  ViewGroup container,
@@ -76,9 +91,6 @@ public class MosqueList extends Fragment{
         latitude= Double.toString(lat);
         longitude= Double.toString(log);
 
-     //   System.out.print(lat +" Lat kkkk " + log + "\n");
-
-      //  System.out.print(latitude +" Lat STRING  " + longitude + "\n");
 //Recycler View
         recyclerView = (RecyclerView) view.findViewById(R.id.MosqueRecyclerView);
         layoutManager = new LinearLayoutManager(getContext());
@@ -142,16 +154,8 @@ public class MosqueList extends Fragment{
                 System.out.println("Error bad  connection\n");
             }
         });
-
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-
-
-    }
 
 
 }

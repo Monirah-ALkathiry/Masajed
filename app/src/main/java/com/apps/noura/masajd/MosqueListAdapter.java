@@ -53,6 +53,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
     double latd;
     double logd;
 
+    String data;
     private Context context;
 
     //constructor
@@ -62,6 +63,14 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         this.mosquesLatLngs = latLngs;
         this.lat =lat;
         this.log=log;
+
+    }
+
+
+    //constructor
+    public MosqueListAdapter(Context context,List<MosquesLatLng> latLngs) {
+        this.context = context;
+        this.mosquesLatLngs = latLngs;
 
     }
 
@@ -78,6 +87,8 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
     @Override
     public void onBindViewHolder(final MosqueViewList holder, final int position) {
+
+
 
         holder.MosqueCode = (mosquesLatLngs.get(position).getCode());
         //System.out.println(holder.imageView + " holder.imageView ");

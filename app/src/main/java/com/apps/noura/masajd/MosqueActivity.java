@@ -2,6 +2,7 @@ package com.apps.noura.masajd;
 
 import android.Manifest;
 
+import android.app.Fragment;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +13,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -47,7 +50,9 @@ import retrofit2.Response;
 
 public class MosqueActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener {
+        GoogleApiClient.OnConnectionFailedListener
+, FirstFragmentListenerMAP
+   {
 
     private static final String TAG = "MosqueActivity";//Used in BottomNav
     private static final int ACTIVITY_NUM = 1;//Used in BottomNav
@@ -104,10 +109,16 @@ public class MosqueActivity extends AppCompatActivity implements
     private ImageButton imageButton;
 
     //------------------------
+
+
+
+//------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mosque);
+
+
 
         drawerLayout = (DrawerLayout)findViewById(R.id.DrawerLayout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.open, R.string.close);
@@ -150,6 +161,9 @@ public class MosqueActivity extends AppCompatActivity implements
         //TabLayout
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mviewPager);
+
+
+        setupViewPager(mviewPager);
 
         //MAP
         intentThatCalled = getIntent();
@@ -222,7 +236,9 @@ public class MosqueActivity extends AppCompatActivity implements
 
     //-------------------------Search -----------------------
 
-    @Override
+
+
+       @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
 
@@ -291,7 +307,11 @@ public class MosqueActivity extends AppCompatActivity implements
                 }
             });
 
-        }
+
+
+
+        }//End If Query Has been enterd
+
 
 
         // getMenuInflater().inflate(R.menu.menu_mosque_information,menu);
@@ -327,12 +347,36 @@ public class MosqueActivity extends AppCompatActivity implements
             public boolean onQueryTextChange(String newText) {
                 return false;
             }
+
+
         });
+
+
+           MenuItem menuItem = menu.findItem(R.id.search);
+           menuItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+               @Override
+               public boolean onMenuItemActionExpand(MenuItem item) {
+                   Toast.makeText(MosqueActivity.this, "llll", Toast.LENGTH_LONG).show();
+
+                   return true;
+               }
+
+               @Override
+               public boolean onMenuItemActionCollapse(MenuItem item) {
+                   Toast.makeText(MosqueActivity.this, "ooo", Toast.LENGTH_LONG).show();
+
+                   //Map -----
+                   fragmentCommunicator.passData(AdvanceMosquesLatLngs);
+                   return true;
+               }
+           });
+
+
 
         return super.onCreateOptionsMenu(menu);
     }
 
-    //Search
+    //Search----------------------------------
     protected String SearchQuery;
 
     public void Search(String query) {
@@ -515,5 +559,18 @@ public class MosqueActivity extends AppCompatActivity implements
        // menuItem.setChecked(true);
 
     }
-}
+
+//send Data TO List -------------Idle------------------------
+       @Override
+       public void sendData(List<MosquesLatLng> newData) {
+
+           recyclerView = (RecyclerView) findViewById(R.id.MosqueRecyclerView);
+           layoutManager = new LinearLayoutManager(MosqueActivity.this);
+           recyclerView.setLayoutManager(layoutManager);
+           recyclerView.setHasFixedSize(true);
+
+           adapter = new MosqueListAdapter(MosqueActivity.this, newData);
+           recyclerView.setAdapter(adapter);
+       }
+   }
 
