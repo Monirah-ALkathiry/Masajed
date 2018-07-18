@@ -7,5 +7,5 @@ import java.util.List;
  */
 
 public interface DawaFragmentCommunicator {
-    public void passData(List<DawaLatLng> dawaLatLngs);
+     void passData(List<DawaLatLng> dawaLatLngs);
 }

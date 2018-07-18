@@ -7,5 +7,5 @@ import java.util.List;
  */
 
 public interface FirstFragmentListenerMAP {
-     void sendData(List<MosquesLatLng> m);
+     void sendData(List<MosquesLatLng> newData);
 }

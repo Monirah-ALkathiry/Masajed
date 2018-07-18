@@ -1,10 +1,15 @@
 package com.apps.noura.masajd;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.InflateException;
@@ -22,6 +27,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.clustering.ClusterManager;
@@ -38,9 +44,10 @@ import retrofit2.Response;
 
 public class DawaMap extends Fragment implements OnMapReadyCallback
         , GoogleMap.InfoWindowAdapter
-        ,GoogleMap.OnInfoWindowClickListener
-        ,GoogleMap.OnCameraMoveStartedListener
-        , DawaFragmentCommunicator {
+        , GoogleMap.OnInfoWindowClickListener
+        , DawaFragmentCommunicator
+    ,GoogleMap.OnCameraIdleListener
+{
 
 
     //-----------------------------------------------------------------
@@ -53,8 +60,8 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
     // SupportMapFragment mapFragment;
     protected Marker marker;
 
-    private  double lat;
-    private  double log;
+    private double lat;
+    private double log;
 
     private String latitude;
     private String longitude;
@@ -74,19 +81,41 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
     protected DawaListAdapter adapter;
 
 
+
+    //Communication'
+    FirstFragmentListenerDawaMAP firstFragmentListenerDawaMAP;
+
+
+
     public DawaMap() {
 
     }
 
 
     @SuppressLint("ValidFragment")
-    public  DawaMap(double lat, double log){
+    public DawaMap(double lat, double log) {
 
         this.lat = lat;
         this.log = log;
     }
 
 //-----------------------------------------------------------------
+
+    /**
+     * Called when a fragment is first attached to its context.
+     * {@link #onCreate(Bundle)} will be called after this.
+     *
+     * @param context
+     */
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if(context instanceof FirstFragmentListenerDawaMAP){
+            firstFragmentListenerDawaMAP = (FirstFragmentListenerDawaMAP)context;
+        }
+    }
+
 
 //----------------------------------
 
@@ -95,7 +124,6 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
 
     }
-
 
 
     @Override
@@ -111,7 +139,7 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
 
             latitude = Double.toString(lat);
             longitude = Double.toString(log);
-        }catch (InflateException e) {
+        } catch (InflateException e) {
             Log.e(TAG, "Inflate exception");
         }
         return mView;
@@ -119,7 +147,7 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
 
 
     @Override
-    public void onViewCreated(View view,  Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         ((DawaActivity) getActivity()).passVal(new DawaFragmentCommunicator() {
@@ -127,7 +155,7 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
             public void passData(List<DawaLatLng> dawaLatLngs) {
                 NewdawaLatLngs = dawaLatLngs;
                 //Toast.makeText(getContext(),
-              //  "From Inter_Face\n " + NewdawaLatLngs.get(0).getDawaActivitiesInfoId(), Toast.LENGTH_SHORT).show();
+                //  "From Inter_Face\n " + NewdawaLatLngs.get(0).getDawaActivitiesInfoId(), Toast.LENGTH_SHORT).show();
 
                 onResume();
             }
@@ -136,7 +164,7 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
         });
     }
 
- //-----------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------
 
 
     @Override
@@ -173,14 +201,14 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
             onMapReady(MgoogleMap);
         }
 
-  }
+    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
     }
 
-//------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
@@ -191,12 +219,14 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
         MgoogleMap.setMapType(googleMap.MAP_TYPE_NORMAL);
 
         //Add Marker and Map Properties (User Location)
-        LatLng latLng =new LatLng(lat,log);
+        LatLng latLng = new LatLng(lat, log);
 
-        MgoogleMap.addMarker(new MarkerOptions().position(latLng)
+      /*  MgoogleMap.addMarker(new MarkerOptions().position(latLng)
                 .title("موقعك الحالي")////title on the marker
                 .snippet("موقعي") );//Description
                 //.icon(BitmapDescriptorFactory.fromResource(R.drawable.icons)) );
+
+                */
         //
         //Mosques Locations : Form API
 
@@ -208,7 +238,19 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
                 .tilt(40)
                 .build();
         //Move Camera
-       // MgoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
+
+
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            return;
+          }
+
+        MgoogleMap.setMyLocationEnabled(true);
+
+
+
+        // MgoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
         MgoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
         //Zoom controller position:
         //leftPadding, topPadding, rightPadding, bottomPadding
@@ -220,7 +262,14 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
 
         //  Google Map Onclick:
         MgoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
-        MgoogleMap.setOnCameraMoveStartedListener(this);
+
+
+        // MgoogleMap.setOnCameraMoveStartedListener(this);
+
+        //MapMove---
+
+        MgoogleMap.setOnCameraIdleListener(this);
+
 
         if (NewdawaLatLngs == null) {
             //System.out.println("NULLL Datat : ");
@@ -231,7 +280,7 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
         }
 
     }
-
+//--------------------------------------------------------------------------------
     protected String Newlat;
     protected String Newlon;
     public void AddOtherLocation(String lat, String lon){
@@ -254,27 +303,30 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
             call.enqueue(new Callback<List<DawaLatLng>>() {
                 @Override
                 public void onResponse(Call<List<DawaLatLng>> call, Response<List<DawaLatLng>> response) {
+                    if (response.isSuccessful()) {
+                        dawaLatLngs = response.body();
+                        System.out.println(dawaLatLngs.size() + " SIZE IS");
+                        //Send Data To Fragment List---
+                        //  adapter = new MosqueListAdapter(getContext(),mosquesLatLngs);
 
-                    dawaLatLngs = response.body();
-                    System.out.println(dawaLatLngs.size() + " SIZE IS");
-                    //Send Data To Fragment List---
-                    //  adapter = new MosqueListAdapter(getContext(),mosquesLatLngs);
+                        ///recyclerView.setAdapter(adapter);
+                        //-------
 
-                    ///recyclerView.setAdapter(adapter);
-                    //-------
+                        //Test Result and Print Data
+                        System.out.println("Responce toString" + response.toString());
+                        System.out.println("Responce body" + response.body());
+                        System.out.println("Responce headers" + response.headers());
+                        System.out.println("Responce errorBody" + response.errorBody());
+                        System.out.print("URL" + response.isSuccessful());
+                        //Storing the data in our list
 
-                    //Test Result and Print Data
-                    System.out.println("Responce toString"+ response.toString());
-                    System.out.println("Responce body"+ response.body());
-                    System.out.println("Responce headers"+ response.headers());
-                    System.out.println("Responce errorBody"+ response.errorBody());
-                    System.out.print("URL" + response.isSuccessful());
-                    //Storing the data in our list
+                        System.out.println("Size Is onResponce :----" + dawaLatLngs.size());
+                        //-----------------------------------------------------------------------
 
-                    System.out.println("Size Is onResponce :----" +dawaLatLngs.size());
-                    //-----------------------------------------------------------------------
 
-                    addMoreMarker(dawaLatLngs);
+                        firstFragmentListenerDawaMAP.sendData(dawaLatLngs);
+                        addMoreMarker(dawaLatLngs);
+                    }
 
                 }
 
@@ -297,7 +349,7 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
     private String DawaName;
     private List<DawaLatLng> dawaLatLngs2;
 
-    protected  void addMoreMarker ( List<DawaLatLng> dawa){
+    protected  void addMoreMarker (List<DawaLatLng> dawa){
         if(marker != null){
             marker.remove();
         }
@@ -341,11 +393,10 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
              marker=  MgoogleMap.addMarker(new MarkerOptions()
                     .position(latLngAPI)
                     .title(DawaName)////title on the marker
-                    .snippet("موقعي")//Description
-
+                    .snippet("")//Description
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.icons)));
 
-            System.out.println(DawaName + " Name");
+          //  System.out.println(DawaName + " Name");
             marker.setTag(dawaLatLngs2.get(i));
 
 //---------------------------------------------------------------------------------
@@ -396,7 +447,7 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
             });
             }//end if
             else {
-                Toast.makeText(getContext(), "لا توجد بيانات ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), " لا توجد بيانات ", Toast.LENGTH_SHORT).show();
 
 
             }
@@ -428,12 +479,36 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
 
     }
 
-    //-----------------Communication with Fragment-----------------------
+    //-----------------Communication with Fragment Search-----------------------
     @Override
     public void passData(List<DawaLatLng> dawaLatLngs) {
 
     }
 
+
+//----------------------------------------------------------------
+    private String nlat;
+    private String nlng;
+
+    @Override
+    public void onCameraIdle() {
+        LatLngBounds bounds = MgoogleMap.getProjection().getVisibleRegion().latLngBounds;
+
+        LatLng nl= bounds.getCenter();
+        double lon= nl.longitude;
+        double lat = nl.latitude;
+
+        nlat= String.valueOf(lat);
+        nlng = String.valueOf(lon);
+        if(NewdawaLatLngs == null ) {
+            AddOtherLocation(nlat, nlng);
+        }
+
+
+    }
+
+
+/*
  //-----------------------Map Cluster---------------------------------------------------------
     protected  double newLat;
     protected  double newLon;
@@ -490,7 +565,7 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
             lng = lng + offset;
             MarkerCluster offsetItem = new MarkerCluster(newLat, newLon,"tt","ss");
             mClusterManager.addItem(offsetItem);
-        }*/
+        }* /
 
     }
 
@@ -498,6 +573,7 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
     public void onCameraMoveStarted(int i) {
         setUpClusterer();
     }
+*/
 
 }
 

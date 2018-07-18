@@ -7,5 +7,5 @@ import java.util.List;
  */
 
 public interface FragmentCommunicator {
-    public void passData(List<MosquesLatLng> mosquesLatLngs);
+     void passData(List<MosquesLatLng> mosquesLatLngs);
 }

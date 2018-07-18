@@ -229,7 +229,6 @@ public class MosqueActivity extends AppCompatActivity implements
             }
         });
 
-
   }
 
 
@@ -241,8 +240,7 @@ public class MosqueActivity extends AppCompatActivity implements
        @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-
-        //------------------------------------------------------------------------------------------------------------
+           //------------------------------------------------------------------------------------------------------------
         String s = getIntent().getStringExtra("Query");
        // Toast.makeText(MosqueActivity.this," New Query \n"+s,Toast.LENGTH_LONG).show();
 
@@ -307,10 +305,7 @@ public class MosqueActivity extends AppCompatActivity implements
                 }
             });
 
-
-
-
-        }//End If Query Has been enterd
+ }//End If Query Has been enterd
 
 
 
@@ -327,6 +322,8 @@ public class MosqueActivity extends AppCompatActivity implements
         assert searchManager != null;
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
+
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -356,14 +353,13 @@ public class MosqueActivity extends AppCompatActivity implements
            menuItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
                @Override
                public boolean onMenuItemActionExpand(MenuItem item) {
-                   Toast.makeText(MosqueActivity.this, "llll", Toast.LENGTH_LONG).show();
+                  // Toast.makeText(MosqueActivity.this, "llll", Toast.LENGTH_LONG).show();
 
                    return true;
                }
 
                @Override
                public boolean onMenuItemActionCollapse(MenuItem item) {
-                   Toast.makeText(MosqueActivity.this, "ooo", Toast.LENGTH_LONG).show();
 
                    //Map -----
                    fragmentCommunicator.passData(AdvanceMosquesLatLngs);
@@ -376,7 +372,7 @@ public class MosqueActivity extends AppCompatActivity implements
         return super.onCreateOptionsMenu(menu);
     }
 
-    //Search----------------------------------
+ //Search----------------------------------
     protected String SearchQuery;
 
     public void Search(String query) {
@@ -412,7 +408,7 @@ public class MosqueActivity extends AppCompatActivity implements
 
                 if (mosquesLatLngs.size() == 0) {
                    // Log.e("  URL KK : ", "There is NO data ");
-                    Toast.makeText(MosqueActivity.this," لاتوجد بيانات" +SearchQuery,Toast.LENGTH_LONG).show();
+                    Toast.makeText(MosqueActivity.this," لاتوجد بيانات " +SearchQuery,Toast.LENGTH_LONG).show();
 
                 } else {
 

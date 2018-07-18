@@ -91,6 +91,8 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
 
     //User Location:
     protected LatLng latLng;
+
+
 //Communication'
     FirstFragmentListenerMAP firstFragmentListenerMAP;
 
@@ -175,8 +177,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
             public void passData(List<MosquesLatLng> mosquesLatLngs) {
                 NewmosquesLatLngs = mosquesLatLngs;
 
-
-                    onResume();
+                onResume();
 
                // addMoreMarker(NewmosquesLatLngs);
             }
@@ -255,6 +256,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
         MgoogleMap.setMyLocationEnabled(true);
 
         // Set a listener for marker click.
+
         //Initialize Map:
         MapsInitializer.initialize(getContext());
         MgoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -362,7 +364,6 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
                     //-----------------------------------------------------------------------
 
                     firstFragmentListenerMAP.sendData(mosquesLatLngs);
-
                     addMoreMarker(mosquesLatLngs);
 
                     //System.out.println("Size Is onResponce :----" + mosquesLatLngs.size());
@@ -536,11 +537,9 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
 
     //------------------------------
 
-
-
-
    private String nlat;
-    private String nlng;
+   private String nlng;
+
     @Override
     public void onCameraIdle() {
         //Toast.makeText(getContext(), "The camera has stopped moving. Fetch the data from the server!", Toast.LENGTH_SHORT).show();
@@ -554,10 +553,9 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
          nlng = String.valueOf(lon);
     if(NewmosquesLatLngs == null ) {
         AddOtherLocation(nlat, nlng);
-    }else {
-        Toast.makeText(getContext(), "Search ", Toast.LENGTH_SHORT).show();
-
     }
+
+
 }
 
 

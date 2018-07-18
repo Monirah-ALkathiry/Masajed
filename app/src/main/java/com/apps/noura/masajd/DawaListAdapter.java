@@ -40,8 +40,14 @@ class DawaListAdapter extends RecyclerView.Adapter<DawaListAdapter.DawaViewList>
 
         this.lat =lat;
         this.log=log;
+    }
 
 
+    //constructor For Communication
+    public DawaListAdapter(Context context,List<DawaLatLng> LatLng) {
+
+        this.context =context;
+        this.DawaLatLng = LatLng;
     }
 
     @Override
@@ -54,8 +60,9 @@ class DawaListAdapter extends RecyclerView.Adapter<DawaListAdapter.DawaViewList>
 
         return new DawaListAdapter.DawaViewList(view);
 
+   }
 
-    }
+
     protected  String Dstance;
 
     @Override
@@ -172,10 +179,6 @@ class DawaListAdapter extends RecyclerView.Adapter<DawaListAdapter.DawaViewList>
                // System.out.println("CLICK :) :) :) :)");
             }
         });
-
-
-
-
 
     }
 

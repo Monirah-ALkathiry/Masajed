@@ -67,7 +67,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
     }
 
 
-    //constructor
+    //constructor For Communication
     public MosqueListAdapter(Context context,List<MosquesLatLng> latLngs) {
         this.context = context;
         this.mosquesLatLngs = latLngs;

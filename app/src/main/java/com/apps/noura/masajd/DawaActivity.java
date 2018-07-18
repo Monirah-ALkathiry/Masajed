@@ -49,7 +49,11 @@ import retrofit2.Response;
 
 public class DawaActivity extends AppCompatActivity  implements
         GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener{
+        GoogleApiClient.OnConnectionFailedListener
+,FirstFragmentListenerDawaMAP{
+
+
+
     private static final String TAG = "DawaActivity";//Used in BottomNav
     private static final int ACTIVITY_NUM = 2;//Used in BottomNav
 
@@ -98,10 +102,15 @@ private ImageButton imageButton ;
     public DawaFragmentCommunicator dawaFragmentCommunicator;
 
 
+
+    //Used To Update Map_Marker
+    public FragmentCommunicator fragmentCommunicator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dawa);
+
 
         Log.d(TAG,"Start");
 
@@ -143,77 +152,25 @@ private ImageButton imageButton ;
 
         setupBottomNavigationView();
         //---------------------------
-        /*
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                System.out.print("\n IDI ID :" + id +"\n");
-                switch(id)
-                {
-                    case R.id.login:
 
-                        Toast.makeText(DawaActivity.this, "LogIn",Toast.LENGTH_SHORT).show();
-                        Intent LoginIntent = new Intent(DawaActivity.this,LoginActivity.class);
-                        DawaActivity.this.startActivity(LoginIntent);
-                        break;
-
-
-                    case R.id.info:
-                        final String websiteurl= "http://www.moia.gov.sa/AboutMinistry/Pages/AboutMinistry.aspx";
-                        Intent LinkIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(websiteurl));
-                        startActivity(LinkIntent);
-                        Toast.makeText(DawaActivity.this, "Link",Toast.LENGTH_SHORT).show();
-                        break;
-
-
-                    case R.id.contactUs:
-                        Toast.makeText(DawaActivity.this, "Mosque",Toast.LENGTH_SHORT).show();
-
-                        break;
-
-
-                    case R.id.ic_Dawa:
-                        Toast.makeText(DawaActivity.this, "Dawa",Toast.LENGTH_SHORT).show();
-                        Intent dawaIntent = new Intent(DawaActivity.this,DawaActivity.class);
-                        DawaActivity.this.startActivity(dawaIntent);
-
-                        break;
-
-                    case R.id.ic_favorit:
-                        Toast.makeText(DawaActivity.this, "Favorite",Toast.LENGTH_SHORT).show();
-                        Intent FavoriteIntent = new Intent(DawaActivity.this,FavoriteActivity.class);
-                        DawaActivity.this.startActivity(FavoriteIntent);
-                        break;
-
-                    case R.id.ic_masijed:
-                        Toast.makeText(DawaActivity.this, "Mosque",Toast.LENGTH_SHORT).show();
-                        Intent Mosque = new Intent(DawaActivity.this,MosqueActivity.class);
-                        DawaActivity.this.startActivity(Mosque);
-                        break;
-
-                    case R.id.aboutApp:
-                        Toast.makeText(DawaActivity.this, "About App",Toast.LENGTH_SHORT).show();
-
-                        break;
-
-                    default:
-                        return true;
-                }
-
-
-                return false;
-            }
-        });
-
-        */
 //----------------------------------------------------------------
 
 
+        //TabLayout
+        TabLayout tabLayout =(TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mviewPager);
+
+
+        //New
+        setupViewPager(mviewPager);
+
         //MAP
         intent = getIntent();
-        latitude = intent.getDoubleExtra("LAT",0.0);
-        longitude = intent.getDoubleExtra("LONG",0.0);
+        //latitude = intent.getDoubleExtra("LAT",0.0);
+        //longitude = intent.getDoubleExtra("LONG",0.0);
+
+
+
 //----------------------------------------------------------------------------------------
        try {
             if (ActivityCompat.checkSelfPermission(this, mPermission)
@@ -260,10 +217,6 @@ private ImageButton imageButton ;
 //---------------------------------------------------------------------------------------------------------
        // Toast.makeText(getApplicationContext(), "lat From Intent - \n Lat: "
              //   + latitude + "\n Long: " + longitude, Toast.LENGTH_LONG).show();
-
-        //TabLayout
-        TabLayout tabLayout =(TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mviewPager);
 
 
 
@@ -379,8 +332,11 @@ private ImageButton imageButton ;
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView(); // Menu Item
 
         // Assumes current activity is the searchable activity
+        assert searchManager != null;
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
+
+
 
 
 
@@ -407,6 +363,31 @@ private ImageButton imageButton ;
             }
         });
         //-------------------------------------------------------
+
+      MenuItem menuItem = menu.findItem(R.id.search);
+      menuItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+          @Override
+          public boolean onMenuItemActionExpand(MenuItem item) {
+              Toast.makeText(DawaActivity.this, "Send data ", Toast.LENGTH_LONG).show();
+
+              return true;
+
+
+          }
+
+          @Override
+          public boolean onMenuItemActionCollapse(MenuItem item) {
+
+              dawaLatLngs = null;
+              Toast.makeText(DawaActivity.this, "Send data after back", Toast.LENGTH_LONG).show();
+              dawaFragmentCommunicator.passData(dawaLatLngs);
+
+              return true;
+          }
+      });
+
+
+
 
         //super.onCreateOptionsMenu(menu)  default return
         return super.onCreateOptionsMenu(menu);
@@ -462,7 +443,7 @@ private ImageButton imageButton ;
 
                 if (dawaLatLngs.size() == 0) {
                     // Log.e("  URL KK : ", "There is NO data ");
-                    Toast.makeText(DawaActivity.this," لاتوجد بيانات" +SearchQuery,Toast.LENGTH_LONG).show();
+                    Toast.makeText(DawaActivity.this," لاتوجد بيانات " +SearchQuery,Toast.LENGTH_LONG).show();
 
                 } else {
 
@@ -592,6 +573,28 @@ private ImageButton imageButton ;
        //Menu menu = navigationView.getMenu();
        // MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         //menuItem.setChecked(true);
+
+    }
+
+
+    //send Data TO List -------------Idle------------------------
+    @Override
+    public void sendData(List<DawaLatLng> newData) {
+
+        //Recycler View
+        recyclerView = (RecyclerView) findViewById(R.id.DawaRecyclerView);
+        layoutManager = new LinearLayoutManager(DawaActivity.this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        //-------------------------------------------------------
+
+        //Send Data To Fragment List---
+         adapter = new DawaListAdapter(DawaActivity.this,newData);
+
+        recyclerView.setAdapter(adapter);
+        //Map -----
+        //dawaFragmentCommunicator.passData(dawaLatLngs);
+
 
     }
 }
