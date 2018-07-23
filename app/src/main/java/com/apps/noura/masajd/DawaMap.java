@@ -394,7 +394,7 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
                     .position(latLngAPI)
                     .title(DawaName)////title on the marker
                     .snippet("")//Description
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.icons)));
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.map)));
 
           //  System.out.println(DawaName + " Name");
             marker.setTag(dawaLatLngs2.get(i));

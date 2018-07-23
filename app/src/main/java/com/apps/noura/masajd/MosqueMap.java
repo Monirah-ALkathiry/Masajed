@@ -449,7 +449,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
                                 .position(latLngAPI)
                                 .title(MosquName)////title on the marker
                                 .snippet("")//Description
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.icons)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.map)));
 
                 // System.out.println(MosquName + " Name");
                 marker.setTag(mosquesLatLngs2.get(i));

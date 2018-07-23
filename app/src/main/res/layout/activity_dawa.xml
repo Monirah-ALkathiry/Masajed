@@ -54,6 +54,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
+        <!--
+
         <ImageButton
             android:id="@+id/SearchFilter"
             android:layout_width="wrap_content"
@@ -63,7 +66,7 @@
             android:tint="@color/white"
             android:background="@color/colorPrimary"
             android:contentDescription="@string/title_activity_advance_search" />
-
+        -->
        <!-- <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"

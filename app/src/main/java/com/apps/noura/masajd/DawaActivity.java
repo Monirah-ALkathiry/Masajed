@@ -221,6 +221,7 @@ private ImageButton imageButton ;
 
 
         //-----Advance Search :
+      /*
         imageButton = (ImageButton) findViewById(R.id.SearchFilter);
         imageButton.setOnClickListener(new View.OnClickListener()
         {
@@ -238,7 +239,7 @@ private ImageButton imageButton ;
 
             }
         });
-
+    */
 //-----------------------------------------------------
 
     }
@@ -368,7 +369,7 @@ private ImageButton imageButton ;
       menuItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
           @Override
           public boolean onMenuItemActionExpand(MenuItem item) {
-              Toast.makeText(DawaActivity.this, "Send data ", Toast.LENGTH_LONG).show();
+             // Toast.makeText(DawaActivity.this, "Send data ", Toast.LENGTH_LONG).show();
 
               return true;
 
@@ -379,30 +380,32 @@ private ImageButton imageButton ;
           public boolean onMenuItemActionCollapse(MenuItem item) {
 
               dawaLatLngs = null;
-              Toast.makeText(DawaActivity.this, "Send data after back", Toast.LENGTH_LONG).show();
+             // Toast.makeText(DawaActivity.this, "Send data after back", Toast.LENGTH_LONG).show();
               dawaFragmentCommunicator.passData(dawaLatLngs);
 
               return true;
           }
       });
 
-
-
-
-        //super.onCreateOptionsMenu(menu)  default return
+  //super.onCreateOptionsMenu(menu)  default return
         return super.onCreateOptionsMenu(menu);
     }
 
-   /* @Override
+   /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        int id= item.getItemId();
+       /* int id= item.getItemId();
 
         //if(id == R.id.collapseActionView)
 
         return super.onOptionsItemSelected(item);
-    }
-*/
+        * /
+
+
+
+
+    }*/
+
   //----------------------Connection With API-----------------------------------
 
     //Search
@@ -545,15 +548,38 @@ private ImageButton imageButton ;
 
     }
 
+
+//---------------------------------------------------------------------------------------------
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(actionBarDrawerToggle.onOptionsItemSelected(item))
+      /*  if(actionBarDrawerToggle.onOptionsItemSelected(item))
             return true;
 
-        return super.onOptionsItemSelected(item);
-    }
+        return super.onOptionsItemSelected(item);*/
 
+        switch (item.getItemId())
+        {
+
+            case R.id.SearchFilter:
+
+                String lat = String.valueOf(latitude);
+                String lon = String.valueOf(longitude);
+
+
+                Intent intent = new Intent(DawaActivity.this, AdvanceSearch.class);
+                intent.putExtra("LAT", lat);
+                intent.putExtra("LON", lon);
+                startActivity(intent);
+
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+//----------------------------------------------------------------------------------------------------
     //Bottom Nav
     private void setupBottomNavigationView() {
         //Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");

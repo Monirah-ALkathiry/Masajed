@@ -211,7 +211,10 @@ public class MosqueActivity extends AppCompatActivity implements
 
 
 //-----Advance Search :
-        imageButton = (ImageButton) findViewById(R.id.SearchFilter);
+
+
+      /*  imageButton = (ImageButton) findViewById(R.id.SearchFilter);
+
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -227,7 +230,7 @@ public class MosqueActivity extends AppCompatActivity implements
 
                 //startActivity(new Intent(MosqueActivity.this,AdvanceSearch.class));
             }
-        });
+        });*/
 
   }
 
@@ -240,7 +243,9 @@ public class MosqueActivity extends AppCompatActivity implements
        @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-           //------------------------------------------------------------------------------------------------------------
+         //  getMenuInflater().inflate(R.menu.menu_mosque_information,menu);
+
+                //------------------------------------------------------------------------------------------------------------
         String s = getIntent().getStringExtra("Query");
        // Toast.makeText(MosqueActivity.this," New Query \n"+s,Toast.LENGTH_LONG).show();
 
@@ -305,8 +310,7 @@ public class MosqueActivity extends AppCompatActivity implements
                 }
             });
 
- }//End If Query Has been enterd
-
+ }//End If Query Has been entered
 
 
         // getMenuInflater().inflate(R.menu.menu_mosque_information,menu);
@@ -345,10 +349,9 @@ public class MosqueActivity extends AppCompatActivity implements
                 return false;
             }
 
+     });
 
-        });
-
-
+//------------------------------------Search-------------------------------------------------------
            MenuItem menuItem = menu.findItem(R.id.search);
            menuItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
                @Override
@@ -370,7 +373,13 @@ public class MosqueActivity extends AppCompatActivity implements
 
 
         return super.onCreateOptionsMenu(menu);
-    }
+
+
+   }
+
+
+
+
 
  //Search----------------------------------
     protected String SearchQuery;
@@ -455,13 +464,14 @@ public class MosqueActivity extends AppCompatActivity implements
 
 }
 
-    //Here is new method
+
+//Here is new method-----------------------------------------------------
     public void passVal(FragmentCommunicator fragmentCommunicator) {
         this.fragmentCommunicator = fragmentCommunicator;
 
     }
 
-//-----------------------------------------------------
+//----------------------------------------------------------------------------
 @Override
     protected void onStart() {
       super.onStart();
@@ -473,6 +483,7 @@ public class MosqueActivity extends AppCompatActivity implements
     }
 
  }
+
 
     @Override
     protected void onPostResume() {
@@ -522,12 +533,34 @@ public class MosqueActivity extends AppCompatActivity implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+      //  if(actionBarDrawerToggle.onOptionsItemSelected(item))
+       //     return true;
 
-        if(actionBarDrawerToggle.onOptionsItemSelected(item))
-            return true;
+    //  return super.onOptionsItemSelected(item);
 
-        return super.onOptionsItemSelected(item);
+
+        switch (item.getItemId())
+        {
+
+            case R.id.SearchFilter:
+
+                String lat = String.valueOf(latitude);
+                String lon = String.valueOf(longitude);
+
+
+                Intent intent = new Intent(MosqueActivity.this, AdvanceSearch.class);
+                intent.putExtra("LAT", lat);
+                intent.putExtra("LON", lon);
+                startActivity(intent);
+
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
+
+
 
 
     //Bottom Nav
