@@ -36,6 +36,8 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.lang.ref.PhantomReference;
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 
@@ -50,6 +52,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
         , GoogleMap.OnInfoWindowClickListener
         , FragmentCommunicator
     ,GoogleMap.OnCameraIdleListener
+    ,GoogleMap.OnCameraMoveStartedListener
 
 
 
@@ -92,6 +95,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
     //User Location:
     protected LatLng latLng;
 
+    private  boolean flge;
 
 //Communication'
     FirstFragmentListenerMAP firstFragmentListenerMAP;
@@ -154,7 +158,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
             mapView.getMapAsync(this);
             latitude = Double.toString(lat);
             longitude = Double.toString(log);
-
+            flge = true;
 
         } catch (InflateException e) {
             Log.e(TAG, "Inflate exception");
@@ -208,6 +212,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
+
     }
 
     @Override
@@ -303,7 +308,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
 
         //MapMove---
         // MgoogleMap.setOnCameraMoveListener(this);
-        // MgoogleMap.setOnCameraMoveStartedListener(this);
+         MgoogleMap.setOnCameraMoveStartedListener(this);
          MgoogleMap.setOnCameraIdleListener(this);
 
 
@@ -398,10 +403,10 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
     public void addMoreMarker(List<MosquesLatLng> mosques) {
 
 
-
-        if (marker != null) {
+       if (marker != null) {
             //to remove All marker from Map when user change camera position
-            MgoogleMap.clear();
+
+             MgoogleMap.clear();
             //Map Movment Marker
         }
 
@@ -457,11 +462,19 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
 
                 //Info Window
                 MgoogleMap.setInfoWindowAdapter(this);
+
                 //Onclick Info Window
+
+
+
+
                 MgoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+
                     @Override
                     public void onInfoWindowClick(Marker marker) {
+
                         MosquesLatLng infoAttached = (MosquesLatLng) marker.getTag();
+
 
                         // Toast.makeText(getContext(), "Test_Toast_Massage: " + infoAttached.getCode() + "  " + infoAttached.getMosqueName(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getContext(), MosqueInformationActivity.class);
@@ -551,12 +564,67 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
 
         nlat= String.valueOf(lat);
          nlng = String.valueOf(lon);
-    if(NewmosquesLatLngs == null ) {
-        AddOtherLocation(nlat, nlng);
+         //Check Search:
+
+        if(NewmosquesLatLngs == null ) {
+
+        if (flge) {
+            AddOtherLocation(nlat, nlng);
+        }
+
+
     }
 
 
 }
+
+    @Override
+    public void onCameraMoveStarted(int reason) {
+
+
+        if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE) {
+
+            //Toast.makeText(getContext(), "The user gestured on the map.",
+                //    Toast.LENGTH_SHORT).show();
+
+        } else
+            if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_API_ANIMATION) {
+
+         //   Toast.makeText(getContext(), "The user tapped something on the map.",
+                  //  Toast.LENGTH_SHORT).show();
+
+
+            if (marker.equals(marker)) {
+              //  Toast.makeText(getContext(), "The  MARKER.",
+                     //   Toast.LENGTH_SHORT).show();
+                if (!marker.isInfoWindowShown()) {
+                   // Toast.makeText(getContext(), "The window",
+                      //      Toast.LENGTH_SHORT).show();
+                    flge = false;
+
+                }
+            }
+
+            MgoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                @Override
+                public void onMapClick(LatLng latLng) {
+
+                  //Toast.makeText(getContext(), "Map Clicked.",Toast.LENGTH_SHORT).show();
+
+                    flge = true;
+
+                }
+            });
+
+
+
+        } else if (reason == GoogleMap.OnCameraMoveStartedListener
+                .REASON_DEVELOPER_ANIMATION) {
+
+            Toast.makeText(getContext(), "The app sssssss the camera.",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
 
 
 

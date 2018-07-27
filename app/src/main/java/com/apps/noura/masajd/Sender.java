@@ -5,5 +5,5 @@ package com.apps.noura.masajd;
  */
 
 public interface Sender {
-    public void SendMassage(String Mesage);
+     void SendMassage(String Mesage);
 }

@@ -119,36 +119,6 @@ public class MosqueActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_mosque);
 
 
-
-        drawerLayout = (DrawerLayout)findViewById(R.id.DrawerLayout);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.open, R.string.close);
-
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
-
-        if(getSupportActionBar() != null){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-    //Navigation:----------------
-        navigationView = (NavigationView)findViewById(R.id.navegation);
-
-        //Check if User Loge in Or not:
-//Check if User Loge in Or not:
-
-
-        sharedConfig = new SharedPreferencesConfig(getApplicationContext());
-        if(sharedConfig.readLoginStatus())
-        {
-            navigationView.getMenu().findItem(R.id.login).setVisible(false);
-        }
-        else {
-
-            navigationView.getMenu().findItem(R.id.logOut).setVisible(false);
-
-        }
-
-        setupDrawerNavigation();
-
    //-------------------Bottom Nav: 
 
         setupBottomNavigationView();
@@ -164,6 +134,42 @@ public class MosqueActivity extends AppCompatActivity implements
 
 
         setupViewPager(mviewPager);
+
+
+
+        //Navigation:----------------
+        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+
+        drawerLayout = (DrawerLayout)findViewById(R.id.DrawerLayout);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.open, R.string.close);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        navigationView = (NavigationView)findViewById(R.id.navegation);
+
+
+        //Check If User Login
+        sharedConfig = new SharedPreferencesConfig(getApplicationContext());
+        if(sharedConfig.readLoginStatus())
+        {
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+            //finish();
+
+
+        }
+        else {
+
+            navigationView.getMenu().findItem(R.id.logOut).setVisible(false);
+
+        }
+
+        setupDrawerNavigation();
 
         //MAP
         intentThatCalled = getIntent();
@@ -533,8 +539,8 @@ public class MosqueActivity extends AppCompatActivity implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-      //  if(actionBarDrawerToggle.onOptionsItemSelected(item))
-       //     return true;
+       if(actionBarDrawerToggle.onOptionsItemSelected(item))
+           return true;
 
     //  return super.onOptionsItemSelected(item);
 
