@@ -56,6 +56,9 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
     String data;
     private Context context;
 
+    private  View view;
+
+
     //constructor
     public MosqueListAdapter(Context context, List<MosquesLatLng> latLngs, double lat , double log) {
 
@@ -77,7 +80,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
     @Override
     public MosqueViewList onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_mosque_item, parent, false);
+         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_mosque_item, parent, false);
         //Mosque Code :
 
         return new MosqueViewList(view);
@@ -89,7 +92,6 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
     public void onBindViewHolder(final MosqueViewList holder, final int position) {
 
 
-
         holder.MosqueCode = (mosquesLatLngs.get(position).getCode());
         //System.out.println(holder.imageView + " holder.imageView ");
 
@@ -99,7 +101,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         holder.InfoTextView.setText(mosquesLatLngs.get(position).getCityVillage());
         holder.MosqueDistrict.setText(mosquesLatLngs.get(position).getDistrict());
         //-----------------------------Calc Distance --------------------------------
-//Location Distance :
+  //Location Distance :
         Location locationA = new Location("point A");
         Location locationB = new Location("point B");
         //Used To calc Distance:
@@ -108,7 +110,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
         String latAPI= mosquesLatLngs.get(position).getLatitude();
         String logAPI= mosquesLatLngs.get(position).getLongitude();
-      //  System.out.println(" Distance is :) :) :0  ******* " + logAPI  + "\n d by meeter :" +latAPI + "\n In Kilo **********: " );
+    //System.out.println(" Distance is :) :) :0  ******* " + logAPI  + "\n d by meeter :" +latAPI + "\n In Kilo **********: " );
 
          latd=Double.parseDouble(latAPI);
          logd= Double.parseDouble(logAPI);
@@ -351,7 +353,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         private String MosqueCode;//Form API To IMAGE VIEW
 
 
-        public MosqueViewList(View view) {
+        MosqueViewList(View view) {
             super(view);
             mTextView = (TextView) view.findViewById(R.id.MosqueName);
             InfoTextView = (TextView) view.findViewById(R.id.MosqueInfo);

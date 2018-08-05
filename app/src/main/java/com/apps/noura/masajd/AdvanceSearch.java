@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -95,6 +97,8 @@ public class AdvanceSearch extends AppCompatActivity implements Sender{
     }
 
 
+
+
     private void setUpViewPager(ViewPager viewPager) {
 
         AdvanceSearchPageAdapter adapter = new AdvanceSearchPageAdapter(getSupportFragmentManager());
@@ -167,9 +171,6 @@ public class AdvanceSearch extends AppCompatActivity implements Sender{
                     lon = Double.parseDouble(longitude);
 
                     System.out.println(latitude + " : lat \n lone : " +longitude);
-
-
-                    //Map -----
 
                 }
 

@@ -237,8 +237,8 @@ public class PrayTime extends AppCompatActivity {
         BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
         BottomNavigationViewHelper.enableNavigation(this, bottomNavigationViewEx);
         Menu menu = bottomNavigationViewEx.getMenu();
-        //MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
-        // menuItem.setChecked(true);
+        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+         menuItem.setChecked(false);
     }
 
     //Drawer Nav

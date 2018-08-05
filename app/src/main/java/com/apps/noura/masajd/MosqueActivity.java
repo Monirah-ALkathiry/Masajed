@@ -174,7 +174,7 @@ public class MosqueActivity extends AppCompatActivity implements
         //MAP
         intentThatCalled = getIntent();
 
-        // latitude = intentThatCalled.getDoubleExtra("LAT",0.0);
+        //latitude = intentThatCalled.getDoubleExtra("LAT",0.0);
         //longitude = intentThatCalled.getDoubleExtra("LONG",0.0);
 //---------------------------------------------------------------------
 
@@ -206,6 +206,7 @@ public class MosqueActivity extends AppCompatActivity implements
 
             latitude = gps.getLatitude();
             longitude = gps.getLongitude();
+            //Toast.makeText(this,latitude+"/n"+longitude,Toast.LENGTH_LONG).show();
 
         } else {
             // can't get location
@@ -251,9 +252,11 @@ public class MosqueActivity extends AppCompatActivity implements
 
          //  getMenuInflater().inflate(R.menu.menu_mosque_information,menu);
 
-                //------------------------------------------------------------------------------------------------------------
+
+
+           //------------------------------------------------------------------------------------------------------------
         String s = getIntent().getStringExtra("Query");
-       // Toast.makeText(MosqueActivity.this," New Query \n"+s,Toast.LENGTH_LONG).show();
+        //Toast.makeText(MosqueActivity.this," New Query \n"+s,Toast.LENGTH_LONG).show();
 
         if(s != null) {
 //Convert latitude and longitude to String
@@ -293,6 +296,8 @@ public class MosqueActivity extends AppCompatActivity implements
                         double latNew = Double.parseDouble(latitude);
                         double lonNew = Double.parseDouble(longitude);
 
+                        //Map -----
+                        fragmentCommunicator.passData(AdvanceMosquesLatLngs);
 
                         recyclerView = (RecyclerView) findViewById(R.id.MosqueRecyclerView);
                         layoutManager = new LinearLayoutManager(MosqueActivity.this);
@@ -303,8 +308,7 @@ public class MosqueActivity extends AppCompatActivity implements
 //
                         recyclerView.setAdapter(adapter);
 
-                        //Map -----
-                         fragmentCommunicator.passData(AdvanceMosquesLatLngs);
+
 
                     }
                 }
@@ -560,6 +564,14 @@ public class MosqueActivity extends AppCompatActivity implements
                 startActivity(intent);
 
                 return true;
+
+            case R.id.Refresh:
+
+                Intent Refreshintent = getIntent();
+                finish();
+                startActivity(Refreshintent);
+                return true;
+
 
             default:
                 return super.onOptionsItemSelected(item);

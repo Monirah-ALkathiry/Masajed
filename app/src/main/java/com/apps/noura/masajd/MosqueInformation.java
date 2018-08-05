@@ -130,7 +130,7 @@ public class MosqueInformation extends Fragment implements OnMapReadyCallback
                 .position(new LatLng(Lat, Lon))
                 .title(MosqueName)////title on the marker
                 .snippet("موقعي")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.icons))//Description
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.map))//Description
         );
 
         //-----------------------

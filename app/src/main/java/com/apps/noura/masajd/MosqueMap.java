@@ -179,6 +179,9 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
         ((MosqueActivity) getActivity()).passVal(new FragmentCommunicator() {
             @Override
             public void passData(List<MosquesLatLng> mosquesLatLngs) {
+
+                //After Cancel the search
+                Toast.makeText(getContext(),"Test 111",Toast.LENGTH_LONG).show();
                 NewmosquesLatLngs = mosquesLatLngs;
 
                 onResume();
@@ -288,7 +291,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
                 .build();
 
         //Move Camera
-        // googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
+        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
         //Google Map Zoom in zoom out
         //Zoom controller position:
         //leftPadding, topPadding, rightPadding, bottomPadding

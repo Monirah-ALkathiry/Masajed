@@ -13,7 +13,7 @@
 
     </style>
 
-    <style name="AppTheme.NoActionBar" >
+    <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -23,7 +23,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
-   <!-- Theme.AppCompat.Light.Dialog.Alert Custom Dialog -->
+    <!-- Theme.AppCompat.Light.Dialog.Alert Custom Dialog -->
 
     <style name="Custom" parent="Theme.AppCompat.Light.Dialog.Alert">
 
@@ -62,8 +62,8 @@
         <item name="colorControlHighlight">@color/white</item>
     </style>
 
-<!-- Log in Pad Login -->
-  <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <!-- Log in Pad Login -->
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
 
         <item name="android:background">@color/red</item>
         <item name="android:textColorPrimary">@color/white</item>
