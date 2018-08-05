@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.apps.noura.masajd.AboutUs.AboutUsActivity;
 import com.apps.noura.masajd.ContactUs.ContactUsActivity;
 import com.apps.noura.masajd.DawaActivity;
 import com.apps.noura.masajd.FavoriteActivity;
@@ -104,7 +105,8 @@ public class DrawerNavigation {
 
                         case R.id.aboutApp:
                            // Toast.makeText(context, "About App",Toast.LENGTH_SHORT).show();
-
+                            Intent AboutAppIntent = new Intent(context, AboutUsActivity.class);//ACTIVITY_NUM = 1
+                            context.startActivity(AboutAppIntent);
                             break;
 
                         case R.id.ic_praytime:

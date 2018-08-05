@@ -108,9 +108,14 @@
         <activity
             android:name=".PrayTime.PrayTime"
             android:label="@string/praytime"/>
+
         <activity
             android:name=".ContactUs.ContactUsActivity"
             android:label="@string/contactUs"/>
+
+        <activity
+            android:name=".AboutUs.AboutUsActivity"
+            android:label="@string/AboutApp"/>
 
 
         <activity android:name=".LogOut"></activity>
