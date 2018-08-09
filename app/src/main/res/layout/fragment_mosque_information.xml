@@ -8,6 +8,7 @@
     tools:context="com.apps.noura.masajd.MosqueInformation">
 
 
+    <!-- TODO: fix list size -->
     <android.support.v4.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="250dp"

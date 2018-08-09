@@ -22,7 +22,7 @@ public class MosqueInformationActivity extends AppCompatActivity  {
     //Adapter------------------------
     private TextView MasijedName ;
 
-
+    private TextView MosquNationalCode;
       //---------------------------------
 
 
@@ -51,11 +51,13 @@ public class MosqueInformationActivity extends AppCompatActivity  {
         tabLayout.setupWithViewPager(mViewPager);
 
         MasijedName = (TextView) findViewById(R.id.MasijedName);
+        MosquNationalCode =(TextView) findViewById(R.id.MosquNationalCode);
+
 
         //Get Data From Mosque Adapter:
         Intent intent = getIntent();
         MasijedName.setText(intent.getStringExtra("MOSQUE_NAME"));
-
+        MosquNationalCode.setText(intent.getStringExtra("MosqueNationalCode"));
 
 
 

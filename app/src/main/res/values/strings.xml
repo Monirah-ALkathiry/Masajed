@@ -26,7 +26,7 @@
     <!-- Monirah -->
     <string name="search">أدخل كلمة البحث</string>
     <string name="mosqueName">إسم المسجد</string>
-    <string name="Text_name_Tag">إسم المسجد</string>
+    <string name="Text_name_Tag">إسم المسجد:</string>
     <string name="Text_name">  </string>
     <string name="Back">الرجوع</string>
     <string name="MosqueInfo">معلومات المسجد</string>
@@ -52,9 +52,9 @@
     <string name="hello_blank_fragment">Image fragment</string>
     <string name="title_activity_mosque_information">مسجد</string>
 
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="tab_text_3">Tab 3</string>
+    <string name="Mosque">إسم المسجد</string>
+    <string name="Imam">إسم الإمام</string>
+    <string name="Khateeb">إسم الخطيب</string>
 
     <string name="section_format">Hello World from section: %1$d</string>
 
@@ -118,7 +118,7 @@
     <string name="InsertImamName">أدخل إسم الإمام</string>
     <string name="enter_date">Enter Date</string>
     <string name="ActivityName">أدخل عنوان المنشط</string>
-    <string name="InsertMosqueName">أدخل إسم المسجد</string>
+    <string name="InsertMosqueName">أدخل كلمة البحث</string>
     <string name="Search_Filter">تصفية البحث</string>
     <string name="Email">   البريد الإلكتروني \n\n   info@moia.gov.sa </string>
     <string name="Email_Address">    البريد الإلكتروني </string>
@@ -127,6 +127,7 @@
     <string name="AboutUs">تطبيق مساجد هو تطبيق رسمي و معتمد من وزارة الشؤون الإسلامية في المملكة العربية السعودية يهدف الى تقديم عدد من الخدمات المتنوعة</string>
     <string name="AboutUs1">يقدم التطبيق خدمة عرض المساجد القريبة من موقعك الحالي مدعومة بصور و معلومات عن المسجد</string>
     <string name="AboutApp">عن التطبيق</string>
+    <string name="title_activity_main_advance_search">MainAdvanceSearch</string>
 
 
 </resources>

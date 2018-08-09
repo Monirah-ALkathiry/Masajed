@@ -24,9 +24,9 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".WelcomMosqueApp"
-            android:theme="@style/AppTheme.NoActionBar"
-            >
-            <!-- android:theme="@style/AppTheme.NoActionBar"-->
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <!-- android:theme="@style/AppTheme.NoActionBar" -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -59,13 +59,16 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity  android:name=".LoginActivity"
-            android:label="@string/login"/>
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/login" />
         <activity android:name=".RigisterActivity" />
         <activity android:name=".UserAreaActivity" />
         <!-- <activity android:name=".MosqueActivity" /> -->
-        <activity android:name=".DawaActivity"
-            android:label="@string/Dawa"/>
+
+        <activity
+            android:name=".DawaActivity"
+            android:label="@string/Dawa" />
         <activity android:name=".DawaInformationActivity" />
         <activity android:name=".forgetPassActivity" />
 
@@ -107,18 +110,24 @@
         -->
         <activity
             android:name=".PrayTime.PrayTime"
-            android:label="@string/praytime"/>
-
+            android:label="@string/praytime" />
         <activity
             android:name=".ContactUs.ContactUsActivity"
-            android:label="@string/contactUs"/>
-
+            android:label="@string/contactUs" />
         <activity
             android:name=".AboutUs.AboutUsActivity"
-            android:label="@string/AboutApp"/>
+            android:label="@string/AboutApp"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".LogOut" />
+        <activity
+            android:name=".MosquSearch.MainAdvanceSearch"
+            android:label="@string/title_activity_main_advance_search"
+            android:theme="@style/AppTheme.NoActionBar">
 
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
 
-        <activity android:name=".LogOut"></activity>
+        </activity>
     </application>
 
 </manifest>

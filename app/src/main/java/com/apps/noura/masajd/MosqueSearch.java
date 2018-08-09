@@ -149,7 +149,8 @@ public class MosqueSearch extends Fragment {
         //Regions.clear();
         loadJSONFromAsset();
         //
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, Regions);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                (getContext(), android.R.layout.simple_spinner_dropdown_item, Regions);
         spinner.setAdapter(adapter);
 
 

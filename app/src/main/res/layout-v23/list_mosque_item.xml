@@ -16,14 +16,14 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp">
+        android:layout_margin="2dp">
 
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:padding="8dp">
+            android:padding="4.5dp">
 
       <!--  <ImageView
 
@@ -44,8 +44,8 @@
 
         <com.github.siyamed.shapeimageview.RoundedImageView
             android:id="@+id/MosqueImage"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             app:siRadius="6dp"
             app:siBorderWidth="2dp"
             app:siBorderColor="@color/white"
@@ -62,27 +62,29 @@
                 android:gravity="center"
                 android:layout_toEndOf="@+id/MosqueImage"
                 >
-        <TextView
+
+            <TextView
             android:id="@+id/MosqueName"
-            android:layout_width="wrap_content"
+            android:layout_width="70pt"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin=".5dp"
             android:fontFamily="sans-serif"
             android:gravity="center"
-            android:padding="0.5dp"
+            android:padding="1.5dp"
             android:paddingBottom="5dp"
             android:paddingStart="0.5dp"
-            android:paddingEnd="0.5dp"
+            android:paddingEnd="2.5dp"
             android:text="@string/Text_name_Tag"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/DarkGray"
             android:textStyle="bold"
             android:breakStrategy="balanced"
             android:ellipsize="end"
             android:maxLines="1"
             android:singleLine="true"
             android:layout_weight="1"
+            android:textSize="14sp"
             />
 
         <TextView
@@ -92,12 +94,11 @@
             android:layout_gravity="end|fill_vertical"
             android:layout_marginBottom=".5dp"
             android:gravity="start"
-            android:padding="0.5dp"
+
             android:text="@string/MosqueDistance"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/DarkGray"
             android:textSize="10sp"
             tools:ignore="SmallSp"
-
             android:layout_weight="1"/>
 
 

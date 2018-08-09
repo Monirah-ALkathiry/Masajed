@@ -3,18 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:minWidth="700px"
+    android:minWidth="100dp"
     android:background="@color/white"
     android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/mosqueIcon"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="50"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_weight="15"
         android:adjustViewBounds="false"
         android:cropToPadding="false"
-        android:src="@drawable/mosque_" />
+        android:src="@drawable/mosque_detail_icon" />
 
     <LinearLayout
         android:layout_width="match_parent"

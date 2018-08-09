@@ -87,6 +87,8 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
     }
 
+   protected String MosqueCityVillageDistrict;
+
 
     @Override
     public void onBindViewHolder(final MosqueViewList holder, final int position) {
@@ -100,8 +102,12 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
         holder.mTextView.setText(mosquesLatLngs.get(position).getMosqueName());
         holder.InfoTextView.setText(mosquesLatLngs.get(position).getCityVillage());
         holder.MosqueDistrict.setText(mosquesLatLngs.get(position).getDistrict());
+
+        MosqueCityVillageDistrict = mosquesLatLngs.get(position).getCityVillage()+"-"
+                +mosquesLatLngs.get(position).getDistrict();
+        //holder.MosqueDistrict.setText(MosqueCityVillageDistrict);
         //-----------------------------Calc Distance --------------------------------
-  //Location Distance :
+        //Location Distance :
         Location locationA = new Location("point A");
         Location locationB = new Location("point B");
         //Used To calc Distance:
@@ -110,24 +116,29 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
         String latAPI= mosquesLatLngs.get(position).getLatitude();
         String logAPI= mosquesLatLngs.get(position).getLongitude();
-    //System.out.println(" Distance is :) :) :0  ******* " + logAPI  + "\n d by meeter :" +latAPI + "\n In Kilo **********: " );
+        //System.out.println(" Distance is :) :) :0  ******* " + logAPI  + "\n d by meeter :" +latAPI + "\n In Kilo **********: " );
 
-         latd=Double.parseDouble(latAPI);
-         logd= Double.parseDouble(logAPI);
+        latd=Double.parseDouble(latAPI);
+        logd= Double.parseDouble(logAPI);
 
         locationB.setLatitude(latd);
         locationB.setLongitude(logd);
         float distance = locationA.distanceTo(locationB);
         double dm =distance * Math.PI / 180.0;
-        double dk = dm / 10.0;
+        double dk = dm / 100.0;
+        dk = Math.floor(dk * 100) / 100;
 
         //rad * 180.0 / Math.PI
-      //  System.out.println(" Distance is :) :) :0  ******* " + distance  + "\n d by meeter :" +dm + "\n In Kilo **********: " +dk );
+        System.out.println(" Distance is :) :) :0  ******* " + distance  + "" +
+                "\n d by meeter :" +dm + "\n In Kilo **********: " +dk );
 
         //Convert To String:
-        dk = Math.floor(dk * 100) / 100;
         String Dstance= Double.toString(dk);
-        holder.Distance.setText(Dstance + "كيلو");
+        holder.Distance.setText(Dstance + " كيلو ");
+
+       double test = distance(lat,log,latd,logd);
+
+        System.out.println("\n Destance : "+test+"\n");
 //--------------------------------------------------------------------------------------------------
         //Onclick : Open New Activity
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
@@ -157,7 +168,7 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
                 intent.putExtra("KHATEEB_NAME", mosquesLatLngs.get(position).getKhateebName());
                 intent.putExtra("MOATHEN_NAME", mosquesLatLngs.get(position).getMoathenName());
                 intent.putExtra("OBSERVER_NAME", mosquesLatLngs.get(position).getObserverName());
-
+                intent.putExtra("MosqueNationalCode",mosquesLatLngs.get(position).getMosqueNationalCode());
                 context.startActivity(intent);
                 //Test
             }
@@ -177,6 +188,31 @@ public class MosqueListAdapter extends RecyclerView.Adapter<MosqueListAdapter.Mo
 
         return mosquesLatLngs.size();
     }
+
+
+
+
+    private double distance(double lat1, double lon1, double lat2, double lon2) {
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1))
+                * Math.sin(deg2rad(lat2))
+                + Math.cos(deg2rad(lat1))
+                * Math.cos(deg2rad(lat2))
+                * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+        return (dist);
+    }
+
+    private double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
+    private double rad2deg(double rad) {
+        return (rad * 180.0 / Math.PI);
+    }
+
 
 
 //-----------------------------------------------------------------------------------------------------

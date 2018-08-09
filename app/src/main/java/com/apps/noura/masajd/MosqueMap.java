@@ -113,6 +113,10 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
         if(context instanceof FirstFragmentListenerMAP){
             firstFragmentListenerMAP = (FirstFragmentListenerMAP)context;
         }
+
+
+        // check if parent Fragment implements listener
+
     }
 
     @SuppressLint("ValidFragment")
@@ -198,7 +202,9 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
     @Override
     public void onPause() {
         super.onPause();
-        mapView.onPause();
+
+        //Change this on back press
+       // mapView.onPause();
 
 
     }
@@ -499,6 +505,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
                         intent.putExtra("KHATEEB_NAME", infoAttached.getKhateebName());
                         intent.putExtra("MOATHEN_NAME", infoAttached.getMoathenName());
                         intent.putExtra("OBSERVER_NAME", infoAttached.getObserverName());
+                        intent.putExtra("MosqueNationalCode",infoAttached.getMosqueNationalCode());
 
 
                         getContext().startActivity(intent);

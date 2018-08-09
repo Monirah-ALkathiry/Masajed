@@ -12,9 +12,11 @@
     android:background="@color/lightGry">
 
         <TableLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_gravity="right"
             tools:ignore="RtlHardcoded">
 
@@ -26,24 +28,23 @@
            android:layout_height="wrap_content"
            android:text="@string/MosqueType"
            android:background="@drawable/button_shape"
-           android:padding="18dip"
+           android:padding="4dip"
            android:textColor="#fff"
            android:textSize="14sp"
-
+            android:layout_marginEnd="4dp"
            />
 
 
             <TextView
             android:id="@+id/MosqueType"
-            android:layout_width="@dimen/mdtp_date_picker_component_width"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
             android:text="@string/Null"
             android:textColor="@color/black"
-            android:padding="18dip"
+            android:padding="4dip"
             android:background="@drawable/list_shape"
             android:textSize="14sp"
-
             />
 <!--
  app:layout_constraintLeft_toLeftOf="parent"
@@ -62,17 +63,20 @@
                android:layout_height="wrap_content"
                android:text="@string/MosqueRegion"
                android:background="@drawable/button_shape"
-               android:padding="18dip"
+               android:padding="4dip"
                android:textColor="#fff"
-               android:textSize="14sp"/>
+               android:textSize="14sp"
+               android:layout_marginEnd="4dp"
+
+             />
 
         <TextView
             android:id="@+id/MosqueRegion"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/Null"
             android:textColor="@color/black"
-            android:padding="18dip"
+            android:padding="4dip"
             android:background="@drawable/list_shape"
             android:textSize="14sp"/>
 
@@ -88,17 +92,19 @@
                android:layout_height="wrap_content"
                android:text="@string/CityVillage"
                android:background="@drawable/button_shape"
-               android:padding="18dip"
+               android:padding="4dip"
                android:textColor="#fff"
-               android:textSize="14sp"/>
+               android:textSize="14sp"
+               android:layout_marginEnd="4dp"
+               />
 
            <TextView
             android:id="@+id/CityVillage"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/Null"
             android:textColor="@color/black"
-            android:padding="18dip"
+            android:padding="4dip"
             android:background="@drawable/list_shape"
             android:textSize="14sp"/>
 
@@ -113,17 +119,19 @@
              android:layout_height="wrap_content"
              android:text="@string/District"
              android:background="@drawable/button_shape"
-             android:padding="18dip"
+             android:padding="4dip"
              android:textColor="#fff"
-             android:textSize="14sp"/>
+             android:textSize="14sp"
+             android:layout_marginEnd="4dp"
+             />
 
         <TextView
             android:id="@+id/District"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/Null"
             android:textColor="@color/black"
-            android:padding="18dip"
+            android:padding="4dip"
             android:background="@drawable/list_shape"
             android:textSize="14sp"/>
 
@@ -139,20 +147,21 @@
             android:layout_height="wrap_content"
             android:text="@string/StreetName"
             android:background="@drawable/button_shape"
-            android:padding="18dip"
+            android:padding="4dip"
             android:textColor="#fff"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+                android:layout_marginEnd="4dp"
+                />
 
             <TextView
             android:id="@+id/StreetName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/Null"
             android:textColor="@color/black"
-            android:padding="18dip"
+            android:padding="4dip"
             android:background="@drawable/list_shape"
             android:textSize="14sp"
-                android:layout_toEndOf="@+id/Street_Name"
                 />
         </TableRow>
 
@@ -165,17 +174,19 @@
                 android:layout_height="wrap_content"
                 android:text="@string/ImamName"
                 android:background="@drawable/button_shape"
-                android:padding="18dip"
+                android:padding="4dip"
                 android:textColor="#fff"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:layout_marginEnd="4dp"
+                />
 
             <TextView
                 android:id="@+id/ImamName"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/Null"
                 android:textColor="@color/black"
-                android:padding="18dip"
+                android:padding="4dip"
                 android:background="@drawable/list_shape"
                 android:textSize="14sp"/>
         </TableRow>
@@ -187,16 +198,18 @@
             android:layout_height="wrap_content"
             android:text="@string/KhateebName"
             android:background="@drawable/button_shape"
-            android:padding="18dip"
+            android:padding="4dip"
             android:textColor="#fff"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:layout_marginEnd="4dp"
+            />
         <TextView
             android:id="@+id/KhateebName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/Null"
             android:textColor="@color/black"
-            android:padding="18dip"
+            android:padding="4dip"
             android:background="@drawable/list_shape"
             android:textSize="14sp"/>
     </TableRow>
@@ -210,16 +223,18 @@
           android:layout_height="wrap_content"
           android:text="@string/MoathenName"
           android:background="@drawable/button_shape"
-          android:padding="18dip"
+          android:padding="4dip"
           android:textColor="#fff"
-          android:textSize="14sp"/>
+          android:textSize="14sp"
+          android:layout_marginEnd="4dp"
+          />
         <TextView
             android:id="@+id/MoathenName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Null"
             android:textColor="@color/black"
-            android:padding="18dip"
+            android:padding="4dip"
             android:background="@drawable/list_shape"
             android:textSize="14sp"/>
 
@@ -232,19 +247,23 @@
           android:layout_height="wrap_content"
           android:text="@string/ObserverName"
           android:background="@drawable/button_shape"
-          android:padding="18dip"
+          android:padding="4dip"
           android:textColor="#fff"
-          android:textSize="14sp"/>
+          android:textSize="14sp"
+          android:layout_marginEnd="4dp"
+          />
 
         <TextView
             android:id="@+id/ObserverName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/Null"
             android:textColor="@color/black"
-            android:padding="18dip"
+            android:padding="4dip"
             android:background="@drawable/list_shape"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:foregroundGravity="right|center_vertical"
+            />
 
 
                 </TableRow>

@@ -11,6 +11,8 @@ public class WelcomMosqueApp extends AppCompatActivity {
 ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcom_mosque_app);
 

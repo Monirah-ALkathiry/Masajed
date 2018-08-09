@@ -18,6 +18,7 @@ import com.apps.noura.masajd.DawaActivity;
 import com.apps.noura.masajd.FavoriteActivity;
 import com.apps.noura.masajd.LogOut;
 import com.apps.noura.masajd.LoginActivity;
+import com.apps.noura.masajd.MosquSearch.MainAdvanceSearch;
 import com.apps.noura.masajd.MosqueActivity;
 import com.apps.noura.masajd.PrayTime.PrayTime;
 import com.apps.noura.masajd.R;
@@ -86,7 +87,7 @@ public class DrawerNavigation {
 
                         case R.id.ic_Dawa:
                            // Toast.makeText(context, "Dawa",Toast.LENGTH_SHORT).show();
-                            Intent dawaIntent = new Intent(context,DawaActivity.class);
+                            Intent dawaIntent = new Intent(context,MainAdvanceSearch.class);
                             context.startActivity(dawaIntent);
 
                             break;
