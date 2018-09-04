@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.apps.noura.masajd">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -59,6 +60,7 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
+
         <activity
             android:name=".LoginActivity"
             android:label="@string/login" />
@@ -69,6 +71,7 @@
         <activity
             android:name=".DawaActivity"
             android:label="@string/Dawa" />
+
         <activity android:name=".DawaInformationActivity" />
         <activity android:name=".forgetPassActivity" />
 
@@ -110,24 +113,37 @@
         -->
         <activity
             android:name=".PrayTime.PrayTime"
-            android:label="@string/praytime" />
+            android:label="@string/praytime"
+            tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".ContactUs.ContactUsActivity"
-            android:label="@string/contactUs" />
+            android:label="@string/contactUs"
+            tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".AboutUs.AboutUsActivity"
             android:label="@string/AboutApp"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="InnerclassSeparator" />
         <activity android:name=".LogOut" />
         <activity
             android:name=".MosquSearch.MainAdvanceSearch"
             android:label="@string/title_activity_main_advance_search"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="InnerclassSeparator">
 
             <meta-data android:name="android.app.searchable"
                 android:resource="@xml/searchable"/>
 
         </activity>
+
+
+
+        <!-- Web View -->
+
+        <activity
+            android:name=".MoiaGovView.AboutMoiaGov"
+            android:label="@string/info"
+            tools:ignore="InnerclassSeparator" />
     </application>
 
 </manifest>

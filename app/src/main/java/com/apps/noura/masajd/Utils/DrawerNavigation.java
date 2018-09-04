@@ -10,6 +10,8 @@ import android.support.design.widget.NavigationView;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.apps.noura.masajd.AboutUs.AboutUsActivity;
@@ -18,12 +20,12 @@ import com.apps.noura.masajd.DawaActivity;
 import com.apps.noura.masajd.FavoriteActivity;
 import com.apps.noura.masajd.LogOut;
 import com.apps.noura.masajd.LoginActivity;
+import com.apps.noura.masajd.MoiaGovView.AboutMoiaGov;
 import com.apps.noura.masajd.MosquSearch.MainAdvanceSearch;
 import com.apps.noura.masajd.MosqueActivity;
 import com.apps.noura.masajd.PrayTime.PrayTime;
 import com.apps.noura.masajd.R;
 
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by Monirah on 4/15/2018.
@@ -70,9 +72,15 @@ public class DrawerNavigation {
                             break;
 
                         case R.id.info:
-                            final String websiteurl= "http://www.moia.gov.sa/AboutMinistry/Pages/AboutMinistry.aspx";
-                            Intent LinkIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(websiteurl));
-                            context.startActivity(LinkIntent);
+
+
+                            //  final String websiteurl= "http://www.moia.gov.sa/AboutMinistry/Pages/AboutMinistry.aspx";
+                            //Intent LinkIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(websiteurl));
+                            //context.startActivity(LinkIntent);
+
+                            Intent websiteurl = new Intent(context,AboutMoiaGov.class);
+                            context.startActivity(websiteurl);
+
                             //Toast.makeText(context, "Link",Toast.LENGTH_SHORT).show();
                             break;
 

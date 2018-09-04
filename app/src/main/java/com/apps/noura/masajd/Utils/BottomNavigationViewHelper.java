@@ -13,10 +13,10 @@ import com.apps.noura.masajd.AboutUs.AboutUsActivity;
 import com.apps.noura.masajd.ContactUs.ContactUsActivity;
 import com.apps.noura.masajd.DawaActivity;
 import com.apps.noura.masajd.FavoriteActivity;
+import com.apps.noura.masajd.MoiaGovView.AboutMoiaGov;
 import com.apps.noura.masajd.MosqueActivity;
 import com.apps.noura.masajd.PrayTime.PrayTime;
 import com.apps.noura.masajd.R;
-import com.apps.noura.masajd.webView.AboutMoiaGov;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 /**
@@ -60,9 +60,12 @@ public class BottomNavigationViewHelper {
                         break;
 
                     case R.id.info:
-                       final String websiteurl= "http://www.moia.gov.sa/AboutMinistry/Pages/AboutMinistry.aspx";
+                       /*final String websiteurl= "http://www.moia.gov.sa/AboutMinistry/Pages/AboutMinistry.aspx";
                         Intent LinkIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(websiteurl));
                         context.startActivity(LinkIntent);
+                                */
+                        Intent websiteurl = new Intent(context,AboutMoiaGov.class);
+                        context.startActivity(websiteurl);
 
                         //Toast.makeText(context, "Link",Toast.LENGTH_SHORT).show();
                         /* Intent LinkIntent  = new Intent(context, AboutMoiaGov.class);//ACTIVITY_NUM = 3
