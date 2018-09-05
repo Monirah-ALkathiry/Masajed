@@ -115,8 +115,9 @@ public class MainAdvanceSearch extends AppCompatActivity implements Sender {
             }
         });*/
 
-        textView = (EditText) findViewById(R.id.MosqueSeach);
-        textView.setText("");
+        //textView = (EditText) findViewById(R.id.MosqueSeach);
+      //  textView.setText("");
+
         SelectAll = "الكل";
 
 
@@ -144,7 +145,7 @@ public class MainAdvanceSearch extends AppCompatActivity implements Sender {
 
 
 
-        textView = (EditText) findViewById(R.id.MosqueSeach);
+       // textView = (EditText) findViewById(R.id.MosqueSeach);
         textView.setText("");
 
 

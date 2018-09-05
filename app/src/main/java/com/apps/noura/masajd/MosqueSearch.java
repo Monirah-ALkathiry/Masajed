@@ -17,8 +17,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -44,7 +48,7 @@ import retrofit2.Response;
  */
 
 @SuppressLint("ValidFragment")
-public class MosqueSearch extends Fragment {
+public class MosqueSearch extends Fragment implements OnQueryTextListener, android.widget.SearchView.OnCloseListener {
 
     private static final String TAG= "Mosque Search";
 
@@ -90,6 +94,14 @@ public class MosqueSearch extends Fragment {
    private  Button bu;
     //-----------------------------------------------------------
 
+
+    private RadioGroup radioGroup;
+    private String ChickedValue;
+    private Button clear;
+
+    private SearchView mSearchView;
+    protected String SearchQuery;
+
     //-----------------------------------------------------------
 
     //------------------------------------------------------
@@ -115,18 +127,58 @@ public class MosqueSearch extends Fragment {
 
          view = inflater.inflate(R.layout.mosque_search,container,false);
 
-         SearchView = getActivity().findViewById(R.id.search);
+        // SearchView = getActivity().findViewById(R.id.search);
 
 
-        // bu = (Button) getActivity().findViewById(R.id.search);
+        bu = (Button) view.findViewById(R.id.ButtonSendFeedback);
 
-         textView = (EditText) view.findViewById(R.id.MosqueSeach);
+         //textView = (EditText) view.findViewById(R.id.MosqueSeach);
         //First Value of All Array list (used On spinner)
         SelectAll = "الكل";
 
+
+
+
+
 //================================================================
 
-        textView.setText("");
+       // textView.setText("");
+
+
+        radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
+        radioGroup.clearCheck();
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    Toast.makeText(getContext(), rb.getText(), Toast.LENGTH_SHORT).show();
+                    ChickedValue= rb.getText().toString();
+
+                    checked();
+                }
+            }
+        });
+
+        //TODO: remove Clear Button
+        clear = (Button) view.findViewById(R.id.CLEAR);
+
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                radioGroup.clearCheck();
+                ChickedValue=null;
+                checked();
+
+            }
+        });
+
+    //Search View
+
+        mSearchView=(SearchView) view.findViewById(R.id.search);
+        setupSearchView();
+
 
 //-----------------------------------------------------------
         spinner = (SearchableSpinner) view.findViewById(R.id.myspinner);
@@ -294,7 +346,22 @@ Sender sender;
     }
 
 
+public void checked(){
+    Toast.makeText(getContext(), ChickedValue + " الاختيار : ", Toast.LENGTH_SHORT).show();
 
+}
+
+
+
+    public void onClear(View v) {
+        /* Clears all selected radio buttons to default */
+        radioGroup.clearCheck();
+    }
+
+    public void onSubmit(View v) {
+        RadioButton rb = (RadioButton) radioGroup.findViewById(radioGroup.getCheckedRadioButtonId());
+        Toast.makeText(getContext(), rb.getText(), Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     public void onViewCreated(View view,  Bundle savedInstanceState) {
@@ -303,7 +370,12 @@ Sender sender;
         System.out.println("\n :::: )  "+lat + " : lat \n lone : " +lon);
         System.out.println("\n test : " + query +"\n");
 
-        textView.setOnClickListener(new View.OnClickListener() {
+        AdvanceSearch();
+
+       /*
+
+       textView.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 query = textView.getText().toString();
@@ -406,14 +478,14 @@ Sender sender;
                                    + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric +
                                    "%' AND Mosque_Catogery = '" + MosqueId + "'";
                        }
-                   }*/
+                   } * /
                     System.out.println("\n new query :  " + map2 + "\n");
                     sender.SendMassage(map2);
 
                 }//end outer else
             }
         });
-
+*/
 
 /*
  if (ministry_region_id == null || City == SelectAll || Distric == SelectAll || MosqueId == SelectAll) {
@@ -443,7 +515,7 @@ Sender sender;
     @Override
     public void onResume() {
         super.onResume();
-        textView.getText().clear();
+//        textView.getText().clear();
 
     }
 
@@ -676,7 +748,102 @@ Sender sender;
 
     }
 
-}
+
+    //Search View:
+    private void setupSearchView()
+    {
+        mSearchView.setIconifiedByDefault(true);
+        mSearchView.setOnQueryTextListener(this);
+        mSearchView.setSubmitButtonEnabled(true);
+        mSearchView.setOnCloseListener(this);
+        mSearchView.setQueryHint("اكتب كلمة البحث");
+    }
+
+    /**
+     * Called when the user submits the query. This could be due to a key press on the
+     * keyboard or due to pressing a submit button.
+     * The listener can override the standard behavior by returning true
+     * to indicate that it has handled the submit request. Otherwise return false to
+     * let the SearchView handle the submission by launching any associated intent.
+     *
+     * @param query the query text that is to be submitted
+     * @return true if the query has been handled by the listener, false to let the
+     * SearchView perform the default action.
+     */
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        try {
+            String Search_String = query;
+            Search(Search_String);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * Called when the query text is changed by the user.
+     *
+     * @param newText the new content of the query text field.
+     * @return false if the SearchView should perform the default action of showing any
+     * suggestions if available, true if the action was handled by the listener.
+     */
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
+
+
+
+    //Search----------------------------------
+
+    public void Search(String query) {
+
+        SearchQuery = query;
+
+         Toast.makeText(getContext(),SearchQuery,Toast.LENGTH_LONG).show();
+    }
+
+
+    private void AdvanceSearch(){
+        Toast.makeText(getContext(),SearchQuery+" from Advance search",Toast.LENGTH_LONG).show();
+
+        bu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //ToDo: Advance Search
+
+                Toast.makeText(getContext(),SearchQuery+" الزر search",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), ChickedValue + " الاختيار : ", Toast.LENGTH_SHORT).show();
+
+                RadioButton rb = (RadioButton) radioGroup.findViewById(radioGroup.getCheckedRadioButtonId());
+                if(rb == null){
+                    Toast.makeText(getContext(), "please select one option", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    Toast.makeText(getContext(), rb.getText() + "iiii", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    /**
+     * The user is attempting to close the SearchView.
+     *
+     * @return true if the listener wants to override the default behavior of clearing the
+     * text field and dismissing it, false otherwise.
+     */
+    @Override
+    public boolean onClose() {
+        try {
+            String Search_String = null;
+            Search(Search_String);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+}//end class
 
 
  /*  SearchView.setOnClickListener(new View.OnClickListener() {

@@ -52,9 +52,13 @@
     <string name="hello_blank_fragment">Image fragment</string>
     <string name="title_activity_mosque_information">مسجد</string>
 
+    <!-- Advance search -->
     <string name="Mosque">إسم المسجد</string>
     <string name="Imam">إسم الإمام</string>
     <string name="Khateeb">إسم الخطيب</string>
+    <string name="All">الغــاء</string>
+
+    <!-- -->
 
     <string name="section_format">Hello World from section: %1$d</string>
 

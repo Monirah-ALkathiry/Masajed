@@ -5,32 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        tools:ignore="UselessParent">
 
     <LinearLayout
         android:id="@+id/Tab3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/lightgray">
+        android:background="@color/lightgray"
+        tools:ignore="ScrollViewSize">
 
 
 
 
-        <EditText
-            android:id="@+id/MosqueSeach"
-            android:layout_width="120pt"
-            android:layout_height="wrap_content"
-            android:ems="25"
-            android:layout_gravity="center_horizontal"
-            android:hint="@string/InsertMosqueName"
-            android:layout_marginTop="20dp"
-             android:inputType="textPersonName"
-            android:layout_marginBottom="5dp"
-            android:ellipsize="start"
-            android:gravity="right"
-            android:drawableLeft="@drawable/ic_search"
-            tools:ignore="RtlHardcoded" />
+
 <!--            android:background="@drawable/edit_text_style"
 -->
 
@@ -43,7 +34,8 @@
             android:scrollbarStyle="outsideInset"
             android:fillViewport="true"
             android:layout_marginBottom="80dip"
-            android:layout_margin="9dp" >
+            android:layout_margin="9dp"
+            tools:ignore="UselessParent">
 
             <HorizontalScrollView
                 android:id="@+id/horizontalView"
@@ -53,6 +45,7 @@
                 android:layout_marginTop="5dip"
                 android:scrollbars="horizontal|vertical">
 
+
                 <TableLayout
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
@@ -60,7 +53,98 @@
                     android:layout_marginBottom="20dp"
                     tools:ignore="RtlHardcoded">
 
+                    <!-- RadioGroup -->
+                    <TableRow android:layout_marginBottom=".5dp">
+
+                    <RadioGroup
+                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        android:id="@+id/radioGroup"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RadioButton
+                            android:id="@+id/radioButton1"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Mosque"
+                            android:textSize="18sp"/>
+
+                        <RadioButton
+                            android:id="@+id/radioButton2"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Imam"
+                            android:textSize="18sp"/>
+
+                        <RadioButton
+                            android:id="@+id/radioButton3"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Khateeb"
+                            android:textSize="18sp"/>
+
+                       <!-- <RadioButton
+                            android:id="@+id/radioButton4"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/All"
+                            android:textSize="18sp"/>-->
+                    </RadioGroup>
+                    </TableRow>
+
+
                     <TableRow android:layout_marginBottom="3.5dp">
+
+                        <Button
+                            android:id="@+id/CLEAR"
+                            android:layout_width="103dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/radioGroup"
+                            android:layout_alignStart="@+id/radioGroup"
+                            android:layout_centerVertical="true"
+
+                            style="?android:attr/borderlessButtonStyle"
+                            android:text="@string/All"
+                            android:textColor="@color/red"
+                            android:textSize="16sp"
+                            tools:ignore="ObsoleteLayoutParam" />
+                    </TableRow>
+
+                    <!-- EditText -->
+
+                   <!--  <TableRow android:layout_marginBottom="3.5dp">
+                    <EditText
+                        android:id="@+id/MosqueSeach"
+                        android:layout_width="120pt"
+                        android:layout_height="wrap_content"
+                        android:ems="25"
+                        android:layout_gravity="center_horizontal"
+                        android:hint="@string/InsertMosqueName"
+                        android:layout_marginTop="20dp"
+                        android:inputType="textPersonName"
+                        android:layout_marginBottom="5dp"
+                        android:ellipsize="start"
+                        android:gravity="right"
+                        android:drawableLeft="@drawable/ic_search"
+                        tools:ignore="RtlHardcoded" />
+                    </TableRow>-->
+
+                    <TableRow android:layout_marginBottom="3.5dp">
+
+                      <!--  <android.support.v7.widget.SearchView
+                            android:id="@+id/searchss"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />-->
+
+                        <SearchView
+                            android:id="@+id/search"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </TableRow>
+
+                    <TableRow android:layout_marginBottom="3.5dp">
+
 
                         <!-- <Spinner
                     android:id="@+id/myspinner"
@@ -170,8 +254,24 @@
                             android:layout_marginTop="2dp"
                             android:spinnerMode="dialog" />
                     </TableRow>
+
+
+
+                    <TableRow android:layout_marginBottom="3.5dp">
+
+                    <Button
+                        android:id="@+id/ButtonSendFeedback"
+                        android:layout_height="wrap_content"
+                        android:text="@string/search_Button"
+                        android:layout_width="fill_parent">
+                    </Button>
+                    </TableRow>
+
+
                 </TableLayout>
             </HorizontalScrollView>
         </ScrollView>
     </LinearLayout>
+
+    </ScrollView>
 </RelativeLayout>
