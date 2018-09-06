@@ -106,6 +106,8 @@ public class ImamaSearch extends Fragment {
 
     }
 
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

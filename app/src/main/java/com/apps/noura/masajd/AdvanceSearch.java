@@ -103,9 +103,10 @@ public class AdvanceSearch extends AppCompatActivity implements Sender{
 
         AdvanceSearchPageAdapter adapter = new AdvanceSearchPageAdapter(getSupportFragmentManager());
 
-        adapter.addFragment(new MosqueSearch(latitude , longitude), "إسم  المسجد");
-        adapter.addFragment(new ImamaSearch(latitude , longitude), "إسم الإمام" );
+        adapter.addFragment(new MosqueSearch(latitude , longitude), "البحث المتقدم");
+       /* adapter.addFragment(new ImamaSearch(latitude , longitude), "إسم الإمام" );
         adapter.addFragment(new KhateebSearch(latitude , longitude), "إسم  الخطيب");
+        */
         viewPager.setAdapter(adapter);
     }
 
@@ -124,9 +125,9 @@ public class AdvanceSearch extends AppCompatActivity implements Sender{
 
 
 
-    bSearch.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
+   // bSearch.setOnClickListener(new View.OnClickListener() {
+   // @Override
+   // public void onClick(View v) {
 
 
         Intent intent = new Intent(AdvanceSearch.this,MosqueActivity.class);
@@ -188,8 +189,8 @@ public class AdvanceSearch extends AppCompatActivity implements Sender{
             finish();
 
 
-        }
-        });
+     //   }
+      //  });
 
 
     } //end Function

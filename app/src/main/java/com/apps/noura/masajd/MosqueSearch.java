@@ -26,6 +26,7 @@ import android.widget.SearchView.OnQueryTextListener;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.apps.noura.masajd.AdvanceSearchUtil.AdvanceSearchFunction;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import org.json.JSONArray;
@@ -118,7 +119,7 @@ public class MosqueSearch extends Fragment implements OnQueryTextListener, andro
         this.lon = lon;
     }
 
-
+    String mTeam;
 
     @Nullable
     @Override
@@ -128,6 +129,11 @@ public class MosqueSearch extends Fragment implements OnQueryTextListener, andro
          view = inflater.inflate(R.layout.mosque_search,container,false);
 
         // SearchView = getActivity().findViewById(R.id.search);
+
+        Bundle bundle = this.getArguments();
+        if(bundle != null) {
+            mTeam = bundle.getString("TeamName");
+        }
 
 
         bu = (Button) view.findViewById(R.id.ButtonSendFeedback);
@@ -211,6 +217,9 @@ public class MosqueSearch extends Fragment implements OnQueryTextListener, andro
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+                //Code used to hide focus
+                mSearchView.clearFocus();
+
                 String Regions = parent.getSelectedItem().toString();
               //  Toast.makeText(parent.getContext().getApplicationContext(),Regions +"REJON IS  ",Toast.LENGTH_LONG).show();
 
@@ -230,6 +239,10 @@ public class MosqueSearch extends Fragment implements OnQueryTextListener, andro
                 spinnerCities.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                        //Code used to hide focus
+                        mSearchView.clearFocus();
+
                         City = parent.getSelectedItem().toString();
 
 
@@ -248,6 +261,9 @@ public class MosqueSearch extends Fragment implements OnQueryTextListener, andro
                         spinnerDistricts.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                                //Code used to hide focus
+                                mSearchView.clearFocus();
 
                                 Distric = parent.getSelectedItem().toString();
                                 //Toast.makeText(getContext().getApplicationContext(), RejionID + " \n" + City + "\n" + Distric +" : update", Toast.LENGTH_LONG).show();
@@ -273,6 +289,8 @@ public class MosqueSearch extends Fragment implements OnQueryTextListener, andro
                                     @Override
                                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+                                        //Code used to hide focus
+                                        mSearchView.clearFocus();
                                         MosqueValue = parent.getSelectedItem().toString();
                                        // Toast.makeText(getContext().getApplicationContext(), MosqueId +" mosquId", Toast.LENGTH_LONG).show();
 
@@ -370,6 +388,7 @@ public void checked(){
         System.out.println("\n :::: )  "+lat + " : lat \n lone : " +lon);
         System.out.println("\n test : " + query +"\n");
 
+        //New Function
         AdvanceSearch();
 
        /*
@@ -547,6 +566,8 @@ public void checked(){
                 Regions.add(jsonObject.getJSONObject("name").getString("ar"));
 
                 System.out.println("json Object Regions: " + Regions.get(i));
+
+
             }
             System.out.println("-------------------------------------------------------");
 
@@ -753,10 +774,11 @@ public void checked(){
     private void setupSearchView()
     {
         mSearchView.setIconifiedByDefault(true);
+
         mSearchView.setOnQueryTextListener(this);
         mSearchView.setSubmitButtonEnabled(true);
         mSearchView.setOnCloseListener(this);
-        mSearchView.setQueryHint("اكتب كلمة البحث");
+        mSearchView.setQueryHint("بحث");
     }
 
     /**
@@ -774,7 +796,9 @@ public void checked(){
     public boolean onQueryTextSubmit(String query) {
         try {
             String Search_String = query;
+
             Search(Search_String);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -806,25 +830,332 @@ public void checked(){
 
 
     private void AdvanceSearch(){
-        Toast.makeText(getContext(),SearchQuery+" from Advance search",Toast.LENGTH_LONG).show();
+      //  Toast.makeText(getContext(),SearchQuery+" from Advance search",Toast.LENGTH_LONG).show();
 
         bu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //ToDo: Advance Search
 
-                Toast.makeText(getContext(),SearchQuery+" الزر search",Toast.LENGTH_LONG).show();
-                Toast.makeText(getContext(), ChickedValue + " الاختيار : ", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getContext(),SearchQuery+" الزر search",Toast.LENGTH_LONG).show();
+               // Toast.makeText(getContext(), ChickedValue + " الاختيار : ", Toast.LENGTH_SHORT).show();
 
                 RadioButton rb = (RadioButton) radioGroup.findViewById(radioGroup.getCheckedRadioButtonId());
                 if(rb == null){
-                    Toast.makeText(getContext(), "please select one option", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "الرجاء الاختيار ", Toast.LENGTH_SHORT).show();
 
                 }else {
-                    Toast.makeText(getContext(), rb.getText() + "iiii", Toast.LENGTH_SHORT).show();
+
+                    String positionName = rb.getText().toString();
+
+
+                    switch(positionName) {
+                        case "إسم المسجد":
+                            MosqueSearchQuery(positionName , SearchQuery ,ministry_region_id , MosqueId ,City ,Distric);
+
+                            break;
+                        case "إسم الإمام":
+                            ImamSearchQuery(positionName,SearchQuery ,ministry_region_id , MosqueId ,City ,Distric);
+                            break;
+                        case "إسم الخطيب":
+                            KhateebSearchQuery(positionName,SearchQuery ,ministry_region_id , MosqueId ,City ,Distric);
+                            break;
+                        default:
+
+                    }
+
                 }
             }
         });
+    }
+
+    private String map2;
+
+    public void MosqueSearchQuery(String Option , String SearchQuery , String ministry_region_id
+            , String MosqueId , String City , String Distric){
+        Toast.makeText(getContext(), " from " + Option +
+                "\n Search Query is :" +SearchQuery
+                    +
+                "\n Rejion ID  is :" +ministry_region_id  +
+                "\n Mosque ID  is :" +MosqueId
+                +
+                "\n City ID  is :" +City
+                +
+                "\n Distric ID  is :" +Distric, Toast.LENGTH_SHORT).show();
+
+        //------------------------------
+        if(SearchQuery != null)
+
+        {
+            if (ministry_region_id == null) {
+
+                if (MosqueId == (null)) {
+
+                    map2 = "Mosque_Name = N" + "\'" + SearchQuery + "\'";
+                    System.out.println("\n sss :  \n" + map2 + "\n");
+                } else {
+                    map2 = "Mosque_Name = N" + "\'" + SearchQuery + "\' AND Mosque_Catogery = '" + MosqueId + "'";
+                    System.out.println("\n sss :  \n" + map2 + "\n");
+                }
+
+            } else if (City.equals(SelectAll)
+                    && Distric.equals(SelectAll)) {
+
+                if (MosqueId == (null)) {
+
+                    map2 = "Mosque_Name like N'%" + SearchQuery + "%' AND Region = '" + ministry_region_id
+                            + "'";
+                    System.out.println("\n sss :  \n" + map2 + "\n");
+                } else {
+                    map2 = "Mosque_Name = N" + "\'" + SearchQuery + "\'" + "%' AND Region = '" + ministry_region_id
+                            + "'AND Mosque_Catogery = '" + MosqueId + "'";
+                    System.out.println("\n sss :  \n" + map2 + "\n");
+                }
+
+
+                //map.put("where", "Mosque_Name = N" + "\'" + query + "\'");
+                System.out.println("\n Query ttt :  " + map2 + "\n");
+
+
+            } else if (Distric.equals(SelectAll)) {
+
+                if (MosqueId == (null)) {
+
+                    map2 = "Mosque_Name like N'%" + SearchQuery + "%' AND Region = '" + ministry_region_id
+                            + "' AND City_Village like N'%" + City + "%'";
+
+                    System.out.println("\n sss :  \n" + map2 + "\n");
+                } else {
+                    map2 = "Mosque_Name = N" + "\'" + SearchQuery + "\'" + "%' AND Region = '" + ministry_region_id
+                            + "' AND City_Village like N'%" + City + "%'AND Mosque_Catogery = '" + MosqueId + "'";
+                    System.out.println("\n sss :  \n" + map2 + "\n");
+                }
+
+
+                System.out.println("\n Query bbb :  " + map2 + "\n");
+
+            } else if (MosqueId == null) {
+
+                map2 = "Mosque_Name like N'%" + SearchQuery + "%' AND Region = '" + ministry_region_id
+                        + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric +
+                        "%'";
+                System.out.println("\n Query jjj :  " + map2 + "\n");
+
+            } else {
+
+                map2 = "Mosque_Name like N'%" + SearchQuery + "%' AND Region = '" + ministry_region_id
+                        + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric +
+                        "%' AND Mosque_Catogery = '" + MosqueId + "'";
+                System.out.println("\n Query xxx :  " + map2 + "\n");
+
+            }
+
+
+            System.out.println("\n new query :  " + map2 + "\n");
+
+            sender.SendMassage(map2);
+
+
+
+
+        }else {
+
+            System.out.println("\n new query :  " + "No Query had been insert" + "\n");
+
+        }
+
+
+       // AdvanceSearchFunction advanceSearchFunction = new AdvanceSearchFunction(Option
+          //      ,SearchQuery,ministry_region_id,MosqueId,City,Distric);
+       // advanceSearchFunction.MosqueSearch();
+    }
+
+
+    public void ImamSearchQuery(String Option , String SearchQuery , String ministry_region_id
+            , String MosqueId , String City , String Distric){
+        Toast.makeText(getContext(), " from " + Option +
+                "\n Search Query is :" +SearchQuery
+                +
+                "\n Rejion ID  is :" +ministry_region_id  +
+                "\n Mosque ID  is :" +MosqueId
+                +
+                "\n City ID  is :" +City
+                +
+                "\n Distric ID  is :" +Distric, Toast.LENGTH_SHORT).show();
+
+        if(SearchQuery != null) {
+            if (ministry_region_id == null) {
+
+                if (MosqueId == (null)) {
+
+                    map2 = "Imam_Name  like N'%" + SearchQuery + "%'";
+                    System.out.println("\n sss :  \n" + map2 + "\n");
+                } else {
+                    map2 = "Imam_Name  like N'%" + SearchQuery + "%' AND Mosque_Catogery = '" + MosqueId + "'";
+                    System.out.println("\n sss :  \n" + map2 + "\n");
+                }
+//------------------------------------------------------------------------------------------------------
+            } else if (City.equals(SelectAll)
+                    && Distric.equals(SelectAll)) {
+
+                if (MosqueId == (null)) {
+
+                    map2 = "Imam_Name like N'%" + SearchQuery + "%' AND Region = '" + ministry_region_id
+                            + "'";
+                    System.out.println("\n sss :  \n" + map2 + "\n");
+                } else {
+                    map2 = "Imam_Name like N'%" + SearchQuery + "%' AND Region = '" + ministry_region_id
+                            + "'AND Mosque_Catogery = '" + MosqueId + "'";
+                    System.out.println("\n sss :  \n" + map2 + "\n");
+                }
+
+
+                //map.put("where", "Imam_Name = N" + "\'" + query + "\'");
+                System.out.println("\n Query ttt :  " + map2 + "\n");
+
+//----------------------------------------------------------------------------------------
+            } else if (Distric.equals(SelectAll)) {
+
+                if (MosqueId == (null)) {
+
+                    map2 = "Imam_Name like N'%" + SearchQuery + "%' AND Region = '" + ministry_region_id
+                            + "' AND City_Village like N'%" + City + "%'";
+
+                    System.out.println("\n sss :  \n" + map2 + "\n");
+                } else {
+                    map2 = "Imam_Name  like N'%" + SearchQuery + "%' AND Region = '" + ministry_region_id
+                            + "' AND City_Village like N'%" + City + "%'AND Mosque_Catogery = '" + MosqueId + "'";
+                    System.out.println("\n sss :  \n" + map2 + "\n");
+                }
+
+
+                System.out.println("\n Query bbb :  " + map2 + "\n");
+//---------------------------------------------------------------------------------------------------------
+            } else if (MosqueId == null) {
+
+                map2 = "Imam_Name like N'%" + SearchQuery + "%' AND Region = '" + ministry_region_id
+                        + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric +
+                        "%'";
+                System.out.println("\n Query jjj :  " + map2 + "\n");
+
+            }
+            //---------------------------------------------------------------------------------------------------
+            else {
+
+                map2 = "Imam_Name like N'%" + SearchQuery + "%' AND Region = '" + ministry_region_id
+                        + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric +
+                        "%' AND Mosque_Catogery = '" + MosqueId + "'";
+                System.out.println("\n Query xxx :  " + map2 + "\n");
+
+            }
+
+            sender.SendMassage(map2);
+        }else {
+            System.out.println("\n new query :  " + "No Query had been insert" + "\n");
+
+        }
+
+    }
+
+    public void KhateebSearchQuery(String Option , String SearchQuery , String ministry_region_id
+            , String MosqueId , String City , String Distric) {
+        Toast.makeText(getContext(), " from " + Option +
+                "\n Search Query is :" + SearchQuery
+                +
+                "\n Rejion ID  is :" + ministry_region_id +
+                "\n Mosque ID  is :" + MosqueId
+                +
+                "\n City ID  is :" + City
+                +
+                "\n Distric ID  is :" + Distric, Toast.LENGTH_SHORT).show();
+
+        if(SearchQuery != null) {
+        if (ministry_region_id == null) {
+
+            if (MosqueId == (null)) {
+
+                map2 = "Khateeb_Name like N'%" + SearchQuery + "%'";
+                System.out.println("\n sss :  \n" + map2 + "\n");
+            } else {
+                map2 = "Khateeb_Name like N'%" + SearchQuery + "%' AND Mosque_Catogery = '" + MosqueId + "'";
+                System.out.println("\n sss :  \n" + map2 + "\n");
+            }
+
+        } else if (City.equals(SelectAll)
+                && Distric.equals(SelectAll)) {
+
+            if (MosqueId == (null)) {
+
+                map2 = "Khateeb_Name like N'%" + SearchQuery + "%' AND Region = '" + ministry_region_id
+                        + "'";
+                System.out.println("\n sss :  \n" + map2 + "\n");
+            } else {
+                map2 = "Khateeb_Name like N'%" + SearchQuery + "%' AND Region = '" + ministry_region_id
+                        + "'AND Mosque_Catogery = '" + MosqueId + "'";
+                System.out.println("\n sss :  \n" + map2 + "\n");
+            }
+
+
+            //map.put("where", "Khateeb_Name = N" + "\'" + query + "\'");
+            System.out.println("\n Query ttt :  " + map2 + "\n");
+
+
+        } else if (Distric.equals(SelectAll)) {
+
+            if (MosqueId == (null)) {
+
+                map2 = "Khateeb_Name like N'%" + SearchQuery + "%' AND Region = '" + ministry_region_id
+                        + "' AND City_Village like N'%" + City + "%'";
+
+                System.out.println("\n sss :  \n" + map2 + "\n");
+            } else {
+                map2 = "Khateeb_Name like N'%" + SearchQuery + "%' AND Region = '" + ministry_region_id
+                        + "' AND City_Village like N'%" + City + "%'AND Mosque_Catogery = '" + MosqueId + "'";
+                System.out.println("\n sss :  \n" + map2 + "\n");
+            }
+
+
+            System.out.println("\n Query bbb :  " + map2 + "\n");
+
+        } else if (MosqueId == null) {
+
+            map2 = "Khateeb_Name like N'%" + SearchQuery + "%' AND Region = '" + ministry_region_id
+                    + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric +
+                    "%'";
+            System.out.println("\n Query jjj :  " + map2 + "\n");
+
+        } else {
+
+            map2 = "Khateeb_Name like N'%" + SearchQuery + "%' AND Region = '" + ministry_region_id
+                    + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric +
+                    "%' AND Mosque_Catogery = '" + MosqueId + "'";
+            System.out.println("\n Query xxx :  " + map2 + "\n");
+
+        }
+
+                  /*  if (ministry_region_id == null || City == SelectAll || Distric == SelectAll || MosqueId == SelectAll){
+                        map2 = "Khateeb_Name = N" + "\'" + query + "\'";
+                        //  map.put("where", "Imam_Name like N'%" + query+ "\'");
+
+                    }else {
+                        // map.put("where", "Imam_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
+                        //       + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric + "%' AND Mosque_Catogery = '" + MosqueId + "'");
+
+
+                        map2 = "Khateeb_Name like N'%" + query + "%' AND Region = '" + ministry_region_id
+                                + "' AND City_Village like N'%" + City + "%' AND District like N'%" + Distric + "%' AND Mosque_Catogery = '" + MosqueId + "'";
+
+                        System.out.println("\n Query :  " + map2 + "\n");
+
+                    }
+                    */
+        sender.SendMassage(map2);
+    }
+    else{
+            System.out.println("\n new query :  " + "No Query had been insert" + "\n");
+
+        }
+
     }
 
     /**
