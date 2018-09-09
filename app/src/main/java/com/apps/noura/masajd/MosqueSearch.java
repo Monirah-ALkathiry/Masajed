@@ -49,7 +49,8 @@ import retrofit2.Response;
  */
 
 @SuppressLint("ValidFragment")
-public class MosqueSearch extends Fragment implements OnQueryTextListener, android.widget.SearchView.OnCloseListener {
+public class MosqueSearch extends Fragment implements OnQueryTextListener
+        , android.widget.SearchView.OnCloseListener {
 
     private static final String TAG= "Mosque Search";
 
@@ -167,10 +168,10 @@ public class MosqueSearch extends Fragment implements OnQueryTextListener, andro
             }
         });
 
-        //TODO: remove Clear Button
-        clear = (Button) view.findViewById(R.id.CLEAR);
 
-        clear.setOnClickListener(new View.OnClickListener() {
+        //clear = (Button) view.findViewById(R.id.CLEAR);
+
+       /* clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 radioGroup.clearCheck();
@@ -179,7 +180,7 @@ public class MosqueSearch extends Fragment implements OnQueryTextListener, andro
 
             }
         });
-
+        */
     //Search View
 
         mSearchView=(SearchView) view.findViewById(R.id.search);
@@ -351,19 +352,14 @@ public class MosqueSearch extends Fragment implements OnQueryTextListener, andro
 //===========================================================
 Sender sender;
 
-    /**
-     * Called when a fragment is first attached to its context.
-     * {@link #onCreate(Bundle)} will be called after this.
-     *
-     * @param context
-     */
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         sender = (Sender) getActivity();
     }
 
-
+//View Checked Item
 public void checked(){
     Toast.makeText(getContext(), ChickedValue + " الاختيار : ", Toast.LENGTH_SHORT).show();
 
@@ -375,12 +371,12 @@ public void checked(){
         /* Clears all selected radio buttons to default */
         radioGroup.clearCheck();
     }
-
+//-------------------------
     public void onSubmit(View v) {
         RadioButton rb = (RadioButton) radioGroup.findViewById(radioGroup.getCheckedRadioButtonId());
         Toast.makeText(getContext(), rb.getText(), Toast.LENGTH_SHORT).show();
     }
-
+//--------------------
     @Override
     public void onViewCreated(View view,  Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -835,7 +831,6 @@ public void checked(){
         bu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ToDo: Advance Search
 
                // Toast.makeText(getContext(),SearchQuery+" الزر search",Toast.LENGTH_LONG).show();
                // Toast.makeText(getContext(), ChickedValue + " الاختيار : ", Toast.LENGTH_SHORT).show();
@@ -865,7 +860,7 @@ public void checked(){
                     }
 
                 }
-            }
+            }//end Function
         });
     }
 
@@ -873,6 +868,8 @@ public void checked(){
 
     public void MosqueSearchQuery(String Option , String SearchQuery , String ministry_region_id
             , String MosqueId , String City , String Distric){
+
+
         Toast.makeText(getContext(), " from " + Option +
                 "\n Search Query is :" +SearchQuery
                     +

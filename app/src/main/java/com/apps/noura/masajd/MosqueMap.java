@@ -5,17 +5,13 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Point;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
@@ -36,8 +32,6 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.lang.ref.PhantomReference;
-import java.lang.ref.WeakReference;
 import java.util.List;
 
 
@@ -95,6 +89,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
     //User Location:
     protected LatLng latLng;
 
+    //Used TO Add new Marker : Check search
     private  boolean flge;
 
 //Communication'
@@ -185,7 +180,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
             public void passData(List<MosquesLatLng> mosquesLatLngs) {
 
                 //After Cancel the search
-                Toast.makeText(getContext(),"Test 111",Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(),"Test 111",Toast.LENGTH_LONG).show();
                 NewmosquesLatLngs = mosquesLatLngs;
 
                 onResume();
@@ -259,15 +254,14 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
         //Get Data From API :
         MgoogleMap = googleMap;
 
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-
-            return;
-        }
-        MgoogleMap.setMyLocationEnabled(true);
+                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(),
+                        Manifest.permission.ACCESS_COARSE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                }
+                //USER LOCATION :
+                MgoogleMap.setMyLocationEnabled(true);
 
         // Set a listener for marker click.
 
@@ -297,7 +291,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
                 .build();
 
         //Move Camera
-        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
+        MgoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
         //Google Map Zoom in zoom out
         //Zoom controller position:
         //leftPadding, topPadding, rightPadding, bottomPadding
@@ -307,8 +301,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
         MgoogleMap.getUiSettings().setScrollGesturesEnabled(true);
         MgoogleMap.getUiSettings().setTiltGesturesEnabled(true);
 
-        //USER LOCATION :
-        MgoogleMap.setMyLocationEnabled(true);
+
         //  MgoogleMap.setOnMarkerClickListener(this);
 
         //  Google Map Onclick:
@@ -333,7 +326,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
 
     }
 
-
+//--------------------------------------------------------------------------------
     protected String Newlat;
     protected String Newlon;
 
@@ -402,6 +395,7 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
 
     }
 
+//--------------------------------------------------------------------------------
 
     private TextView MosqueName;
     private String MosquName;
@@ -631,8 +625,8 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
         } else if (reason == GoogleMap.OnCameraMoveStartedListener
                 .REASON_DEVELOPER_ANIMATION) {
 
-            Toast.makeText(getContext(), "The app sssssss the camera.",
-                    Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), "The app the camera.",
+              //      Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -125,17 +125,6 @@
             android:theme="@style/AppTheme.NoActionBar"
             tools:ignore="InnerclassSeparator" />
         <activity android:name=".LogOut" />
-        <activity
-            android:name=".MosquSearch.MainAdvanceSearch"
-            android:label="@string/title_activity_main_advance_search"
-            android:theme="@style/AppTheme.NoActionBar"
-            tools:ignore="InnerclassSeparator">
-
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
-
-        </activity>
-
 
 
         <!-- Web View -->

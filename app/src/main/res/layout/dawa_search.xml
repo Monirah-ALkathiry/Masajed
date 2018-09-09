@@ -6,23 +6,28 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        tools:ignore="UselessParent">
 
     <LinearLayout
         android:id="@+id/Tab3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/lightgray">
-       <!-- <SearchView
-            android:id="@+id/Search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginBottom="5dp"
-            android:hint="ادخل كلمة البحث">
-        </SearchView>-->
-        <EditText
+        android:background="@color/lightgray"
+        tools:ignore="ScrollViewSize">
+
+        <SearchView
+        android:id="@+id/search"
+        android:layout_width="150pt"
+        android:layout_height="wrap_content"/>
+
+
+
+
+      <!--  <EditText
             android:id="@+id/DawaSeach"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,17 +41,9 @@
             android:gravity="right"
             android:drawableLeft="@android:drawable/ic_search_category_default"
             android:background="@drawable/edit_text_style"
-            tools:ignore="RtlHardcoded" />
+            tools:ignore="RtlHardcoded" />-->
 
-        <ScrollView
-            android:id="@+id/layout"
-            android:layout_height="wrap_content"
-            android:scrollbars="horizontal|vertical"
-            android:layout_width="match_parent"
-            android:layout_marginTop="5dip"
-            android:scrollbarStyle="outsideInset"
-            android:fillViewport="true"
-            android:layout_marginBottom="80dip">
+
 
         <HorizontalScrollView
             android:id="@+id/horizontalView"
@@ -58,31 +55,59 @@
 
         <TableLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="fill_parent"
             android:layout_marginBottom="20dp"
             android:layout_gravity="right"
             tools:ignore="RtlHardcoded">
 
+
+
+
+            <!-- RadioGroup -->
+            <TableRow android:layout_marginBottom=".5dp">
+
+                <RadioGroup
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:id="@+id/radioGroup"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/radioButton1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/SubjectOfTheDawa"
+                        android:textSize="18sp"/>
+
+                    <RadioButton
+                        android:id="@+id/radioButton2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/DaeiaName"
+                        android:textSize="18sp"/>
+
+                </RadioGroup>
+            </TableRow>
+
             <TableRow  android:layout_marginBottom="3.5dp">
-
-
-
 
                 <TextView
 
                     android:id="@+id/simpleTextView"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_shape"
-                    android:padding="18dip"
+                    android:padding="10dip"
                     android:text="@string/MosqueRegion"
                     android:textColor="#fff"
                     android:textSize="14sp" />
+
+
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:id="@+id/myspinner"
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:spinnerMode="dialog"
                     />
 
@@ -101,13 +126,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_shape"
-                    android:padding="18dip"
+                    android:padding="10dip"
                     android:text="@string/CityVillage"
                     android:textColor="#fff"
                     android:textSize="14sp"/>
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:layout_marginTop="8dp"
                     android:id="@+id/spinnerCities"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -125,13 +149,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_shape"
-                    android:padding="18dip"
+                    android:padding="10dip"
                     android:text="@string/District"
                     android:textColor="#fff"
                     android:textSize="14sp" />
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:layout_marginTop="8dp"
                     android:id="@+id/spinnerDistricts"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -148,13 +171,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_shape"
-                    android:padding="18dip"
+                    android:padding="10dip"
                     android:text="@string/spinnerActivity"
                     android:textColor="#fff"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:paddingLeft="@dimen/mdtp_date_picker_component_width"
+                    android:paddingRight="@dimen/mdtp_date_picker_component_width"/>
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:layout_marginTop="8dp"
                     android:id="@+id/spinnerActivity"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -173,13 +197,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_shape"
-                    android:padding="18dip"
+                    android:padding="10dip"
                     android:text="@string/spinnerDomian"
                     android:textColor="#fff"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:paddingLeft="@dimen/mdtp_date_picker_component_width"
+                    android:paddingRight="@dimen/mdtp_date_picker_component_width"/>
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:layout_marginTop="8dp"
                     android:id="@+id/spinnerDomain"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -195,12 +220,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_shape"
-                    android:padding="18dip"
+                    android:padding="10dip"
                     android:text="@string/language"
                     android:textColor="#fff"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:paddingLeft="@dimen/mdtp_date_picker_component_width"
+                    android:paddingRight="@dimen/mdtp_date_picker_component_width"/>
+
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:layout_marginTop="8dp"
                     android:id="@+id/spinnerLanguage"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -217,14 +244,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_shape"
-                    android:padding="18dip"
+                    android:padding="10dip"
                     android:text="@string/office"
                     android:textColor="#fff"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:paddingLeft="@dimen/mdtp_date_picker_component_width"
+                    android:paddingRight="@dimen/mdtp_date_picker_component_width"/>
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
 
-                    android:layout_marginTop="8dp"
                     android:id="@+id/spinneroffice"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -249,13 +277,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_shape"
-                    android:padding="18dip"
+                    android:padding="10dip"
                     android:text="@string/fromDate"
                     android:textColor="#fff"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+
+                    />
 
                 <TextView
-                    android:layout_marginTop="8dp"
                     android:id="@+id/spinnerfromDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -281,14 +310,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_shape"
-                    android:padding="18dip"
+                    android:padding="10dip"
                     android:text="@string/toDate"
                     android:textColor="#fff"
                     android:textSize="14sp"
+                    android:paddingLeft="@dimen/mdtp_date_picker_component_width"
+                    android:paddingRight="@dimen/mdtp_date_picker_component_width"
                   />
 
                 <TextView
-                    android:layout_marginTop="8dp"
                     android:id="@+id/spinnertoDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -296,9 +326,22 @@
                     android:hint="@string/enter_date"
                     />
             </TableRow>
+
+
+            <TableRow android:layout_marginBottom="3.5dp">
+
+                <Button
+                    android:id="@+id/ButtonSendFeedback"
+                    android:layout_height="wrap_content"
+                    android:text="@string/search_Button"
+                    android:layout_width="fill_parent">
+                </Button>
+            </TableRow>
+
         </TableLayout>
 
         </HorizontalScrollView>
-        </ScrollView>
     </LinearLayout>
+
+    </ScrollView>
 </RelativeLayout>

@@ -567,7 +567,7 @@ private ImageButton imageButton ;
                 String lon = String.valueOf(longitude);
 
 
-                Intent intent = new Intent(DawaActivity.this, AdvanceSearch.class);
+                Intent intent = new Intent(DawaActivity.this, DawaAdvanceSearch.class);
                 intent.putExtra("LAT", lat);
                 intent.putExtra("LON", lon);
                 startActivity(intent);

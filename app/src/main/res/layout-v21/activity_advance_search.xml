@@ -60,7 +60,7 @@
 
                 android:layout_width="70dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="25dp"
+                android:layout_marginLeft="25dp"
                 android:background="@drawable/button_shape"
                 android:elevation="0dp"
                 android:shadowColor="#A8A8A8"
@@ -70,8 +70,7 @@
                 android:text="@string/Exit_Button"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                tools:targetApi="lollipop" />
+                android:textSize="16sp" />
 
             <!--<Button
                 android:id="@+id/exit"
@@ -92,7 +91,7 @@
 
         </android.support.v7.widget.Toolbar>
 
-        <!--<android.support.design.widget.TabLayout
+      <!--  <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,7 +99,7 @@
             app:tabIndicatorColor="@color/orange"
             app:tabSelectedTextColor="@color/cardview_light_background"
             app:tabTextAppearance="@style/TextAppearance.AppCompat.Body1"
-            app:tabTextColor="@color/common_google_signin_btn_text_dark_default" /> -->
+            app:tabTextColor="@color/common_google_signin_btn_text_dark_default" />-->
 
     </android.support.design.widget.AppBarLayout>
 

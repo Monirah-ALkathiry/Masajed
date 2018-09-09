@@ -30,7 +30,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.maps.android.clustering.ClusterManager;
 
 import java.util.List;
 
@@ -47,6 +46,8 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
         , GoogleMap.OnInfoWindowClickListener
         , DawaFragmentCommunicator
     ,GoogleMap.OnCameraIdleListener
+       ,GoogleMap.OnCameraMoveStartedListener
+
 {
 
 
@@ -85,7 +86,11 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
     //Communication'
     FirstFragmentListenerDawaMAP firstFragmentListenerDawaMAP;
 
+    //User Location:
+    protected LatLng latLng;
 
+    //Used TO Add new Marker : Check search
+    private  boolean flge;
 
     public DawaMap() {
 
@@ -139,6 +144,10 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
 
             latitude = Double.toString(lat);
             longitude = Double.toString(log);
+
+            flge = true;
+
+
         } catch (InflateException e) {
             Log.e(TAG, "Inflate exception");
         }
@@ -212,14 +221,27 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
+        //Get Data From API :
+        MgoogleMap = googleMap;
+
+                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(),
+                        Manifest.permission.ACCESS_COARSE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                }
+
+                //USER LOCATION :
+                MgoogleMap.setMyLocationEnabled(true);
+
         //Initialize Map:
         MapsInitializer.initialize(getContext());
         MgoogleMap = googleMap;
 
-        MgoogleMap.setMapType(googleMap.MAP_TYPE_NORMAL);
+        MgoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         //Add Marker and Map Properties (User Location)
-        LatLng latLng = new LatLng(lat, log);
+         latLng = new LatLng(lat, log);
 
       /*  MgoogleMap.addMarker(new MarkerOptions().position(latLng)
                 .title("موقعك الحالي")////title on the marker
@@ -232,26 +254,15 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
 
         //-----------------------
         //Set Camera Position:
-        CameraPosition CameraMosque = CameraPosition.builder().target(latLng)
+        CameraPosition CameraDawa = CameraPosition.builder().target(latLng)
                 .zoom(13)
                 .bearing(0)
                 .tilt(40)
                 .build();
         //Move Camera
 
-
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            return;
-          }
-
-        MgoogleMap.setMyLocationEnabled(true);
-
-
-
-        // MgoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
-        MgoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
+        MgoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraDawa));
+        //MgoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
         //Zoom controller position:
         //leftPadding, topPadding, rightPadding, bottomPadding
         MgoogleMap.setPadding(0,0,0,100);
@@ -260,11 +271,13 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
         MgoogleMap.getUiSettings().setScrollGesturesEnabled(true);
         MgoogleMap.getUiSettings().setTiltGesturesEnabled(true);
 
+
+        //
         //  Google Map Onclick:
-        MgoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(CameraMosque));
+        MgoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(CameraDawa));
 
 
-        // MgoogleMap.setOnCameraMoveStartedListener(this);
+         MgoogleMap.setOnCameraMoveStartedListener(this);
 
         //MapMove---
 
@@ -283,6 +296,7 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
 //--------------------------------------------------------------------------------
     protected String Newlat;
     protected String Newlon;
+
     public void AddOtherLocation(String lat, String lon){
        // if (NewdawaLatLngs == null) {
             if (marker != null) {
@@ -344,6 +358,7 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
 
     }
 
+//--------------------------------------------------------------------------------
 
     private TextView DawaTitle ;
     private String DawaName;
@@ -501,9 +516,60 @@ public class DawaMap extends Fragment implements OnMapReadyCallback
         nlat= String.valueOf(lat);
         nlng = String.valueOf(lon);
         if(NewdawaLatLngs == null ) {
-            AddOtherLocation(nlat, nlng);
+
+            if(flge) {
+                AddOtherLocation(nlat, nlng);
+            }
         }
 
+
+    }
+
+    @Override
+    public void onCameraMoveStarted(int reason) {
+
+        if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE) {
+
+            //Toast.makeText(getContext(), "The user gestured on the map.",
+            //    Toast.LENGTH_SHORT).show();
+
+        } else
+        if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_API_ANIMATION) {
+
+            //   Toast.makeText(getContext(), "The user tapped something on the map.",
+            //  Toast.LENGTH_SHORT).show();
+
+
+            if (marker.equals(marker)) {
+                //  Toast.makeText(getContext(), "The  MARKER.",
+                //   Toast.LENGTH_SHORT).show();
+                if (!marker.isInfoWindowShown()) {
+                    // Toast.makeText(getContext(), "The window",
+                    //      Toast.LENGTH_SHORT).show();
+                    flge = false;
+
+                }
+            }
+
+            MgoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                @Override
+                public void onMapClick(LatLng latLng) {
+
+                    //Toast.makeText(getContext(), "Map Clicked.",Toast.LENGTH_SHORT).show();
+
+                    flge = true;
+
+                }
+            });
+
+
+
+        } else if (reason == GoogleMap.OnCameraMoveStartedListener
+                .REASON_DEVELOPER_ANIMATION) {
+
+            //Toast.makeText(getContext(), "The app the camera.",
+            //      Toast.LENGTH_SHORT).show();
+        }
 
     }
 

@@ -62,15 +62,15 @@ public class AdvanceSearch extends AppCompatActivity implements Sender{
         mViewPager = (ViewPager) findViewById(R.id.container);
 
         //Tab
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
+        //TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        //tabLayout.setupWithViewPager(mViewPager);
 
         intent=getIntent();
         latitude = intent.getStringExtra("LAT");
         longitude =  intent.getStringExtra("LON");
 
 
-        bSearch =(Button) findViewById(R.id.search);
+      //  bSearch =(Button) findViewById(R.id.search);
         bExit =(Button) findViewById(R.id.exit);
 
         System.out.print(latitude + "  LAT: \n Lone: " +longitude);

@@ -1,18 +1,11 @@
 package com.apps.noura.masajd.Utils;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.webkit.WebView;
-import android.widget.Toast;
 
 import com.apps.noura.masajd.AboutUs.AboutUsActivity;
 import com.apps.noura.masajd.ContactUs.ContactUsActivity;
@@ -21,7 +14,6 @@ import com.apps.noura.masajd.FavoriteActivity;
 import com.apps.noura.masajd.LogOut;
 import com.apps.noura.masajd.LoginActivity;
 import com.apps.noura.masajd.MoiaGovView.AboutMoiaGov;
-import com.apps.noura.masajd.MosquSearch.MainAdvanceSearch;
 import com.apps.noura.masajd.MosqueActivity;
 import com.apps.noura.masajd.PrayTime.PrayTime;
 import com.apps.noura.masajd.R;
@@ -95,7 +87,7 @@ public class DrawerNavigation {
 
                         case R.id.ic_Dawa:
                            // Toast.makeText(context, "Dawa",Toast.LENGTH_SHORT).show();
-                            Intent dawaIntent = new Intent(context,MainAdvanceSearch.class);
+                            Intent dawaIntent = new Intent(context,DawaActivity.class);
                             context.startActivity(dawaIntent);
 
                             break;

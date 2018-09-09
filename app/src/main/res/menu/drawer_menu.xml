@@ -5,14 +5,14 @@
         android:id="@+id/login"
         android:icon="@drawable/sign_in"
         android:title="@string/login"
-        android:visible="false">
+        android:visible="true">
     </item>
 
     <item
         android:id="@+id/logOut"
         android:icon="@drawable/sign_out"
         android:title="@string/logOut"
-        android:visible="false">
+        android:visible="true">
     </item>
 
         <item
@@ -45,7 +45,7 @@
         android:id="@+id/ic_Dawa"
         android:icon="@drawable/ic_activity"
         android:title="@string/Dawa"
-        android:visible="false">
+        android:visible="true">
     </item>
 
 

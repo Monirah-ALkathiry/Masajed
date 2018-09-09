@@ -51,8 +51,8 @@ public class DawaAdvanceSearch extends AppCompatActivity  implements Sender{
 
 
         //Tab
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
+       // TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+       // tabLayout.setupWithViewPager(mViewPager);
 
 
         intent=getIntent();
@@ -109,11 +109,14 @@ public class DawaAdvanceSearch extends AppCompatActivity  implements Sender{
        // Toast.makeText(DawaAdvanceSearch.this, Mesage2, Toast.LENGTH_LONG).show();
       //  System.out.println("Advance Searc Querey Dawa \n"+Mesage2 + "\n");
 
-        bSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+       // bSearch.setOnClickListener(new View.OnClickListener() {
+          //  @Override
+          //  public void onClick(View v) {
 
-                Intent intent = new Intent(DawaAdvanceSearch.this,DawaActivity.class);
+        Toast.makeText(DawaAdvanceSearch.this, "DAWA ", Toast.LENGTH_LONG).show();
+
+
+        Intent intent = new Intent(DawaAdvanceSearch.this,DawaActivity.class);
                 intent.putExtra("Query",Mesage2);
                 startActivity(intent);
 
@@ -163,8 +166,8 @@ public class DawaAdvanceSearch extends AppCompatActivity  implements Sender{
                 });
 
                 finish();
-            }
-        });
+           // }
+       // });
 
     }//end Function
 }//end Class

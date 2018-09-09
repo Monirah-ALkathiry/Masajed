@@ -19,9 +19,10 @@
 
 
     <!-- LogIn SharedPrefrencess -->
-
     <string name="login_preferences">com.apps.noura.masajd_shared_preferences_LogIn</string>
     <string name="login_status_preferences">com.apps.noura.masajd_shared_preferences_status</string>
+
+
 
     <!-- Monirah -->
     <string name="search">أدخل كلمة البحث</string>
@@ -104,6 +105,8 @@
     <string name="WomanRoom">قاعة النساء</string>
     <string name="Distance">المسافة</string>
     <string name="Evaluation">التقييم</string>
+    <string name="SubjectOfTheDawa">عنوان المنشط</string>
+    <string name="DaeiaName">إسم الداعية</string>
 
     <!-- Menu-->
 
@@ -120,7 +123,7 @@
     <string name="logo">شعار</string>
     <string name="kateebName">أدخل إسم الخطيب</string>
     <string name="InsertImamName">أدخل إسم الإمام</string>
-    <string name="enter_date">Enter Date</string>
+    <string name="enter_date">ادخل التاريخ</string>
     <string name="ActivityName">أدخل عنوان المنشط</string>
     <string name="InsertMosqueName">أدخل كلمة البحث</string>
     <string name="Search_Filter">تصفية البحث</string>
