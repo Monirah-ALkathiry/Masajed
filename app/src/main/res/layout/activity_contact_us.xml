@@ -9,6 +9,10 @@
     android:layout_height="match_parent"
     android:background="@color/lightgray">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        tools:ignore="UselessParent">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -19,7 +23,9 @@
         android:paddingBottom="20dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingTop="20dp">
+        android:paddingTop="20dp"
+        tools:ignore="ScrollViewSize">
+
 
 
         <LinearLayout
@@ -141,6 +147,8 @@
 
     </LinearLayout>
 
+    </ScrollView>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -151,7 +159,8 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        <include layout="@layout/layout_bottom_navigation"/>
+        <include layout="@layout/layout_bottom_navigation"
+           />
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView

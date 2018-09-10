@@ -38,5 +38,9 @@ ImageView imageView;
                 startActivity(new Intent(getApplicationContext(),MosqueActivity.class));
             }
         });
+
+
+
+
     }
 }

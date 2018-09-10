@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -40,6 +41,7 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -109,14 +111,28 @@ public class MosqueActivity extends AppCompatActivity implements
     private ImageButton imageButton;
 
     //------------------------
+    public interface FragmentRefreshListener{
+        void onRefresh();
+    }
+
+       private FragmentRefreshListener fragmentRefreshListener;
 
 
 
+       public void setFragmentRefreshListener(FragmentRefreshListener fragmentRefreshListener) {
+           this.fragmentRefreshListener = fragmentRefreshListener;
+       }
+
+
+       public FragmentRefreshListener getFragmentRefreshListener() {
+           return fragmentRefreshListener;
+       }
 //------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mosque);
+
 
 
    //-------------------Bottom Nav: 
@@ -567,9 +583,13 @@ public class MosqueActivity extends AppCompatActivity implements
 
             case R.id.Refresh:
 
-                Intent Refreshintent = getIntent();
+                /*Intent Refreshintent = getIntent();
                 finish();
                 startActivity(Refreshintent);
+                */
+                if(getFragmentRefreshListener()!=null){
+                    getFragmentRefreshListener().onRefresh();
+                }
                 return true;
 
 
