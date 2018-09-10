@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Masajed.iml" filepath="$PROJECT_DIR$/Masajed.iml" />
-      <module fileurl="file://C:\Users\Monirah\Desktop\Android\Mosque\Masajed\Masajed 17-5 2018.iml" filepath="C:\Users\Monirah\Desktop\Android\Mosque\Masajed\Masajed 17-5 2018.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../Monirah/Desktop/Android/Mosque/Masajed/Masajed 17-5 2018.iml" filepath="$PROJECT_DIR$/../../../Monirah/Desktop/Android/Mosque/Masajed/Masajed 17-5 2018.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

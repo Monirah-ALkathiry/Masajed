@@ -6,17 +6,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.util.Log;
 import android.view.MenuItem;
 
+import com.apps.noura.masajd.AboutApp.AboutAppActivity;
 import com.apps.noura.masajd.AboutUs.AboutUsActivity;
 import com.apps.noura.masajd.ContactUs.ContactUsActivity;
-import com.apps.noura.masajd.DawaActivity;
-import com.apps.noura.masajd.FavoriteActivity;
 import com.apps.noura.masajd.MosqueActivity;
 import com.apps.noura.masajd.PrayTime.PrayTime;
 import com.apps.noura.masajd.R;
-import com.apps.noura.masajd.webView.AboutMoiaGov;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 /**
@@ -73,7 +70,7 @@ public class BottomNavigationViewHelper {
 
                     case R.id.aboutApp:
                         // Toast.makeText(context, "About App",Toast.LENGTH_SHORT).show();
-                        Intent AboutAppIntent = new Intent(context, AboutUsActivity.class);//ACTIVITY_NUM = 1
+                        Intent AboutAppIntent = new Intent(context, AboutAppActivity.class);//ACTIVITY_NUM = 1
                         context.startActivity(AboutAppIntent);
                         break;
                    /* case R.id.ic_activities:

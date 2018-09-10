@@ -23,7 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".WelcomMosqueApp"
+            android:name=".AboutApp.AboutAppActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
             <!-- android:theme="@style/AppTheme.NoActionBar" -->
@@ -32,6 +32,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".WelcomMosqueApp"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <!--
@@ -108,9 +114,6 @@
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         -->
-        <activity
-            android:name=".PrayTime.PrayTime"
-            android:label="@string/praytime" />
         <activity
             android:name=".ContactUs.ContactUsActivity"
             android:label="@string/contactUs" />

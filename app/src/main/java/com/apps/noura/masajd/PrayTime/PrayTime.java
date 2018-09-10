@@ -5,22 +5,19 @@ import android.icu.util.Calendar;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.test.mock.MockPackageManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.apps.noura.masajd.GPSTracker;
 import com.apps.noura.masajd.R;
@@ -40,7 +37,8 @@ import java.util.Locale;
 public class PrayTime extends AppCompatActivity {
 
     private TextView txtPrayerTime1,txtPrayerTime2, txtPrayerTime3,
-            txtPrayerTime4,txtPrayerTime5,txtPrayerTime6,txtPrayerTime7, TitleText;
+            txtPrayerTime4,txtPrayerTime5,txtPrayerTime6,txtPrayerTime7,txtPrayerTime1_1,txtPrayerTime2_1, txtPrayerTime3_1,
+            txtPrayerTime4_1,txtPrayerTime5_1,txtPrayerTime6_1,txtPrayerTime7_1, TitleText;
     String PrayerName []= new String [7];
     String PrayerTime []= new String [7];
     View v;
@@ -69,7 +67,7 @@ public class PrayTime extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pray_time);
+        setContentView(R.layout.activity_praytime);
 
         txtPrayerTime1 = findViewById(R.id.txtPrayerTime1);
         txtPrayerTime2 = findViewById(R.id.txtPrayerTime2);
@@ -78,6 +76,14 @@ public class PrayTime extends AppCompatActivity {
         //txtPrayerTime5 = (TextView) findViewById(R.id.txtPrayerTime5);
         txtPrayerTime6 = findViewById(R.id.txtPrayerTime6);
         txtPrayerTime7 = findViewById(R.id.txtPrayerTime7);
+
+        txtPrayerTime1_1 = findViewById(R.id.txtPrayerTime1_1);
+        txtPrayerTime2_1 = findViewById(R.id.txtPrayerTime2_1);
+        txtPrayerTime3_1 = findViewById(R.id.txtPrayerTime3_1);
+        txtPrayerTime4_1 = findViewById(R.id.txtPrayerTime4_1);
+        //txtPrayerTime5 = (TextView) findViewById(R.id.txtPrayerTime5);
+        txtPrayerTime6_1 = findViewById(R.id.txtPrayerTime6_1);
+        txtPrayerTime7_1 = findViewById(R.id.txtPrayerTime7_1);
         TitleText = findViewById(R.id.title);
 
         //-------------------------------------------------------------------------------
@@ -155,8 +161,8 @@ public class PrayTime extends AppCompatActivity {
             longitude = gps.getLongitude();
 
             // \n is for new line
-            // Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
-            //       + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+             //Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
+                   //+ latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
 
             Geocoder gcd = new Geocoder(PrayTime.this, Locale.getDefault());
             List<Address> addresses = null;
@@ -210,13 +216,21 @@ public class PrayTime extends AppCompatActivity {
             PrayerTime[i]=(String)prayerTimes.get(i);
         }
 
-        txtPrayerTime1.append(PrayerName[0]+ "                "+PrayerTime[0]);
-        txtPrayerTime2.append(PrayerName[1]+ "                "+PrayerTime[1]);
-        txtPrayerTime3.append(PrayerName[2]+ "                "+PrayerTime[2]);
-        txtPrayerTime4.append(PrayerName[3]+ "                "+PrayerTime[3]);
+        txtPrayerTime1.append(PrayerName[0]+"   ");
+        txtPrayerTime2.append(PrayerName[1]);
+        txtPrayerTime3.append(PrayerName[2]+"   ");
+        txtPrayerTime4.append(PrayerName[3]+"  ");
         // txtPrayerTime5.append(PrayerName[4]+ "                "+PrayerTime[4]);
-        txtPrayerTime6.append(PrayerName[5]+ "                "+PrayerTime[5]);
-        txtPrayerTime7.append(PrayerName[6]+ "                "+PrayerTime[6]);
+        txtPrayerTime6.append(PrayerName[5]);
+        txtPrayerTime7.append(PrayerName[6]);
+
+        txtPrayerTime1_1.append(PrayerTime[0]);
+        txtPrayerTime2_1.append(PrayerTime[1]);
+        txtPrayerTime3_1.append(PrayerTime[2]);
+        txtPrayerTime4_1.append(PrayerTime[3]);
+        // txtPrayerTime5.append(PrayerName[4]+ "                "+PrayerTime[4]);
+        txtPrayerTime6_1.append(PrayerTime[5]);
+        txtPrayerTime7_1.append(PrayerTime[6]);
     }
 
 
