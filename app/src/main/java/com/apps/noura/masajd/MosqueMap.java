@@ -148,14 +148,6 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        ((MosqueActivity)getActivity()).setFragmentRefreshListener(new MosqueActivity.FragmentRefreshListener(){
-
-                    @Override
-                    public void onRefresh() {
-                    Toast.makeText(getContext(),"Test",Toast.LENGTH_LONG).show();
-                    }
-                }
-                );
 
         try {
             mView = inflater.inflate(R.layout.fragment_mosque_map, container, false);
@@ -171,6 +163,22 @@ public class MosqueMap extends Fragment implements OnMapReadyCallback
         } catch (InflateException e) {
             Log.e(TAG, "Inflate exception");
         }
+
+
+
+        ((MosqueActivity)getActivity()).setFragmentRefreshListener(new MosqueActivity.FragmentRefreshListener(){
+
+                    @Override
+                    public void onRefresh() {
+                    Toast.makeText(getContext(),"Test",Toast.LENGTH_LONG).show();
+
+                    MgoogleMap.clear();
+
+                    }
+                }
+                );
+
+
 
 
         return mView;

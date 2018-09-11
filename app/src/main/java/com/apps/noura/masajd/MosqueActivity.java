@@ -110,7 +110,7 @@ public class MosqueActivity extends AppCompatActivity implements
     //Search---
     private ImageButton imageButton;
 
-    //------------------------
+    //--------------Update MAp Fragment : TODO --
     public interface FragmentRefreshListener{
         void onRefresh();
     }
@@ -583,13 +583,15 @@ public class MosqueActivity extends AppCompatActivity implements
 
             case R.id.Refresh:
 
-                /*Intent Refreshintent = getIntent();
+                Intent Refreshintent = getIntent();
                 finish();
                 startActivity(Refreshintent);
-                */
-                if(getFragmentRefreshListener()!=null){
+
+               /*
+               Update Map Fragment
+               if(getFragmentRefreshListener()!=null){
                     getFragmentRefreshListener().onRefresh();
-                }
+                }*/
                 return true;
 
 
