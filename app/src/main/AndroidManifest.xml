@@ -47,7 +47,8 @@
 
         <activity
             android:name=".MosqueActivity"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -63,14 +64,18 @@
 
         <activity
             android:name=".LoginActivity"
-            android:label="@string/login" />
+            android:label="@string/login"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity android:name=".RigisterActivity" />
         <activity android:name=".UserAreaActivity" />
         <!-- <activity android:name=".MosqueActivity" /> -->
 
         <activity
             android:name=".DawaActivity"
-            android:label="@string/Dawa" />
+            android:label="@string/Dawa"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
 
         <activity android:name=".DawaInformationActivity" />
         <activity android:name=".forgetPassActivity" />
@@ -126,13 +131,21 @@
             tools:ignore="InnerclassSeparator" />
         <activity android:name=".LogOut" />
 
-
         <!-- Web View -->
 
         <activity
             android:name=".MoiaGovView.AboutMoiaGov"
             android:label="@string/info"
-            tools:ignore="InnerclassSeparator" />
+            tools:ignore="InnerclassSeparator"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <!--
+            <activity
+            android:name=".NavigationDrawer.BasicActivity"
+            android:label="@string/title_activity_basic"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        -->
+
+
     </application>
 
 </manifest>

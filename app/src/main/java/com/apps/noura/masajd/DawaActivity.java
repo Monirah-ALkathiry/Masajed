@@ -1,6 +1,7 @@
 package com.apps.noura.masajd;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
@@ -19,6 +21,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.test.mock.MockPackageManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,6 +30,7 @@ import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.apps.noura.masajd.NavigationDrawer.BasicActivity;
 import com.apps.noura.masajd.Utils.BottomNavigationViewHelper;
 import com.apps.noura.masajd.Utils.DrawerNavigation;
 import com.apps.noura.masajd.Utils.SharedPreferencesConfig;
@@ -47,7 +51,7 @@ import retrofit2.Response;
  * Created by Noura Alsomaikhi on 12/31/2017.
  */
 
-public class DawaActivity extends AppCompatActivity  implements
+public class DawaActivity extends BasicActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener
 ,FirstFragmentListenerDawaMAP{
@@ -81,7 +85,7 @@ public class DawaActivity extends AppCompatActivity  implements
     //-------Nav  drawerLayout
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
-    private NavigationView navigationView;
+   // private NavigationView navigationView;
 //--------------------------------------
 //Search---
 private ImageButton imageButton ;
@@ -102,25 +106,46 @@ private ImageButton imageButton ;
     public DawaFragmentCommunicator dawaFragmentCommunicator;
 
 
-
     //Used To Update Map_Marker
     public FragmentCommunicator fragmentCommunicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dawa);
+        //setContentView(R.layout.activity_dawa);
+
+
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        //inflate your activity layout here!
+        @SuppressLint("InflateParams")
+        View contentView = inflater.inflate(R.layout.activity_dawa, null, false);
+        drawer.addView(contentView, 0);
+        //check in Menu selected :
+        navigationView.setCheckedItem(R.id.ic_Dawa);
 
 
         Log.d(TAG,"Start");
 
         //viewpager
         mviewPager = (ViewPager) findViewById(R.id.container);
-       // setupViewPager(mviewPager);
+        //setupViewPager(mviewPager);
 
 
 
+        //Check If User Login
+        sharedConfig = new SharedPreferencesConfig(getApplicationContext());
+        if(sharedConfig.readLoginStatus())
+        {
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+            //finish();
+        }
+        else {
 
+            navigationView.getMenu().findItem(R.id.logOut).setVisible(false);
+
+        }
+
+/*
         //Navigation:----------------
         drawerLayout = (DrawerLayout)findViewById(R.id.DrawerLayout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.open, R.string.close);
@@ -147,6 +172,7 @@ private ImageButton imageButton ;
         }
 
         setupDrawerNavigation();
+        */
 
         //-------------------Bottom Nav:
 
@@ -248,7 +274,9 @@ private ImageButton imageButton ;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-
+        // Inflate the options menu from XML
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_mosque_information, menu);
         //------------------------------------------------------------------------------------------------------------
         String s = getIntent().getStringExtra("Query");
 
@@ -320,9 +348,7 @@ private ImageButton imageButton ;
         }
 
          //getMenuInflater().inflate(R.menu.menu_mosque_information,menu);
-        // Inflate the options menu from XML
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_mosque_information, menu);
+
 
       //  final Context context= this;
 
@@ -501,11 +527,11 @@ private ImageButton imageButton ;
     protected void onStart() {
         super.onStart();
         //end check if Not Null
-        if(sharedConfig.readLoginStatus())
+      /*  if(sharedConfig.readLoginStatus())
         {
             navigationView.getMenu().findItem(R.id.login).setVisible(false);
         }
-
+*/
     }
 
 
@@ -516,10 +542,10 @@ private ImageButton imageButton ;
         setupViewPager(mviewPager);
         mviewPager.setCurrentItem(0);
 
-        if(sharedConfig.readLoginStatus())
+      /*  if(sharedConfig.readLoginStatus())
         {
             navigationView.getMenu().findItem(R.id.login).setVisible(false);
-        }
+        }*/
     }
 
     private void setupViewPager(ViewPager viewPager){
@@ -553,8 +579,8 @@ private ImageButton imageButton ;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(actionBarDrawerToggle.onOptionsItemSelected(item))
-            return true;
+       // if(actionBarDrawerToggle.onOptionsItemSelected(item))
+         //   return true;
 
        /* return super.onOptionsItemSelected(item);*/
 

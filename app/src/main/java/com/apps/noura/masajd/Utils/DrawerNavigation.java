@@ -34,8 +34,7 @@ public class DrawerNavigation {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     int id = item.getItemId();
 
-                    // set item as selected to persist highlight
-                    item.setChecked(true);
+
 
 
                    // System.out.print("\n IDI ID :" + id +"\n");
@@ -43,6 +42,7 @@ public class DrawerNavigation {
                     {
 
                         case R.id.login:
+
 
                            // Toast.makeText(context, "LogIn",Toast.LENGTH_SHORT).show();
                             Intent LoginIntent = new Intent(context,LoginActivity.class);

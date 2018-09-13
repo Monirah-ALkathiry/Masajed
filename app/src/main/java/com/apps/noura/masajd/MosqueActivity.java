@@ -2,6 +2,7 @@ package com.apps.noura.masajd;
 
 import android.Manifest;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.SearchManager;
 import android.content.Context;
@@ -24,6 +25,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.test.mock.MockPackageManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,6 +34,7 @@ import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.apps.noura.masajd.NavigationDrawer.BasicActivity;
 import com.apps.noura.masajd.Utils.BottomNavigationViewHelper;
 import com.apps.noura.masajd.Utils.DrawerNavigation;
 import com.apps.noura.masajd.Utils.SharedPreferencesConfig;
@@ -50,7 +53,7 @@ import retrofit2.Response;
 
 
 
-public class MosqueActivity extends AppCompatActivity implements
+public class MosqueActivity extends BasicActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener
 , FirstFragmentListenerMAP
@@ -96,7 +99,7 @@ public class MosqueActivity extends AppCompatActivity implements
     //-------Nav  drawerLayout
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
-    protected NavigationView navigationView;
+   // protected NavigationView navigationView;
 
 
     //-------------------GPS-------------------------------------
@@ -131,11 +134,21 @@ public class MosqueActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mosque);
+
+       // setContentView(R.layout.activity_mosque);
+
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        //inflate your activity layout here!
+        @SuppressLint("InflateParams")
+        View contentView = inflater.inflate(R.layout.activity_mosque, null, false);
+        drawer.addView(contentView, 0);
+        //check in Menu selected :
+        navigationView.setCheckedItem(R.id.ic_Dawa);
 
 
 
-   //-------------------Bottom Nav: 
+
+        //-------------------Bottom Nav:
 
         setupBottomNavigationView();
         
@@ -156,18 +169,19 @@ public class MosqueActivity extends AppCompatActivity implements
         //Navigation:----------------
         // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if(getSupportActionBar() != null){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+      //  if(getSupportActionBar() != null){
+        //    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+      //  }
 
 
-        drawerLayout = (DrawerLayout)findViewById(R.id.DrawerLayout);
+       /* drawerLayout = (DrawerLayout)findViewById(R.id.DrawerLayout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.open, R.string.close);
 
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
         navigationView = (NavigationView)findViewById(R.id.navegation);
+        */
 
 
         //Check If User Login
@@ -185,7 +199,7 @@ public class MosqueActivity extends AppCompatActivity implements
 
         }
 
-        setupDrawerNavigation();
+        //setupDrawerNavigation();
 
         //MAP
         intentThatCalled = getIntent();
@@ -267,7 +281,9 @@ public class MosqueActivity extends AppCompatActivity implements
     public boolean onCreateOptionsMenu(Menu menu) {
 
          //  getMenuInflater().inflate(R.menu.menu_mosque_information,menu);
-
+           // Inflate the options menu from XML
+           MenuInflater inflater = getMenuInflater();
+           inflater.inflate(R.menu.menu_mosque_information, menu);
 
 
            //------------------------------------------------------------------------------------------------------------
@@ -340,9 +356,7 @@ public class MosqueActivity extends AppCompatActivity implements
 
 
         // getMenuInflater().inflate(R.menu.menu_mosque_information,menu);
-        // Inflate the options menu from XML
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_mosque_information, menu);
+
 
         // Get the SearchView and set the searchable configuration
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -559,8 +573,8 @@ public class MosqueActivity extends AppCompatActivity implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-       if(actionBarDrawerToggle.onOptionsItemSelected(item))
-           return true;
+       //if(actionBarDrawerToggle.onOptionsItemSelected(item))
+        //   return true;
 
     //  return super.onOptionsItemSelected(item);
 

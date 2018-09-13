@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,18 +23,19 @@ import android.webkit.WebViewClient;
 import com.apps.noura.masajd.MosqueList;
 import com.apps.noura.masajd.MosqueMap;
 import com.apps.noura.masajd.MosqueSectoinsAdapter;
+import com.apps.noura.masajd.NavigationDrawer.BasicActivity;
 import com.apps.noura.masajd.R;
 import com.apps.noura.masajd.Utils.DrawerNavigation;
 import com.apps.noura.masajd.Utils.SharedPreferencesConfig;
 
-public class AboutMoiaGov extends AppCompatActivity {
+public class AboutMoiaGov extends BasicActivity {
 
 
 
     //-------Nav  drawerLayout
-    private DrawerLayout drawerLayout;
+   // private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
-    protected NavigationView navigationView;
+  //  protected NavigationView navigationView;
 
     //sharedpreferences
     private SharedPreferencesConfig sharedConfig;
@@ -46,7 +48,17 @@ public class AboutMoiaGov extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about_moia_gov);
+
+        //setContentView(R.layout.activity_about_moia_gov);
+
+
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        //inflate your activity layout here!
+        @SuppressLint("InflateParams")
+        View contentView = inflater.inflate(R.layout.activity_about_moia_gov, null, false);
+        drawer.addView(contentView, 0);
+        //check in Menu selected :
+        navigationView.setCheckedItem(R.id.ic_Dawa);
 
         /* myWebView = (WebView) findViewById(R.id.webview);
         myWebView = new WebView(this);
@@ -60,7 +72,7 @@ public class AboutMoiaGov extends AppCompatActivity {
         //Navigation:----------------
         // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if(getSupportActionBar() != null){
+      /*  if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
@@ -75,7 +87,7 @@ public class AboutMoiaGov extends AppCompatActivity {
 
         actionBarDrawerToggle.syncState();
 
-
+        */
 
         //Check If User Login
         sharedConfig = new SharedPreferencesConfig(getApplicationContext());
@@ -92,7 +104,7 @@ public class AboutMoiaGov extends AppCompatActivity {
 
         }
 
-        setupDrawerNavigation();
+       // setupDrawerNavigation();
 
 
        /* Configuration config = getResources().getConfiguration();

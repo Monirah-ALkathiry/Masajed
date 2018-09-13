@@ -1,5 +1,7 @@
 package com.apps.noura.masajd;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.apps.noura.masajd.NavigationDrawer.BasicActivity;
 import com.apps.noura.masajd.Utils.DrawerNavigation;
 import com.apps.noura.masajd.Utils.SharedPreferencesConfig;
 import com.google.gson.JsonObject;
@@ -32,12 +36,15 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class LoginActivity extends AppCompatActivity {
+
+
+public class LoginActivity extends BasicActivity {
 
     //-------Nav  drawerLayout
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
-    private NavigationView navigationView;
+
+   // private NavigationView navigationView;
     //--------------------------------------
 
 
@@ -68,7 +75,18 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+
+        // setContentView(R.layout.activity_login);
+
+
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        //inflate your activity layout here!
+        @SuppressLint("InflateParams")
+        View contentView = inflater.inflate(R.layout.activity_login, null, false);
+        drawer.addView(contentView, 0);
+        //check in Menu selected :
+        navigationView.setCheckedItem(R.id.ic_Dawa);
+
 
         final EditText etUsername = (EditText) findViewById(R.id.etUsername);
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
@@ -80,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
         //Navigation:----------------
         // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if(getSupportActionBar() != null){
+        /* if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
@@ -92,12 +110,13 @@ public class LoginActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
 
         navigationView = (NavigationView)findViewById(R.id.navegation);
+        */
 
 
         //Check If User Login
         sharedConfig = new SharedPreferencesConfig(getApplicationContext());
 
-        setupDrawerNavigation();
+       // setupDrawerNavigation();
 
 
         //Check if User Loge in Or not:

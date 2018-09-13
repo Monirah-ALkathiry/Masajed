@@ -23,7 +23,6 @@
     <string name="login_status_preferences">com.apps.noura.masajd_shared_preferences_status</string>
 
 
-
     <!-- Monirah -->
     <string name="search">أدخل كلمة البحث</string>
     <string name="mosqueName">إسم المسجد</string>
@@ -135,5 +134,11 @@
     <string name="AboutUs1">يقدم التطبيق خدمة عرض المساجد القريبة من موقعك الحالي مدعومة بصور و معلومات عن المسجد</string>
     <string name="AboutApp">عن التطبيق</string>
     <string name="title_activity_main_advance_search">MainAdvanceSearch</string>
+    <string name="title_activity_app_navigation_drawer">AppNavigationDrawer</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_tets">TetsActivity</string>
+    <string name="title_activity_basic">BasicActivity</string>
 
 </resources>
