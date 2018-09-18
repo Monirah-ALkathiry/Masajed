@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.apps.noura.masajd.DawaMap">
+    tools:context="com.apps.noura.masajd.Dawa.DawaMap">
 
 
     <com.google.android.gms.maps.MapView

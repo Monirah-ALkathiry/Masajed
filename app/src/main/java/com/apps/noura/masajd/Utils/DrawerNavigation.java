@@ -9,12 +9,12 @@ import android.view.MenuItem;
 
 import com.apps.noura.masajd.AboutUs.AboutUsActivity;
 import com.apps.noura.masajd.ContactUs.ContactUsActivity;
-import com.apps.noura.masajd.DawaActivity;
-import com.apps.noura.masajd.FavoriteActivity;
-import com.apps.noura.masajd.LogOut;
-import com.apps.noura.masajd.LoginActivity;
+import com.apps.noura.masajd.Dawa.DawaActivity;
+import com.apps.noura.masajd.Favorite.FavoriteActivity;
+import com.apps.noura.masajd.UserAccount.LogOut;
+import com.apps.noura.masajd.UserAccount.LoginActivity;
 import com.apps.noura.masajd.MoiaGovView.AboutMoiaGov;
-import com.apps.noura.masajd.MosqueActivity;
+import com.apps.noura.masajd.Mosque.MosqueActivity;
 import com.apps.noura.masajd.PrayTime.PrayTime;
 import com.apps.noura.masajd.R;
 

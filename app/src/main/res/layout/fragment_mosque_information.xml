@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.apps.noura.masajd.MosqueInformation">
+    tools:context="com.apps.noura.masajd.Mosque.MosqueInformation">
 
 
     <!-- TODO: fix list size -->

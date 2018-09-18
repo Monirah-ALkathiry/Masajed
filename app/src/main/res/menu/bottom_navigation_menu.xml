@@ -37,7 +37,7 @@
 
   <item
       android:id="@+id/aboutApp"
-      android:icon="@drawable/icons"
+      android:icon="@drawable/aboutapp"
       android:title="@string/aboutApp">
   </item>
 

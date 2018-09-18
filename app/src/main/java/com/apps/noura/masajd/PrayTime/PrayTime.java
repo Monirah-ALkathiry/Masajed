@@ -1,28 +1,26 @@
 package com.apps.noura.masajd.PrayTime;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.icu.util.Calendar;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.test.mock.MockPackageManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.apps.noura.masajd.GPSTracker;
+import com.apps.noura.masajd.GPS.GPSTracker;
+import com.apps.noura.masajd.NavigationDrawer.BasicActivity;
 import com.apps.noura.masajd.R;
 import com.apps.noura.masajd.Utils.BottomNavigationViewHelper;
 import com.apps.noura.masajd.Utils.DrawerNavigation;
@@ -37,10 +35,11 @@ import java.util.Locale;
 
 
 //pray time code
-public class PrayTime extends AppCompatActivity {
+public class PrayTime extends BasicActivity {
 
     private TextView txtPrayerTime1,txtPrayerTime2, txtPrayerTime3,
-            txtPrayerTime4,txtPrayerTime5,txtPrayerTime6,txtPrayerTime7, TitleText;
+            txtPrayerTime4,txtPrayerTime5,txtPrayerTime6,txtPrayerTime7,txtPrayerTime1_1,txtPrayerTime2_1, txtPrayerTime3_1,
+            txtPrayerTime4_1,txtPrayerTime5_1,txtPrayerTime6_1,txtPrayerTime7_1, TitleText;
     String PrayerName []= new String [7];
     String PrayerTime []= new String [7];
     View v;
@@ -60,16 +59,44 @@ public class PrayTime extends AppCompatActivity {
     //shared preferences
     private SharedPreferencesConfig sharedConfig;
     //-------Nav  drawerLayout
-    private DrawerLayout drawerLayout;
+
+   // private DrawerLayout drawerLayout;
+
     private ActionBarDrawerToggle actionBarDrawerToggle;
-    private NavigationView navigationView;
+    //private NavigationView navigationView;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pray_time);
+
+       // setContentView(R.layout.activity_pray_time);
+
+
+//------------------------------------------------
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        //inflate your activity layout here!
+        @SuppressLint("InflateParams")
+        View contentView = inflater.inflate(R.layout.activity_pray_time, null, false);
+        drawer.addView(contentView, 0);
+        //check in Menu selected :
+        navigationView.setCheckedItem(R.id.ic_praytime);
+
+
+        //Check If User Login
+        sharedConfig = new SharedPreferencesConfig(getApplicationContext());
+        if(sharedConfig.readLoginStatus())
+        {
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+            //finish();
+        }
+        else {
+
+            navigationView.getMenu().findItem(R.id.logOut).setVisible(false);
+
+        }
+        //---------------------------------------------------
 
         txtPrayerTime1 = findViewById(R.id.txtPrayerTime1);
         txtPrayerTime2 = findViewById(R.id.txtPrayerTime2);
@@ -78,6 +105,14 @@ public class PrayTime extends AppCompatActivity {
         //txtPrayerTime5 = (TextView) findViewById(R.id.txtPrayerTime5);
         txtPrayerTime6 = findViewById(R.id.txtPrayerTime6);
         txtPrayerTime7 = findViewById(R.id.txtPrayerTime7);
+
+        txtPrayerTime1_1 = findViewById(R.id.txtPrayerTime1_1);
+        txtPrayerTime2_1 = findViewById(R.id.txtPrayerTime2_1);
+        txtPrayerTime3_1 = findViewById(R.id.txtPrayerTime3_1);
+        txtPrayerTime4_1 = findViewById(R.id.txtPrayerTime4_1);
+        //txtPrayerTime5 = (TextView) findViewById(R.id.txtPrayerTime5);
+        txtPrayerTime6_1 = findViewById(R.id.txtPrayerTime6_1);
+        txtPrayerTime7_1 = findViewById(R.id.txtPrayerTime7_1);
         TitleText = findViewById(R.id.title);
 
         //-------------------------------------------------------------------------------
@@ -105,11 +140,11 @@ public class PrayTime extends AppCompatActivity {
         //Navigation:----------------
         // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if(getSupportActionBar() != null){
+       /* if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        }*/
 
-
+/*
         drawerLayout = (DrawerLayout)findViewById(R.id.DrawerLayout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.open, R.string.close);
 
@@ -132,6 +167,7 @@ public class PrayTime extends AppCompatActivity {
 
         }
         setupDrawerNavigation();
+        */
 
         //-------------------Bottom Nav:
 
@@ -154,9 +190,10 @@ public class PrayTime extends AppCompatActivity {
             latitude = gps.getLatitude();
             longitude = gps.getLongitude();
 
+
             // \n is for new line
-            // Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
-            //       + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
+            //+ latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
 
             Geocoder gcd = new Geocoder(PrayTime.this, Locale.getDefault());
             List<Address> addresses = null;
@@ -167,11 +204,14 @@ public class PrayTime extends AppCompatActivity {
             }
             if (addresses.size() > 0) {
                 // Toast.makeText(getApplicationContext(), addresses.get(0).getLocality(), Toast.LENGTH_LONG).show();
-                TitleText.append(addresses.get(0).getLocality()+"\n");
-            }
-            else {
+                TitleText.append(addresses.get(0).getLocality() + "\n");
+            } else {
                 // do your stuff
+
+                TitleText.append("لا يوجد بيانات"+ "\n");
+
             }
+
         } else{
             // can't get location
             // GPS or Network is not enabled
@@ -210,13 +250,21 @@ public class PrayTime extends AppCompatActivity {
             PrayerTime[i]=(String)prayerTimes.get(i);
         }
 
-        txtPrayerTime1.append(PrayerName[0]+ "                "+PrayerTime[0]);
-        txtPrayerTime2.append(PrayerName[1]+ "                "+PrayerTime[1]);
-        txtPrayerTime3.append(PrayerName[2]+ "                "+PrayerTime[2]);
-        txtPrayerTime4.append(PrayerName[3]+ "                "+PrayerTime[3]);
+        txtPrayerTime1.append(PrayerName[0]+"   ");
+        txtPrayerTime2.append(PrayerName[1]);
+        txtPrayerTime3.append(PrayerName[2]+"   ");
+        txtPrayerTime4.append(PrayerName[3]+"  ");
         // txtPrayerTime5.append(PrayerName[4]+ "                "+PrayerTime[4]);
-        txtPrayerTime6.append(PrayerName[5]+ "                "+PrayerTime[5]);
-        txtPrayerTime7.append(PrayerName[6]+ "                "+PrayerTime[6]);
+        txtPrayerTime6.append(PrayerName[5]);
+        txtPrayerTime7.append(PrayerName[6]);
+
+        txtPrayerTime1_1.append(PrayerTime[0]);
+        txtPrayerTime2_1.append(PrayerTime[1]);
+        txtPrayerTime3_1.append(PrayerTime[2]);
+        txtPrayerTime4_1.append(PrayerTime[3]);
+        // txtPrayerTime5.append(PrayerName[4]+ "                "+PrayerTime[4]);
+        txtPrayerTime6_1.append(PrayerTime[5]);
+        txtPrayerTime7_1.append(PrayerTime[6]);
     }
 
 
@@ -238,13 +286,13 @@ public class PrayTime extends AppCompatActivity {
         BottomNavigationViewHelper.enableNavigation(this, bottomNavigationViewEx);
         Menu menu = bottomNavigationViewEx.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
-         menuItem.setChecked(false);
+        menuItem.setChecked(false);
     }
 
     //Drawer Nav
     private void setupDrawerNavigation() {
         Log.d("setupDrawerNavigation", "setupBottomNavigationView: setting BottomNavigationView");
-       DrawerNavigation.enableDrawerNavigation(this,navigationView);
+        DrawerNavigation.enableDrawerNavigation(this,navigationView);
         //Menu menu = navigationView.getMenu();
         //MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         //  menuItem.setChecked(true);
@@ -255,9 +303,9 @@ public class PrayTime extends AppCompatActivity {
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        if(sharedConfig.readLoginStatus())
+      /*  if(sharedConfig.readLoginStatus())
         {
             navigationView.getMenu().findItem(R.id.login).setVisible(false);
-        }
+        }*/
     }
 }

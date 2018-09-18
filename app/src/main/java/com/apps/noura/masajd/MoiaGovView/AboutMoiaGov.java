@@ -1,28 +1,14 @@
 package com.apps.noura.masajd.MoiaGovView;
 
 import android.annotation.SuppressLint;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
-import com.apps.noura.masajd.MosqueList;
-import com.apps.noura.masajd.MosqueMap;
-import com.apps.noura.masajd.MosqueSectoinsAdapter;
 import com.apps.noura.masajd.NavigationDrawer.BasicActivity;
 import com.apps.noura.masajd.R;
 import com.apps.noura.masajd.Utils.DrawerNavigation;

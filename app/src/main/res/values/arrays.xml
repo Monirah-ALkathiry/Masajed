@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array
+        name="races_array">
+        <item>@string/ic_masijed</item>
+        <item>@string/Dawa</item>
+
+        <item>@string/praytime</item>
+        <item>@string/empServices</item>
+
+        <item>@string/observer</item>
+        <item>@string/maintenance</item>
+
+        <item>@string/aboutApp</item>
+        <item>@string/info</item>
+
+
+        <item>@string/contactUs</item>
+
+        <!-- <item>@string/favorit</item> -->
+    </string-array>
+</resources>

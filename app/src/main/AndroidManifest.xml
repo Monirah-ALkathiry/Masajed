@@ -24,7 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".WelcomMosqueApp"
+            android:name=".AboutApp.AboutAppActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
             <!-- android:theme="@style/AppTheme.NoActionBar" -->
@@ -34,7 +34,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".WelcomMosqueApp"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+            <!-- android:theme="@style/AppTheme.NoActionBar" -->
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+
+
+        <activity android:name=".MainActivity">
+        </activity>
         <!--
         <activity android:name=".MainActivity">
            <intent-filter>
@@ -46,7 +64,7 @@
         -->
 
         <activity
-            android:name=".MosqueActivity"
+            android:name=".Mosque.MosqueActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -61,24 +79,20 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-
         <activity
-            android:name=".LoginActivity"
+            android:name=".UserAccount.LoginActivity"
             android:label="@string/login"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
-        <activity android:name=".RigisterActivity" />
-        <activity android:name=".UserAreaActivity" />
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".UserAccount.RigisterActivity" />
+        <activity android:name=".UserAccount.UserAreaActivity" />
         <!-- <activity android:name=".MosqueActivity" /> -->
 
         <activity
-            android:name=".DawaActivity"
+            android:name=".Dawa.DawaActivity"
             android:label="@string/Dawa"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
-
-        <activity android:name=".DawaInformationActivity" />
-        <activity android:name=".forgetPassActivity" />
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Dawa.DawaInformationActivity" />
+        <activity android:name=".UserAccount.forgetPassActivity" />
 
         <!-- Map Android Key -->
         <!--
@@ -95,22 +109,23 @@
 
         <!-- Map -->
         <activity
-            android:name=".MosqueInformationActivity"
+            android:name=".Mosque.MosqueInformationActivity"
             android:label="@string/title_activity_mosque_information"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AdvanceSearch"
+            android:name=".Mosque.MosqueAdvanceSearch.AdvanceSearch"
             android:label="@string/title_activity_advance_search"
             android:theme="@style/Custom" />
         <activity
-            android:name=".DawaAdvanceSearch"
+            android:name=".Dawa.DawaAdvanceSearch.DawaAdvanceSearch"
             android:label="@string/title_activity_advance_search"
             android:theme="@style/Custom" />
         <activity
-            android:name=".FavoriteActivity"
+            android:name=".Favorite.FavoriteActivity"
             android:label="@string/title_activity_favorite"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <!--
+         android:theme="@style/AppTheme"
             <activity
             android:name=".Main2Activity"
             android:label="@string/title_activity_main2"
@@ -119,25 +134,27 @@
         <activity
             android:name=".PrayTime.PrayTime"
             android:label="@string/praytime"
+            android:theme="@style/AppTheme.NoActionBar"
             tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".ContactUs.ContactUsActivity"
             android:label="@string/contactUs"
+            android:theme="@style/AppTheme.NoActionBar"
             tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".AboutUs.AboutUsActivity"
             android:label="@string/AboutApp"
             android:theme="@style/AppTheme.NoActionBar"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".LogOut" />
+        <activity android:name=".UserAccount.LogOut" />
 
         <!-- Web View -->
 
         <activity
             android:name=".MoiaGovView.AboutMoiaGov"
             android:label="@string/info"
-            tools:ignore="InnerclassSeparator"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="InnerclassSeparator" />
         <!--
             <activity
             android:name=".NavigationDrawer.BasicActivity"
@@ -145,7 +162,20 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         -->
 
+        <activity android:name=".MaintenanceEmployeeServices.MaintenanceActivity"
+            android:label="@string/maintenance"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
+        <activity android:name=".MosqueEmployeeServices.EmpServicesActivity"
+            android:label="@string/empServices"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+
+        <activity android:name=".MosqueObserverServices.ObserverActivity"
+            android:label="@string/observer"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>

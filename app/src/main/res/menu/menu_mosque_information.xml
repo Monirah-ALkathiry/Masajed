@@ -3,6 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+
+
     <item
         android:id="@+id/search"
         android:icon="@drawable/ic_search"
@@ -31,7 +34,7 @@
     <!--<menu xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context="com.apps.noura.masajd.MosqueActivity">
+        tools:contecom.apps.noura.masajd.Mosque.MosqueActivityvity">
         <item
             android:id="@+id/search"
             android:title="@string/search"

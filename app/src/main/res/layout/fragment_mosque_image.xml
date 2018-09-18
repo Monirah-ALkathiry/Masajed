@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/border_style"
-    tools:context="com.apps.noura.masajd.MosqueImage">
+    tools:context="com.apps.noura.masajd.Mosque.MosqueImage">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/RecyclerViewImag"

@@ -18,6 +18,22 @@
     <color name="Yellow">#FAD230</color>
     <color name="darkBlue">#0D1A77</color>
 
+
+    <!-- Intro Slide inactivate -->
+    <color name= "lightGreen">#90D0C5</color>
+
+    <array name="array_dot_active">
+        <item>@color/white</item>
+        <item>@color/white</item>
+
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/lightGreen</item>
+        <item>@color/lightGreen</item>
+
+    </array>
+
 </resources>
 <!--#437272
  305252

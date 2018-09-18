@@ -7,6 +7,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.apps.noura.masajd.Mosque.MosqueActivity;
+
 public class WelcomMosqueApp extends AppCompatActivity {
 ImageView imageView;
     @Override
